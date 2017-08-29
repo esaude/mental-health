@@ -60,6 +60,7 @@ public class BkkhConfigurationsActivator implements ModuleActivator {
 		service.disableApp("xforms.formentry");
 		service.disableExtension("xforms.formentry.cfpd");
 		service.disableExtension("referenceapplication.realTime.vitals");
+		service.disableApp("coreapps.diagnoses");
 		log.info("Bkkh Configurations Module started");
 	}
 	
