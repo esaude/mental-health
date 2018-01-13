@@ -11,14 +11,14 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.bkkhconfigs.api.db;
+package org.openmrs.module.aihdconfigs.api.db;
 
-import org.openmrs.module.bkkhconfigs.api.BkkhConfigsService;
+import org.openmrs.module.aihdconfigs.api.AihdConfigsService;
 
 /**
- *  Database methods for {@link BkkhConfigsService}.
+ *  Database methods for {@link AihdConfigsService}.
  */
-public interface BkkhConfigsDAO {
+public interface AihdConfigsDAO {
 	
 	/*
 	 * Add DAO methods here

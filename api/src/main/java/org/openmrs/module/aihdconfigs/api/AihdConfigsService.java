@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.bkkhconfigs.api;
+package org.openmrs.module.aihdconfigs.api;
 
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,13 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
  * <p>
  * It can be accessed only via Context:<br>
  * <code>
- * Context.getService(BkkhConfigsService.class).someMethod();
+ * Context.getService(AihdConfigsService.class).someMethod();
  * </code>
  * 
  * @see org.openmrs.api.context.Context
  */
 @Transactional
-public interface BkkhConfigsService extends OpenmrsService {
+public interface AihdConfigsService extends OpenmrsService {
      
 	/*
 	 * Add service methods here

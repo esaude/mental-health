@@ -11,34 +11,32 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.bkkhconfigs.api.impl;
+package org.openmrs.module.aihdconfigs.api.db.hibernate;
 
-import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.bkkhconfigs.api.BkkhConfigsService;
-import org.openmrs.module.bkkhconfigs.api.db.BkkhConfigsDAO;
+import org.hibernate.SessionFactory;
+import org.openmrs.module.aihdconfigs.api.db.AihdConfigsDAO;
 
 /**
- * It is a default implementation of {@link BkkhConfigsService}.
+ * It is a default implementation of  {@link AihdConfigsDAO}.
  */
-public class BkkhConfigsServiceImpl extends BaseOpenmrsService implements BkkhConfigsService {
-	
+public class HibernateAihdConfigsDAO implements AihdConfigsDAO {
 	protected final Log log = LogFactory.getLog(this.getClass());
 	
-	private BkkhConfigsDAO dao;
+	private SessionFactory sessionFactory;
 	
 	/**
-     * @param dao the dao to set
+     * @param sessionFactory the sessionFactory to set
      */
-    public void setDao(BkkhConfigsDAO dao) {
-	    this.dao = dao;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+	    this.sessionFactory = sessionFactory;
     }
     
-    /**
-     * @return the dao
+	/**
+     * @return the sessionFactory
      */
-    public BkkhConfigsDAO getDao() {
-	    return dao;
+    public SessionFactory getSessionFactory() {
+	    return sessionFactory;
     }
 }

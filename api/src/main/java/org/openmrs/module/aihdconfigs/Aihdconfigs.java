@@ -11,20 +11,29 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.bkkhconfigs.api;
+package org.openmrs.module.aihdconfigs;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
-import org.openmrs.api.context.Context;
-import org.openmrs.test.BaseModuleContextSensitiveTest;
+import java.io.Serializable;
+import org.openmrs.BaseOpenmrsObject;
+import org.openmrs.BaseOpenmrsMetadata;
 
 /**
- * Tests {@link ${BkkhConfigsService}}.
+ * It is a model class. It should extend either {@link BaseOpenmrsObject} or {@link BaseOpenmrsMetadata}.
  */
-public class  BkkhConfigsServiceTest extends BaseModuleContextSensitiveTest {
+public class Aihdconfigs extends BaseOpenmrsObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
-	@Test
-	public void shouldSetupContext() {
-		assertNotNull(Context.getService(BkkhConfigsService.class));
+	private Integer id;
+	
+	@Override
+	public Integer getId() {
+		return id;
 	}
+	
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 }

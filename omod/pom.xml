@@ -4,14 +4,14 @@
 
 	<parent>
 		<groupId>org.openmrs.module</groupId>
-		<artifactId>bkkhconfigs</artifactId>
+		<artifactId>aihdconfigs</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bkkhconfigs-omod</artifactId>
+	<artifactId>aihdconfigs-omod</artifactId>
 	<packaging>jar</packaging>
-	<name>Bkkh Configurations Module OMOD</name>
-	<description>OMOD project for BkkhConfigurations</description>
+	<name>AIHD Configurations Module OMOD</name>
+	<description>OMOD project for AIHD Configurations</description>
 
 	<dependencies>
 

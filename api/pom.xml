@@ -4,14 +4,14 @@
 
 	<parent>
 		<groupId>org.openmrs.module</groupId>
-		<artifactId>bkkhconfigs</artifactId>
+		<artifactId>aihdconfigs</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bkkhconfigs-api</artifactId>
+	<artifactId>aihdconfigs-api</artifactId>
 	<packaging>jar</packaging>
-	<name>Bkkh Configurations Module API</name>
-	<description>API project for BkkhConfigurations</description>
+	<name>AIHD Configurations Module API</name>
+	<description>API project for AIHD Configurations</description>
 
 	<dependencies>
 	

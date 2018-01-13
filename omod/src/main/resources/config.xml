@@ -25,13 +25,13 @@
 	<!-- / Required Modules -->
 	
 	<!-- Module Activator -->
-	<activator>${project.parent.groupId}.${project.parent.artifactId}.BkkhConfigurationsActivator</activator>
+	<activator>${project.parent.groupId}.${project.parent.artifactId}.AihdConfigurationsActivator</activator>
 	
 	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
 				
-		Bkkhconfigs.hbm.xml
+		Aihdconfigs.hbm.xml
 				
 	</mappingFiles>
 

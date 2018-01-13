@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.openmrs.module</groupId>
-	<artifactId>bkkhconfigs</artifactId>
+	<artifactId>aihdconfigs</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Bkkh Configurations Module</name>
-	<description>The module help configure several metadata for Bkkh</description>
-	<url>https://wiki.openmrs.org/display/docs/Bkkh+Configurations+Module+Module</url>
+	<name>AIHD Configurations Module</name>
+	<description>The module help configure several metadata for AIHD</description>
+	<url></url>
 	
 	<developers>
 		<developer>
@@ -22,9 +22,10 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/bkkhconfigs/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/bkkhconfigs/trunk/</developerConnection>
-		<url>https://svn.openmrs.org/openmrs-modules/bkkhconfigs/trunk/</url>
+		<connection>scm:https://github.com/IntelliSOFT-Consulting/AIHD.git</connection>
+		<developerConnection>scm:https://github.com/IntelliSOFT-Consulting/AIHD.git</developerConnection>
+		<url>https://github.com/IntelliSOFT-Consulting/AIHD</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<modules>

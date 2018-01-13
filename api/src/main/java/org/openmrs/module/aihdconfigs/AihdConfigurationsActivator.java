@@ -11,7 +11,7 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.bkkhconfigs;
+package org.openmrs.module.aihdconfigs;
 
 
 import org.apache.commons.logging.Log;
@@ -23,7 +23,7 @@ import org.openmrs.module.appframework.service.AppFrameworkService;
 /**
  * This class contains the logic that is run every time this module is either started or stopped.
  */
-public class BkkhConfigurationsActivator implements ModuleActivator {
+public class AihdConfigurationsActivator implements ModuleActivator {
 	
 	protected Log log = LogFactory.getLog(getClass());
 		
@@ -31,21 +31,21 @@ public class BkkhConfigurationsActivator implements ModuleActivator {
 	 * @see ModuleActivator#willRefreshContext()
 	 */
 	public void willRefreshContext() {
-		log.info("Refreshing Bkkh Configurations Module");
+		log.info("Refreshing Aihd Configurations Module");
 	}
 	
 	/**
 	 * @see ModuleActivator#contextRefreshed()
 	 */
 	public void contextRefreshed() {
-		log.info("Bkkh Configurations Module refreshed");
+		log.info("Aihd Configurations Module refreshed");
 	}
 	
 	/**
 	 * @see ModuleActivator#willStart()
 	 */
 	public void willStart() {
-		log.info("Starting Bkkh Configurations Module");
+		log.info("Starting Aihd Configurations Module");
 	}
 	
 	/**
@@ -61,21 +61,21 @@ public class BkkhConfigurationsActivator implements ModuleActivator {
 		service.disableExtension("xforms.formentry.cfpd");
 		service.disableExtension("referenceapplication.realTime.vitals");
 		service.disableApp("coreapps.diagnoses");
-		log.info("Bkkh Configurations Module started");
+		log.info("Aihd Configurations Module started");
 	}
 	
 	/**
 	 * @see ModuleActivator#willStop()
 	 */
 	public void willStop() {
-		log.info("Stopping Bkkh Configurations Module");
+		log.info("Stopping Aihd Configurations Module");
 	}
 	
 	/**
 	 * @see ModuleActivator#stopped()
 	 */
 	public void stopped() {
-		log.info("Bkkh Configurations Module stopped");
+		log.info("Aihd Configurations Module stopped");
 	}
 		
 }
