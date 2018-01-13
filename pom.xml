@@ -38,6 +38,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<metadatadeployVersion>1.8.1</metadatadeployVersion>
 		<metadatasharingVersion>1.2.2</metadatasharingVersion>
+		<uiframeworkVersion>3.12.0</uiframeworkVersion>
+		<formentryappVersion>1.4.1</formentryappVersion>
+		<htmlformentryVersion>3.3.2</htmlformentryVersion>
+		<htmlformentryuiVersion>1.6.3</htmlformentryuiVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -124,6 +128,35 @@
 				<artifactId>metadatasharing-api</artifactId>
 				<version>${metadatasharingVersion}</version>
 				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>uiframework-api</artifactId>
+				<version>${uiframeworkVersion}</version>
+				<type>jar</type>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>formentryapp-omod</artifactId>
+				<version>${formentryappVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>htmlformentryui-api</artifactId>
+				<version>${htmlformentryuiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>htmlformentry-api-1.10</artifactId>
+				<version>${htmlformentryVersion}</version>
+				<scope>test</scope>
 			</dependency>
 
 		</dependencies>

@@ -18,7 +18,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.ModuleActivator;
+import org.openmrs.module.aihdconfigs.activator.AppConfigurationInitializer;
+import org.openmrs.module.aihdconfigs.activator.HtmlFormsInitializer;
+import org.openmrs.module.aihdconfigs.activator.Initializer;
 import org.openmrs.module.appframework.service.AppFrameworkService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class contains the logic that is run every time this module is either started or stopped.
@@ -62,6 +68,11 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		service.disableExtension("referenceapplication.realTime.vitals");
 		service.disableApp("coreapps.diagnoses");
 		log.info("Aihd Configurations Module started");
+
+		// run the initializers
+		for (Initializer initializer : getInitializers()) {
+			initializer.started();
+		}
 	}
 	
 	/**
@@ -76,6 +87,13 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 	 */
 	public void stopped() {
 		log.info("Aihd Configurations Module stopped");
+	}
+
+	private List<Initializer> getInitializers() {
+		List<Initializer> l = new ArrayList<Initializer>();
+		l.add(new AppConfigurationInitializer());
+		l.add(new HtmlFormsInitializer());
+		return l;
 	}
 		
 }
