@@ -1,0 +1,14 @@
+<htmlform formName=""
+          formDescription=""
+          formEncounterType="2da542a4-f87d-11e7-8eb4-37dc291c1b12"
+          formUuid=""
+          formVersion="1.0"
+          formAddMetadata="yes"
+          formUILocation="patientDashboard.visitActions"
+          formOrder="1"
+          formIcon="icon-medkit"
+          formShowIf=""
+          formDisplayStyle="Standard"
+          formLabel="DM_HTN INITIAL ENCOUNTER FORM">
+
+</htmlform>
