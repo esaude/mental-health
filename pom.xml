@@ -36,6 +36,8 @@
 	<properties>
 		<openMRSVersion>1.11.5</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<metadatadeployVersion>1.8.1</metadatadeployVersion>
+		<metadatasharingVersion>1.2.2</metadatasharingVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -109,6 +111,20 @@
 			</dependency>
 						
 			<!-- End OpenMRS core -->
+			<!--Start of modules to be used-->
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>metadatadeploy-api</artifactId>
+				<version>${metadatadeployVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>metadatasharing-api</artifactId>
+				<version>${metadatasharingVersion}</version>
+				<scope>provided</scope>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>

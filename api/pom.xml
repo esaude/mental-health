@@ -70,6 +70,15 @@
 		</dependency>
 				
 		<!-- End OpenMRS core -->
+		<!--Start of other module dependancies-->
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>metadatadeploy-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>metadatasharing-api</artifactId>
+		</dependency>
 		
 	</dependencies>
 	
