@@ -37,12 +37,12 @@ public class AppConfigurationInitializer implements Initializer {
                 backupDatabase.setStartOnStartup(true);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
                 Calendar taskDefinitionCalendar = new GregorianCalendar(2016, 8, 28, 23, 59, 59);
-                Calendar ugandaEMRCalendar = new GregorianCalendar(2016, 8, 28, 15, 59, 59);
+                Calendar aihdMRCalendar = new GregorianCalendar(2016, 8, 28, 15, 59, 59);
 
                 // change the start date
                 if(sdf.format(taskDefinitionCalendar.getTime()).equals(sdf.format(backupDatabase.getStartTime()))) {
                     // set it to the new time for Uganda
-                    backupDatabase.setStartTime(ugandaEMRCalendar.getTime());
+                    backupDatabase.setStartTime(aihdMRCalendar.getTime());
                     log.info("AIHD backup time set");
                 }
                 schedulerService.saveTaskDefinition(backupDatabase);

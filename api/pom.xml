@@ -105,6 +105,11 @@
 			<version>RELEASE</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>idgen-api</artifactId>
+		</dependency>
+
 	</dependencies>
 	
 	<build>
