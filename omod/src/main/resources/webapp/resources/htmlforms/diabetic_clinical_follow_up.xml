@@ -1,7 +1,7 @@
-<htmlform formName=""
-          formDescription=""
+<htmlform formName="DM_HTN_FOLLOW_UP"
+          formDescription=" Diabetes Clinical Follow Up Form"
           formEncounterType="2da542a4-f87d-11e7-8eb4-37dc291c1b12"
-          formUuid=""
+          formUuid="e7a7b3a2-7331-4f5f-9f47-3d4a632845eb"
           formVersion="1.0"
           formAddMetadata="yes"
           formUILocation="patientDashboard.visitActions"
@@ -9,6 +9,83 @@
           formIcon="icon-medkit"
           formShowIf=""
           formDisplayStyle="Standard"
-          formLabel="DM_HTN INITIAL ENCOUNTER FORM">
+          formLabel="Diabetes Clinical Follow Up Form">
+    <style>
 
+        form label, .form label {
+        float: left;
+        padding: 0px 10px 0 0;
+        }
+
+        form input[type="checkbox"], form input[type="radio"], .form input[type="checkbox"], .form input[type="radio"] {
+        margin: 10px 15px;
+        }
+
+        table td {
+        background: #FFFFFF;
+        color: #404040;
+        }
+
+        form select, .form select {
+        min-width: 0px;
+        }
+
+        form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form
+        ul.select {
+        background-color: #FBFBFB;
+        border: 1px solid #CEC9C9;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        padding: 10px;
+        min-width: 20%;
+        }
+
+        .row {
+        width: 100%;
+        float: left;
+        display: inline-flex;
+        clear: both;
+        }
+
+        .row .row-col2 {
+        float: left;
+        width: 50%;
+        }
+
+        table th, table td {
+        border: 1px solid #AFAFAF;
+        }
+    </style>
+    <div class="ai-page-frame">
+        <div class="headers" style="text-align: center;">
+            <h3 style="background: #FFFF7D; padding: 10px;">Diabetes Clinical Follow Up Form</h3>
+        </div>
+        <section>
+            <label>Encounter Details</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            Date:
+                            <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
+                            <span style="display: none;">
+                                <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
+                                                   order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <label><span class="required">*</span> Provider:</label>
+                            <encounterProvider role="Provider" style="autocomplete" required="required"/>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+        <br/>
+        <submit/>
+
+    </div>
 </htmlform>
