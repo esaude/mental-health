@@ -16,6 +16,7 @@ package org.openmrs.module.aihdconfigs;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.GlobalProperty;
 import org.openmrs.Patient;
 import org.openmrs.PatientIdentifier;
 import org.openmrs.PatientIdentifierType;
@@ -97,6 +98,9 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		}
 		// generate OpenMRS ID for patients without the identifier
 		generateOpenMRSIdentifierForPatientsWithout();
+
+		// save defined global properties
+		administrationService.saveGlobalProperties(configureGlobalProperties());
 
 		log.info("Aihd Configurations Module started");
 	}
@@ -184,6 +188,17 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 			ModuleFactory.stopModule(mod);
 			throw new RuntimeException("failed to install the common metadata ", e);
 		}
+	}
+
+	/**
+	 * Configure the global properties for the expected functionality
+	 *
+	 * @return
+	 */
+	private List<GlobalProperty> configureGlobalProperties() {
+		List<GlobalProperty> properties = new ArrayList<GlobalProperty>();
+
+		return properties;
 	}
 		
 }

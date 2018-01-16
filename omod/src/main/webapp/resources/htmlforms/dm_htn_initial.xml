@@ -11,41 +11,44 @@
           formDisplayStyle="Standard"
           formLabel="DM_HTN INITIAL ENCOUNTER FORM">
 
-    <!-- TODO: Fix the url of all the forms to display their contents once done -->
-
     <style>
 
 
     </style>
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
-            <h3 style="background: #FFFF7D; padding: 10px;">DM_HTN INITIAL ENCOUNTER FORM</h3>
+            <h3>DM_HTN INITIAL ENCOUNTER FORM</h3>
         </div>
-        <section>
-            <label>Encounter Details</label>
-            <table>
+        <div>
+            <table border="0" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
                         <td>
                             Date:
                             <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
-                            <span style="display: none;">
-                                <encounterLocation />
-                            </span>
+                        </td>
+                        <td>
+                            Facility:
+                            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+
                         </td>
 
                         <td>
 
-                            <label><span class="required">*</span> Provider:</label>
-                            <encounterProvider role="Provider" style="autocomplete" required="required"/>
+                            <label>Provider:</label>
+                            <encounterProvider default="currentUser" />
                         </td>
                     </tr>
 
                 </tbody>
             </table>
-        </section>
-       <br/>
-        <submit/>
+        </div>
+        <ifMode mode="VIEW" include="false">
+            <div id="buttons">
+                <submit submitClass="confirm right" submitCode="general.save"/>
+                <button type="button" class="cancel"><uimessage code="general.cancel"/></button>
+            </div>
+        </ifMode>
 
     </div>
 </htmlform>
