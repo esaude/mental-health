@@ -22,16 +22,6 @@
 			<artifactId>library-name</artifactId>
 		</dependency> 
 		-->
-
-		
-				
-		<!-- Begin OpenMRS modules -->
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>appframework-api</artifactId>
-		</dependency>
-				
-		<!-- End OpenMRS modules -->
 		
 
 		<!-- Begin OpenMRS core -->
@@ -84,11 +74,6 @@
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>calculation-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>dataexchange-api</artifactId>
 		</dependency>
 
 		<dependency>
