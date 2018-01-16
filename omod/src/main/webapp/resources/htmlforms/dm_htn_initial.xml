@@ -15,49 +15,7 @@
 
     <style>
 
-        form label, .form label {
-        float: left;
-        padding: 0px 10px 0 0;
-        }
 
-        form input[type="checkbox"], form input[type="radio"], .form input[type="checkbox"], .form input[type="radio"] {
-        margin: 10px 15px;
-        }
-
-        table td {
-        background: #FFFFFF;
-        color: #404040;
-        }
-
-        form select, .form select {
-        min-width: 0px;
-        }
-
-        form input, form select, form textarea, form ul.select, .form input, .form select, .form textarea, .form
-        ul.select {
-        background-color: #FBFBFB;
-        border: 1px solid #CEC9C9;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        padding: 10px;
-        min-width: 20%;
-        }
-
-        .row {
-        width: 100%;
-        float: left;
-        display: inline-flex;
-        clear: both;
-        }
-
-        .row .row-col2 {
-        float: left;
-        width: 50%;
-        }
-
-        table th, table td {
-        border: 1px solid #AFAFAF;
-        }
     </style>
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
@@ -72,8 +30,7 @@
                             Date:
                             <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
                             <span style="display: none;">
-                                <encounterLocation default="629d78e9-93e5-43b0-ad8a-48313fd99117"
-                                                   order="629d78e9-93e5-43b0-ad8a-48313fd99117"/>
+                                <encounterLocation />
                             </span>
                         </td>
 
