@@ -42,6 +42,230 @@
 
                 </tbody>
             </table>
+            <section>
+            <label>Status of patient:</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label>Diabetes</label>
+                        </td>
+
+                        <td>
+                            <label>New DM patient</label>                        
+                        </td>
+
+                        <td>
+                            <label> Known DM patient</label>                        
+                        </td>
+
+                        <td>
+                            <label>Year of Diagnosis</label>
+                            <obs conceptId="160617"/>                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Hypertension:</label>
+                        </td>
+                        <td>
+                            <label>New HTN patient</label>                        
+                        </td>
+                        <td>
+                            <label> Known HTN patient</label>                        
+                        </td>
+                        <td>
+                            <label>Year of Diagnosis</label>
+                            <obs conceptId="160617"/>                        
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>HIV status:</label>
+                            <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
+                                 answerSeparator=""/>
+                        </td>
+                        <td>
+                            <label>Enrolled to care:</label>
+                            <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 answerSeparator=""/>                        
+                        </td>
+                     </tr>
+
+                     <tr>
+                        <td>
+                            <label>Other:</label>
+                            <obs conceptId="160632"/>                        
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td>
+                            <label>** Patient covered by NHIF:</label>
+                            <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                        <td>
+                            <label>Encourage enrollment</label>                   
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td>
+                            <label>**Is patient a referral?</label>
+                            <obs conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                        <td>
+                            <label>Referring Dispensary:</label>
+                            <obs conceptId="161550"/>                       
+                        </td>
+                        <td>
+                            <label>Referring Patient:</label>
+                            <obs conceptId="161103"/>                       
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+        <section>
+            <label>Chief Complaints:</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <obs conceptId="6042" answerConceptIds="110265,158627,156046,112961,135966,135592,147104,6005,164529" answerLabels="Shortness of breath on activity,Palpitations (heart racing),Recurrent dizziness,Fainting,Leg swelling,Loss of consciousness,Blurring of vision,Focal weakness,Foot complaints" style="checkbox"
+                                 answerSeparator=""/> 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>LMP if female:</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <obs conceptId="1427"/> 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>Drug Use:</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label>Do you smoke cigarettes?</label>
+                            <obs conceptId="152722" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>** Do you sometimes drink alcohol?</label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>** Past / Current medication:</label>
+            <table>
+                <tbody>
+                    <tr>
+                    <obsgroup groupingConceptId="159460">
+
+                        <td><label>None</label><obs conceptId="1107"/></td>
+                        <td><label>Metformin</label><obs conceptId="79651"/></td>
+                        <td><label>Glibenclamide</label><obs conceptId="77071"/></td>
+                        <td><label>Insulin 70/30</label><obs conceptId="159459"/></td>
+                        <td><label>NPH</label><obs conceptId="78068"/></td>
+                        <td><label>Soluble Insulin</label><obs conceptId="282"/></td>
+                        <td><label>Enalapril </label><obs conceptId="75633"/></td>
+                        <td><label>HCTZ</label><obs conceptId="77696"/></td>
+                        <td><label>Losartan</label><obs conceptId="79074"/></td>
+                        <td><label>Nifedipine</label><obs conceptId="80637"/></td>
+                        <td><label>Atenolol</label><obs conceptId="71652"/></td>
+                        <td><label>Other</label><obs conceptId="5622"/></td>
+                        <td><label>Other</label><obs conceptId="160632"/></td>
+
+                    </obsgroup>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>** Adhering to current medications?  </label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,N/A" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                        <td><label>** Specify reason</label><obs conceptId="160632"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>Any known allergies to the drugs?</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><obs conceptId="1512"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>** Physical examination</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label>Temp</label><obs conceptId="5088"/></td>
+                        <td><label>PR</label><obs conceptId="5087"/></td>
+                        <td><label>BP (1st reading) **</label><obs conceptId="5087"/></td>
+                        <td><label>BP (2nd reading) **</label><obs conceptId="5087"/></td>
+                        <td><label>Waist circ</label><obs conceptId="163080"/></td>
+                        <td><label>Height</label><obs conceptId="5090"/></td>
+                        <td><label>Weight</label><obs conceptId="5089"/></td>
+                        <td><label>BMI **</label><obs conceptId="5089"/></td>
+                    </tr>
+
+                     <tr>
+                        <td>
+                            <label>** General exam:</label>
+                            <obs conceptId="1119" answerConceptIds="5245,136443,143050,161602" answerLabels="Pallor,Jaundice,Cyanosis,Other" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td>
+                            <label>Extremities:</label>
+                            <obs conceptId="1115" answerConceptIds="1115,1116,123919" answerLabels="Normal,Abnormal,Ulcers" style="checkbox"
+                                 answerSeparator=""/>                       
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
         </div>
         <ifMode mode="VIEW" include="false">
             <div id="buttons">
