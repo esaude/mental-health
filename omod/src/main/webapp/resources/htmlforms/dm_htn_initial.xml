@@ -28,15 +28,23 @@
                             <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
                         </td>
                         <td>
-                            Facility:
+                            Facility name:
                             <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
 
                         </td>
 
                         <td>
 
-                            <label>Provider:</label>
+                            <label>Care giver:</label>
                             <encounterProvider default="currentUser" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            Occupation:
+                            <obs conceptId="163399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  answerSeparator="" />
+                            Level of education:
+                            <obs conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Secondary,Primary,None,Pre-school,Special education,Tertiary education,College/university/polytechnic" style="dropdown" answerSeparator="" />
                         </td>
                     </tr>
 
@@ -267,12 +275,14 @@
         </section>
        <br/>
         </div>
-        <ifMode mode="VIEW" include="false">
-            <div id="buttons">
-                <submit submitClass="confirm right" submitCode="general.save"/>
-                <button type="button" class="cancel"><uimessage code="general.cancel"/></button>
-            </div>
-        </ifMode>
+        <div>
+            <ifMode mode="VIEW" include="false">
+                <div id="buttons">
+                    <submit submitClass="confirm right" submitCode="general.save"/>
+                    <button type="button" class="cancel"><uimessage code="general.cancel"/></button>
+                </div>
+            </ifMode>
+        </div>
 
     </div>
 </htmlform>
