@@ -40,11 +40,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
+                        <td>
                             Occupation:
-                            <obs conceptId="163399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  answerSeparator="" />
+                            <obs conceptId="1542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  answerConceptIds="1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,123801AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1538AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1539AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1540AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159465AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159466AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Unknown,Unemployed,Farmer,Trader,Employee,Retired,Student,Driver" answerSeparator="" />
+                        </td>
+                        <td colspan="2">
                             Level of education:
                             <obs conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Secondary,Primary,None,Pre-school,Special education,Tertiary education,College/university/polytechnic" style="dropdown" answerSeparator="" />
+
                         </td>
                     </tr>
 
