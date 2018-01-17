@@ -114,8 +114,7 @@
                      <tr>
                         <td>
                             <label>**Is patient a referral?</label>
-                            <obs conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                       
+                                                  
                         </td>
                         <td>
                             <label>Referring Dispensary:</label>
@@ -189,25 +188,6 @@
             <table>
                 <tbody>
                     <tr>
-                    <obsgroup groupingConceptId="159460">
-
-                        <td><label>None</label><obs conceptId="1107"/></td>
-                        <td><label>Metformin</label><obs conceptId="79651"/></td>
-                        <td><label>Glibenclamide</label><obs conceptId="77071"/></td>
-                        <td><label>Insulin 70/30</label><obs conceptId="159459"/></td>
-                        <td><label>NPH</label><obs conceptId="78068"/></td>
-                        <td><label>Soluble Insulin</label><obs conceptId="282"/></td>
-                        <td><label>Enalapril </label><obs conceptId="75633"/></td>
-                        <td><label>HCTZ</label><obs conceptId="77696"/></td>
-                        <td><label>Losartan</label><obs conceptId="79074"/></td>
-                        <td><label>Nifedipine</label><obs conceptId="80637"/></td>
-                        <td><label>Atenolol</label><obs conceptId="71652"/></td>
-                        <td><label>Other</label><obs conceptId="5622"/></td>
-                        <td><label>Other</label><obs conceptId="160632"/></td>
-
-                    </obsgroup>
-                    </tr>
-                    <tr>
                         <td>
                             <label>** Adhering to current medications?  </label>
                             <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,N/A" style="radio"
@@ -225,7 +205,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><obs conceptId="1512"/></td>
+                        <td><label>** allergy </label></td>
                     </tr>
                 </tbody>
             </table>
@@ -258,8 +238,7 @@
                      <tr>
                         <td>
                             <label>Extremities:</label>
-                            <obs conceptId="1115" answerConceptIds="1115,1116,123919" answerLabels="Normal,Abnormal,Ulcers" style="checkbox"
-                                 answerSeparator=""/>                       
+                                                
                         </td>
                     </tr>
                 </tbody>
