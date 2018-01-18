@@ -35,6 +35,14 @@
 	<aware_of_modules>
 		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
 	</aware_of_modules>
+
+	<globalProperty>
+		<property>aihdconfigs.facilityName</property>
+		<defaultValue>Facility Name</defaultValue>
+		<description>
+			Allows one to set the name of the facility that this installation implements
+		</description>
+	</globalProperty>
 	
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.AihdConfigurationsActivator</activator>

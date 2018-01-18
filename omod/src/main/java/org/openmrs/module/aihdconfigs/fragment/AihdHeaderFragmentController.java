@@ -28,7 +28,7 @@ public class AihdHeaderFragmentController {
             List<Extension> userAccountMenuItems = appFrameworkService.getExtensionsForCurrentUser(
                     AppUiExtensions.HEADER_USER_ACCOUNT_MENU_ITEMS_EXTENSION);
             fragmentModel.addAttribute("userAccountMenuItems", userAccountMenuItems);
-            fragmentModel.addAttribute("healthCenter", Context.getAdministrationService().getGlobalProperty("aihdconfigs.healthCenterName"));
+            fragmentModel.addAttribute("facility", Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
         }
         finally {
             Context.removeProxyPrivilege(GET_LOCATIONS);

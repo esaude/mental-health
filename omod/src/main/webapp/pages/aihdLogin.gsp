@@ -289,12 +289,12 @@
     </div>
     <div class="footer">
         <div class="left_al">
-            &#169; ${year} All Rights Reserved <a href="http://www.health.go.ug" target="_blank"
-                                                  title="Ministry of Health Uganda">Ministry of Health - Republic of Uganda</a>
+            &#169; ${year} All Rights Reserved <a href="#" target="_blank"
+                                                  title="AIHD">AIHD</a>
         </div>
         <div class="right_al">
-${ui.message("aijar.build.info")} powered by <a href="http://www.mets.or.ug" target="_blank"
-                                                        title="Makerere University School of Public Health METS Programme">METS Programme</a>
+powered by <a href="#" target="_blank"
+                                                        title="OpenMRS">OpenMRS</a>
         </div>
     </div>
 </div>

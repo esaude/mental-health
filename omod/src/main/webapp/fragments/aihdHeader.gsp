@@ -8,7 +8,7 @@
         return it
     }
 
-    def logoIconUrl = addContextPath(configSettings?."logo-icon-url") ?: ui.resourceLink("aijar", "images/moh_logo_without_word.png")
+    def logoIconUrl = addContextPath(configSettings?."logo-icon-url") ?: ui.resourceLink("aihdconfigs", "images/moh_logo_without_word.png")
     def logoLinkUrl = addContextPath(configSettings?."logo-link-url") ?: "/${org.openmrs.ui.framework.WebConstants.CONTEXT_PATH}"
 
     def multipleLoginLocations = (loginLocations.size > 1);
@@ -102,7 +102,7 @@
         <span style="color: #848484;font-size: 0.9em;float: left; width: 100%; text-align: center;">Electronic Medical System</span>
     </div>
     <div style="float: left; font-size: 1.6em; text-align: center; margin: 25px 0 10px 20px; width: 22%;">
-        ${healthCenter}
+        ${facility}
     </div>
 
     <% if (context.authenticated) { %>
