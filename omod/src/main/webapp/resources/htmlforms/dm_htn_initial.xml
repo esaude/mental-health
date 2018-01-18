@@ -228,34 +228,261 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><label>Temp</label><obs conceptId="5088"/></td>
-                        <td><label>PR</label><obs conceptId="5087"/></td>
-                        <td><label>BP (1st reading) **</label><obs conceptId="5087"/></td>
-                        <td><label>BP (2nd reading) **</label><obs conceptId="5087"/></td>
-                        <td><label>Waist circ</label><obs conceptId="163080"/></td>
-                        <td><label>Height</label><obs conceptId="5090"/></td>
-                        <td><label>Weight</label><obs conceptId="5089"/></td>
+                        <td><label>Temp(<sup>o</sup>C)</label><obs conceptId="5088"/></td>
+                        <td><label>PR (/min)</label><obs conceptId="5087"/></td>
+                        <td><label>BP (1st reading) **</label>
+                          <p>
+                            <obs conceptId="5085" labelText="Systolic (mmHg)"/>
+                            <obs conceptId="5086" labelText="Diastolic (mmHg)"/>
+                          </p> 
+                       </td>
+                        <td>
+                         <label>BP (2nd reading) **</label>
+                          <p>
+                            <obs conceptId="5085" labelText="Systolic (mmHg)"/>
+                            <obs conceptId="5086" labelText="Diastolic (mmHg)"/>
+                           </p>   
+                        </td>
+                        <td><label>Waist circ (cm)</label><obs conceptId="163080"/></td>
+                        <td><label>Height  (cm)</label><obs conceptId="5090"/></td>
+                        <td><label>Weight  (KG)</label><obs conceptId="5089"/></td>
                         <td><label>BMI **</label><obs conceptId="5089"/></td>
                     </tr>
 
                      <tr>
                         <td>
                             <label>** General exam:</label>
-                            <obs conceptId="1119" answerConceptIds="5245,136443,143050,161602" answerLabels="Pallor,Jaundice,Cyanosis,Other" style="radio"
+                            <obs conceptId="1119" answerConceptIds="5245,136443,143050,161602" answerLabels="Pallor,Jaundice,Cyanosis,Other" style="checkbox"
                                  answerSeparator=""/>                       
                         </td>
                     </tr>
 
-                     <tr>
+                    <tr>
                         <td>
-                            <label>Extremities:</label>
-                                                
+                            <label>CVS </label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Normal,Abnormal" style="radio"
+                                 answerSeparator=""/>                       
+                         </td>
+                        <td><label>Describe</label><obs conceptId="160632"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>RS </label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Normal,Abnormal" style="radio"
+                                 answerSeparator=""/>                       
                         </td>
+                        <td><label>Describe</label><obs conceptId="160632"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>P/A </label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Normal,Abnormal" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                        <td><label>Describe</label><obs conceptId="160632"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>CNS </label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Normal,Abnormal" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                        <td><label>Describe</label><obs conceptId="160632"/></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Extremities </label>
+                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Normal,Abnormal" style="radio"
+                                 answerSeparator=""/>                       
+                        </td>
+                    </tr>
+                     <tr>
+                         <td><label>Ulcers</label></td>
+                         <td><label>Callouses</label></td>
+                         <td><label>HardenedNails</label></td>
+                         <td><label>Fungus</label></td>
+                         <td><label>Cellulitis</label></td>
+                         <td><label>Edema</label></td>
+                         <td><label>Dry</label></td>
+                    </tr>
+                     <tr>
+                        <td><label>Other</label><obs conceptId="1391"/></td>
+                    </tr>
+                     <tr>
+                        <td><label>Monofilament test</label></td>
+                        <td><obs conceptId="1391" labelText="RF (/5)" /></td>
+                        <td><obs conceptId="1391" labelText="LF (/5)" /></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>Investigations</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Test</th><th>Results</th><th>Date</th><th>Test</th><th>Results</th><th>Date</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <label>RBS (mmols/L)</label>
+                        <br/>
+                        <label>FBS (mmols/L)</label>                        
+                       </td>
+                    <td></td>
+                    <td></td>
+                    <td><label>PDT</label></td>
+                    <td>
+                        <label>Negative</label>
+                         <br/>
+                        <label>Positive</label>
+                    </td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>Hb A1C (%)</label></td><td></td><td></td><td> <label>ECG</label></td>
+                        <td> 
+                        <label>Normal</label>
+                         <br/>
+                        <label>Abnormal</label>
+                        </td>
+                    <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <label>Urinalysis</label>
+                         <br/>
+                        <label>Pus cells</label>
+                         <br/>
+                        <label>Glucose</label>
+
+                        </td><td></td><td></td><td>CXR</td>
+                        <td>
+                         <label>Normal</label>
+                         <br/>
+                        <label>Abnormal</label>
+                        </td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <label>Protein</label>
+                         </td>
+                         <td>
+                         <obs conceptId="128340" answerConceptIds="1066,1065,1362,1363,1364" answerLabels="No,yes,+,++,+++" style="radio"
+                                 answerSeparator=""/> 
+                         </td>
+                         <td></td>
+                         <td><label>Protein</label></td>
+                         <td></td>
+                         <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <label>Ketone</label>
+                         </td>
+                         <td>
+                         <obs conceptId="161442" answerConceptIds="1066,1065,1362,1363,1364" answerLabels="No,yes,+,++,+++" style="radio"
+                                 answerSeparator=""/> 
+                         </td>
+                         <td></td>
+                         <td><label>Protein</label></td>
+                         <td></td>
+                         <td></td>
+                    </tr>
+                    <tr>
+                        <td><label>UECs</label></td><td></td><td></td><td></td><td></td><td></td>
                     </tr>
                 </tbody>
             </table>
         </section>
        <br/>
+
+      <section>
+            <label>Complications</label>
+            <table>
+                <tbody>
+                    <tr>                    				
+                        <th>No.</th><th>Complications</th><th>ADD</th><th>ONGOING</th><th>REMOVE</th>
+                    </tr>
+                     <tr>
+                        <td>1</td><td><label>Stroke</label></td><td></td><td></td><td></td>
+                     </tr>
+                    <tr>
+                        <td>2</td><td><label>Heart failure</label></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>3</td><td><label>Kidney failure</label></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>4</td><td><label>Peripheral Neuropathy</label></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>5</td><td><label>Visual Impairement</label></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>6</td><td><label>Foot ulcers/deformities</label></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>7</td><td><label>Erectile dysfunction</label></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                        <td>8</td><td></td><td></td><td></td><td></td>
+                    </tr>
+                    <tr>
+                       <td></td><td><label>Others:</label></td><td></td><td></td><td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>** Diebetes, nutrition and Counselling education provision</label>
+            <table>
+                <tbody>
+                    <tr>
+                         <td>
+                         <obs conceptId="1379" answerConceptIds="1380,1380,1380" answerLabels="Diabetes ,Nutrition ,Counselling" style="checkbox"
+                                 answerSeparator=""/> 
+                         </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
+       <section>
+            <label>Treatment</label>
+            <table>
+                <tbody>
+                    <tr>                    				
+                        <th></th><th>Drug</th><th>Plan</th><th>Dose</th><th>Frequency</th>                        			
+                    </tr>
+                    <tr>                    				
+                       <td></td><td><label>Metformin</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>                     			
+                    </tr>
+                    <tr>                    				
+                      <td></td><td><label>Glibenclamide</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>                			
+                    </tr>
+                    <tr>                    				
+                      <td></td><td><label>Insulin 70/30</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>         			
+                    </tr>
+                    <tr>                    				
+                       <td></td><td><label>NPH</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>                     			
+                    </tr>
+                    <tr>                    				
+                      <td></td><td><label>Soluble Insulin</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/>BD</td>                			
+                    </tr>               
+                </tbody>
+            </table>
+        </section>
+       <br/>
+
         </div>
         <div>
             <ifMode mode="VIEW" include="false">
