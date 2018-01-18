@@ -1,5 +1,6 @@
-package org.openmrs.module.aihdconfigs.fragment;
+package org.openmrs.module.aihdconfigs.fragment.controller;
 
+import org.openmrs.Location;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.domain.Extension;
 import org.openmrs.module.appframework.service.AppFrameworkService;
@@ -28,7 +29,8 @@ public class AihdHeaderFragmentController {
             List<Extension> userAccountMenuItems = appFrameworkService.getExtensionsForCurrentUser(
                     AppUiExtensions.HEADER_USER_ACCOUNT_MENU_ITEMS_EXTENSION);
             fragmentModel.addAttribute("userAccountMenuItems", userAccountMenuItems);
-            fragmentModel.addAttribute("facility", Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
+            Location location = Context.getLocationService().getLocationByUuid(Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
+            fragmentModel.addAttribute("facility", location);
         }
         finally {
             Context.removeProxyPrivilege(GET_LOCATIONS);

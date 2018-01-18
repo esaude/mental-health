@@ -1,4 +1,4 @@
-package org.openmrs.module.aihdconfigs.page;
+package org.openmrs.module.aihdconfigs.page.controller;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -66,7 +66,7 @@ public class AihdLoginPageController {
         }
 
         model.addAttribute(REQUEST_PARAMETER_NAME_REDIRECT_URL, getRelativeUrl(redirectUrl, pageRequest));
-        model.addAttribute("healthCenter", Context.getAdministrationService().getGlobalProperty("aijar.healthCenterName"));
+        model.addAttribute("healthCenter", Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
 
         Location lastSessionLocation = null;
         try {

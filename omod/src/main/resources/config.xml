@@ -38,7 +38,7 @@
 
 	<globalProperty>
 		<property>aihdconfigs.facilityName</property>
-		<defaultValue>Facility Name</defaultValue>
+		<defaultValue>8d6c993e-c2cc-11de-8d13-0010c6dffd0f</defaultValue>
 		<description>
 			Allows one to set the name of the facility that this installation implements
 		</description>

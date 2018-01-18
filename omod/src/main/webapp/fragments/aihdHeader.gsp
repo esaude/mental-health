@@ -8,7 +8,7 @@
         return it
     }
 
-    def logoIconUrl = addContextPath(configSettings?."logo-icon-url") ?: ui.resourceLink("aihdconfigs", "images/moh_logo_without_word.png")
+    def logoIconUrl = addContextPath(configSettings?."logo-icon-url") ?: ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")
     def logoLinkUrl = addContextPath(configSettings?."logo-link-url") ?: "/${org.openmrs.ui.framework.WebConstants.CONTEXT_PATH}"
 
     def multipleLoginLocations = (loginLocations.size > 1);
@@ -89,22 +89,18 @@
 </script>
 <header>
     <div class="logo">
-        <a href="${logoLinkUrl}">
-            <img src="${logoIconUrl}" style="height: 70px; width: 70px; background: whitesmoke; padding: 5px;"/>
-        </a>
-    </div>
-
-    <div style="float: left;margin: 25px 0 10px 20px; color: #EFEFEF;width: 285px;">
-        <div style="padding-bottom: 10px;">
-            <span style="font-size: 1.2em; text-align: left;color: #FFFFFF;">Ministry of Health </span>
-            <span style="color: #F1F1F1;font-size: 1.2em;">- AIHD</span><span style="color: #D2CB92;font-size: 1.2em;">EMS</span>
+        <div style="float: left; padding-right: 3px">
+            <a href="${logoLinkUrl}">
+                <img src="${logoIconUrl}" />
+            </a>
         </div>
-        <span style="color: #848484;font-size: 0.9em;float: left; width: 100%; text-align: center;">Electronic Medical System</span>
+        <div style="float: left">
+            <span style="font-size: 24px;">ncdEMS</span>
+            <span style="font-size: 10px;">, powered by OpenMRS</span>
+            <br />
+            <span style="font-weight: bold; margin-left: 12px; border-top: 1px gray solid;">${facility.name}</span>
+        </div>
     </div>
-    <div style="float: left; font-size: 1.6em; text-align: center; margin: 25px 0 10px 20px; width: 22%;">
-        ${facility}
-    </div>
-
     <% if (context.authenticated) { %>
     <ul class="user-options" style="padding: 20px;">
         <li class="identifier">
