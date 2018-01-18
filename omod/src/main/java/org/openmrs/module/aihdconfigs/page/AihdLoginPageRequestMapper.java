@@ -3,10 +3,11 @@ package org.openmrs.module.aihdconfigs.page;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.ui.framework.page.PageRequest;
+import org.openmrs.ui.framework.page.PageRequestMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AihdLoginPageRequestMapper {
+public class AihdLoginPageRequestMapper implements PageRequestMapper {
 
     protected final Log log = LogFactory.getLog(getClass());
     /**

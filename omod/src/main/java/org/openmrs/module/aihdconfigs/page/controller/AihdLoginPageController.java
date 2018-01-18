@@ -66,7 +66,8 @@ public class AihdLoginPageController {
         }
 
         model.addAttribute(REQUEST_PARAMETER_NAME_REDIRECT_URL, getRelativeUrl(redirectUrl, pageRequest));
-        model.addAttribute("healthCenter", Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
+        Location location = Context.getLocationService().getLocationByUuid(Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
+        model.addAttribute("facility", location);
 
         Location lastSessionLocation = null;
         try {

@@ -218,14 +218,14 @@
     <header>
         <div class="logo">
             <a href="${ui.pageLink("referenceapplication", "home")}">
-                <img src="${ui.resourceLink("aijar", "images/moh_logo_large.png")}"/>
+                <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")}" style="height:48px" />
             </a>
         </div>
     </header>
 
     ${ui.includeFragment("referenceapplication", "infoAndErrorMessages")}
     <div id="content">
-        <div style="width: 100%; font-size: 1.6em; text-align: center; margin: 25px 0 10px 20px;">${healthCenter}</div>
+        <div style="width: 100%; font-size: 1.6em; text-align: center; margin: 25px 0 10px 20px;">${facility}</div>
         <form id="login-form" method="post" autocomplete="off">
             <fieldset>
 
@@ -254,7 +254,6 @@
                 <p class="clear">
                     <label for="sessionLocation">
                         Select appropriate area for your session:
-                        <!--${ui.message("referenceapplication.login.sessionLocation")}:-->
                     </label>
                 <ul id="sessionLocation" class="select">
                     <% locations.sort { ui.format(it) }.each { %>
@@ -289,12 +288,11 @@
     </div>
     <div class="footer">
         <div class="left_al">
-            &#169; ${year} All Rights Reserved <a href="http://www.health.go.ug" target="_blank"
-                                                  title="Ministry of Health Uganda">Ministry of Health - Republic of Uganda</a>
+            &#169; ${year} All Rights Reserved <a href="#" target="_blank"
+                                                  title="Ministry of Health Kenya">Ministry of Health - Republic of Kenya</a>
         </div>
         <div class="right_al">
-${ui.message("aijar.build.info")} powered by <a href="http://www.mets.or.ug" target="_blank"
-                                                        title="Makerere University School of Public Health METS Programme">METS Programme</a>
+            powered by OpenMRS
         </div>
     </div>
 </div>
