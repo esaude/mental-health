@@ -32,7 +32,10 @@
 		</dependency>
 						
 		<!-- End OpenMRS modules -->
-		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
 
 		<!-- Begin OpenMRS core -->
 
