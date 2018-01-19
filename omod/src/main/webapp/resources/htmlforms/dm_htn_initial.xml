@@ -460,24 +460,58 @@
             <label>Treatment</label>
             <table>
                 <tbody>
-                    <tr>                    				
-                        <th></th><th>Drug</th><th>Plan</th><th>Dose</th><th>Frequency</th>                        			
+                    <tr>
+                        <td>
+                            Glucose Lowering drugs
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <th>Drug</th>
+                                    <th>Plan</th>
+                                    <th>Dose</th>
+                                    <th>Frequency</th>
+                                </tr>
+                                <tr>
+                                    <td><label>Metformin</label>
+                                    </td><td>Start <br/>CT <br/>Change <br/>Stop</td>
+                                    <td><br/>500mg <br/>850mg <br/>1000mg </td>
+                                    <td><br/> OD <br/> BD</td>
+                                </tr>
+                                <tr>
+                                  <td><label>Glibenclamide</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>
+                                </tr>
+                                <tr>
+                                  <td><label>Insulin 70/30</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>
+                                </tr>
+                                <tr>
+                                   <td><label>NPH</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>
+                                </tr>
+                                <tr>
+                                  <td><label>Soluble Insulin</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/>BD</td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
-                    <tr>                    				
-                       <td></td><td><label>Metformin</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>                     			
+                    <tr>
+                        <td rowspan="2">
+                            Others
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
                     </tr>
-                    <tr>                    				
-                      <td></td><td><label>Glibenclamide</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>                			
-                    </tr>
-                    <tr>                    				
-                      <td></td><td><label>Insulin 70/30</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>         			
-                    </tr>
-                    <tr>                    				
-                       <td></td><td><label>NPH</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/> BD</td>                     			
-                    </tr>
-                    <tr>                    				
-                      <td></td><td><label>Soluble Insulin</label></td><td>Start <br/>CT <br/>Change <br/>Stop</td><td><br/>500mg <br/>850mg <br/>1000mg </td><td><br/> OD <br/>BD</td>                			
-                    </tr>               
                 </tbody>
             </table>
         </section>
