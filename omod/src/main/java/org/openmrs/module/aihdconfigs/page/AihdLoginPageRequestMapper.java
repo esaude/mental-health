@@ -7,7 +7,7 @@ import org.openmrs.ui.framework.page.PageRequestMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AihdLoginPageRequestMapper implements PageRequestMapper {
+public class AihdLoginPageRequestMapper /*implements PageRequestMapper*/ {
 
     protected final Log log = LogFactory.getLog(getClass());
     /**
@@ -26,6 +26,7 @@ public class AihdLoginPageRequestMapper implements PageRequestMapper {
                 request.setPageNameOverride("aihdLogin");
 
                 log.info(request.toString());
+                System.out.println("The request is "+request.toString());
                 return true;
             }
         }
