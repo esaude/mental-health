@@ -200,7 +200,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            <label>** Adhering to current medications?  </label>
+                            <label>Adhering to current medications?  </label>
                             <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,N/A" style="radio"
                                  answerSeparator=""/>                       
                         </td>
@@ -326,9 +326,9 @@
             <table>
                 <tbody>
                     <tr>
-                        <th>Test</th>
-                        <th>Results</th>
-                        <th>Date</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Test</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Results</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
                     </tr>
                     <tr>
                         <td><label>RBS (mmols/L)</label></td>
@@ -416,11 +416,11 @@
                 <tbody>
                     <tr>                    				
                         
-                        <th>No.</th>
-                        <th>Complications</th>
-                        <th>ADD</th>
-                        <th>ONGOING</th>
-                        <th>REMOVE</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">No.</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Complications</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">ADD</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">ONGOING</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">REMOVE</th>
                     </tr>
                      <tr>
                         <td>1</td>
@@ -511,10 +511,10 @@
                         <td>
                             <table>
                                 <tr>
-                                    <th>Drug</th>
-                                    <th>Plan</th>
-                                    <th>Dose</th>
-                                    <th>Frequency</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drug</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Plan</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Frequency</th>
                                 </tr>					
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
