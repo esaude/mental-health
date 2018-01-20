@@ -17,7 +17,7 @@
 
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
-            <h3>Diabetes Clinical Follow Up Form</h3>
+            <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Diabetes Clinical Follow Up Form</h3>
         </div>
         <div>
             <label>Encounter Details</label>

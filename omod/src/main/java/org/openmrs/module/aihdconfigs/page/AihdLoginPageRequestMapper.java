@@ -26,7 +26,6 @@ public class AihdLoginPageRequestMapper /*implements PageRequestMapper*/ {
                 request.setPageNameOverride("aihdLogin");
 
                 log.info(request.toString());
-                System.out.println("The request is "+request.toString());
                 return true;
             }
         }
