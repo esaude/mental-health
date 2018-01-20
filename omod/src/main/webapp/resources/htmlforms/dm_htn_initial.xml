@@ -687,8 +687,8 @@
             <table border="0">
                 <tbody>
                     <tr>
-                        <th>Option</th>
-                        <th>Return date(dd/mm/yyyy)</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Option</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Return date(dd/mm/yyyy)</th>
                     </tr>
                     <tr>
                         <td><obs conceptId="1271"  answerConceptId="302"  answerLabel="Continue Care in clinic"  style="checkbox"/></td>
@@ -718,7 +718,7 @@
                                                     <obs conceptId="1271" answerConceptId="161157"   answerLabel="CVD review"   style="checkbox" />
                                                     <obs conceptId="1271" answerConceptId="5622"   answerLabel="Nutrition"   style="checkbox" />
                                                     <obs conceptId="1271" answerConceptId="5622"   answerLabel="Physiotherapy"   style="checkbox" />
-                                                    <obs conceptId="1271" answerConceptId="5622"   answerLabel="Other"   style="checkbox" />
+                                                    <obs conceptId="1271" answerConceptId="5622"   answerLabel="Other__________"   style="checkbox" />
                                                 </td>
                                             </tr>
                                         </table>
