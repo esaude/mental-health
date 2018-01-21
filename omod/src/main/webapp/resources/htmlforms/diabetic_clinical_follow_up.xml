@@ -20,7 +20,7 @@
             <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Diabetes Clinical Follow Up Form</h3>
         </div>
         <div>
-            <label>Encounter Details</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Encounter Details</label>
             <table border="0" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
@@ -45,7 +45,7 @@
                 </tbody>
             </table>
 
-            <label>Status of patient:</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Status of patient:</label>
             <table>
                 <tbody>
                     <tr>
@@ -54,10 +54,12 @@
                         </td>
 
                         <td>
+                         <input type="radio" value="new_htn"/>
                             <label>New DM patient</label>                        
                         </td>
 
                         <td>
+                           <input type="radio" value="new_htn"/>
                             <label> Known DM patient</label>                        
                         </td>
 
@@ -69,12 +71,15 @@
                     <tr>
                         <td>
                             <label>Hypertension:</label>
+                             <input type="radio" value="new_htn"/>
                         </td>
                         <td>
-                            <label>New HTN patient</label>                        
+                            <label>New HTN patient</label> 
+                             <input type="radio" value="new_htn"/>                       
                         </td>
                         <td>
-                            <label> Known HTN patient</label>                        
+                            <label> Known HTN patient</label> 
+                             <input type="radio" value="new_htn"/>                       
                         </td>
                         <td>
                             <label>Date of starting clinic</label>
@@ -82,23 +87,27 @@
                         </td>
                     </tr>
                      <tr>
-                        <td>
-                            <label>** Patient covered by NHIF:</label>
+                        <td colspan="4">
+                            <label>Patient covered by NHIF:</label>
                             <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>                       
                         </td>
-                        <td>
+                    </tr>
+                    <tr>                        
+                        <td colspan="4"> 
                             <label>Encourage enrollment</label>                   
                         </td>
+
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="4">
                             <label>Type of Diabetes:</label>
                             <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Type 1,Type 2" style="radio"
                                  answerSeparator=""/>                        
                          </td>
-
-                        <td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
                             <label>HIV status:</label>
                             <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
                                  answerSeparator=""/>
@@ -108,63 +117,89 @@
                 </tbody>
             </table>
             
-            <label>Dates of Assessments</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Dates of Assessments</label>
             <table>
                 <tbody>
+
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137593" labelText="Frequent urination"  style="checkbox"/></td>
-                   </tr>
-                    <tr>
-                      <td><obs conceptId="1728" answerConceptId="140939" labelText="Excessive thirst"  style="checkbox"/></td>
-                   </tr>
-                    <tr>
-                      <td><obs conceptId="1728" answerConceptId="140939" labelText="Extreme hunger **"  style="checkbox"/></td>
-                   </tr>
-                    <tr>
-                      <td><obs conceptId="1728" answerConceptId="159214" labelText="Unexplained weight loss"  style="checkbox"/></td>
-                   </tr>
-                    <tr>
-                      <td><obs conceptId="1728" answerConceptId="120655" labelText="Increased fatigue **"  style="checkbox"/></td>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Symptoms</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="147104" labelText="Blurred Vision"  style="checkbox"/></td>
+                      <td><obs conceptId="1728" answerConceptId="137593" answerLabel="Frequent urination"  style="checkbox"/></td>
+                      <td><input type="date"/></td>
+                   </tr>
+                    <tr>
+                      <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Excessive thirst"  style="checkbox"/></td>
+                      <td><input type="date"/></td>
+                   </tr>
+                    <tr>
+                      <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Extreme hunger **"  style="checkbox"/></td>
+                      <td></td>
+                   </tr>
+                    <tr>
+                      <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox"/></td>
+                      <td><input type="date"/></td>
+                   </tr>
+                    <tr>
+                      <td><input conceptId="1728" answerConceptId="120655" type="checkbox"/><label>Increased fatigue</label> </td>
+                      <td><input type="date"/></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137679" labelText="Impotence"  style="checkbox"/></td>
+                      <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox"/></td>
+                      <td><input type="date"/></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137679" labelText="Numbness or tingling sensation **"  style="checkbox"/></td>
+                      <td><obs conceptId="1728" answerConceptId="137679" answerLabel="Impotence"  style="checkbox"/></td>
+                      <td><input type="date"/></td>
+                    </tr>
+                    <tr>
+                      <td><input conceptId="1728" answerConceptId="137679"  type="checkbox"/><label>Numbness or tingling sensation</label></td>
+                      <td><input type="date"/></td>
                    </tr>
                 </tbody>
             </table>
 
-            <label>Daily Symptoms:</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Daily Symptoms:</label>
             <table>
                 <tbody>
                     <tr>
-                          <td><obs conceptId="159800" answerConceptId="159799"  labelText="Cough of any duration"   style="checkbox"/></td>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Symptoms</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                    </tr>                
+                    <tr>
+                          <td><obs conceptId="159800" answerConceptId="159799"  answerLabel="Cough of any duration"   style="checkbox"/></td>
+                          <td><input type="date"/></td>
                     </tr>
                     <tr>
-                          <td><obs conceptId="159800" answerConceptId="140238" labelText="Fever"   style="checkbox"/></td>
+                          <td><obs conceptId="159800" answerConceptId="140238" answerLabel="Fever"   style="checkbox"/></td>
+                          <td><input type="date"/></td>
                     </tr>
                     <tr>
-                          <td><obs conceptId="159800" answerConceptId="150796" labelText="Noticeable weight Loss"   style="checkbox"/></td>
+                          <td><obs conceptId="159800" answerConceptId="150796" answerLabel="Noticeable weight Loss"   style="checkbox"/></td>
+                          <td><input type="date"/></td>
                     </tr>
                     <tr>
-                          <td><obs conceptId="159800" answerConceptId="133027" labelText="Night sweats"   style="checkbox"/></td>
+                          <td><obs conceptId="159800" answerConceptId="133027" answerLabel="Night sweats"   style="checkbox"/></td>
+                          <td><input type="date"/></td>
                     </tr>
                 </tbody>
             </table>
 
-            <label>Action taken/Date</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Action taken/Date</label>
             <table>
                 <tbody>
+                    <tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Action</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                    </tr>                 
                     <tr>
                        <td>
                             <label>Sputum Smear :</label>
                             <obs conceptId="307" answerConceptIds="703,644" answerLabels="Positive,Negative" style="radio"
                                  answerSeparator=""/>                        
                         </td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                        <td>
@@ -172,6 +207,7 @@
                             <obs conceptId="162202" answerConceptIds="703,644" answerLabels="Positive,Negative" style="radio"
                                  answerSeparator=""/>                        
                         </td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                        <td>
@@ -179,6 +215,7 @@
                             <obs conceptId="12" answerConceptIds="1115,5158" answerLabels="Normal N,Suggestive S **" style="radio"
                                  answerSeparator=""/>                        
                         </td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                        <td>
@@ -186,13 +223,7 @@
                             <obs conceptId="12" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>                        
                         </td>
-                    </tr>
-                    <tr>
-                       <td>
-                            <label>Start anti-TB:</label>
-                            <obs conceptId="162309" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                        
-                        </td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                        <td>
@@ -200,6 +231,7 @@
                             <obs conceptId="164072" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>                        
                         </td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                        <td>
@@ -207,220 +239,307 @@
                             <obs conceptId="162275" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>                        
                         </td>
+                        <td><input type="date"/></td>
                     </tr>
                 </tbody>
             </table>
 
-           <label>Physical Examination</label>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;"> Physical Examination</label>
             <table>
                 <tbody>
+                    <tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Vitals</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                    </tr> 
                     <tr>                       
                         <td><label>Height  (cm)</label></td>
                         <td><obs conceptId="5090"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>Weight  (KG)</label></td>
                         <td><obs conceptId="5089"/></td>
+                         <td><input type="date"/></td>
                     </tr>
                     <tr>                        
-                        <td><label>BMI **</label></td>
-                        <td><obs conceptId="5089"/></td>
+                        <td><label>BMI</label></td>
+                        <td><input type="text"/></td>
                     </tr>
                     <tr>
-                        <td><label>Systolic blood pressure</label></td>
-                        <td><obs conceptId="5085"/></td>
+                        <td><label>Blood pressure (mmHg)</label></td>
+                        <td>
+                            <label>Systolic</label>
+                            <obs conceptId="5085"/>
+                            <label>Diastolic</label>
+                            <obs conceptId="5086"/>
+                        </td>    
                     </tr>
                 </tbody>
             </table>
 
-            <label>Exams:</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Exams:</label>
             <table>
                 <tbody>
                     <tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Exam</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                    </tr>                 
+                    <tr>
                         <td><obs conceptId="159800" answerConceptId="159799" answerLabel="Foot Check/Annual Foot Exam"   style="checkbox"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><obs conceptId="159800" answerConceptId="140238" answerLabel="Eye Exam"   style="checkbox"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><obs conceptId="159800" answerConceptId="150796" answerLabel="Dental Exam"   style="checkbox"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><obs conceptId="159800" answerConceptId="133027" answerLabel="Eye Check up "   style="checkbox"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><obs conceptId="159800" answerConceptId="120655" answerLabel="Nutritional Review"   style="checkbox"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                 </tbody>
             </table>
 
-           <label>Laboratory Investigations:</label>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;">Laboratory Investigations:</label>
             <table>
                 <tbody>
                     <tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                    </tr>                  
+                    <tr>
                         <td><label>Fasting Blood Sugar (FBS)</label></td>
                         <td><obs conceptId="160912"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>Random Blood Sugar (RBS)</label></td>
                         <td><obs conceptId="887"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>HbA1c</label></td>
                         <td><obs conceptId="159644"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>HDL</label></td>
                         <td><obs conceptId="1007"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>LDL</label></td>
                         <td><obs conceptId="1008"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>Triglycerides</label></td>
                         <td><obs conceptId="1009"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                     <tr>
                         <td><label>UECs/ Creatinine</label></td>
                         <td><obs conceptId="164364"/></td>
+                        <td><input type="date"/></td>
                     </tr>
                 </tbody>
             </table>
 
-           <label>Current Medical Treatment **:</label>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;">Current Medical Treatment:</label>
             <table>
                 <tbody>
                 
                     <tr>
-                      <th>
-                      Medication
-                      </th>
-                      <th>
-                      Drugs and Dosage
-                      </th>                            
-                    </tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Medication</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Yes</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">No</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drugs and Dosage</th>
+                    </tr>                      
                      <tr>
                        <td>
                             <label>OGLAs:</label>
-                            <obs conceptId="162309" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                        
-                        </td>
+                       </td>     
+                       <td>
+                            <input type="checkbox"/>
+                       </td>     
+                       <td>
+                           <input type="checkbox"/>
+                       </td>     
+                       <td>
+                           <input type="text"/>
+                       </td>     
+                            
                     </tr>
                     <tr>
                        <td>
-                            <label>Insulin only:</label>
-                            <obs conceptId="164072" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                        
+                            <label>Insulin only:</label>                   
                         </td>
+                        <td>
+                            <input type="checkbox"/>
+                       </td>     
+                       <td>
+                           <input type="checkbox"/>
+                       </td>     
+                       <td>
+                           <input type="text"/>
+                       </td>  
                     </tr>
                     <tr>
                        <td>
-                            <label>OGLAs + Insulin:</label>
-                            <obs conceptId="162275" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                        
+                            <label>OGLAs + Insulin:</label>                    
                         </td>
+                        <td>
+                            <input type="checkbox"/>
+                        </td>     
+                        <td>
+                            <input type="checkbox"/>
+                        </td>     
+                        <td>
+                            <input type="text"/>
+                        </td>  
                     </tr>
                 </tbody>
             </table>
 
-           <label>Current Medical Treatment **:</label>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;">Assessments:</label>
             <table>
                 <tbody>
-                
+                    <tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Assessment</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                    </tr>                   
                     <tr>                      
-                       <td><obs conceptId="159800" answerConceptId="159799" lanswerLabel="Cardiovascular Disease" style="checkbox"/></td>                    
+                       <td><obs conceptId="159800" answerConceptId="159799" answerLabel="Cardiovascular Disease" style="checkbox"/></td>  
+                       <td><input type="text"/></td>                   
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="140238"  lanswerLabel="High blood pressure" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="140238"  answerLabel="High blood pressure" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="150796"  lanswerLabel="High cholesterol" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="150796"  answerLabel="High cholesterol" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="133027"  lanswerLabel="Peripheral vascular disease" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="133027"  answerLabel="Peripheral vascular disease" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="120655"  lanswerLabel="Peripheral neuropathy" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="120655"  answerLabel="Peripheral neuropathy" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="147104"  lanswerLabel="Autonomic neuropathy" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="147104"  answerLabel="Autonomic neuropathy" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="137679"  lanswerLabel="Retinopathy" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="137679"  answerLabel="Retinopathy" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5622"  lanswerLabel="Kidney disease" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="5622"  answerLabel="Kidney disease" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5622"  lanswerLabel="Asthma/COPD" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="5622"  answerLabel="Asthma/COPD" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5622"  lanswerLabel="Arthritis" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="5622"  answerLabel="Arthritis" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5623"  lanswerLabel="Other" style="checkbox"/></td>
+                       <td><obs conceptId="159800" answerConceptId="5623"  answerLabel="Other" style="checkbox"/></td>
+                       <td><input type="text"/></td> 
                     </tr>
                 </tbody>
             </table>
 
-          <label>Complications:  Foot Amputations  (please indicate) </label>
+          <label style="background:  #ff7100; padding: 5px; color: #fff;">Complications:  Foot Amputations  (please indicate) </label>
             <table>
                 <tbody>
-                    <tr>                       
-                       <label>Foot Amputations **:</label>
+                    <tr>
+                    <td>                       
+                       <label>Foot Amputations:</label>
                        <obs conceptId="162275" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>  
+                     </td>            
                     </tr>
                 </tbody>
             </table>
-
+          <label style="background:  #ff7100; padding: 5px; color: #fff;">Medication:</label>
             <table>
                      <tbody>
                                 <tr>
-                                    <th>Drug</th>
-                                    <th>Plan</th>
-                                    <th>Dose</th>
-                                    <th>Frequency</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drug</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
                                 </tr>					
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
-                                   <td>Start <br/>CT <br/>Change <br/>Stop</td>
-                                   <td>500mg <br/>850mg <br/>1000mg </td>
-                                   <td>OD<br/>BD</td>
+                                    <td><input type="text"/></td>
                                 </tr>						
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox"/></td>
-                                   <td>Start <br/>CT <br/>Change <br/>Stop</td>
-                                   <td>2.5mg <br/>5mg <br/>7.5mg <br/>10mg</td>
-                                   <td>AM<br/>PM</td>
-                                </tr>						
+                                    <td><input type="text"/></td>
+                                </tr>
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
-                                   <td>Start <br/>CT <br/>Change <br/>Stop</td>
-                                   <td>____IU<br/>____IU</td>
-                                   <td>AM<br/>PM</td>
-                                </tr>						
+                                   <td><input type="text"/></td>
+                                </tr>                                											
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox"/></td>
-                                   <td>Start <br/>CT <br/>Change <br/>Stop</td>
-                                   <td>____IU<br/>____IU</td>
-                                   <td>AM<br/>PM</td>
+                                   <td><input type="text"/></td>
                                 </tr>						
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox"/></td>
-                                   <td>Start <br/>CT <br/>Change <br/>Stop</td>
-                                   <td>____IU<br/>____IU</td>
-                                   <td>AM<br/>PM</td>
-                                </tr>	
+                                   <td><input type="text"/>____IU</td>
+                                </tr>
+                                <tr>                                   
+                                   <td><obs conceptId="159460"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
+                                   <td><input type="text"/>____IU</td>
+                                </tr>		
                                 <tr>                                   
                                    <td><obs conceptId="159460"  answerConceptId="5622"  answerLabel="Other Prescription"  style="checkbox"/></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
+                                   <td><input type="text"/></td>
+                                </tr>	
+                                <tr>                                   
+                                   <td><label>TCA</label></td>
+                                   <td><input type="text"/></td>
                                 </tr>	
                         </tbody>
                     </table>
+
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Referrals:</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label>Referral</label></td>
+                        <td><input type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Referral Note Number</label></td>
+                        <td><input type="text"/></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Clinician Name________________________</td>
+                        <td>Signature____________________________</td>
+                    </tr>
+                </tbody>
+            </table>  
 
         </div>
         <ifMode mode="VIEW" include="false">
