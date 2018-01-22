@@ -9,305 +9,288 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>${ui.message("referenceapplication.login.title")}</title>
-    <link rel="shortcut icon" type="image/ico" href="/${ui.contextPath()}/images/openmrs-favicon.ico"/>
-    <link rel="icon" type="image/png\" href="/${ui.contextPath()}/images/openmrs-favicon.png"/>
-    ${ui.resourceLinks()}
+    <title>${ ui.message("referenceapplication.login.title") }</title>
+    <link rel="shortcut icon" type="image/ico" href="/${ ui.contextPath() }/images/openmrs-favicon.ico"/>
+    <link rel="icon" type="image/png\" href="/${ ui.contextPath() }/images/openmrs-favicon.png"/>
+    ${ ui.resourceLinks() }
 
     <style media="screen" type="text/css">
-    body {
-        font-family: "OpenSans", Arial, sans-serif;
-        -webkit-font-smoothing: subpixel-antialiased;
-        max-width: 1000px;
-        margin: 10px auto;
-        background-color: white;
-    }
-
-    #body-wrapper {
-        margin-top: 10px;
-        padding: 10px;
-        background-color: white;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -khtml-border-radius: 5px;
-        border-radius: 5px;
-    }
-
-    #body-wrapper #content {
-        margin-top: 20px;
-        padding: 10px;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -khtml-border-radius: 5px;
-        border-radius: 5px;
-    }
-
-    .logo {
-        margin: 0px;
-        text-align: center;
-    }
-
-    #error-message {
-        color: #B53D3D;
-        text-align: center;
-    }
-
-    .footer{
-        float: left;
-        margin: 0px 15px;
-        width: 95%;
-        display: inline-block;
-        font-size: 0.7em;
-        color: #808080;
-    }
-    .footer .left_al {
-        float: left;
-    }
-
-    .footer .right_al{
-        float: right;
-    }
-    .footer a{
-        color: #404040;
-        font-size: 1em;
-        padding: 5px;
-        text-decoration: none;
-    }
-    .footer a:hover{
-        color: #404040;
-        font-size: 1em;
-        padding: 5px;
-        text-decoration: underline;
-    }
-    .footer a:active{
-        color: #404040;
-        font-size: 1em;
-        padding: 5px;
-        text-decoration: none;
-    }
-    .footer a:after{
-        color: #404040;
-        font-size: 1em;
-        padding: 5px;
-        text-decoration: none;
-    }
-    header {
-        line-height: 1em;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -khtml-border-radius: 5px;
-        border-radius: 5px;
-        position: relative;
-        background-color: white;
-        color: #CCC;
-    }
-
-    header .logo img {
-        width: 200px;
-    }
-
-    header .logo {
-        float: none;
-        margin: 4px;
-    }
-
-    #login-form ul.select {
-        padding: 10px;
-        background: beige;
-    }
-
-    ul.select li.selected {
-        background-color: #94979A;
-        color: white;
-        border-color: transparent;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -khtml-border-radius: 5px;
-        border-radius: 5px;
-        padding: 5px;
-        text-align: center;
-    }
-
-    ul.select li:hover {
-        background-color: #AB3A15;
-        color: white;
-        cursor: pointer;
-    }
-
-    ul.select li {
-        margin: 0 10px;
-        text-align: left;
-        display: inline-block;
-        width: 20%;
-        padding: 5px;
-        color: #3B6692;
-        background-color: #FFF;
-        /* border-bottom: 1px solid #efefef; */
-        border: dashed 1px #CEC6C6;
-        text-align: center;
-    }
-
-    form fieldset, .form fieldset {
-        border: solid 1px #CECECE;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -khtml-border-radius: 5px;
-        border-radius: 5px;
-        background: #FFFFFB;
-    }
-    </style>
+        body {
+            font-family: "OpenSans", Arial, sans-serif;
+            -webkit-font-smoothing: subpixel-antialiased;
+            max-width: 1000px;
+            margin: 10px auto;
+            background-color: white;
+        }
+        #body-wrapper {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            border-radius: 5px;
+        }
+        #body-wrapper #content {
+            margin-top: 20px;
+            padding: 10px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            border-radius: 5px;
+        }
+        .logo {
+            margin: 0px;
+            text-align: center;
+        }
+        #error-message {
+            color: #B53D3D;
+            text-align: center;
+        }
+        .footer{
+            float: left;
+            margin: 0px 15px;
+            width: 95%;
+            display: inline-block;
+            font-size: 0.7em;
+            color: #808080;
+        }
+        .footer .left_al {
+            float: left;
+        }
+        .footer .right_al{
+            float: right;
+        }
+        .footer a{
+            color: #404040;
+            font-size: 1em;
+            padding: 5px;
+            text-decoration: none;
+        }
+        .footer a:hover{
+            color: #404040;
+            font-size: 1em;
+            padding: 5px;
+            text-decoration: underline;
+        }
+        .footer a:active{
+            color: #404040;
+            font-size: 1em;
+            padding: 5px;
+            text-decoration: none;
+        }
+        .footer a:after{
+            color: #404040;
+            font-size: 1em;
+            padding: 5px;
+            text-decoration: none;
+        }
+        header {
+            line-height: 1em;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            border-radius: 5px;
+            position: relative;
+            background-color: white;
+            color: #CCC;
+        }
+        header .logo img {
+            width: 200px;
+        }
+        header .logo {
+            float: none;
+            margin: 4px;
+        }
+        #login-form ul.select {
+            padding: 10px;
+            background: beige;
+        }
+        ul.select li.selected {
+            background-color: #94979A;
+            color: white;
+            border-color: transparent;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            border-radius: 5px;
+            padding: 5px;
+            text-align: center;
+        }
+        ul.select li:hover {
+            background-color: #AB3A15;
+            color: white;
+            cursor: pointer;
+        }
+        ul.select li {
+            margin: 0 10px;
+            text-align: left;
+            display: inline-block;
+            width: 20%;
+            padding: 5px;
+            color: #3B6692;
+            background-color: #FFF;
+            /* border-bottom: 1px solid #efefef; */
+            border: dashed 1px #CEC6C6;
+            text-align: center;
+        }
+        form fieldset, .form fieldset {
+            border: solid 1px #CECECE;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -o-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -khtml-border-radius: 5px;
+            border-radius: 5px;
+            background: #FFFFFB;
+        }
+        </style>
 </head>
-
 <body>
 <script type="text/javascript">
     var OPENMRS_CONTEXT_PATH = '${ ui.contextPath() }';
 </script>
 
-<script type="text/javascript">
-    jQuery(function () {
-        updateSelectedOption = function () {
-            jQuery('#sessionLocation li').removeClass('selected');
-            var sessionLocationVal = jQuery('#sessionLocationInput').val();
-            if (sessionLocationVal != null && sessionLocationVal != "" && sessionLocationVal != 0) {
-                jQuery('#sessionLocation li[value|=' + sessionLocationVal + ']').addClass('selected');
-                jQuery('#loginButton').removeClass('disabled');
-                jQuery('#loginButton').removeAttr('disabled');
-            } else {
-                jQuery('#loginButton').addClass('disabled');
-                jQuery('#loginButton').attr('disabled', 'disabled');
-            }
-        };
 
+${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        jQuery('#username').focus();
+    });
+
+    updateSelectedOption = function() {
+        jQuery('#sessionLocation li').removeClass('selected');
+        jQuery('#sessionLocation li[value|=' + jQuery('#sessionLocationInput').val() + ']').addClass('selected');
+
+        var sessionLocationVal = jQuery('#sessionLocationInput').val();
+        if(parseInt(sessionLocationVal, 10) > 0){
+            jQuery('#login-button').removeClass('disabled');
+            jQuery('#login-button').removeAttr('disabled');
+        }else{
+            jQuery('#login-button').addClass('disabled');
+            jQuery('#login-button').attr('disabled','disabled');
+        }
+    };
+
+    jQuery(function() {
         updateSelectedOption();
 
-        jQuery('#sessionLocation li').click(function () {
+        jQuery('#sessionLocation li').click( function() {
             jQuery('#sessionLocationInput').val(jQuery(this).attr("value"));
             updateSelectedOption();
         });
 
-        jQuery('#username').focus();
-
         var cannotLoginController = emr.setupConfirmationDialog({
-                                                                    selector: '#cannotLoginPopup',
-                                                                    actions: {
-                                                                        confirm: function () {
-                                                                            cannotLoginController.close();
-                                                                        }
-                                                                    }
-                                                                });
-
-        jQuery('a#cantLogin').click(function () {
-            cannotLoginController.show();
+            selector: '#cannot-login-popup',
+            actions: {
+                confirm: function() {
+                    cannotLoginController.close();
+                }
+            }
         });
-
-        pageReady = true;
+        jQuery('a#cant-login').click(function() {
+            cannotLoginController.show();
+        })
     });
 </script>
 
-<div id="body-wrapper">
-    <header>
-        <div class="logo">
-            <a href="${ui.pageLink("referenceapplication", "home")}">
-                <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")}" style="height:48px" />
-            </a>
-        </div>
-    </header>
+<header>
+    <div class="logo">
+        <a href="${ui.pageLink("referenceapplication", "home")}">
+            <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")}"/>
+        </a>
+    </div>
+</header>
 
-    ${ui.includeFragment("referenceapplication", "infoAndErrorMessages")}
+<div id="body-wrapper">
     <div id="content">
-        <div style="width: 100%; font-size: 1.6em; text-align: center; margin: 25px 0 10px 20px;">${facility}</div>
         <form id="login-form" method="post" autocomplete="off">
             <fieldset>
 
                 <legend>
                     <i class="icon-lock small"></i>
-                    ${ui.message("referenceapplication.login.loginHeading")}
+                    ${ ui.message("referenceapplication.login.loginHeading") }
                 </legend>
 
                 <p class="left">
                     <label for="username">
-                        ${ui.message("referenceapplication.login.username")}:
+                        ${ ui.message("referenceapplication.login.username") }:
                     </label>
-                    <input id="username" type="text" name="username"
-                           placeholder="${ui.message("referenceapplication.login.username.placeholder")}"/>
+                    <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
                 </p>
 
                 <p class="left">
-
                     <label for="password">
-                        ${ui.message("referenceapplication.login.password")}:
+                        ${ ui.message("referenceapplication.login.password") }:
                     </label>
-                    <input id="password" type="password" name="password"
-                           placeholder="${ui.message("referenceapplication.login.password.placeholder")}"/>
+                    <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
                 </p>
 
                 <p class="clear">
                     <label for="sessionLocation">
-                        Select appropriate area for your session:
+                        ${ ui.message("referenceapplication.login.sessionLocation") }:
                     </label>
-                <ul id="sessionLocation" class="select">
-                    <% locations.sort { ui.format(it) }.each { %>
-                    <li id="${it.name}" value="${it.id}">${ui.format(it)}</li>
-                    <% } %>
-                </ul>
-            </p>
+                    <ul id="sessionLocation" class="select">
+                        <% locations.sort { ui.format(it) }.each { %>
+                        <li id="${it.name}" value="${it.id}">${ui.format(it)}</li>
+                        <% } %>
+                    </ul>
+                </p>
 
                 <input type="hidden" id="sessionLocationInput" name="sessionLocation"
-                    <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %>/>
+                    <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
 
                 <p></p>
-
-                <p>
-                    <input id="loginButton" class="confirm" type="submit"
-                           value="${ui.message("referenceapplication.login.button")}"/>
-                </p>
-
-                <p>
-                    <a id="cantLogin" href="javascript:void(0)">
-                        <i class="icon-question-sign small"></i>
-                        ${ui.message("referenceapplication.login.cannotLogin")}
-                    </a>
-                </p>
+                <div style="padding-top: 20px">
+                    <div>
+                        <p>
+                            <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
+                        </p>
+                        <p>
+                            <a id="cant-login" href="javascript:void(0)">
+                                <i class="icon-question-sign small"></i>
+                                ${ ui.message("referenceapplication.login.cannotLogin") }
+                            </a>
+                        </p>
+                    </div>
+                </div>
 
             </fieldset>
 
-            <input type="hidden" name="redirectUrl" value="${redirectUrl}"/>
+            <input type="hidden" name="redirectUrl" value="${redirectUrl}" />
 
         </form>
 
     </div>
     <div class="footer">
-        <div class="left_al">
-            &#169; ${year} All Rights Reserved <a href="#" target="_blank"
-                                                  title="Ministry of Health Kenya">Ministry of Health - Republic of Kenya</a>
-        </div>
-        <div class="right_al">
-            powered by OpenMRS
-        </div>
+            <div class="left_al">
+                &#169; ${year} All Rights Reserved <a href="#" target="_blank"
+                                                      title="Ministry of Health Kenya">Ministry of Health - Republic of Kenya</a>
+            </div>
+            <div class="right_al">
+                powered by OpenMRS
+            </div>
     </div>
 </div>
 
-<div id="cannotLoginPopup" class="dialog" style="display: none">
+<div id="cannot-login-popup" class="dialog" style="display: none">
     <div class="dialog-header">
         <i class="icon-info-sign"></i>
-
-        <h3>${ui.message("referenceapplication.login.cannotLogin")}</h3>
+        <h3>${ ui.message("referenceapplication.login.cannotLogin") }</h3>
     </div>
-
     <div class="dialog-content">
-        <p class="dialog-instructions">${ui.message("referenceapplication.login.cannotLoginInstructions")}</p>
+        <p class="dialog-instructions">${ ui.message("referenceapplication.login.cannotLoginInstructions") }</p>
 
-        <button class="confirm">${ui.message("referenceapplication.okay")}</button>
+        <button class="confirm">${ ui.message("referenceapplication.okay") }</button>
     </div>
 </div>
 

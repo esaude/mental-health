@@ -1,4 +1,26 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
 package org.openmrs.module.aihdconfigs.page.controller;
+
+import static org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants.COOKIE_NAME_LAST_SESSION_LOCATION;
+import static org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants.REQUEST_PARAMETER_NAME_REDIRECT_URL;
+import static org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants.SESSION_ATTRIBUTE_REDIRECT_URL;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -8,10 +30,8 @@ import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.ContextAuthenticationException;
 import org.openmrs.module.appframework.service.AppFrameworkService;
-import org.openmrs.module.appui.AppUiConstants;
 import org.openmrs.module.appui.UiSessionContext;
 import org.openmrs.module.emrapi.EmrApiConstants;
-import org.openmrs.module.emrapi.utils.GeneralUtils;
 import org.openmrs.module.referenceapplication.ReferenceApplicationConstants;
 import org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants;
 import org.openmrs.ui.framework.UiUtils;
@@ -20,25 +40,27 @@ import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.ui.framework.page.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Locale;
-
-import static org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants.COOKIE_NAME_LAST_SESSION_LOCATION;
-import static org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants.REQUEST_PARAMETER_NAME_REDIRECT_URL;
-import static org.openmrs.module.referenceapplication.ReferenceApplicationWebConstants.SESSION_ATTRIBUTE_REDIRECT_URL;
-
+/**
+ * Spring MVC controller that takes over /login.htm and processes requests to authenticate a user
+ */
 @Controller
 public class AihdLoginPageController {
+
+    //see TRUNK-4536 for details why we need this
     private static final String GET_LOCATIONS = "Get Locations";
+
+    // RA-592: don't use PrivilegeConstants.VIEW_LOCATIONS
     private static final String VIEW_LOCATIONS = "View Locations";
-    protected final Log log = LogFactory.getLog(this.getClass());
+
+    protected final Log log = LogFactory.getLog(getClass());
+
+    @RequestMapping("/"+"aihdLogin.htm")
+    public String overrideLoginpage() {
+        return "forward:/" + "aihdconfigs" + "/" + "aihdLogin" + ".page";
+    }
 
     /**
      * @should redirect the user to the home page if they are already authenticated
@@ -46,8 +68,8 @@ public class AihdLoginPageController {
      * @should set redirectUrl in the page model if any was specified in the request
      * @should set the referer as the redirectUrl in the page model if no redirect param exists
      * @should set redirectUrl in the page model if any was specified in the session
-     * @should not set the referer as the redirectUrl in the page model if referer URL is outside context path
-     * @should set the referer as the redirectUrl in the page model if referer URL is within context path
+     * @should not set the referer as the redirectUrl in the page model if referer url is outside context path
+     * @should set the referer as the redirectUrl in the page model if referer url is within context path
      */
     public String get(PageModel model,
                       UiUtils ui,
@@ -56,19 +78,22 @@ public class AihdLoginPageController {
                       @SpringBean("locationService") LocationService locationService,
                       @SpringBean("appFrameworkService") AppFrameworkService appFrameworkService) {
 
-        String redirectUrl = getRedirectUrl(pageRequest);
-
         if (Context.isAuthenticated()) {
-            if(StringUtils.isNotBlank(redirectUrl)){
-                return "redirect:" + getRelativeUrl(redirectUrl, pageRequest);
-            }
             return "redirect:" + ui.pageLink(ReferenceApplicationConstants.MODULE_ID, "home");
         }
 
-        model.addAttribute(REQUEST_PARAMETER_NAME_REDIRECT_URL, getRelativeUrl(redirectUrl, pageRequest));
-        Location location = Context.getLocationService().getLocationByUuid(Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
-        model.addAttribute("facility", location);
+        String redirectUrl = getStringSessionAttribute(SESSION_ATTRIBUTE_REDIRECT_URL, pageRequest.getRequest());
+        if (StringUtils.isBlank(redirectUrl))
+            redirectUrl = pageRequest.getRequest().getParameter(REQUEST_PARAMETER_NAME_REDIRECT_URL);
 
+        if (StringUtils.isBlank(redirectUrl)) {
+            redirectUrl = getRedirectUrlFromReferer(pageRequest);
+        }
+
+        if (redirectUrl == null)
+            redirectUrl = "";
+
+        model.addAttribute(REQUEST_PARAMETER_NAME_REDIRECT_URL, redirectUrl);
         Location lastSessionLocation = null;
         try {
             Context.addProxyPrivilege(VIEW_LOCATIONS);
@@ -89,56 +114,27 @@ public class AihdLoginPageController {
         return null;
     }
 
-    private boolean isUrlWithinOpenmrs(PageRequest pageRequest, String redirectUrl){
-        if (StringUtils.isNotBlank(redirectUrl)) {
-            if (redirectUrl.startsWith("http://") || redirectUrl.startsWith("https://")) {
+    private String getRedirectUrlFromReferer(PageRequest pageRequest) {
+        String referer = pageRequest.getRequest().getHeader("Referer");
+        String redirectUrl = "";
+        if (referer != null) {
+            if (referer.contains("http://") || referer.contains("https://")) {
                 try {
-                    URL url = new URL(redirectUrl);
-                    String urlPath = url.getFile();
-                    String urlContextPath = urlPath.substring(0, urlPath.indexOf('/', 1));
-                    if (StringUtils.equals(pageRequest.getRequest().getContextPath(), urlContextPath)) {
-                        return true;
+                    URL refererUrl = new URL(referer);
+                    String refererPath = refererUrl.getPath();
+                    String refererContextPath = refererPath.substring(0, refererPath.indexOf('/', 1));
+                    if (StringUtils.equals(pageRequest.getRequest().getContextPath(), refererContextPath)) {
+                        redirectUrl = refererPath;
                     }
-                } catch (MalformedURLException e) {
+                }
+                catch (MalformedURLException e) {
                     log.error(e.getMessage());
                 }
-            } else if(redirectUrl.startsWith(pageRequest.getRequest().getContextPath())){
-                return true;
+            } else {
+                redirectUrl = pageRequest.getRequest().getHeader("Referer");
             }
         }
-        return false;
-    }
-
-    private String getRedirectUrlFromReferer(PageRequest pageRequest) {
-        String manualLogout = pageRequest.getSession().getAttribute(AppUiConstants.SESSION_ATTRIBUTE_MANUAL_LOGOUT, String.class);
-        String redirectUrl = "";
-        if(!Boolean.valueOf(manualLogout)){
-            redirectUrl = pageRequest.getRequest().getHeader("Referer");
-        } else {
-            Cookie cookie = new Cookie(ReferenceApplicationWebConstants.COOKIE_NAME_LAST_USER, null);
-            cookie.setMaxAge(0);
-            pageRequest.getResponse().addCookie(cookie);
-        }
-        pageRequest.getSession().setAttribute(AppUiConstants.SESSION_ATTRIBUTE_MANUAL_LOGOUT, null);
         return redirectUrl;
-    }
-
-    private String getRedirectUrlFromRequest(PageRequest pageRequest){
-        return pageRequest.getRequest().getParameter(REQUEST_PARAMETER_NAME_REDIRECT_URL);
-    }
-
-    private String getRedirectUrl(PageRequest pageRequest) {
-        String redirectUrl = getRedirectUrlFromRequest(pageRequest);
-        if (StringUtils.isBlank(redirectUrl)) {
-            redirectUrl = getStringSessionAttribute(SESSION_ATTRIBUTE_REDIRECT_URL, pageRequest.getRequest());
-        }
-        if (StringUtils.isBlank(redirectUrl)) {
-            redirectUrl = getRedirectUrlFromReferer(pageRequest);
-        }
-        if (StringUtils.isNotBlank(redirectUrl) && isUrlWithinOpenmrs(pageRequest, redirectUrl)) {
-            return redirectUrl;
-        }
-        return "";
     }
 
     /**
@@ -192,28 +188,17 @@ public class AihdLoginPageController {
                         log.debug("User has successfully authenticated");
 
                     sessionContext.setSessionLocation(sessionLocation);
-                    //we set the username value to check it new or old user is trying to log in
-                    pageRequest.setCookieValue(ReferenceApplicationWebConstants.COOKIE_NAME_LAST_USER, String.valueOf(username.hashCode()));
-
-                    // set the locale based on the user's default locale
-                    Locale userLocale = GeneralUtils.getDefaultLocale(Context.getUserContext().getAuthenticatedUser());
-                    if (userLocale != null) {
-                        Context.getUserContext().setLocale(userLocale);
-                        pageRequest.getResponse().setLocale(userLocale);
-                        new CookieLocaleResolver().setDefaultLocale(userLocale);
-                    }
 
                     if (StringUtils.isNotBlank(redirectUrl)) {
                         //don't redirect back to the login page on success nor an external url
-                        if (isUrlWithinOpenmrs(pageRequest, redirectUrl)) {
-                            if (!redirectUrl.contains("login.") && isSameUser(pageRequest, username)) {
-                                if (log.isDebugEnabled())
-                                    log.debug("Redirecting user to " + redirectUrl);
-                                return "redirect:" + redirectUrl;
-                            } else {
-                                if (log.isDebugEnabled())
-                                    log.debug("Redirect contains 'login.', redirecting to home page");
-                            }
+                        if (!redirectUrl.contains("login.")) {
+                            if (log.isDebugEnabled())
+                                log.debug("Redirecting user to " + redirectUrl);
+
+                            return "redirect:" + redirectUrl;
+                        } else {
+                            if (log.isDebugEnabled())
+                                log.debug("Redirect contains 'login.', redirecting to home page");
                         }
                     }
 
@@ -247,15 +232,6 @@ public class AihdLoginPageController {
         return "redirect:" + ui.pageLink(ReferenceApplicationConstants.MODULE_ID, "login");
     }
 
-    private boolean isSameUser(PageRequest pageRequest, String username) {
-        String cookieValue = pageRequest.getCookieValue(ReferenceApplicationWebConstants.COOKIE_NAME_LAST_USER);
-        int storedUsername = 0;
-        if (StringUtils.isNotBlank(cookieValue)) {
-            storedUsername = Integer.parseInt(cookieValue);
-        }
-        return cookieValue == null || storedUsername == username.hashCode();
-    }
-
     private String getStringSessionAttribute(String attributeName, HttpServletRequest request) {
         Object attributeValue = request.getSession().getAttribute(attributeName);
         request.getSession().removeAttribute(attributeName);
@@ -271,11 +247,6 @@ public class AihdLoginPageController {
         }
 
         //This is an absolute url, discard the protocal, domain name/host and port section
-        if(url.startsWith("http://")){
-            url = StringUtils.removeStart(url, "http://");
-        } else if(url.startsWith("https://")){
-            url = StringUtils.removeStart(url, "https://");
-        }
         int indexOfContextPath = url.indexOf(pageRequest.getRequest().getContextPath());
         if (indexOfContextPath >= 0) {
             url = url.substring(indexOfContextPath);
@@ -287,4 +258,3 @@ public class AihdLoginPageController {
         return null;
     }
 }
-

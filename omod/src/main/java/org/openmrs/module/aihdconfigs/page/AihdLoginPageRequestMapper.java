@@ -7,7 +7,7 @@ import org.openmrs.ui.framework.page.PageRequestMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AihdLoginPageRequestMapper /*implements PageRequestMapper*/ {
+public class AihdLoginPageRequestMapper implements PageRequestMapper {
 
     protected final Log log = LogFactory.getLog(getClass());
     /**
