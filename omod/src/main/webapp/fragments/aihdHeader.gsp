@@ -88,17 +88,11 @@
 
 </script>
 <header>
-    <div class="logo">
+    <div>
         <div style="float: left; padding-right: 3px">
             <a href="${logoLinkUrl}">
-                <img src="${logoIconUrl}" />
+                <img src="${logoIconUrl}" width="200px"/>
             </a>
-        </div>
-        <div style="float: left">
-            <span style="font-size: 24px;">ncdEMS</span>
-            <span style="font-size: 10px;">, powered by OpenMRS</span>
-            <br />
-            <span style="font-weight: bold; margin-left: 12px; border-top: 1px gray solid;">${facility.name}</span>
         </div>
     </div>
     <% if (context.authenticated) { %>

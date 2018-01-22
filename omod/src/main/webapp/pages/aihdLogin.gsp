@@ -54,7 +54,7 @@
         .footer{
             float: left;
             margin: 0px 15px;
-            width: 95%;
+            width: 60%;
             display: inline-block;
             font-size: 0.7em;
             color: #808080;
@@ -100,6 +100,7 @@
             position: relative;
             background-color: white;
             color: #CCC;
+            align: left;
         }
         header .logo img {
             width: 200px;
@@ -203,15 +204,12 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     });
 </script>
 
-<header>
-    <div class="logo">
+<div id="body-wrapper" style="width:800px; margin:0 auto;">
+    <div id="content">
         <a href="${ui.pageLink("referenceapplication", "home")}">
             <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")}"/>
         </a>
     </div>
-</header>
-
-<div id="body-wrapper">
     <div id="content">
         <form id="login-form" method="post" autocomplete="off">
             <fieldset>
@@ -220,31 +218,46 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
                     <i class="icon-lock small"></i>
                     ${ ui.message("referenceapplication.login.loginHeading") }
                 </legend>
+                <table>
+                    <tr>
+                        <td>
 
-                <p class="left">
-                    <label for="username">
-                        ${ ui.message("referenceapplication.login.username") }:
-                    </label>
-                    <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
-                </p>
+                            <label for="username">
+                                ${ ui.message("referenceapplication.login.username") }:
+                            </label>
+                        </td>
+                        <td>
+                            <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
+                        </td>
+                    </tr>
 
-                <p class="left">
-                    <label for="password">
-                        ${ ui.message("referenceapplication.login.password") }:
-                    </label>
-                    <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
-                </p>
+                    <tr>
+                        <td>
+                            <label for="password">
+                                ${ ui.message("referenceapplication.login.password") }:
+                            </label>
+                        </td>
+                        <td>
+                            <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
+                        </td>
+                    </tr>
 
-                <p class="clear">
-                    <label for="sessionLocation">
-                        ${ ui.message("referenceapplication.login.sessionLocation") }:
-                    </label>
-                    <ul id="sessionLocation" class="select">
-                        <% locations.sort { ui.format(it) }.each { %>
-                        <li id="${it.name}" value="${it.id}">${ui.format(it)}</li>
-                        <% } %>
-                    </ul>
-                </p>
+
+                    <tr>
+                        <td>
+                            <label for="sessionLocation">
+                                ${ ui.message("referenceapplication.login.sessionLocation") }:
+                            </label>
+                        </td>
+                        <td>
+                            <select id="sessionLocation" class="select">
+                                <% locations.sort { ui.format(it) }.each { %>
+                                <option id="${it.name}" value="${it.id}">${ui.format(it)}</option>
+                                <% } %>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
 
                 <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                     <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
@@ -265,16 +278,12 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
                 </div>
 
             </fieldset>
-
             <input type="hidden" name="redirectUrl" value="${redirectUrl}" />
-
         </form>
-
     </div>
     <div class="footer">
             <div class="left_al">
-                &#169; ${year} All Rights Reserved <a href="#" target="_blank"
-                                                      title="Ministry of Health Kenya">Ministry of Health - Republic of Kenya</a>
+                &#169; ${year} All Rights Reserved.
             </div>
             <div class="right_al">
                 powered by OpenMRS
