@@ -169,8 +169,8 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     });
 
     updateSelectedOption = function() {
-        jQuery('#sessionLocation li').removeClass('selected');
-        jQuery('#sessionLocation li[value|=' + jQuery('#sessionLocationInput').val() + ']').addClass('selected');
+        jQuery('#sessionLocation option').removeClass('selected');
+        jQuery('#sessionLocation option[value|=' + jQuery('#sessionLocationInput').val() + ']').addClass('selected');
 
         var sessionLocationVal = jQuery('#sessionLocationInput').val();
         if(parseInt(sessionLocationVal, 10) > 0){
@@ -185,7 +185,7 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     jQuery(function() {
         updateSelectedOption();
 
-        jQuery('#sessionLocation li').click( function() {
+        jQuery('#sessionLocation option').click( function() {
             jQuery('#sessionLocationInput').val(jQuery(this).attr("value"));
             updateSelectedOption();
         });
@@ -259,8 +259,7 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
                     </tr>
                 </table>
 
-                <input type="hidden" id="sessionLocationInput" name="sessionLocation"
-                    <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
+                <input type="hidden" id="sessionLocationInput" name="sessionLocation" value="7" />
 
                 <p></p>
                 <div style="padding-top: 20px">
