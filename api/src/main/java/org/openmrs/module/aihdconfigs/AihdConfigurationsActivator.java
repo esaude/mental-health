@@ -21,8 +21,6 @@ import org.openmrs.Patient;
 import org.openmrs.PatientIdentifier;
 import org.openmrs.PatientIdentifierType;
 import org.openmrs.api.AdministrationService;
-import org.openmrs.api.ConceptService;
-import org.openmrs.api.LocationService;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.Module;
@@ -36,7 +34,6 @@ import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
-import org.openmrs.notification.AlertService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +74,6 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		AdministrationService administrationService = Context.getAdministrationService();
 		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 		MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
-		ConceptService conceptService = Context.getConceptService();
-		LocationService locationService = Context.getLocationService();
 
 		appFrameworkService.disableExtension("referenceapplication.realTime.simpleAdmission");
 		appFrameworkService.disableExtension("referenceapplication.realTime.simpleVisitNote");
@@ -88,6 +83,7 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		appFrameworkService.disableExtension("xforms.formentry.cfpd");
 		appFrameworkService.disableExtension("referenceapplication.realTime.vitals");
 		appFrameworkService.disableApp("coreapps.diagnoses");
+		appFrameworkService.disableApp("reportingui.reports");
 
 		// install commonly used metadata
 		installCommonMetadata(deployService);
