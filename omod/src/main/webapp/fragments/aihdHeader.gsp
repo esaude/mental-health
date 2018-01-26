@@ -8,7 +8,7 @@
         return it
     }
 
-    def logoIconUrl = addContextPath(configSettings?."logo-icon-url") ?: ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")
+    def logoIconUrl = addContextPath(configSettings?."logo-icon-url") ?: ui.resourceLink("aihdconfigs", "images/banners/AIHD_logo.jpg")
     def logoLinkUrl = addContextPath(configSettings?."logo-link-url") ?: "/${org.openmrs.ui.framework.WebConstants.CONTEXT_PATH}"
 
     def multipleLoginLocations = (loginLocations.size > 1);
@@ -91,7 +91,7 @@
     <div>
         <div style="float: left; padding-right: 3px">
             <a href="${logoLinkUrl}">
-                <img src="${logoIconUrl}" width="200px"/>
+                <img src="${logoIconUrl}" height="100px" width="500px"/>
             </a>
         </div>
     </div>

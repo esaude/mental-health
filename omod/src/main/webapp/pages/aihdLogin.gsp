@@ -204,12 +204,12 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     });
 </script>
 
-<div id="body-wrapper" style="width:800px; margin:0 auto;">
-    <div id="content">
-        <a href="${ui.pageLink("referenceapplication", "home")}">
-            <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_Logo.png")}"/>
-        </a>
-    </div>
+<div style="align:center;">
+    <a href="${ui.pageLink("referenceapplication", "home")}">
+        <img src="${ui.resourceLink("aihdconfigs", "images/banners/AIHD_logo.jpg")}" width="1000px" />
+    </a>
+</div>
+<div id="body-wrapper" style="width:800px; margin:0 auto; align:center;">
     <div id="content">
         <form id="login-form" method="post" autocomplete="off">
             <fieldset>
