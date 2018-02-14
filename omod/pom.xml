@@ -207,6 +207,11 @@
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>webservices.rest-omod-common</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.asprise.ocr</groupId>
+			<artifactId>java-ocr-api</artifactId>
+		</dependency>
 		
 		<!-- End OpenMRS core -->
 

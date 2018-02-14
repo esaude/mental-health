@@ -387,6 +387,11 @@
 				<type>jar</type>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.asprise.ocr</groupId>
+				<artifactId>java-ocr-api</artifactId>
+				<version>[15,)</version>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>

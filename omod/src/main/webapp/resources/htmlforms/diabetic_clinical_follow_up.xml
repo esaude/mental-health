@@ -101,7 +101,7 @@
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <label>Type of Diabetes:</label>
+                            ***<label>Type of Diabetes:</label>
                             <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Type 1,Type 2" style="radio"
                                  answerSeparator=""/>                        
                          </td>
@@ -354,7 +354,7 @@
                 </tbody>
             </table>
 
-           <label style="background:  #ff7100; padding: 5px; color: #fff;">Current Medical Treatment:</label>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;">***Current Medical Treatment:</label>
             <table>
                 <tbody>
                 

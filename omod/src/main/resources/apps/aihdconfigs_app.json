@@ -1,0 +1,19 @@
+[
+  {
+    "id": "aihdconfigs.images",
+    "description": "Homepage showing image processing",
+    "order": 10,
+    "extensions": [
+      {
+        "id": "aihdconfigs.homepageLink",
+        "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+        "type": "link",
+        "label": "AIHD Images",
+        "url": "aihdconfigs/processImages.page",
+        "icon": "icon-book",
+        "order": 150
+      }
+
+    ]
+  }
+]
