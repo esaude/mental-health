@@ -49,18 +49,15 @@
             <table>
                 <tbody>
                     <tr>
+                        <td>                        
+                        <label>DM Diagnosis </label>
+                        <obs conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
+                                 answerSeparator=""/>                                               
+                        </td>
+
                         <td>
                             <label>Date of DM Diagnosis </label>
-                        </td>
-
-                        <td>
-                         <input type="radio" value="new_htn"/>
-                            <label>New DM patient</label>                        
-                        </td>
-
-                        <td>
-                           <input type="radio" value="new_htn"/>
-                            <label> Known DM patient</label>                        
+                            <obs conceptId="165089"/>                   
                         </td>
 
                         <td>
@@ -71,15 +68,8 @@
                     <tr>
                         <td>
                             <label>Hypertension:</label>
-                             <input type="radio" value="new_htn"/>
-                        </td>
-                        <td>
-                            <label>New HTN patient</label> 
-                             <input type="radio" value="new_htn"/>                       
-                        </td>
-                        <td>
-                            <label> Known HTN patient</label> 
-                             <input type="radio" value="new_htn"/>                       
+                            <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
+                                 answerSeparator=""/>
                         </td>
                         <td>
                             <label>Date of starting clinic</label>
@@ -89,8 +79,8 @@
                      <tr>
                         <td colspan="4">
                             <label>Patient covered by NHIF:</label>
-                            <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                       
+                            <obs conceptId="1917" style="yes_no"
+                                 answerSeparator=""/>                                              
                         </td>
                     </tr>
                     <tr>                        
@@ -102,7 +92,7 @@
                     <tr>
                         <td colspan="4">
                             <label>Type of Diabetes:</label>
-                            <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Type 1,Type 2" style="radio"
+                            <obs conceptId="165094" answerConceptIds="142474,1449,142473" answerLabels="Type 1,GDM,Type 2" style="radio"
                                  answerSeparator=""/>                        
                          </td>
                     </tr>
@@ -134,7 +124,7 @@
                       <td><input type="date"/></td>
                    </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Extreme hunger **"  style="checkbox"/></td>
+                      <td><obs conceptId="1728" answerConceptId="165095" answerLabel="Extreme hunger"  style="checkbox"/></td>
                       <td></td>
                    </tr>
                     <tr>
@@ -142,7 +132,7 @@
                       <td><input type="date"/></td>
                    </tr>
                     <tr>
-                      <td><input conceptId="1728" answerConceptId="120655" type="checkbox"/><label>Increased fatigue</label> </td>
+                      <td><input conceptId="1728" answerConceptId="165096" type="checkbox"/><label>Increased fatigue</label> </td>
                       <td><input type="date"/></td>
                     </tr>
                     <tr>
@@ -154,7 +144,7 @@
                       <td><input type="date"/></td>
                     </tr>
                     <tr>
-                      <td><input conceptId="1728" answerConceptId="137679"  type="checkbox"/><label>Numbness or tingling sensation</label></td>
+                      <td><input conceptId="1728" answerConceptId="165097"  type="checkbox"/><label>Numbness or tingling sensation</label></td>
                       <td><input type="date"/></td>
                    </tr>
                 </tbody>
@@ -286,23 +276,23 @@
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
                     </tr>                 
                     <tr>
-                        <td><obs conceptId="159800" answerConceptId="159799" answerLabel="Foot Check/Annual Foot Exam"   style="checkbox"/></td>
+                        <td><obs conceptId="1391" answerConceptId="165099" answerLabel="Foot Check/Annual Foot Exam"   style="checkbox"/></td>
                         <td><input type="date"/></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="159800" answerConceptId="140238" answerLabel="Eye Exam"   style="checkbox"/></td>
+                        <td><obs conceptId="1391" answerConceptId="165100" answerLabel="Eye Exam"   style="checkbox"/></td>
                         <td><input type="date"/></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="159800" answerConceptId="150796" answerLabel="Dental Exam"   style="checkbox"/></td>
+                        <td><obs conceptId="1391" answerConceptId="165101" answerLabel="Dental Exam"   style="checkbox"/></td>
                         <td><input type="date"/></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="159800" answerConceptId="133027" answerLabel="Eye Check up "   style="checkbox"/></td>
+                        <td><obs conceptId="1391" answerConceptId="165102" answerLabel="Eye Check up "   style="checkbox"/></td>
                         <td><input type="date"/></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="159800" answerConceptId="120655" answerLabel="Nutritional Review"   style="checkbox"/></td>
+                        <td><obs conceptId="1391" answerConceptId="165103" answerLabel="Nutritional Review"   style="checkbox"/></td>
                         <td><input type="date"/></td>
                     </tr>
                 </tbody>
@@ -315,7 +305,8 @@
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
-                    </tr>                  
+                    </tr> 
+                    <obsgroup groupingConceptId="161487">                   
                     <tr>
                         <td><label>Fasting Blood Sugar (FBS)</label></td>
                         <td><obs conceptId="160912"/></td>
@@ -326,11 +317,13 @@
                         <td><obs conceptId="887"/></td>
                         <td><input type="date"/></td>
                     </tr>
+                    </obsgroup>
                     <tr>
                         <td><label>HbA1c</label></td>
                         <td><obs conceptId="159644"/></td>
                         <td><input type="date"/></td>
                     </tr>
+                    <obsgroup groupingConceptId="161487">
                     <tr>
                         <td><label>HDL</label></td>
                         <td><obs conceptId="1007"/></td>
@@ -341,6 +334,7 @@
                         <td><obs conceptId="1008"/></td>
                         <td><input type="date"/></td>
                     </tr>
+                    </obsgroup>
                     <tr>
                         <td><label>Triglycerides</label></td>
                         <td><obs conceptId="1009"/></td>
@@ -418,47 +412,47 @@
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
                     </tr>                   
                     <tr>                      
-                       <td><obs conceptId="159800" answerConceptId="159799" answerLabel="Cardiovascular Disease" style="checkbox"/></td>  
+                       <td><obs conceptId="165106" answerConceptId="119270" answerLabel="Cardiovascular Disease" style="checkbox"/></td>  
                        <td><input type="text"/></td>                   
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="140238"  answerLabel="High blood pressure" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="117399"  answerLabel="High blood pressure" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="150796"  answerLabel="High cholesterol" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="117460"  answerLabel="High cholesterol" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="133027"  answerLabel="Peripheral vascular disease" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="114212"  answerLabel="Peripheral vascular disease" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="120655"  answerLabel="Peripheral neuropathy" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="118983"  answerLabel="Peripheral neuropathy" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="147104"  answerLabel="Autonomic neuropathy" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="155215"  answerLabel="Autonomic neuropathy" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="137679"  answerLabel="Retinopathy" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="113257"  answerLabel="Retinopathy" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5622"  answerLabel="Kidney disease" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="6033"  answerLabel="Kidney disease" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5622"  answerLabel="Asthma/COPD" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="121375"  answerLabel="Asthma/COPD" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5622"  answerLabel="Arthritis" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="148432"  answerLabel="Arthritis" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                     <tr>
-                       <td><obs conceptId="159800" answerConceptId="5623"  answerLabel="Other" style="checkbox"/></td>
+                       <td><obs conceptId="165106" answerConceptId="5622"  answerLabel="Other" style="checkbox"/></td>
                        <td><input type="text"/></td> 
                     </tr>
                 </tbody>
@@ -470,7 +464,7 @@
                     <tr>
                     <td>                       
                        <label>Foot Amputations:</label>
-                       <obs conceptId="162275" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                       <obs conceptId="165104" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>  
                      </td>            
                     </tr>
@@ -482,39 +476,42 @@
                                 <tr>
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drug</th>
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
-                                </tr>					
+                                </tr>
+                            <obsgroup groupingConceptId="160741">					
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
                                     <td><input type="text"/></td>
                                 </tr>						
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox"/></td>
                                     <td><input type="text"/></td>
                                 </tr>
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
                                    <td><input type="text"/></td>
                                 </tr>                                											
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox"/></td>
                                    <td><input type="text"/></td>
                                 </tr>						
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox"/></td>
                                    <td><input type="text"/>____IU</td>
                                 </tr>
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
                                    <td><input type="text"/>____IU</td>
                                 </tr>		
                                 <tr>                                   
-                                   <td><obs conceptId="159460"  answerConceptId="5622"  answerLabel="Other Prescription"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="5622"  answerLabel="Other Prescription"  style="checkbox"/></td>
                                    <td><input type="text"/></td>
-                                </tr>	
+                                </tr>
+                             </obsgroup>		
                                 <tr>                                   
                                    <td><label>TCA</label></td>
-                                   <td><input type="text"/></td>
-                                </tr>	
+                                   <td><obs conceptId="5096"/></td>
+                                </tr>
+                            
                         </tbody>
                     </table>
 
@@ -522,12 +519,16 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><label>Referral</label></td>
-                        <td><input type="text"/></td>
+                        <td><label>Referral Date</label></td>
+                        <td><obs conceptId="163181"/></td>
+                    </tr>
+                    <tr>
+                        <td><label>Referred To</label></td>
+                        <td><obs conceptId="161562"/></td>
                     </tr>
                     <tr>
                         <td><label>Referral Note Number</label></td>
-                        <td><input type="text"/></td>
+                        <td><obs conceptId="165105"/></td>
                     </tr>
                 </tbody>
             </table>
@@ -535,7 +536,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>Clinician Name________________________</td>
+                        <td>Clinician Name:<obs conceptId="1473"/></td>
                         <td>Signature____________________________</td>
                     </tr>
                 </tbody>
