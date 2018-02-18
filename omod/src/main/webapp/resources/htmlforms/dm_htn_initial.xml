@@ -111,8 +111,8 @@
                      <tr>
                         <td colspan="3">
                             <label>Patient covered by NHIF:</label>
-                            <obs conceptId="1917" style="yes_no"
-                                 answerSeparator=""/>                       
+                            <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 answerSeparator=""/>
                         </td>
                       </tr>
 
@@ -272,8 +272,8 @@
             <table>
                 <tbody>
                     <tr>
-                        <td> <obs conceptId="1512" style="yes_no"
-                                 answerSeparator=""/></td>
+                        <td> <obs conceptId="1512" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                  answerSeparator=""/></td>
                     </tr>
                 </tbody>
             </table>
@@ -381,7 +381,7 @@
                     </tr>
                      <tr>
                         <td colspan="2">
-                            <label>Monofilament test</label>
+                            <label>**Monofilament test</label>
                             <br/>
                             <label>RF (/5)</label>
                             <obs conceptId="165116" />
@@ -442,7 +442,7 @@
                     </tr>
 
                     <tr>
-                        <td><label>Urinalysis</label></td>
+                        <td><label>Urinalysis**</label></td>
                         <td></td>
                         <td></td>
                     </tr>
