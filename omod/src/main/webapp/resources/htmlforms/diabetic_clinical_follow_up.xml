@@ -39,12 +39,12 @@
             }
             jq('#recent-calculated-bmi').html(bmi.toFixed(2));
         }
-        jq(function() {
+        jQuery(function() {
             getField('weight.value').change(onWeightOrHeightChange);
             getField('height.value').change(onWeightOrHeightChange);
             onWeightOrHeightChange();
             displayRecentBmi();
-        }
+        });
     </script>
 
     <div class="ai-page-frame">
@@ -81,7 +81,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            DOPC/MOPC No: <patient  field="identifier" identifierTypeId="82609a20-f87b-11e7-bf96-cbcf7771ff78 " />
+                            DOPC/MOPC No: <patient  field="identifier" identifierTypeId="82609a20-f87b-11e7-bf96-cbcf7771ff78" reqiured="false" />
                         </td>
                         <td>
                             Treatment supporter's name:<obs conceptId="160638AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
@@ -117,10 +117,11 @@
                             <label>Hypertension:</label>
                             <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
                                  answerSeparator=""/>
-                        </td><td>
-                        <label>Date of HTN Diagnosis </label>
-                        <obs conceptId="165090"/>
-                    </td>
+                        </td>
+                        <td>
+                            <label>Date of HTN Diagnosis </label>
+                            <obs conceptId="165090"/>
+                        </td>
 
                         <td>
                             <label>Date of starting clinic</label>
@@ -128,26 +129,27 @@
                         </td>
                     </tr>
                      <tr>
-                        <td colspan="4">
+                        <td>
                             <label>Patient covered by NHIF:</label>
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""/>
                         </td>
-                         <td colspan="4">
+                         <td colspan="2">
                              <label>Encourage enrollment</label>
                          </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
+                        <td>
                             <label>Type of Diabetes:</label>
                             <obs conceptId="165094" answerConceptIds="142474,1449,142473" answerLabels="Type 1,GDM,Type 2" style="radio"
                                  answerSeparator=""/>                        
                          </td>
-                        <td colspan="4">
+                        <td>
                             <label>HIV status:</label>
                             <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
                                  answerSeparator=""/>
                         </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -174,7 +176,7 @@
                         <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                      <td><input conceptId="1728" answerConceptId="165096" type="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /><label>Increased fatigue</label> </td>
+                      <td><input conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
                         <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
@@ -183,7 +185,7 @@
                       <td><obs conceptId="1728" answerConceptId="137679" answerLabel="Impotence"  style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                        <td><input conceptId="1728" answerConceptId="165097"  type="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /><label>Numbness or tingling sensation</label></td>
+                        <td><input conceptId="1728" answerConceptId="165097"  answerLabel="Numbness or tingling sensation" type="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -199,7 +201,7 @@
                     <tr><td><obs id="weightloss" conceptId="159800" answerConceptId="150796" answerLabel="Noticeable weight Loss"   style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td></tr>
                     <tr><td><obs id="sweat" conceptId="159800" answerConceptId="133027" answerLabel="Night sweats"   style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td></tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <p id="yes">
                                 <b>Examine the patient and do</b> sputum examination if coughing(sputum smear or gene Xpert)
                             </p>
@@ -372,47 +374,43 @@
                 </tbody>
             </table>
 
-           <label style="background:  #ff7100; padding: 5px; color: #fff;">***Current Medical Treatment:</label>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;">Current Medical Treatment:</label>
             <table>
                 <tbody>
                 
                     <tr>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Medication</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Yes</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">No</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drugs and Dosage</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drugs</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
                     </tr>
 
                      <tr>
                          <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                           <td><label>OGLAs:</label></td>
-                           <td>**<obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="checkbox" /> </td>
-                           <td>
-                               <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" />
-                               <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                           <td><label>**OGLAs:</label>
+                           <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" />
                            </td>
+                           <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
+                           <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
                          </obsgroup>
                     </tr>
 
                     <tr>
                         <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                           <td><label>Insulin only:</label></td>
-                            <td>**<obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="checkbox" /> </td>
-                            <td>
-                                <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" />
-                                <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                            <td><label>**Insulin only:</label>
+                            <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"  answerSeparator="" />
                             </td>
+                            <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
+                            <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
                         </obsgroup>
                     </tr>
                     <tr>
                         <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
 
-                       <td><label>OGLAs + Insulin:</label></td>
-                            <td>**<obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="checkbox" /> </td>
-                            <td>
-                                <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" />
-                                <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                            <td><label>**OGLAs + Insulin:</label>
+                            <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" />
                             </td>
+                            <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
+                            <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
                         </obsgroup>
                     </tr>
                 </tbody>
@@ -485,7 +483,7 @@
                                     <template>
                                         <obsgroup groupingConceptId="160741AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
                                             <tr>
-                                               <td><obs conceptId="1282"  answerConceptId="79651,77071,159459,78068,282,159459,5622"  answerLabels="Metformin,Glibenclamide,Insulin 70/30,NPH,Soluble Insulin(IU),Insulin 70/30(IU),Other"  style="dropdown"/></td>
+                                               <td><obs conceptId="1282"  answerConceptIds="79651,77071,159459,78068,282,159459,5622"  answerLabels="Metformin,Glibenclamide,Insulin 70/30,NPH,Soluble Insulin(IU),Insulin 70/30(IU),Other"  style="dropdown"/></td>
                                                 <td><input type="text"/></td>
                                             </tr>
                                         </obsgroup>
@@ -501,7 +499,7 @@
 
                                     <tr>
                                        <td><label>TCA</label></td>
-                                       <td><obs conceptId="5096"/></td>
+                                       <td><obs conceptId="5096" allowFutureDates="true" /></td>
                                     </tr>
                             
                             </tbody>
