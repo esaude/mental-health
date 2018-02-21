@@ -109,7 +109,7 @@
 
                         <td>
                             <label>Date of starting clinic</label>
-                            **<obs conceptId="160617"/>
+                            <obs conceptId="fbf22987-bdf7-4721-81ce-6b71e1630c5d" />
                         </td>
                     </tr>
                     <tr>
@@ -125,7 +125,7 @@
 
                         <td>
                             <label>Date of starting clinic</label>
-                           **<obs conceptId="160617"/>
+                           <obs conceptId="504f853e-1f81-478d-a043-711ac528322d" />
                         </td>
                     </tr>
                      <tr>
@@ -237,7 +237,7 @@
                     <tr>
                        <td>
                             <label>Chest x-ray :</label>
-                            <obs conceptId="12" answerConceptIds="1115,5158" answerLabels="Normal N,Suggestive S **" style="radio"
+                            <obs conceptId="12AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,81f426b4-ff8d-4e31-90bd-dc0fca04c201" answerLabels="Normal N,Suggestive S" style="radio"
                                  answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                         </td>
                     </tr>
@@ -386,8 +386,8 @@
 
                      <tr>
                          <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                           <td><label>**OGLAs:</label>
-                           <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" />
+                           <td><label>OGLAs:</label>
+                           <obs conceptId="2bac6fca-19d0-4e4b-99a7-4bb30f40470b" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" />
                            </td>
                            <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
                            <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
@@ -396,8 +396,8 @@
 
                     <tr>
                         <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                            <td><label>**Insulin only:</label>
-                            <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"  answerSeparator="" />
+                            <td><label>Insulin only:</label>
+                            <obs conceptId="f5b23ca2-ee78-4fa8-915d-8c81c8c9d8bd" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"  answerSeparator="" />
                             </td>
                             <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
                             <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
@@ -406,8 +406,8 @@
                     <tr>
                         <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
 
-                            <td><label>**OGLAs + Insulin:</label>
-                            <obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" />
+                            <td><label>OGLAs + Insulin:</label>
+                            <obs conceptId="6b90a512-39a4-4eac-a6dc-12b54932f536" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" />
                             </td>
                             <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
                             <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
