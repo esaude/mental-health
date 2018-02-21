@@ -14,6 +14,43 @@
     <style>
 
     </style>
+    <script type="text/javascript">
+        function onWeightOrHeightChange() {
+            var display = '';
+            var weightKg = parseFloat(getValue('weight.value'));
+            var heightM = parseFloat(getValue('height.value')) / 100;
+            if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
+                var bmi = weightKg / (heightM * heightM);
+                if (isNaN(bmi) || bmi &lt; 10 || bmi &gt; 50) {
+                    display = 'Abnormal value. Were height and height entered correctly?';
+                }
+                else {
+                    display = bmi.toFixed(2);
+                }
+            }
+
+            jq('#calculated-bmi').html(display);
+        }
+
+        function onNHIFStatusChange() {
+            var display = '';
+            var nhif = getValue('nhif.value');            
+            if (nhif==1066)  {                
+                    display = 'Encourage patient to enroll';
+            }            
+            jq('#nhif-comment').html(display);
+          }
+          
+        jQuery(function() {
+            getField('weight.value').change(onWeightOrHeightChange);
+            getField('height.value').change(onWeightOrHeightChange);
+            onWeightOrHeightChange();
+            jq('#nhif').change(onNHIFStatusChange);
+        });
+
+           
+            
+    </script>
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
             <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">DM_HTN INITIAL ENCOUNTER FORM</h3>
@@ -70,7 +107,7 @@
 
                         <td>
                             <label>Year of Diagnosis</label>
-                            <obs conceptId="165089"/>                        
+                            <obs conceptId="165089" id="yeard"/>                        
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +116,7 @@
                         </td>
                         <td>
                             <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
-                                 answerSeparator=""/>                                                   
+                                 answerSeparator="" id="htn_status"/>                                                   
                         </td>
             
                         <td>
@@ -112,13 +149,13 @@
                         <td colspan="3">
                             <label>Patient covered by NHIF:</label>
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="nhif"/>
                         </td>
                       </tr>
 
                      <tr>
                         <td colspan="3" id="enrollToNhif">
-                            <label>Encourage enrollment</label>                   
+                            <span id="nhif-comment" class="value"></span>                  
                         </td>
                     </tr>
 
@@ -303,9 +340,9 @@
                     </tr>                        
                     <tr>                        
                         <td><label>Waist circ (cm)</label><obs conceptId="163080"/></td>
-                        <td><label>Height  (cm)</label><obs conceptId="5090"/></td>
-                        <td><label>Weight  (KG)</label><obs conceptId="5089"/></td>
-                        <td><label>BMI</label><input type="text"/></td>
+                        <td><label>Height  (cm)</label><obs conceptId="5090" id="height"/></td>
+                        <td><label>Weight  (KG)</label><obs conceptId="5089" id="weight"/></td>
+                        <td><span id="calculated-bmi" class="value"></span></td>
                     </tr>                   
                     <tr>
                         <td colspan="4"><label>General Exam **:</label></td>                 
