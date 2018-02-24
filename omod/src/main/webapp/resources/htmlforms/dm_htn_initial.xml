@@ -55,8 +55,6 @@
             jq('#nhif').change(onNHIFStatusChange);
             jq('#nhif').change(patientRefered);
         });
-
-           
             
     </script>
     <div class="ai-page-frame">
@@ -157,28 +155,31 @@
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" id="nhif"/>
                         </td>
-                        <td colspan="2" id="enrollToNhif">
+                        <td colspan="3" id="enrollToNhif">
                             <span id="nhif-comment" class="value"></span>                  
                         </td>
                     </tr>
 
                      <tr>
-                        <td colspan="3">
+                        <td valign="top">
                             <label>Is patient a referral?</label>
                                  <obs conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" id="referal" />
-                                                  
+
                         </td>
-                         <td colspan="3">
+                         <td colspan="3" valign="top">
                              <span id="refering_facility">
                                  <obs conceptId="164408" answerConceptIds="1759,165107,160551,160542,160473,5622" answerLabels="CHW ,Dispensary, In patient, OPD, Casualty ,Other" style="radio"
                                       answerSeparator=""/>
                              </span>
-                             <br />
-                             <label>Other referral details</label>
-                             <obs conceptId="164359"/>
                          </td>
-                      </tr>
+                     </tr>
+                    <tr>
+                        <td colspan="4">
+                            <label>Other referral details</label>
+                            <obs conceptId="164359"/>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </section>
@@ -233,12 +234,10 @@
                             <obs conceptId="152722" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio"
                                  answerSeparator=""/>                       
                         </td>
-                    </tr>
-                    <tr>
                         <td>
                             <label>Do you sometimes drink alcohol?</label>
                             <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator=""/>
                         </td>
                     </tr>
                 </tbody>
@@ -247,7 +246,7 @@
        <br/>
 
        <section>
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Past / Current medication:**</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Past / Current medication:</label>
             <table>
                 <tbody>
                     <tr> 
@@ -618,7 +617,7 @@
                             Glucose Lowering drugs
                         </td>
                         <td>
-                            <table>
+                            <table width="80%">
                                 <tr>
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drug</th>
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Plan</th>
@@ -626,54 +625,54 @@
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Frequency</th>
                                 </tr>
                                 
-					        <obsgroup groupingConceptId="165140">
-                                <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
-                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdwon" /></td>
-                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,850,1000" answerLabels="500mg,850mg,1000mg" style="dropdown"/></td>
-                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
-                                </tr>
-                            </obsgroup>	
-                            <obsgroup groupingConceptId="165140">					
-                                <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox"/></td>
-                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown"  /></td>
-                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10" answerLabels="2.5mg,5mg,7.5mg,10mg" style="dropdown"/></td>
-                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
-                                </tr>
-                            </obsgroup>	
-                            <obsgroup groupingConceptId="165140">						
-                                <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
-                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
-                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
-                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
-                                </tr>
-                            </obsgroup>	
-                            <obsgroup groupingConceptId="165140">						
-                                <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox"/></td>
-                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
-                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
-                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
-                                </tr>
-                                </obsgroup>	
-                            <obsgroup groupingConceptId="165140">						
-                                <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox"/></td>
-                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
-                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
-                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
-                                </tr>
-                            </obsgroup>
-                            <obsgroup groupingConceptId="165140">						
-                                <tr>                                   
-                                   <td>Other glucose lowering drugs <obs conceptId="163101"/></td>
-                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
-                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
-                                   <td></td>
-                                </tr>
-                            </obsgroup>					
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdwon" /></td>
+                                       <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,850,1000" answerLabels="500mg,850mg,1000mg" style="dropdown"/></td>
+                                       <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown"  /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10" answerLabels="2.5mg,5mg,7.5mg,10mg" style="dropdown"/></td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td>Other glucose lowering drugs <obs conceptId="163101"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                       <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                                       <td></td>
+                                    </tr>
+                                </obsgroup>
 
                             </table>
                         </td>
@@ -681,7 +680,7 @@
                      <tr>
                         <td>Anti hypertensive agents</td>
                         <td>
-                            <table>
+                            <table width="80%">
                             <obsgroup groupingConceptId="165141">
                                 <tr>
                                    <td><obs conceptId="1282"  answerConceptId="75633"  answerLabel="Enalapril "  style="checkbox"/></td>

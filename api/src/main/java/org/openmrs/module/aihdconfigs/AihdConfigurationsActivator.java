@@ -98,6 +98,9 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		// save defined global properties
 		administrationService.saveGlobalProperties(configureGlobalProperties());
 
+		//install the locations here
+		Facilities.saveLocations("code", "name");
+
 		log.info("Aihd Configurations Module started");
 	}
 	
