@@ -176,7 +176,7 @@
                         <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                      <td><input conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                      <td><obs conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
                         <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
