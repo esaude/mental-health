@@ -98,8 +98,7 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		// save defined global properties
 		administrationService.saveGlobalProperties(configureGlobalProperties());
 
-		//install the locations here
-		Facilities.saveLocations("code", "name");
+
 
 		log.info("Aihd Configurations Module started");
 	}
@@ -181,10 +180,13 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		try {
 			log.info("Installing commonly used metadata");
 			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
+			//install the locations here
+			Facilities.saveLocations("facilities.csv");
+
 		}
 		catch (Exception e) {
-			Module mod = ModuleFactory.getModuleById("aihdconfigs");
-			ModuleFactory.stopModule(mod);
+			//Module mod = ModuleFactory.getModuleById("aihdconfigs");
+			//ModuleFactory.stopModule(mod);
 			throw new RuntimeException("failed to install the common metadata ", e);
 		}
 	}
