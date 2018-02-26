@@ -47,16 +47,154 @@
                 jq('#refering_facility :input').prop('disabled', false);
              }
         }
-          
+        function patientReferedOther(){
+            var val= getValue('referra-options.value');
+            jq('#refering_other :input').prop('disabled', true);
+            if(val == 522){
+                jq('#refering_other :input').prop('disabled', false);
+             }
+        }
+        function diabeteStatus(){
+            var val= getValue('diabetes_status.value');
+            jq('#dm_diagnosis_year :input').prop('disabled', true);
+            if(val == 165088){
+                jq('#dm_diagnosis_year :input').prop('disabled', false);
+             }
+        }
+        function hivStatus(){
+            var val= getValue('hiv_status.value');
+            jq('#enrolled_to_hiv_care :input').prop('disabled', true);
+            if(val == 138571){
+                jq('#enrolled_to_hiv_care :input').prop('disabled', false);
+             }
+        }
+        function htnStatus(){
+            var val= getValue('htn_status.value');
+            jq('#htn_diagnosis_year :input').prop('disabled', true);
+            if(val == 165093){
+                jq('#htn_diagnosis_year :input').prop('disabled', false);
+             }
+        }
+        function htnStatus(){
+            var val= getValue('htn_status.value');
+            jq('#htn_diagnosis_year :input').prop('disabled', true);
+            if(val == 165093){
+                jq('#htn_diagnosis_year :input').prop('disabled', false);
+             }
+        }
+        function currentMeds(){
+            var val= getValue('checkboxAll.value');
+            jq('#checkboxCheckbox :input').prop('checked', true);
+            <!-- jq('#medication_list_2 :input').prop('disabled', true); -->
+            if(val == 1107){
+                jq('#checkboxCheckbox :input').prop('checked', false);
+             }
+             return val;
+        }
+        function currentMedsOther(){
+            var val= getValue('other_medication_selected.value');
+            jq('#other_current_medication :input').prop('disabled', true);
+            if(val == 5622){
+                jq('#other_current_medication :input').prop('disabled', false);
+             }
+        }
+        function cvs(){
+            var val= getValue('cvs.value');
+            jq('#cvs-abnormal :input').prop('disabled', true);
+            if(val == 1116){
+                jq('#cvs-abnormal :input').prop('disabled', false);
+             }
+        }
+        function rs(){
+            var val= getValue('rs.value');
+            jq('#rs-abnormal :input').prop('disabled', true);
+            if(val == 1116){
+                jq('#rs-abnormal :input').prop('disabled', false);
+             }
+        }
+        function cns(){
+            var val= getValue('cns.value');
+            jq('#cns-abnormal :input').prop('disabled', true);
+            if(val == 1116){
+                jq('#cns-abnormal :input').prop('disabled', false);
+             }
+        }
+        function extremities(){
+            var val= getValue('extremities.value');
+            jq('#extremities-abnormal :input').prop('disabled', true);
+            if(val == 1116){
+                jq('#extremities-abnormal :input').prop('disabled', false);
+             }
+        }
+        function pa(){
+            var val= getValue('pa.value');
+            jq('#pa-abnormal :input').prop('disabled', true);
+            if(val == 1116){
+                jq('#pa-abnormal :input').prop('disabled', false);
+             }
+        }
+        function adheringToMedications(){
+            var val= getValue('adhering_to_current_medications.value');
+            jq('#medication-adherence-reason :input').prop('disabled', true);
+            if(val == 1066){
+                jq('#medication-adherence-reason :input').prop('disabled', false);
+             }
+        }
+        function glucose(){
+            var val= getValue('glucose.value');
+            jq('#glucose-level :input').prop('disabled', true);
+            if(val == 1065){
+                jq('#glucose-level :input').prop('disabled', false);
+             }
+        }
+        function protein(){
+            var val= getValue('protein.value');
+            jq('#protein-level :input').prop('disabled', true);
+            if(val == 1065){
+                jq('#protein-level :input').prop('disabled', false);
+             }
+        }
+        function ketone(){
+            var val= getValue('ketone.value');
+            jq('#ketone-level :input').prop('disabled', true);
+            if(val == 1065){
+                jq('#ketone-level :input').prop('disabled', false);
+             }
+        }
+        function otherPatientReferralPlan(){
+            var val= getValue('other-referral-selected.value');
+            jq('#other_referral_reasons :input').prop('disabled', true);
+            if(val == 5622){
+                jq('#other_referral_reasons :input').prop('disabled', false);
+             }
+        }
+         
         jQuery(function() {
             getField('weight.value').change(onWeightOrHeightChange);
             getField('height.value').change(onWeightOrHeightChange);
             onWeightOrHeightChange();
             jq('#nhif').change(onNHIFStatusChange);
-            jq('#nhif').change(patientRefered);
+            jq('#adhering_to_current_medications').change(adheringToMedications);
+            jq('#glucose').change(glucose);
+            jq('#protein').change(protein);
+            jq('#ketone').change(ketone);
+            jq('#other-referral-selected').change(otherPatientReferralPlan);
+            jq('#referal').change(patientRefered);
+            jq('#referra-options').change(patientReferedOther);
+            jq('#diabetes_status').change(diabeteStatus);
+            jq('#hiv_status').change(hivStatus);
+            jq('#htn_status').change(htnStatus);
+            jq('#checkboxAll').change(currentMeds);
+            jq('#other_medication_selected').change(currentMedsOther);
+            jq('#extremities').change(extremities);
+            jq('#cvs').change(cvs);
+            jq('#rs').change(rs);
+            jq('#pa').change(pa);
+            jq('#cns').change(cns);
         });
             
     </script>
+
     <div class="ai-page-frame">
         <div class="headers" style="text-align: center;">
             <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">DM_HTN INITIAL ENCOUNTER FORM</h3>
@@ -72,11 +210,9 @@
                         <td>
                             Facility name:
                             <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
-
                         </td>
 
                         <td>
-
                             <label>Care giver:</label>
                             <encounterProvider default="currentUser" />
                         </td>
@@ -105,15 +241,16 @@
                         </td>
 
                         <td>
-                           
-                            <label>New DM patient</label> 
                             <obs conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator="" id="diabetes_status"/>                       
                         </td>
 
                         <td>
                             <label>Year of Diagnosis</label>
-                            <obs conceptId="165089" id="yeard"/>                        
+                            <span id="dm_diagnosis_year">
+                                <obs conceptId="95d4aa36-05ee-44cb-823b-35a62f07ce49" /> 
+                            </span>
+
                         </td>
                     </tr>
                     <tr>
@@ -127,7 +264,9 @@
             
                         <td>
                             <label>Year of Diagnosis</label>
-                            <obs conceptId="165090"/>                        
+                             <span id="htn_diagnosis_year">
+                                <obs conceptId="b863e568-1491-42d0-b881-04df389ad0de"/> 
+                            </span>                       
                         </td>
                     </tr>
 
@@ -135,17 +274,21 @@
                         <td>
                             <label>HIV status:</label> 
                             <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="hiv_status"/>
                         </td>
                         <td>
                             <label>Enrolled to care:</label>
+                         <span id="enrolled_to_hiv_care">
                             <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>                        
+                                 answerSeparator=""/>
+                         </span>                      
                         </td>
 
                         <td colspan="3">
                             <label>**Other patient status:</label>
-                            <obs conceptId="160632"/>                        
+                            <span id="other_patient_status">
+                            <obs conceptId="33216318-4bd5-4b5c-9434-6f6f10a87d26"/> 
+                            </span>                       
                         </td>
                     </tr>
 
@@ -155,7 +298,7 @@
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" id="nhif"/>
                         </td>
-                        <td colspan="3" id="enrollToNhif">
+                        <td colspan="3" id="enroll_to_nhif">
                             <span id="nhif-comment" class="value"></span>                  
                         </td>
                     </tr>
@@ -170,14 +313,16 @@
                          <td colspan="3" valign="top">
                              <span id="refering_facility">
                                  <obs conceptId="164408" answerConceptIds="1759,165107,160551,160542,160473,5622" answerLabels="CHW ,Dispensary, In patient, OPD, Casualty ,Other" style="radio"
-                                      answerSeparator=""/>
+                                      answerSeparator="" id="referra-options"/>
                              </span>
                          </td>
                      </tr>
                     <tr>
                         <td colspan="4">
                             <label>Other referral details</label>
-                            <obs conceptId="164359"/>
+                         <span id="refering_other">
+                            <obs conceptId="fb2be102-3366-4b54-aa0b-c33145e12b9b"/>
+                         </span>
                         </td>
                     </tr>
                 </tbody>
@@ -252,7 +397,7 @@
                     <tr> 
                     <td colspan="2">
                     <table>
-                       <tr>                     
+                       <tr>                                       
                             <td><obs conceptId="159460" answerConceptId="1107" answerLabel="None"  style="checkbox"/></td>
                             <td><obs conceptId="159460" answerConceptId="79651" answerLabel="Metformin"  style="checkbox"/></td>
                             <td><obs conceptId="159460" answerConceptId="77071" answerLabel="Glibenclamide"  style="checkbox"/></td>
@@ -276,16 +421,21 @@
                     <tr>
                         <td colspan="2">
                             <label>Other medication **</label>
-                            <obs conceptId="160632"/>                       
+                            <span id="other_current_medication">
+                               <obs conceptId="1218ecbc-816c-47bb-a85d-ade3d090ae39"/>   
+                            </span>                    
                         </td>
                     </tr>                
                     <tr>
                         <td>
                             <label>Adhering to current medications?  </label>
                             <obs conceptId="165108" answerConceptIds="1065,1066,1175" answerLabels="Yes,No,N/A" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator="" id="adhering_to_current_medications"/>                       
                         </td>
-                        <td><label>Specify reason</label><obs conceptId="165109"/></td>
+                        <td><label>Specify reason</label>
+                        <span id="medication-adherence-reason">
+                            <obs conceptId="165109"/>
+                        </span></td>
                     </tr>
                 </tbody>
             </table>
@@ -351,11 +501,11 @@
                         <td>
                             <label>CVS </label>
                             <obs conceptId="1124" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator="" id="cvs"/>                       
                          </td>
                         <td>
                             <span id="cvs-abnormal">
-                                **<label>Describe</label><obs conceptId="160632"/>
+                                **<label>Describe</label><obs conceptId="5365a17e-1719-4758-ad19-47b37ff89a25"/>
                             </span>
                         </td>
                     </tr>
@@ -363,11 +513,11 @@
                         <td>
                             <label>RS </label>
                             <obs conceptId="1123" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="rs"/>
                         </td>
                         <td>
                             <span id="rs-abnormal">
-                                **<label>Describe</label><obs conceptId="160632"/>
+                                **<label>Describe</label><obs conceptId="1fdb06f8-0495-4b55-907c-85eae0c1afa3"/>
                             </span>
                         </td>
                     </tr>
@@ -375,11 +525,11 @@
                         <td>
                             <label>P/A</label>
                             <obs conceptId="139549AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator="" id="pa"/>                       
                         </td>
                         <td>
                             <span id="pa-abnormal">
-                                **<label>Describe</label><obs conceptId="160632"/>
+                                **<label>Describe</label><obs conceptId="808692e9-cf03-4d7d-acff-f155bf7fc745"/>
                             </span>
                         </td>
                     </tr>
@@ -387,11 +537,11 @@
                         <td>
                             <label>CNS </label>
                             <obs conceptId="163109" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="cns"/>
                         </td>
                         <td>
                             <span id="cns-abnormal">
-                                **<label>Describe</label><obs conceptId="160632"/>
+                                **<label>Describe</label><obs conceptId="a6b0c37f-94f2-4e64-a270-e98959c95fed"/>
                             </span>
                         </td>
                     </tr>
@@ -399,7 +549,7 @@
                         <td style="width: 40%">
                             <label>Extremities </label>
                             <obs conceptId="165112" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator="" id="extremities"/>                       
                         </td>
                         <td>
                             <span id="extremities-abnormal">
@@ -482,9 +632,11 @@
                     <tr>
                         <td><label>Glucose</label></td>
                         <td>                             
-                             <obs conceptId="159733" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
+                             <obs id="glucose" conceptId="159733" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
                              <hr />
+                             <span id="glucose-level">
                              <obs conceptId="159733" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;"/>
+                             </span>
                          </td>
                     </tr>
                     <tr>
@@ -495,17 +647,21 @@
                     <tr>
                         <td><label>Protein</label></td>
                          <td>
-                             <obs conceptId="128340" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
+                             <obs id="protein" conceptId="128340" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
                              <hr />
-                             <obs conceptId="128340" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                             <span id="protein-level">
+                               <obs conceptId="128340" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                             </span>
                          </td>
                     </tr>
                     <tr>
                         <td><label>Ketone</label></td>
                          <td>
-                             <obs conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
+                             <obs id="ketone" conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
                              <hr />
+                             <span id="ketone-level">
                              <obs conceptId="161442" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                            </span>
                          </td>
                     </tr>
                     <tr>
@@ -868,8 +1024,11 @@
                             <obs conceptId="1887" answerConceptId="119270"   answerLabel="CVD review"   style="checkbox" />
                             <obs conceptId="1887" answerConceptId="160552"   answerLabel="Nutrition"   style="checkbox" />
                             <obs conceptId="1887" answerConceptId="165134"   answerLabel="Physiotherapy"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="5622"   answerLabel="Other"   style="checkbox" />
-                            <label>Other Referral Reasons:</label><obs conceptId="165139" />
+                            <obs conceptId="1887" answerConceptId="5622"   answerLabel="Other"   style="checkbox" id="other-referral-selected" />
+                            <label>Other Referral Reasons:</label>
+                            <span id="other_referral_reasons">
+                                <obs conceptId="165139" />
+                            </span>
                         </td>
                     </tr>
                     <tr>

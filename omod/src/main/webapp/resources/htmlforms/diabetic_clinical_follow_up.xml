@@ -39,9 +39,49 @@
             }
             jq('#recent-calculated-bmi').html(bmi.toFixed(2));
         }
+
+         function diabeteStatus(){
+            var val= getValue('diabetes_status.value');
+            jq('#dm_diagnosis_date :input').prop('disabled', true);
+            jq('#dm_treatment_start_date :input').prop('disabled', true);
+            if(val == 165088){
+                jq('#dm_diagnosis_date :input').prop('disabled', false);
+                jq('#dm_treatment_start_date :input').prop('disabled', false);
+             }
+        }
+         function htnStatus(){
+            var val= getValue('htn_status.value');
+            jq('#htn_diagnosis_date :input').prop('disabled', true);
+            jq('#htn_treatment_start_date :input').prop('disabled', true);
+            if(val == 165093){
+                jq('#htn_diagnosis_date :input').prop('disabled', false);
+                jq('#htn_treatment_start_date :input').prop('disabled', false);
+             }
+        }
+        function onNHIFStatusChange() {
+            var display = '';
+            var nhif = getValue('nhif.value');            
+            if (nhif==1066)  {                
+                    display = 'Encourage patient to enroll';
+            }            
+            jq('#nhif-comment').html(display);
+          }
+
+          function hivStatus(){
+            var val= getValue('hiv_status.value');
+            jq('#enrolled_to_hiv_care :input').prop('disabled', true);
+            if(val == 138571){
+                jq('#enrolled_to_hiv_care :input').prop('disabled', false);
+             }
+        }
         jQuery(function() {
+
+             jq('#diabetes_status').change(diabeteStatus);
+             jq('#hiv_status').change(hivStatus);
+             jq('#htn_status').change(htnStatus);
+             jq('#nhif').change(onNHIFStatusChange);
             getField('weight.value').change(onWeightOrHeightChange);
-            getField('height.value').change(onWeightOrHeightChange);
+            getField('height.value').change(onWeightOrHeightChange);            
             onWeightOrHeightChange();
             displayRecentBmi();
         });
@@ -99,44 +139,52 @@
                         <td>                        
                         <label>DM Diagnosis </label>
                         <obs conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
-                                 answerSeparator=""/>                                               
+                                 answerSeparator="" id="diabetes_status"/>                                               
                         </td>
 
                         <td>
                             <label>Date of DM Diagnosis </label>
-                            <obs conceptId="165089"/>                   
+                            <span id="dm_diagnosis_date">
+                                 <obs conceptId="165089"/>
+                            </span>                   
                         </td>
 
                         <td>
                             <label>Date of starting clinic</label>
-                            <obs conceptId="fbf22987-bdf7-4721-81ce-6b71e1630c5d" />
+                            <span id="dm_treatment_start_date">
+                              <obs conceptId="fbf22987-bdf7-4721-81ce-6b71e1630c5d" />
+                             </span>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <label>Hypertension:</label>
                             <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="htn_status"/>
                         </td>
                         <td>
                             <label>Date of HTN Diagnosis </label>
-                            <obs conceptId="165090"/>
+                            <span id="htn_diagnosis_date">
+                                <obs conceptId="165090"/>
+                            </span>
                         </td>
 
                         <td>
                             <label>Date of starting clinic</label>
-                           <obs conceptId="504f853e-1f81-478d-a043-711ac528322d" />
+                            <span id="htn_treatment_start_date">
+                               <obs conceptId="504f853e-1f81-478d-a043-711ac528322d"  />
+                            </span>    
                         </td>
                     </tr>
                      <tr>
                         <td>
                             <label>Patient covered by NHIF:</label>
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="nhif"/>
                         </td>
-                         <td colspan="2">
-                             <label>Encourage enrollment</label>
-                         </td>
+                        <td colspan="2" id="enroll_to_nhif">
+                            <span id="nhif-comment" class="value"></span>                  
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -147,7 +195,7 @@
                         <td>
                             <label>HIV status:</label>
                             <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" id="hiv_status"/>
                         </td>
                         <td></td>
                     </tr>
