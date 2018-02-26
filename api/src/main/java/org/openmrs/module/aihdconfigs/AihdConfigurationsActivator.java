@@ -34,7 +34,9 @@ import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
+import org.openmrs.util.OpenmrsClassLoader;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -179,14 +181,18 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 	private void installCommonMetadata(MetadataDeployService deployService) {
 		try {
 			log.info("Installing commonly used metadata");
+
+			//install the locations heremetadata/facilities.csv
+            InputStream path = OpenmrsClassLoader.getInstance().getResourceAsStream("metadata/facilities.csv");
+
+			Facilities.saveLocations(path);
 			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
-			//install the locations here
-			Facilities.saveLocations("facilities.csv");
+
 
 		}
 		catch (Exception e) {
-			//Module mod = ModuleFactory.getModuleById("aihdconfigs");
-			//ModuleFactory.stopModule(mod);
+			Module mod = ModuleFactory.getModuleById("aihdconfigs");
+			ModuleFactory.stopModule(mod);
 			throw new RuntimeException("failed to install the common metadata ", e);
 		}
 	}

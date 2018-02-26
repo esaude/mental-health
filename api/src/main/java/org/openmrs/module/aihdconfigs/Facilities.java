@@ -7,14 +7,12 @@ import org.openmrs.LocationAttributeType;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 
 public class Facilities {
 
-    public static void saveLocations(String csvFile){
+    public static void saveLocations(InputStream csvFile){
         LocationService locationService = Context.getLocationService();
         LocationAttributeType locationAttributeType = locationService.getLocationAttributeTypeByName("MflCode");
         //if missing create one here
@@ -35,7 +33,7 @@ public class Facilities {
         String mflCode = "";
         String locationName = "";
         try {
-            BufferedReader br = new BufferedReader(new FileReader(csvFile));
+            BufferedReader br = new BufferedReader(new InputStreamReader(csvFile, "UTF-8"));
             headLine = br.readLine();
                 while ((line = br.readLine()) != null) {
                     String[] records = line.split(cvsSplitBy);
