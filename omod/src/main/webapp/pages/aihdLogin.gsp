@@ -54,7 +54,7 @@
         .footer{
             float: left;
             margin: 0px 15px;
-            width: 60%;
+            width: 80%;
             display: inline-block;
             font-size: 0.7em;
             color: #808080;
@@ -65,6 +65,9 @@
         .footer .right_al{
             float: right;
         }
+        .footer .center_al{
+            float: center;
+         }
         .footer a{
             color: #404040;
             font-size: 1em;
@@ -206,7 +209,7 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
 
 <div style="align:center;">
     <a href="${ui.pageLink("referenceapplication", "home")}">
-        <img src="${ui.resourceLink("aihdconfigs", "images/banners/AIHD_logo.jpg")}" width="1000px" />
+        <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="200px" width="300px" />
     </a>
 </div>
 <div id="body-wrapper" style="width:800px; margin:0 auto; align:center;">
@@ -280,14 +283,21 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
             <input type="hidden" name="redirectUrl" value="${redirectUrl}" />
         </form>
     </div>
-    <div class="footer">
-            <div class="left_al">
-                &#169; ${year} All Rights Reserved.
-            </div>
-            <div class="right_al">
-                powered by OpenMRS
-            </div>
-    </div>
+</div>
+<div>
+<table border="0">
+    <tr>
+        <td valign="top">
+            <img src="${ui.resourceLink("aihdconfigs", "svg/malteser_logo.svg")}" width="250" height="150" />
+        </td>
+        <td valign="top">
+           <img src="${ui.resourceLink("aihdconfigs", "images/BMZ_logo.png")}" />
+        </td>
+        <td valign="top">
+           <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_logo.jpg")}" width="500" height="150" />
+        </td>
+    </tr>
+</table>
 </div>
 
 <div id="cannot-login-popup" class="dialog" style="display: none">
