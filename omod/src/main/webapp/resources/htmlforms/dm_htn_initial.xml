@@ -756,7 +756,7 @@
                          <td>
                          <obs conceptId="1379"  answerConceptId="165128"  answerLabel="Diabetes"  style="checkbox"/>
                          <obs conceptId="1379"  answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox"/>
-                         <obs conceptId="1379"  answerConceptId="165129"  answerLabel="Diabetes"  style="checkbox"/>
+                         <obs conceptId="1379"  answerConceptId="165129"  answerLabel="Counselling"  style="checkbox"/>
                          </td>
                     </tr>
                 </tbody>

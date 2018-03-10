@@ -156,6 +156,50 @@
             border-radius: 5px;
             background: #FFFFFB;
         }
+        #county-logo{
+            margin-left: 30%;
+            padding-top: 15px;
+            height: 130px;
+            width: auto;
+        } 
+
+        #bmz-logo img{
+            width: 100%;
+            height:auto;
+        }
+        #bmz-logo{
+                width: 30%;
+                float: left;
+                padding: 10px;
+        }
+        
+        #malteser-logo img{
+               width: auto;
+                height: 100px;
+        }
+        #malteser-logo{
+            width: 30%;
+            float: left;
+            border-right-style: solid;
+            border-right-width: 1px;
+            border-right-color: #e5e5e5;
+            padding: 3px;
+        }
+
+        #aihd-logo img{
+            width: 100%;
+            height: auto;
+        }
+        #aihd-logo{
+            width: 50%;
+            float: left;
+            padding: 10px;
+        }
+        #logo-container{
+        margin-left: 5%;
+        margin-right: 10%;
+        width: 100%;
+        }
         </style>
 </head>
 <body>
@@ -209,10 +253,10 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
 
 <div style="align:center;">
     <a href="${ui.pageLink("referenceapplication", "home")}">
-        <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="200px" width="300px" />
+        <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="200px" width="300px" id="county-logo"/>
     </a>
 </div>
-<div id="body-wrapper" style="width:800px; margin:0 auto; align:center;">
+<div id="body-wrapper" style="width:100%; margin:0 auto; align:center;">
     <div id="content">
         <form id="login-form" method="post" autocomplete="off">
             <fieldset>
@@ -284,20 +328,18 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
         </form>
     </div>
 </div>
-<div>
-<table border="0">
-    <tr>
-        <td valign="top">
-            <img src="${ui.resourceLink("aihdconfigs", "svg/malteser_logo.svg")}" width="250" height="150" />
-        </td>
-        <td valign="top">
-           <img src="${ui.resourceLink("aihdconfigs", "images/BMZ_logo.png")}" />
-        </td>
-        <td valign="top">
-           <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_logo.jpg")}" width="500" height="150" />
-        </td>
-    </tr>
-</table>
+<div id ="logo-container">
+
+    <div id="malteser-logo">
+            <img src="${ui.resourceLink("aihdconfigs", "svg/malteser_logo.svg")}" height="95px" />
+    </div>
+    <div id="bmz-logo">
+           <img src="${ui.resourceLink("aihdconfigs", "images/bmz_logo2.png")}" height="125px" />
+    </div>
+    <div id="aihd-logo">
+           <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_logo.jpg")}" width="450px" height="auto" />
+    </div>
+
 </div>
 
 <div id="cannot-login-popup" class="dialog" style="display: none">
