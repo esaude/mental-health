@@ -157,9 +157,9 @@
             background: #FFFFFB;
         }
         #county-logo{
-            margin-left: 30%;
+            margin-left: 25%;
             padding-top: 15px;
-            height: 130px;
+            height: 200px;
             width: auto;
         } 
 
