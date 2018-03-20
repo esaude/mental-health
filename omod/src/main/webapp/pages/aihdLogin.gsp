@@ -216,9 +216,6 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     });
 
     updateSelectedOption = function() {
-        jQuery('#sessionLocation option').removeClass('selected');
-        jQuery('#sessionLocation option[value|=' + jQuery('#sessionLocationInput').val() + ']').addClass('selected');
-
         var sessionLocationVal = jQuery('#sessionLocationInput').val();
         if(parseInt(sessionLocationVal, 10) > 0){
             jQuery('#login-button').removeClass('disabled');
