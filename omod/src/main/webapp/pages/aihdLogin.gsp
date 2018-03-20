@@ -247,8 +247,89 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
         });
         jQuery('a#cant-login').click(function() {
             cannotLoginController.show();
-        })
+        });
+
+        setCaptcha();
+        
     });
+
+    function setCaptcha(){
+        generateRandomNumber();
+        validateSecurityInput();
+        jQuery('#login-button').addClass('disabled');
+        jQuery('#login-button').attr('disabled','disabled');
+        jQuery("#security_captcha_answer").keypress(function(){
+            setTimeout(checkSecurityResponse, 200);
+        });
+    }
+
+    function generateRandomNumber(){  
+    var operators = [{
+        sign: "+",
+        method: function(a,b){ return a + b; }
+    },{
+        sign: "-",
+        method: function(a,b){ return a - b; }
+    }];
+  
+  
+    var min = 12;
+    var max = 100;
+    firstNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    var min_2 = 1;
+    var max_2= 10;
+    secondNumber = Math.floor(Math.random() * (max_2 - min_2 + 1)) + min_2; 
+  
+    var selectedOperator = Math.floor(Math.random()*operators.length);
+    var currentOperator = operators[selectedOperator].sign;                   
+    var computedResults = operators[selectedOperator].method(firstNumber, secondNumber);
+    
+   
+      jQuery("#first_number").text(firstNumber);
+      jQuery("#operator").text(currentOperator); 
+      jQuery("#second_number").text(secondNumber); 
+      jQuery("#computer_results_hidden").val(computedResults); 
+}
+
+function checkSecurityResponse(){ 
+  var userInputAnswer = parseInt(jQuery('#security_captcha_answer').val());
+  var securityAnswer = parseInt(jQuery('#computer_results_hidden').val());
+  var sessionLocationVal = jQuery('#sessionLocationInput').val();
+
+        if(parseInt(sessionLocationVal, 10) > 0 && securityAnswer == userInputAnswer){
+            jQuery('#login-button').removeClass('disabled');
+            jQuery('#login-button').removeAttr('disabled');
+        }else{
+            jQuery('#login-button').addClass('disabled');
+            jQuery('#login-button').attr('disabled','disabled');
+        }
+
+
+}
+
+function validateSecurityInput(){
+    jQuery("#security_captcha_answer").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if (jQuery.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+}
+
 </script>
 
 <div style="align:center;">
@@ -302,6 +383,22 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
                                 <option id="${it.name}" value="${it.id}">${ui.format(it)}</option>
                                 <% } %>
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="security">
+                                Security Stamp:
+                            </label>
+                        </td>
+                        <td>
+                        <div id="security-container">
+                            <span id="first_number"></span>
+                            <span id="operator"></span>
+                            <span id="second_number"></span>
+                            <input id="computer_results_hidden" type="hidden"/>
+                            <input id="security_captcha_answer" type="text" name="security_check_answer" />
+                         </div>   
                         </td>
                     </tr>
                 </table>
