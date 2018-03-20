@@ -374,7 +374,7 @@ function validateSecurityInput(){
                     <tr>
                         <td>
                             <label for="sessionLocation">
-                                ${ ui.message("referenceapplication.login.sessionLocation") }:
+                                Health facility:
                             </label>
                         </td>
                         <td>
@@ -393,9 +393,9 @@ function validateSecurityInput(){
                         </td>
                         <td>
                         <div id="security-container">
-                            <span id="first_number"></span>
+                            <span id="first_number" style="color:red;"></span>
                             <span id="operator"></span>
-                            <span id="second_number"></span>
+                            <span id="second_number" style="color:red;"></span>
                             <input id="computer_results_hidden" type="hidden"/>
                             <input id="security_captcha_answer" type="text" name="security_check_answer" />
                          </div>   

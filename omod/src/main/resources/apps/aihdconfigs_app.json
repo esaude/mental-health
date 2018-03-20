@@ -1,5 +1,5 @@
 [
-  {
+  /*{
     "id": "aihdconfigs.images",
     "description": "Homepage showing image processing",
     "order": 10,
@@ -15,7 +15,7 @@
       }
 
     ]
-  },
+  },*/
   {
     "id": "aihdconfigs.findPatient",
     "instanceOf": "coreapps.template.findPatient",

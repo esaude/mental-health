@@ -208,10 +208,10 @@
 			<artifactId>webservices.rest-omod-common</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.asprise.ocr</groupId>
 			<artifactId>java-ocr-api</artifactId>
-		</dependency>
+		</dependency>-->
 		
 		<!-- End OpenMRS core -->
 

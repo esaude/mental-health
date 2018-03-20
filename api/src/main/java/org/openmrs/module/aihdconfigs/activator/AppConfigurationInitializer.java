@@ -31,7 +31,7 @@ public class AppConfigurationInitializer implements Initializer {
             schedulerService.saveTaskDefinition(autoCloseVisitsTask);
 
             // check the Database Backup Task
-            TaskDefinition backupDatabase = (TaskDefinition) schedulerService.getTaskByName("Database Backup Task");
+            /*TaskDefinition backupDatabase = (TaskDefinition) schedulerService.getTaskByName("Database Backup Task");
             if (backupDatabase != null) {
                 // only execute if the task exists
                 backupDatabase.setStartOnStartup(true);
@@ -47,7 +47,7 @@ public class AppConfigurationInitializer implements Initializer {
                 }
                 schedulerService.saveTaskDefinition(backupDatabase);
                 log.info("Database Backup Task set to start on Startup");
-            }
+            }*/
         }
         catch (Exception e) {
             log.error("Failed to setup scheduled tasks ", e);
