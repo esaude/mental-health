@@ -232,8 +232,8 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     jQuery(function() {
         updateSelectedOption();
 
-        jQuery('#sessionLocation option').click( function() {
-            jQuery('#sessionLocationInput').val(jQuery(this).attr("value"));
+        jQuery('#sessionLocation').change( function() {
+            jQuery('#sessionLocationInput').val(jQuery(this).val());
             updateSelectedOption();
         });
 
@@ -374,7 +374,7 @@ function validateSecurityInput(){
                     <tr>
                         <td>
                             <label for="sessionLocation">
-                                Health facility:
+                                Health acility:
                             </label>
                         </td>
                         <td>
@@ -403,7 +403,8 @@ function validateSecurityInput(){
                     </tr>
                 </table>
 
-                <input type="hidden" id="sessionLocationInput" name="sessionLocation" value="7" />
+                <input type="hidden" id="sessionLocationInput" name="sessionLocation"
+                 <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
 
                 <p></p>
                 <div style="padding-top: 20px">
