@@ -188,13 +188,14 @@ public class AihdConfigurationsActivator implements ModuleActivator {
             InputStream path = OpenmrsClassLoader.getInstance().getResourceAsStream("metadata/facilities.csv");
 
 			Facilities.saveLocations(path);
+			Facilities.markAllAsLoginLocations();
 			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
 
 
 		}
 		catch (Exception e) {
 			Module mod = ModuleFactory.getModuleById("aihdconfigs");
-			ModuleFactory.stopModule(mod);
+			//ModuleFactory.stopModule(mod);
 			throw new RuntimeException("failed to install the common metadata ", e);
 		}
 	}

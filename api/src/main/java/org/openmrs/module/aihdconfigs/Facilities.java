@@ -4,11 +4,16 @@ import org.apache.commons.lang3.StringUtils;
 import org.openmrs.Location;
 import org.openmrs.LocationAttribute;
 import org.openmrs.LocationAttributeType;
+import org.openmrs.LocationTag;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Facilities {
 
@@ -46,6 +51,7 @@ public class Facilities {
                             location.setName(locationName);
                             location.setDateCreated(new Date());
                             location.setCreator(Context.getAuthenticatedUser());
+                            //location.addTag(locationService.getLocationTagByName("Login Location"));
                             //set the mfl code if availabble
                             if (StringUtils.isNotBlank(mflCode) && StringUtils.isNotEmpty(mflCode)) {
                                 //set the mfl code here
@@ -67,6 +73,17 @@ public class Facilities {
         }
         catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public static void markAllAsLoginLocations(){
+        LocationService service = Context.getLocationService();
+        List<Location> allLocations = service.getAllLocations();
+        LocationTag tag = service.getLocationTagByName("Login Location");
+        for(Location location:allLocations){
+            location.addTag(tag);
+            service.saveLocation(location);
         }
 
     }

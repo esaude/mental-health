@@ -19,6 +19,9 @@ import static org.openmrs.module.referenceapplication.ReferenceApplicationWebCon
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -98,7 +101,9 @@ public class AihdLoginPageController {
         try {
             Context.addProxyPrivilege(VIEW_LOCATIONS);
             Context.addProxyPrivilege(GET_LOCATIONS);
-            model.addAttribute("locations", locationService.getAllLocations());
+            List<Location> allLocations = locationService.getAllLocations();
+            allLocations.removeAll(excludeThisAtLogin());
+            model.addAttribute("locations", allLocations);
             lastSessionLocation = locationService.getLocation(Integer.valueOf(lastSessionLocationId));
         }
         catch (NumberFormatException ex) {
@@ -256,5 +261,16 @@ public class AihdLoginPageController {
         }
 
         return null;
+    }
+
+    public List<Location> excludeThisAtLogin(){
+        List<Location> toExclude = new ArrayList<Location>();
+        LocationService service = Context.getLocationService();
+        List<String> unUsedLocations = Arrays.asList("Amani Hospital", "Registration Desk", "Pharmacy", "Inpatient Ward", "Isolation Ward", "Laboratory", "Outpatient Clinic", "Unknown Location");
+        for(String s: unUsedLocations){
+            toExclude.add(service.getLocation(s));
+        }
+        return toExclude;
+
     }
 }
