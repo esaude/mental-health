@@ -98,7 +98,7 @@ public class AihdLoginPageController {
         try {
             Context.addProxyPrivilege(VIEW_LOCATIONS);
             Context.addProxyPrivilege(GET_LOCATIONS);
-            model.addAttribute("locations", appFrameworkService.getLoginLocations());
+            model.addAttribute("locations", locationService.getAllLocations());
             lastSessionLocation = locationService.getLocation(Integer.valueOf(lastSessionLocationId));
         }
         catch (NumberFormatException ex) {

@@ -21,7 +21,7 @@ public class AihdHeaderFragmentController {
         try {
             Context.addProxyPrivilege(GET_LOCATIONS);
             Context.addProxyPrivilege(VIEW_LOCATIONS);
-            fragmentModel.addAttribute("loginLocations", appFrameworkService.getLoginLocations());
+            fragmentModel.addAttribute("loginLocations", Context.getLocationService().getAllLocations());
 
             List<Extension> exts = appFrameworkService.getExtensionsForCurrentUser(AppUiExtensions.HEADER_CONFIG_EXTENSION);
             Map<String, Object> configSettings = exts.size() > 0 ? exts.get(0).getExtensionParams() : null;
@@ -29,8 +29,8 @@ public class AihdHeaderFragmentController {
             List<Extension> userAccountMenuItems = appFrameworkService.getExtensionsForCurrentUser(
                     AppUiExtensions.HEADER_USER_ACCOUNT_MENU_ITEMS_EXTENSION);
             fragmentModel.addAttribute("userAccountMenuItems", userAccountMenuItems);
-            Location location = Context.getLocationService().getLocationByUuid(Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
-            fragmentModel.addAttribute("facility", location);
+            //Location location = Context.getLocationService().getLocationByUuid(Context.getAdministrationService().getGlobalProperty("aihdconfigs.facilityName"));
+            //fragmentModel.addAttribute("facility", location);
         }
         finally {
             Context.removeProxyPrivilege(GET_LOCATIONS);
