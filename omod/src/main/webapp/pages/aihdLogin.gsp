@@ -297,9 +297,13 @@ function checkSecurityResponse(){
         if(parseInt(sessionLocationVal, 10) > 0 && securityAnswer == userInputAnswer){
             jQuery('#login-button').removeClass('disabled');
             jQuery('#login-button').removeAttr('disabled');
+            jQuery("#captcha_notification").text('');
         }else{
             jQuery('#login-button').addClass('disabled');
             jQuery('#login-button').attr('disabled','disabled');
+            if(securityAnswer != userInputAnswer){
+               jQuery("#captcha_notification").text("You have entered incorrect answer" ); 
+            }
         }
 
 
@@ -395,6 +399,7 @@ function validateSecurityInput(){
                             <span id="second_number" style="color:red;"></span>
                             <input id="computer_results_hidden" type="hidden"/>
                             <input id="security_captcha_answer" type="text" name="security_check_answer" />
+                            <span id="captcha_notification" style="color:red; font-size:18;"></span>
                          </div>   
                         </td>
                     </tr>
