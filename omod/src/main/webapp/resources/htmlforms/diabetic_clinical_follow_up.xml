@@ -91,6 +91,9 @@
         <div class="headers" style="text-align: center;">
             <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Diabetes Clinical Follow Up Form</h3>
         </div>
+        <div style="display: none">
+            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
+        </div>
         <div>
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Encounter Details</label>
             <table border="0" cellpadding="0" cellspacing="0">
@@ -100,14 +103,7 @@
                             Date:
                             <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
                         </td>
-                        <td>
-
-                            Facility:
-                            <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
-
-                        </td>
-
-                        <td>
+                        <td colspan="2">
 
                             <label>Provider:</label>
                             <encounterProvider default="currentUser" />

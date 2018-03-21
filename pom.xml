@@ -307,16 +307,8 @@
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>reporting-api</artifactId>
 				<version>${reportingVersion}</version>
-				<scope>test</scope>
+				<scope>provided</scope>
 			</dependency>
-
-			<dependency>
-				<groupId>org.openmrs.module</groupId>
-				<artifactId>reporting-api-1.9</artifactId>
-				<version>${reportingVersion}</version>
-				<scope>test</scope>
-			</dependency>
-
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
 				<artifactId>reportingcompatibility-api</artifactId>
