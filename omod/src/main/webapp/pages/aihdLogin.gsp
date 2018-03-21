@@ -371,7 +371,7 @@ function validateSecurityInput(){
                     <tr>
                         <td>
                             <label for="sessionLocation">
-                                Health acility:
+                                Health facility:
                             </label>
                         </td>
                         <td>

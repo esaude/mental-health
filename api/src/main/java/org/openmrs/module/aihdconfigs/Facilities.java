@@ -80,9 +80,16 @@ public class Facilities {
     public static void markAllAsLoginLocations(){
         LocationService service = Context.getLocationService();
         List<Location> allLocations = service.getAllLocations();
-        LocationTag tag = service.getLocationTagByName("Login Location");
+
+        Set<LocationTag> allTags = new HashSet<LocationTag>();
+        allTags.add(service.getLocationTagByName("Login Location"));
+        allTags.add(service.getLocationTagByName("Visit Location"));
+        allTags.add(service.getLocationTagByName("Visit Location"));
+        allTags.add(service.getLocationTagByName("Transfer Location"));
+        allTags.add(service.getLocationTagByName("Admission Location"));
+
         for(Location location:allLocations){
-            location.addTag(tag);
+            location.setTags(allTags);
             service.saveLocation(location);
         }
 
