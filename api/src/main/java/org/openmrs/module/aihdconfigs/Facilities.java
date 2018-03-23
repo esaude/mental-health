@@ -94,4 +94,14 @@ public class Facilities {
         }
 
     }
+
+    public static void removeLocations(List<String> loccations){
+        LocationService service = Context.getLocationService();
+        for(String s: loccations){
+            Location location = service.getLocation(s);
+            if(location != null) {
+                service.purgeLocation(location);
+            }
+        }
+    }
 }

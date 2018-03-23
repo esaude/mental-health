@@ -38,6 +38,7 @@ import org.openmrs.util.OpenmrsClassLoader;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -189,6 +190,7 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 
 			Facilities.saveLocations(path);
 			Facilities.markAllAsLoginLocations();
+			Facilities.removeLocations(Arrays.asList("St. Getrudes githogoro (Githogoro Runda Baptist Clinic (Getrudes Nairobi))", "National youth service HC (*HQ Dispensary (Ruaraka))", "Karura (Karura Health Centre Kiambu Road)"));
 			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
 
 
