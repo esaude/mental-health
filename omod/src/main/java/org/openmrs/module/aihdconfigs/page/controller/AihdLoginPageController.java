@@ -21,7 +21,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +31,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Location;
+import org.openmrs.User;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.ContextAuthenticationException;
@@ -41,6 +44,7 @@ import org.openmrs.ui.framework.UiUtils;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.openmrs.ui.framework.page.PageRequest;
+import org.openmrs.web.user.CurrentUsers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -187,8 +191,17 @@ public class AihdLoginPageController {
 
             try {
                 Context.authenticate(username, password);
+                User user = Context.getAuthenticatedUser();
+                if(user != null){
+                    Set<String> onlineUsers = new HashSet<String>(CurrentUsers.getCurrentUsernames(pageRequest.getRequest().getSession()));
+                    if(onlineUsers.contains(user.getUsername())){
+                        pageRequest.getSession().setAttribute(ReferenceApplicationWebConstants.SESSION_ATTRIBUTE_INFO_MESSAGE,
+                                ui.message("Already logged in. Removing the seesion now.."));
+                        CurrentUsers.removeUser(pageRequest.getRequest().getSession());
+                    }
+                }
 
-                if (Context.isAuthenticated()) {
+                else if (Context.isAuthenticated()) {
                     if (log.isDebugEnabled())
                         log.debug("User has successfully authenticated");
 
