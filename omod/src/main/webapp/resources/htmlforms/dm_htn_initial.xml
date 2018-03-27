@@ -12,7 +12,52 @@
           formLabel="DM_HTN INITIAL ENCOUNTER FORM">
 
     <style>
+        text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+        }
 
+        .nav-button a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .previous {
+            background-color: #f1f1f1;
+            font: bold 14px Arial;
+            float: left;
+        }
+
+        .next {
+            background-color: #ff7100;
+            font: bold 14px Arial;   
+            float: right;
+        }
+
+        .form-nav-container {
+            padding-top:10px;
+            padding-bottom:10px;
+            padding-left:10px;
+            padding-right:10px;
+            background-color:#00b4ef;
+            height: 35px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        
+        }
+
+        .nav-button a{
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            height: 25px;
+            width: 10%;
+        }
+
+        .buttons-container {
+            padding-bottom: 15px;
+            padding-top: 5px;
+        }
     </style>
     <script type="text/javascript">
         function onWeightOrHeightChange() {
@@ -190,7 +235,48 @@
             jq('#cvs').change(cvs);
             jq('#rs').change(rs);
             jq('#pa').change(pa);
-            jq('#cns').change(cns);
+            jq('#cns').change(cns);            
+            var tabsObj=jq( "#tabs" ).tabs();
+            jq(".ui-tabs-panel").each(function(i){
+	
+			 var totalSize = jq(".ui-tabs-panel").size() - 1;
+	         var prevTag='';
+             var nextTag='';
+			  if (i != totalSize) {
+			      next = i + 2;
+                  nextTag='<div class="nav-button"><a href="#"  class="next" rel="' + next + '">Next Page &#187;</a></div>';
+
+                  if(next == 2)
+                  nextTag='<div class="nav-button"><a href="#"   class="next" rel="' + next + '">Next Page &#187;</a></div>';
+			  }
+	  
+			  if (i != 0) {
+			      prev = i;
+                  prevTag='<div class="nav-button"><a href="#" class="previous" rel="' + prev + '">&#171; Prev Page</a></div>';
+			  }
+  
+
+
+              if(prevTag){
+                if(nextTag) jq(this).append('<div class="form-nav-container">' + prevTag + nextTag+'</div>');
+              }
+
+              if(prevTag){
+                if(!nextTag) jq(this).append('<div class="form-nav-container">' + prevTag+'</div>');
+              }
+
+              if(nextTag){
+                if(!prevTag) jq(this).append('<div class="form-nav-container">' + nextTag +'</div>');
+              }
+              
+   		
+			});
+	
+			jq('.next, .previous').click(function() { 
+		           tabsObj.tabs('select', jq(this).attr("rel"));
+		           return false;
+		       });
+       
         });
             
     </script>
@@ -202,7 +288,17 @@
         <div style="display:none">
             <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
         </div>
-        <div>
+
+    <div id="tab-wrap">
+        <div id="tabs">
+
+            <ul>
+                <li><a href="#tabs-1">Page 1</a></li>
+                <li><a href="#tabs-2">Page 2</a></li>
+                <li><a href="#tabs-3">Page 3</a></li>
+                <li><a href="#tabs-4">Page 4</a></li>
+            </ul>
+          <div id="tabs-1">
             <table border="0" cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr>
@@ -387,7 +483,8 @@
             </table>
         </section>
        <br/>
-
+    </div>
+    <div id="tabs-2">
        <section>
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Past / Current medication:</label>
             <table>
@@ -674,7 +771,8 @@
             </table>
         </section>
        <br/>
-
+    </div>
+    <div id="tabs-3">
       <section>
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Complications</label>
             <table>
@@ -761,7 +859,8 @@
             </table>
         </section>
        <br/>
-
+	</div>
+    <div id="tabs-4">
        <section>
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Treatment</label>
             <table>
@@ -985,7 +1084,7 @@
             </table>
         </section>
        <br/>
-		
+
 
         <section>
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Follow Up Plan</label>
@@ -1053,15 +1152,18 @@
         </section>
        <br/>
 
-        </div>
         <div>
             <ifMode mode="VIEW" include="false">
+            <div class="buttons-container">
                 <div id="buttons">
                     <submit submitClass="confirm right" submitCode="general.save"/>
                     <button type="button" class="cancel"><uimessage code="general.cancel"/></button>
                 </div>
+            </div>
             </ifMode>
         </div>
-
+      </div>
+    </div> 
+</div>
     </div>
 </htmlform>
