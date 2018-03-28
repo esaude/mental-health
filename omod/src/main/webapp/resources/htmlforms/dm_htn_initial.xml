@@ -57,8 +57,25 @@
         .buttons-container {
             padding-bottom: 15px;
             padding-top: 5px;
+        }    
+
+        .align-radio-input label {
+            margin-top: -8px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            margin-left: 10px;
         }
-    </style>
+
+         .align-checkbox-input input{
+            top: 10px;
+            color:red;
+        }
+
+        .align-checkbox-input label] {
+            color:red;
+        }
+
+            </style>
     <script type="text/javascript">
         function onWeightOrHeightChange() {
             var display = '';
@@ -336,7 +353,7 @@
 
                         <td>
                             <obs conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
-                                 answerSeparator="" id="diabetes_status"/>                       
+                                 answerSeparator="" id="diabetes_status" class="align-radio-input"/>                       
                         </td>
 
                         <td>
@@ -353,7 +370,7 @@
                         </td>
                         <td>
                             <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
-                                 answerSeparator="" id="htn_status"/>                                                   
+                                 answerSeparator="" id="htn_status" class="align-radio-input"/>                                                   
                         </td>
             
                         <td>
@@ -368,13 +385,13 @@
                         <td>
                             <label>HIV status:</label> 
                             <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
-                                 answerSeparator="" id="hiv_status"/>
+                                 answerSeparator="" id="hiv_status" class="align-radio-input"/>
                         </td>
                         <td>
                             <label>Enrolled to care:</label>
                          <span id="enrolled_to_hiv_care">
                             <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" class="align-radio-input"/>
                          </span>                      
                         </td>
 
@@ -390,7 +407,7 @@
                         <td>
                             <label>Patient covered by NHIF:</label>
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator="" id="nhif"/>
+                                 answerSeparator="" id="nhif" class="align-radio-input"/>
                         </td>
                         <td colspan="3" id="enroll_to_nhif">
                             <span id="nhif-comment" class="value"></span>                  
@@ -401,13 +418,13 @@
                         <td valign="top">
                             <label>Is patient a referral?</label>
                                  <obs conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
-                                 answerSeparator="" id="referal" />
+                                 answerSeparator="" id="referal" class="align-radio-input"/>
 
                         </td>
                          <td colspan="3" valign="top">
                              <span id="refering_facility">
                                  <obs conceptId="164408" answerConceptIds="1759,165107,160551,160542,160473,5622" answerLabels="CHW ,Dispensary, In patient, OPD, Casualty ,Other" style="radio"
-                                      answerSeparator="" id="referra-options"/>
+                                      answerSeparator="" id="referra-options" class="align-radio-input" />
                              </span>
                          </td>
                      </tr>
@@ -429,17 +446,18 @@
             <table>
                 <tbody>
                     <tr>                      
-                        <td><obs conceptId="6042" answerConceptId="110265" answerLabel="Shortness of breath on activity" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="158627" answerLabel="Palpitations (heart racing)" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="156046" answerLabel="Recurrent dizziness" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="112961" answerLabel="Fainting" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="135966" answerLabel="Leg swelling" style="checkbox"/></td>                                            
+                        <td><obs conceptId="6042" answerConceptId="110265" answerLabel="Shortness of breath on activity" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="158627" answerLabel="Palpitations (heart racing)" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="156046" answerLabel="Recurrent dizziness" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="112961" answerLabel="Fainting" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="135966" answerLabel="Leg swelling" style="checkbox" class="align-checkbox-input"/></td>                                            
                     </tr>                     
                     <tr>                    
-                        <td><obs conceptId="6042" answerConceptId="135592" answerLabel="Loss of consciousness" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="147104" answerLabel="Blurring of vision" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="6005" answerLabel="Focal weakness" style="checkbox"/></td>
-                        <td><obs conceptId="6042" answerConceptId="164529" answerLabel="Foot complaints" style="checkbox"/></td>
+                        <td><obs conceptId="6042" answerConceptId="135592" answerLabel="Loss of consciousness" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="147104" answerLabel="Blurring of vision" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="6005" answerLabel="Focal weakness" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="6042" answerConceptId="164529" answerLabel="Foot complaints" style="checkbox" class="align-checkbox-input"/></td>
+
                         <td></td>
                     </tr>
 
@@ -471,12 +489,12 @@
                         <td>
                             <label>Do you smoke cigarettes?</label>
                             <obs conceptId="152722" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio"
-                                 answerSeparator=""/>                       
+                                 answerSeparator="" class="align-radio-input"/>                       
                         </td>
                         <td>
                             <label>Do you sometimes drink alcohol?</label>
                             <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
-                                 answerSeparator=""/>
+                                 answerSeparator="" class="align-radio-input"/>
                         </td>
                     </tr>
                 </tbody>
@@ -493,21 +511,21 @@
                     <td colspan="2">
                     <table>
                        <tr>                                       
-                            <td><obs conceptId="159460" answerConceptId="1107" answerLabel="None"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="79651" answerLabel="Metformin"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="77071" answerLabel="Glibenclamide"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="159459" answerLabel="Insulin 70/30"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="78068" answerLabel="NPH"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="282" answerLabel="Soluble Insulin"  style="checkbox"/></td>
+                            <td><obs conceptId="159460" answerConceptId="1107" answerLabel="None"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="79651" answerLabel="Metformin"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="77071" answerLabel="Glibenclamide"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="159459" answerLabel="Insulin 70/30"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="78068" answerLabel="NPH"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="282" answerLabel="Soluble Insulin"  style="checkbox" class="align-checkbox-input"/></td>
 
                        </tr> 
                        <tr> 
-                            <td><obs conceptId="159460" answerConceptId="75633" answerLabel="Enalapril "  style="checkbox"/></td>                       
-                            <td><obs conceptId="159460" answerConceptId="77696" answerLabel="HCTZ"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="79074" answerLabel="Losartan"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="80637" answerLabel="Nifedipine"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="71652" answerLabel="Atenolol"  style="checkbox"/></td>
-                            <td><obs conceptId="159460" answerConceptId="5622" answerLabel="Other"  style="checkbox"/></td>
+                            <td><obs conceptId="159460" answerConceptId="75633" answerLabel="Enalapril "  style="checkbox" class="align-checkbox-input"/></td>                       
+                            <td><obs conceptId="159460" answerConceptId="77696" answerLabel="HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="79074" answerLabel="Losartan"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="80637" answerLabel="Nifedipine"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="71652" answerLabel="Atenolol"  style="checkbox" class="align-checkbox-input"/></td>
+                            <td><obs conceptId="159460" answerConceptId="5622" answerLabel="Other"  style="checkbox" class="align-checkbox-input"/></td>
                        </tr> 
   
                     </table>
@@ -524,7 +542,7 @@
                     <tr>
                         <td>
                             <label>Adhering to current medications?  </label>
-                            <obs conceptId="165108" answerConceptIds="1065,1066,1175" answerLabels="Yes,No,N/A" style="radio"
+                            <obs conceptId="165108" answerConceptIds="1065,1066,1175" answerLabels="Yes,No,N/A" style="radio" class="align-radio-input"
                                  answerSeparator="" id="adhering_to_current_medications"/>                       
                         </td>
                         <td><label>Specify reason</label>
@@ -542,7 +560,7 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><obs conceptId="5872849d-bbb7-4b37-baf1-8643afdee710" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                        <td><obs conceptId="5872849d-bbb7-4b37-baf1-8643afdee710" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input"
                                   answerSeparator=""/></td>
                     </tr>
                 </tbody>
@@ -583,10 +601,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1119" answerConceptId="5245" answerLabel="Pallor" style="checkbox"/></td>
-                        <td><obs conceptId="1119" answerConceptId="136443" answerLabel="Jaundice" style="checkbox"/></td>
-                        <td><obs conceptId="1119" answerConceptId="143050" answerLabel="Cyanosis" style="checkbox"/></td>
-                        <td><obs conceptId="1119" answerConceptId="161602" answerLabel="Other" style="checkbox"/></td>                 
+                        <td><obs conceptId="1119" answerConceptId="5245" answerLabel="Pallor" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1119" answerConceptId="136443" answerLabel="Jaundice" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1119" answerConceptId="143050" answerLabel="Cyanosis" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1119" answerConceptId="161602" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>                 
                     </tr>
                </tbody>
             </table>
@@ -596,7 +614,7 @@
                         <td>
                             <label>CVS </label>
                             <obs conceptId="1124" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator="" id="cvs"/>                       
+                                 answerSeparator="" id="cvs" class="align-radio-input"/>                       
                          </td>
                         <td>
                             <span id="cvs-abnormal">
@@ -607,7 +625,7 @@
                     <tr>
                         <td>
                             <label>RS </label>
-                            <obs conceptId="1123" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
+                            <obs conceptId="1123" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
                                  answerSeparator="" id="rs"/>
                         </td>
                         <td>
@@ -619,7 +637,7 @@
                     <tr>
                         <td>
                             <label>P/A</label>
-                            <obs conceptId="139549AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
+                            <obs conceptId="139549AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
                                  answerSeparator="" id="pa"/>                       
                         </td>
                         <td>
@@ -632,7 +650,7 @@
                         <td>
                             <label>CNS </label>
                             <obs conceptId="163109" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator="" id="cns"/>
+                                 answerSeparator="" id="cns" class="align-radio-input"/>
                         </td>
                         <td>
                             <span id="cns-abnormal">
@@ -644,22 +662,22 @@
                         <td style="width: 40%">
                             <label>Extremities </label>
                             <obs conceptId="165112" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
-                                 answerSeparator="" id="extremities"/>                       
+                                 answerSeparator="" id="extremities" class="align-radio-input"/>                       
                         </td>
                         <td>
                             <span id="extremities-abnormal">
                                 <table>
                                     <tr>
-                                    <td><obs conceptId="165112" answerConceptId="123919" answerLabel="Ulcers" style="checkbox"/></td>
-                                    <td><obs conceptId="165112" answerConceptId="120943" answerLabel="Callouses" style="checkbox"/></td>
-                                    <td><obs conceptId="165112" answerConceptId="165113" answerLabel="Hardened Nails" style="checkbox"/></td>
-                                    <td><obs conceptId="165112" answerConceptId="165114" answerLabel="Fungus" style="checkbox"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="123919" answerLabel="Ulcers" style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="120943" answerLabel="Callouses" style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="165113" answerLabel="Hardened Nails" style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="165114" answerLabel="Fungus" style="checkbox" class="align-checkbox-input"/></td>
 
                                     </tr>
                                     <tr>
-                                    <td><obs conceptId="165112" answerConceptId="134" answerLabel="Cellulitis" style="checkbox"/></td>
-                                    <td><obs conceptId="165112" answerConceptId="156113" answerLabel="Edema" style="checkbox"/></td>
-                                    <td><obs conceptId="165112" answerConceptId="165115" answerLabel="Dry" style="checkbox"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="134" answerLabel="Cellulitis" style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="156113" answerLabel="Edema" style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165112" answerConceptId="165115" answerLabel="Dry" style="checkbox" class="align-checkbox-input"/></td>
                                         <td></td>
                                     </tr>
                                 </table>
@@ -707,7 +725,7 @@
                     </tr>
                     <tr>
                         <td> <label>ECG</label></td>
-                        <td><obs conceptId="159565" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
+                        <td><obs conceptId="159565" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
                                  answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
@@ -727,35 +745,35 @@
                     <tr>
                         <td><label>Glucose</label></td>
                         <td>                             
-                             <obs id="glucose" conceptId="159733" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
+                             <obs id="glucose" conceptId="159733" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
                              <hr />
                              <span id="glucose-level">
-                             <obs conceptId="159733" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;"/>
+                             <obs conceptId="159733" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;"/>
                              </span>
                          </td>
                     </tr>
                     <tr>
                         <td>CXR</td>
-                        <td><obs conceptId="12" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio"
+                        <td><obs conceptId="12" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
                                  answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
                         <td><label>Protein</label></td>
                          <td>
-                             <obs id="protein" conceptId="128340" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
+                             <obs id="protein" conceptId="128340" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
                              <hr />
                              <span id="protein-level">
-                               <obs conceptId="128340" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                               <obs conceptId="128340" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                              </span>
                          </td>
                     </tr>
                     <tr>
                         <td><label>Ketone</label></td>
                          <td>
-                             <obs id="ketone" conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" answerSeparator=""  />
+                             <obs id="ketone" conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
                              <hr />
                              <span id="ketone-level">
-                             <obs conceptId="161442" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                             <obs conceptId="161442" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input" answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                             </span>
                          </td>
                     </tr>
@@ -786,56 +804,56 @@
                     <obsgroup groupingConceptId="165124">
                      <tr>
                         <td>1</td>
-                        <td><obs conceptId="6042" answerConceptId="111103" answerLabel="Stroke" style="checkbox"/></td>                    
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="111103" answerLabel="Stroke" style="checkbox" class="align-checkbox-input"/></td>                    
+                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                      </tr>
                      </obsgroup>
                      <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>2</td>
-                        <td><obs conceptId="6042" answerConceptId="139069" answerLabel="Heart failure" style="checkbox"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="139069" answerLabel="Heart failure" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>3</td>
-                        <td><obs conceptId="6042" answerConceptId="113338" answerLabel="Kidney failure" style="checkbox"/></td>
-                       <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="113338" answerLabel="Kidney failure" style="checkbox" class="align-checkbox-input"/></td>
+                       <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>4</td>
-                        <td><obs conceptId="6042" answerConceptId="118983" answerLabel="Peripheral Neuropathy" style="checkbox"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="118983" answerLabel="Peripheral Neuropathy" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>5</td>
-                        <td><obs conceptId="6042" answerConceptId="159298" answerLabel="Visual Impairement" style="checkbox"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="159298" answerLabel="Visual Impairement" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>6</td>
-                        <td><obs conceptId="6042" answerConceptId="163411" answerLabel="Foot ulcers/deformities" style="checkbox"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="163411" answerLabel="Foot ulcers/deformities" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>7</td>
-                        <td><obs conceptId="6042" answerConceptId="156162" answerLabel="Erectile dysfunction" style="checkbox"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="156162" answerLabel="Erectile dysfunction" style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>                       
                         <td></td>
-                        <td><obs conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox"/></td>
+                        <td><obs conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>
                         <td colspan="2"><obs conceptId="165125"/></td>
                     </tr>
                     </obsgroup>
@@ -850,9 +868,9 @@
                 <tbody>
                     <tr>
                          <td>
-                         <obs conceptId="1379"  answerConceptId="165128"  answerLabel="Diabetes"  style="checkbox"/>
-                         <obs conceptId="1379"  answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox"/>
-                         <obs conceptId="1379"  answerConceptId="165129"  answerLabel="Counselling"  style="checkbox"/>
+                         <obs conceptId="1379"  answerConceptId="165128"  answerLabel="Diabetes"  style="checkbox" class="align-checkbox-input"/>
+                         <obs conceptId="1379"  answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox" class="align-checkbox-input"/>
+                         <obs conceptId="1379"  answerConceptId="165129"  answerLabel="Counselling"  style="checkbox" class="align-checkbox-input"/>
                          </td>
                     </tr>
                 </tbody>
@@ -880,7 +898,7 @@
                                 
                                 <obsgroup groupingConceptId="165140">
                                     <tr>
-                                       <td><obs conceptId="1282"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox"/></td>
+                                       <td><obs conceptId="1282"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox" class="align-checkbox-input"/></td>
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdwon" /></td>
                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,850,1000" answerLabels="500mg,850mg,1000mg" style="dropdown"/></td>
                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -888,7 +906,7 @@
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
                                     <tr>
-                                       <td><obs conceptId="1282"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox"/></td>
+                                       <td><obs conceptId="1282"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox" class="align-checkbox-input"/></td>
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown"  /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10" answerLabels="2.5mg,5mg,7.5mg,10mg" style="dropdown"/></td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
@@ -896,7 +914,7 @@
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
                                     <tr>
-                                       <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox"/></td>
+                                       <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox" class="align-checkbox-input"/></td>
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
@@ -904,7 +922,7 @@
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
                                     <tr>
-                                       <td><obs conceptId="1282"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox"/></td>
+                                       <td><obs conceptId="1282"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox" class="align-checkbox-input"/></td>
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
@@ -912,7 +930,7 @@
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
                                     <tr>
-                                       <td><obs conceptId="1282"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox"/></td>
+                                       <td><obs conceptId="1282"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox" class="align-checkbox-input"/></td>
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
@@ -936,7 +954,7 @@
                             <table width="80%">
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                   <td><obs conceptId="1282"  answerConceptId="75633"  answerLabel="Enalapril "  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="75633"  answerLabel="Enalapril "  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10,15,20" answerLabels="2.5mg,5mg,7.5mg,10mg,15mg,20mg" style="dropdown"/></td>
                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -944,7 +962,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">						
                                 <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="77696"  answerLabel="HCTZ"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="77696"  answerLabel="HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="12.5,25" answerLabels="12.5mg,25mg" style="dropdown"/></td>
                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -952,7 +970,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">						
                                 <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="79074"  answerLabel="Losartan"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="79074"  answerLabel="Losartan"  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25mg,50mg" style="dropdown"/></td>
                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -960,7 +978,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">						
                                 <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="80637"  answerLabel="Nifedipine"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="80637"  answerLabel="Nifedipine"  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="20,40" answerLabels="20mg,40mg" style="dropdown"/></td>
                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -968,7 +986,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">						
                                 <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atenolol"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atenolol"  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50,100" answerLabels="25mg,50mg,100mg" style="dropdown"/></td>
                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -976,7 +994,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="J ASA"  style="checkbox"/></td>
+                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="J ASA"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="75" answerLabels="75mg" style="dropdown"/></td>
                                     <td></td>
@@ -984,7 +1002,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atorvastatin"  style="checkbox"/></td>
+                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atorvastatin"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="10,20,40,80" answerLabels="10mg,20mg,40mg,80mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -992,7 +1010,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Lisinopril/HCTZ"  style="checkbox"/></td>
+                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Lisinopril/HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="15,20" answerLabels="15mg,20mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1000,7 +1018,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amlodipine"  style="checkbox"/></td>
+                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amlodipine"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5mg,5mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1008,7 +1026,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Felodipine"  style="checkbox"/></td>
+                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Felodipine"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5mg,5mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1031,7 +1049,7 @@
                             <table>
                             <obsgroup groupingConceptId="165142">
                                 <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amitriptylline"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amitriptylline"  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25mg,50mg" style="dropdown"/></td>
                                    <td>Nocte</td>
@@ -1039,7 +1057,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165142">						
                                 <tr>                                   
-                                   <td><obs conceptId="1282"  answerConceptId="72822"  answerLabel="Carbamazepine"  style="checkbox"/></td>
+                                   <td><obs conceptId="1282"  answerConceptId="72822"  answerLabel="Carbamazepine"  style="checkbox" class="align-checkbox-input"/></td>
                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="100,200" answerLabels="100mg,200mg" style="dropdown"/></td>
                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1072,13 +1090,13 @@
             <table>
                 <tbody>
                     <tr>
-                        <td><obs conceptId="1271"  answerConceptId="302"  answerLabel="Urinalysis"  style="checkbox"/></td>
-                        <td><obs conceptId="1271"  answerConceptId="159644"  answerLabel="HBA1c"  style="checkbox"/></td>
-                        <td><obs conceptId="1271"  answerConceptId="164938"  answerLabel="Microalbumin"  style="checkbox"/></td>
-                        <td><obs conceptId="1271"  answerConceptId="1011"  answerLabel="Creatinine"  style="checkbox"/></td>
-                        <td><obs conceptId="1271"  answerConceptId="159659"  answerLabel="Potassium"  style="checkbox"/></td>
-                        <td><obs conceptId="1271"  answerConceptId="161157"  answerLabel="ECG"  style="checkbox"/></td>
-                        <td><obs conceptId="1271"  answerConceptId="5622"  answerLabel="Other"  style="checkbox"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="302"  answerLabel="Urinalysis"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="159644"  answerLabel="HBA1c"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="164938"  answerLabel="Microalbumin"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="1011"  answerLabel="Creatinine"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="159659"  answerLabel="Potassium"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="161157"  answerLabel="ECG"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td><obs conceptId="1271"  answerConceptId="5622"  answerLabel="Other"  style="checkbox" class="align-checkbox-input"/></td>
                     </tr>
                 </tbody>
             </table>
@@ -1095,33 +1113,33 @@
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date(dd/mm/yyyy)</th>
                     </tr>
                     <tr>
-                        <td><obs conceptId="165122"  answerConceptId="165132"  answerLabel="Continue Care in clinic"  style="checkbox" /></td>
+                        <td><obs conceptId="165122"  answerConceptId="165132"  answerLabel="Continue Care in clinic"  style="checkbox" class="align-checkbox-input" /></td>
                         <td>Return date:<obs conceptId="5096"/> </td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="165122"  answerConceptId="1285"  answerLabel="Transfer care to Health center, specify"  style="checkbox"/>
+                        <td><obs conceptId="165122"  answerConceptId="1285"  answerLabel="Transfer care to Health center, specify"  style="checkbox" class="align-checkbox-input"/>
                         <obs conceptId="159495" /></td>
                         <td>Date trnasferred out:<obs conceptId="160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> </td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="165122"  answerConceptId="164165"  answerLabel="Refer to referral facility"  style="checkbox"/></td>
+                        <td><obs conceptId="165122"  answerConceptId="164165"  answerLabel="Refer to referral facility"  style="checkbox" class="align-checkbox-input"/></td>
                         <td>Date reffered:<obs conceptId="161561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> </td>
                     </tr>
                     <tr>
                         <label style="background:  #00b4ef; padding: 3px; color: #fff;">Referral Reasons</label>
                         <td>
-                            <obs conceptId="1887" answerConceptId="165133"   answerLabel="Further management of DM"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="165135"   answerLabel="Further management of HTN"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="165138"   answerLabel="Eye review"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="165137"   answerLabel="Surgical review"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="165136"   answerLabel="Renal review"   style="checkbox" />
+                            <obs conceptId="1887" answerConceptId="165133"   answerLabel="Further management of DM"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="165135"   answerLabel="Further management of HTN"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="165138"   answerLabel="Eye review"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="165137"   answerLabel="Surgical review"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="165136"   answerLabel="Renal review"   style="checkbox" class="align-checkbox-input" />
                         </td>
                         <td>
 
-                            <obs conceptId="1887" answerConceptId="119270"   answerLabel="CVD review"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="160552"   answerLabel="Nutrition"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="165134"   answerLabel="Physiotherapy"   style="checkbox" />
-                            <obs conceptId="1887" answerConceptId="5622"   answerLabel="Other"   style="checkbox" id="other-referral-selected" />
+                            <obs conceptId="1887" answerConceptId="119270"   answerLabel="CVD review"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="160552"   answerLabel="Nutrition"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="165134"   answerLabel="Physiotherapy"   style="checkbox" class="align-checkbox-input" />
+                            <obs conceptId="1887" answerConceptId="5622"   answerLabel="Other"   style="checkbox" class="align-checkbox-input" id="other-referral-selected" />
                             <label>Other Referral Reasons:</label>
                             <span id="other_referral_reasons">
                                 <obs conceptId="165139" />
