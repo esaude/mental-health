@@ -155,9 +155,10 @@
             -khtml-border-radius: 5px;
             border-radius: 5px;
             background: #FFFFFB;
+            margin-left: 8%;
         }
         #county-logo{
-            margin-left: 25%;
+            margin-left: 37%;
             padding-top: 15px;
             height: 200px;
             width: auto;
@@ -196,9 +197,12 @@
             padding: 10px;
         }
         #logo-container{
-        margin-left: 5%;
+        margin-left: 20%;
         margin-right: 10%;
         width: 100%;
+        }
+        #login-page-container{
+       
         }
         </style>
 </head>
@@ -332,7 +336,6 @@ function validateSecurityInput(){
 }
 
 </script>
-
 <div style="align:center;">
     <a href="${ui.pageLink("referenceapplication", "home")}">
         <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="200px" width="300px" id="county-logo"/>
@@ -453,6 +456,5 @@ function validateSecurityInput(){
         <button class="confirm">${ ui.message("referenceapplication.okay") }</button>
     </div>
 </div>
-
 </body>
 </html>
