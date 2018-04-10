@@ -188,20 +188,13 @@ public class AihdLoginPageController {
         if (sessionLocation != null && sessionLocation.hasTag(EmrApiConstants.LOCATION_TAG_SUPPORTS_LOGIN)) {
             // Set a cookie, so next time someone logs in on this machine, we can default to that same location
             pageRequest.setCookieValue(COOKIE_NAME_LAST_SESSION_LOCATION, sessionLocationId.toString());
+            //Set<String> onlineUsers = new HashSet<String>(CurrentUsers.getCurrentUsernames(pageRequest.getRequest().getSession()));
 
             try {
                 Context.authenticate(username, password);
-                User user = Context.getAuthenticatedUser();
-                if(user != null){
-                    Set<String> onlineUsers = new HashSet<String>(CurrentUsers.getCurrentUsernames(pageRequest.getRequest().getSession()));
-                    if(onlineUsers.contains(user.getUsername())){
-                        pageRequest.getSession().setAttribute(ReferenceApplicationWebConstants.SESSION_ATTRIBUTE_INFO_MESSAGE,
-                                ui.message("Already logged in. Removing the seesion now.."));
-                        CurrentUsers.removeUser(pageRequest.getRequest().getSession());
-                    }
-                }
+                    //System.out.println("The number of online users are ::"+onlineUsers.size());
 
-                else if (Context.isAuthenticated()) {
+                 if (Context.isAuthenticated()) {
                     if (log.isDebugEnabled())
                         log.debug("User has successfully authenticated");
 
@@ -222,6 +215,7 @@ public class AihdLoginPageController {
 
                     return "redirect:" + ui.pageLink(ReferenceApplicationConstants.MODULE_ID, "home");
                 }
+
             }
             catch (ContextAuthenticationException ex) {
                 if (log.isDebugEnabled())
@@ -246,6 +240,7 @@ public class AihdLoginPageController {
         //TODO limit login attempts by IP Address
 
         pageRequest.getSession().setAttribute(SESSION_ATTRIBUTE_REDIRECT_URL, redirectUrl);
+        //check if that user already exist in the session
 
         return "redirect:" + ui.pageLink(ReferenceApplicationConstants.MODULE_ID, "login");
     }

@@ -37,20 +37,6 @@ public class PatientFlagsWidgetFragmentController {
 
         flags.add(missedAppointments(patient.getId(), context));
         flags.add(lostToFollowUp(patient.getId(), context));
-        /*// Gather all flag calculations that evaluate to true in a generic way
-        System.out.println("The size is"+calculationManager.getFlagCalculations().size());
-        for (PatientFlagCalculation calc : calculationManager.getFlagCalculations()) {
-            System.out.println("The report reaches here:"+calc.getFlagMessage());
-            try {
-                CalculationResult result = Context.getService(PatientCalculationService.class).evaluate(patient.getPatient().getPatientId(), calc);
-                if (result != null && (Boolean) result.getValue()) {
-                    flags.add(calc.getFlagMessage());
-                }
-            }
-            catch (Exception ex) {
-                log.error("Error evaluating " + calc.getClass(), ex);
-            }
-        }*/
 
         model.addAttribute("flags", flags);
 
@@ -68,6 +54,13 @@ public class PatientFlagsWidgetFragmentController {
     }
 
     private String lostToFollowUp(Integer patientId, PatientCalculationContext context){
-        return "Lost to Follow up";
+        String message = "";
+        CalculationResultMap lastReturnDateObss = ConfigCalculations.lastObs(Dictionary.getConcept(Dictionary.RETURN_VISIT_DATE), Arrays.asList(patientId), context);
+        Date lastScheduledReturnDate = ConfigEmrCalculationUtils.datetimeObsResultForPatient(lastReturnDateObss, patientId);
+        if (lastScheduledReturnDate != null && ConfigEmrCalculationUtils.daysSince(lastScheduledReturnDate, context) > 90) {
+            message = "Lost to Followup";
+        }
+
+        return message;
     }
 }

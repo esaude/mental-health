@@ -55,5 +55,19 @@
         </insert>
     </changeSet>
 
+    <changeSet id="aihd-201803271016" author="ningosi">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="1">
+                SELECT COUNT(*) FROM location WHERE name='Unknown Location';
+            </sqlCheck>
+        </preConditions>
+        <comment>Changing the Unkown Location to </comment>
+        <sql>
+            SET FOREIGN_KEY_CHECKS = 0;
+                UPDATE location SET name='Other Location' WHERE name='Unknown Location';
+            SET FOREIGN_KEY_CHECKS = 1;
+        </sql>
+    </changeSet>
+
     
 </databaseChangeLog>
