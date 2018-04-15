@@ -202,6 +202,27 @@
                 jq('#medication-adherence-reason :input').prop('disabled', false);
              }
         }
+        function allergic(){
+            var val= getValue('allergies.value');
+            jq('#allergies_name :input').prop('disabled', true);
+            if(val == 1065){
+                jq('#allergies_name :input').prop('disabled', false);
+             }
+        }
+        function transferCareToOtherCenter(){
+            var val= getValue('transfer_to_other_health_center_specify.value');
+            jq('#transfer_to_other_health_center :input').prop('disabled', true);
+            if(val == 1285){
+                jq('#transfer_to_other_health_center :input').prop('disabled', false);
+             }
+        }
+        function supportGroup(){
+            var val= getValue('support_group.value');
+            jq('#support_group_name :input').prop('disabled', true);
+            if(val == 1065){
+                jq('#support_group_name :input').prop('disabled', false);
+             }
+        }
         function glucose(){
             var val= getValue('glucose.value');
             jq('#glucose-level :input').prop('disabled', true);
@@ -237,6 +258,9 @@
             onWeightOrHeightChange();
             jq('#nhif').change(onNHIFStatusChange);
             jq('#adhering_to_current_medications').change(adheringToMedications);
+            jq('#allergies').change(allergic);
+            jq('#transfer_to_other_health_center_specify').change(transferCareToOtherCenter);
+            jq('#support_group').change(supportGroup);
             jq('#glucose').change(glucose);
             jq('#protein').change(protein);
             jq('#ketone').change(ketone);
@@ -388,7 +412,7 @@
                                  answerSeparator="" id="hiv_status" class="align-radio-input"/>
                         </td>
                         <td>
-                            <label>Enrolled to care:</label>
+                        <label>If HIV+ enrolled to care.</label>
                          <span id="enrolled_to_hiv_care">
                             <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" class="align-radio-input"/>
@@ -396,7 +420,7 @@
                         </td>
 
                         <td colspan="3">
-                            <label>**Other patient status:</label>
+                            <label>Other patient status:</label>
                             <span id="other_patient_status">
                             <obs conceptId="33216318-4bd5-4b5c-9434-6f6f10a87d26"/> 
                             </span>                       
@@ -408,6 +432,10 @@
                             <label>Patient covered by NHIF:</label>
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" id="nhif" class="align-radio-input"/>
+                        </td>
+                        <td>
+                            <label>Other:</label>
+                            <obs conceptId="cd2b38b5-ce2f-45fd-ba14-b5db1b68b81f" />
                         </td>
                         <td colspan="3" id="enroll_to_nhif">
                             <span id="nhif-comment" class="value"></span>                  
@@ -421,10 +449,25 @@
                                  answerSeparator="" id="referal" class="align-radio-input"/>
 
                         </td>
-                         <td colspan="3" valign="top">
+                         <td valign="top">
                              <span id="refering_facility">
-                                 <obs conceptId="164408" answerConceptIds="1759,165107,160551,160542,160473,5622" answerLabels="CHW ,Dispensary, In patient, OPD, Casualty ,Other" style="radio"
+                             <label>Interreferral</label>
+                                 <obs conceptId="164408" answerConceptIds="163146,160551,160542,160473,162050,5622" answerLabels="Maternity,In patient, OPD, Casualty ,CCC,Other" style="radio"
                                       answerSeparator="" id="referra-options" class="align-radio-input" />
+                            </span>
+                         </td>
+                         <td valign="top">
+                             <span id="intra_referral">
+                             <label>Intrareferral</label>
+                                 <obs conceptId="267b7dc4-21b5-45d4-ad7a-041082ce2e2a" answerConceptIds="1759,165107" answerLabels="CHW ,Dispensary" style="radio"
+                                      answerSeparator="" id="intra-referra-options" class="align-radio-input" />
+                             </span>
+                         </td>
+
+                         <td valign="top">
+                             <span id="referral_details">
+                             <label>Details</label>
+                                 <obs conceptId="dcc76feb-c2e7-4ef5-8455-eafda17b9b20" />
                              </span>
                          </td>
                      </tr>
@@ -451,20 +494,20 @@
                         <td><obs conceptId="6042" answerConceptId="156046" answerLabel="Recurrent dizziness" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="112961" answerLabel="Fainting" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="135966" answerLabel="Leg swelling" style="checkbox" class="align-checkbox-input"/></td>                                            
+                        <td><obs conceptId="6042" answerConceptId="134185" answerLabel="Frequent Urination and Fatigue" style="checkbox" class="align-checkbox-input"/></td>                                            
                     </tr>                     
                     <tr>                    
                         <td><obs conceptId="6042" answerConceptId="135592" answerLabel="Loss of consciousness" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="147104" answerLabel="Blurring of vision" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="6005" answerLabel="Focal weakness" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="164529" answerLabel="Foot complaints" style="checkbox" class="align-checkbox-input"/></td>
-
-                        <td></td>
+                        <td><obs conceptId="6042" answerConceptId="115782" answerLabel="Headaches / Migraines" style="checkbox" class="align-checkbox-input"/></td>
                     </tr>
 
                 </tbody>
             </table>
         </section>
-       <br/>
+               <br/>
             <includeIf velocityTest="$patient.gender == 'F' ">
                <section>
                     <label>LMP if female:</label>
@@ -482,7 +525,7 @@
        <br/>
 
        <section>
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Drug Use:</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Substance Use/Abuse:</label>
             <table>
                 <tbody>
                     <tr>
@@ -495,6 +538,10 @@
                             <label>Do you sometimes drink alcohol?</label>
                             <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
                                  answerSeparator="" class="align-radio-input"/>
+                        </td>
+                        <td>
+                            <label>Others</label>
+                            <obs conceptId="cf94e312-6812-429e-b513-f0bad3f7bd2f"/>
                         </td>
                     </tr>
                 </tbody>
@@ -561,7 +608,10 @@
                 <tbody>
                     <tr>
                         <td><obs conceptId="5872849d-bbb7-4b37-baf1-8643afdee710" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input"
-                                  answerSeparator=""/></td>
+                                  answerSeparator="" id="allergies"/>
+                        </td>
+                        <td><obs conceptId="50e4dd69-03e4-4793-adf9-c48d3252c676" id="allergies_name"/>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -618,7 +668,7 @@
                          </td>
                         <td>
                             <span id="cvs-abnormal">
-                                **<label>Describe</label><obs conceptId="5365a17e-1719-4758-ad19-47b37ff89a25"/>
+                                <label>Describe</label><obs conceptId="5365a17e-1719-4758-ad19-47b37ff89a25"/>
                             </span>
                         </td>
                     </tr>
@@ -630,7 +680,7 @@
                         </td>
                         <td>
                             <span id="rs-abnormal">
-                                **<label>Describe</label><obs conceptId="1fdb06f8-0495-4b55-907c-85eae0c1afa3"/>
+                                <label>Describe</label><obs conceptId="1fdb06f8-0495-4b55-907c-85eae0c1afa3"/>
                             </span>
                         </td>
                     </tr>
@@ -863,14 +913,14 @@
        <br/>
 
        <section>
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Diabetes, nutrition and Counselling education provision</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Nutrition and Counselling education provision</label>
             <table>
                 <tbody>
                     <tr>
                          <td>
-                         <obs conceptId="1379"  answerConceptId="165128"  answerLabel="Diabetes"  style="checkbox" class="align-checkbox-input"/>
                          <obs conceptId="1379"  answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox" class="align-checkbox-input"/>
-                         <obs conceptId="1379"  answerConceptId="165129"  answerLabel="Counselling"  style="checkbox" class="align-checkbox-input"/>
+                         <obs conceptId="1379"  answerConceptId="159364"  answerLabel="Physical Activity"  style="checkbox" class="align-checkbox-input"/>
+                         <obs conceptId="1379"  answerConceptId="5490"  answerLabel="Psychosocial"  style="checkbox" class="align-checkbox-input"/>
                          </td>
                     </tr>
                 </tbody>
@@ -1117,14 +1167,21 @@
                         <td>Return date:<obs conceptId="5096"/> </td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="165122"  answerConceptId="1285"  answerLabel="Transfer care to Health center, specify"  style="checkbox" class="align-checkbox-input"/>
-                        <obs conceptId="159495" /></td>
-                        <td>Date trnasferred out:<obs conceptId="160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> </td>
+                        <td><obs conceptId="165122"  answerConceptId="164165"  answerLabel="Refer to referral facility"  style="checkbox" class="align-checkbox-input"/>
+                        <obs  conceptId="ddd65525-e6b4-41bb-beda-9153ddb3069f"  /></td>
+                        <td>Date Referred:<obs conceptId="161561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> </td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="165122"  answerConceptId="164165"  answerLabel="Refer to referral facility"  style="checkbox" class="align-checkbox-input"/></td>
-                        <td>Date reffered:<obs conceptId="161561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> </td>
+                        <td><obs conceptId="165122" id="transfer_to_other_health_center_specify" answerConceptId="1285"  answerLabel="Transfer care to Health center, specify"  style="checkbox" class="align-checkbox-input"/>
+                        <obs conceptId="159495" id="transfer_to_other_health_center"  /></td>
+                        <td>Date Transferred out:<obs conceptId="160649AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /> </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                        <label>Referred For?</label>
+                        <obs conceptId="82e089f4-b91f-4865-a402-693cc6420ecf" /></td>
+                        
+                    </tr> 
                     <tr>
                         <label style="background:  #00b4ef; padding: 3px; color: #fff;">Referral Reasons</label>
                         <td>
@@ -1147,8 +1204,11 @@
                         </td>
                     </tr>
                     <tr>
-                         <td colspan="2"><label>Member of support group</label>
-                             <obs conceptId="163766" answerConceptIds="1066,1065,1067" answerLabels="No,Yes,Unknown" style="dropdown"   answerSeparator=""/>
+                         <td><label>Member of support group</label>
+                             <obs id="support_group" conceptId="163766" answerConceptIds="1066,1065,1067" answerLabels="No,Yes,Unknown" style="dropdown"   answerSeparator=""/>
+                         </td>
+                         <td><label>Name of support group</label>
+                             <obs id="support_group_name" conceptId="22ea6cc7-83b4-437f-9f39-f5b198990dd9"/>
                          </td>
                    </tr>
                 </tbody>
