@@ -23,8 +23,8 @@
             background-color: white;
         }
         #body-wrapper {
-            margin-top: 2px;
-            padding: 2px;
+            margin-top: 1px;
+            padding: 0;
             background-color: white;
             -moz-border-radius: 3px;
             -webkit-border-radius: 3px;
@@ -34,8 +34,8 @@
             border-radius: 3px;
         }
         #body-wrapper #content {
-            margin-top: 2;
-            padding: 2px;
+            margin-top: 2px;
+            padding: 0;
             -moz-border-radius: 3px;
             -webkit-border-radius: 3px;
             -o-border-radius: 3px;
@@ -399,7 +399,7 @@ function validateSecurityInput(){
                                     <span id="operator"></span>
                                     <span id="second_number" style="color:red;"></span>
                                     <input id="computer_results_hidden" type="hidden"/>
-                                    <input id="security_captcha_answer" type="text" name="security_check_answer" />
+                                    <input id="security_captcha_answer" type="text" name="security_check_answer" size="10" />
                                     <span id="captcha_notification" style="color:red; font-size:18;"></span>
                                  </div>
                                 </td>
