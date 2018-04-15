@@ -199,7 +199,7 @@
            left: 50%;
            top: 45%;
            margin-left: -300px;
-           margin-top: -300px;
+           margin-top: -310px;
         }
         </style>
 </head>
@@ -348,7 +348,7 @@ function validateSecurityInput(){
                             <i class="icon-lock small"></i>
                             ${ ui.message("referenceapplication.login.loginHeading") }
                         </legend>
-                        <table>
+                        <table border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td>
 
@@ -408,20 +408,18 @@ function validateSecurityInput(){
 
                         <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                          <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
-
-                        <p></p>
                         <div>
-                            <div>
-                                <p>
-                                    <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
-                                </p>
-                                <p>
-                                    <a id="cant-login" href="javascript:void(0)">
-                                        <i class="icon-question-sign small"></i>
-                                        ${ ui.message("referenceapplication.login.cannotLogin") }
-                                    </a>
-                                </p>
-                            </div>
+                            <table>
+                                <tr>
+                                    <td colspan="2" align="right">
+                                        <a id="cant-login" href="javascript:void(0)">
+                                            <i class="icon-question-sign small"></i>
+                                            ${ ui.message("referenceapplication.login.cannotLogin") }
+                                        </a>
+                                        <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
+                                    </td>
+                                <tr>
+                            </table>
                         </div>
 
                     </fieldset>
