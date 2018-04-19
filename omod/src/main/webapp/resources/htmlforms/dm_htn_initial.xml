@@ -96,9 +96,13 @@
 
         function onNHIFStatusChange() {
             var display = '';
-            var nhif = getValue('nhif.value');            
+            var nhif = getValue('nhif.value');
+            jq('#other_nhif :input').prop('disabled', true);            
             if (nhif==1066)  {                
                     display = 'Encourage patient to enroll';
+            }            
+            if (nhif==1065)  {                
+                    jq('#other_nhif :input').prop('disabled', false);  
             }            
             jq('#nhif-comment').html(display);
           }
@@ -110,9 +114,9 @@
              }
         }
         function patientReferedOther(){
-            var val= getValue('referra-options.value');
+            var val= getValue('referral-options.value');
             jq('#refering_other :input').prop('disabled', true);
-            if(val == 522){
+            if(val == 5622){
                 jq('#refering_other :input').prop('disabled', false);
              }
         }
@@ -123,10 +127,30 @@
                 jq('#dm_diagnosis_year :input').prop('disabled', false);
              }
         }
+        function occupationStatus(){
+            var val= getValue('occupation.value');
+            jq('#other_occupation :input').prop('disabled', true);
+            if(val == 5622){
+                jq('#other_occupation :input').prop('disabled', false);
+             }
+        }
+        function chiefComplaint(){
+            var val= getValue('other_chief_complaint.value');
+            jq('#other_chief_complaint_text :input').prop('disabled', true);
+            if(val == 5622){
+                jq('#other_chief_complaint_text :input').prop('disabled', false);
+             }
+        }
         function hivStatus(){
             var val= getValue('hiv_status.value');
-            jq('#enrolled_to_hiv_care :input').prop('disabled', true);
+               jq('#enrolled_to_hiv_care :input').prop('disabled', true);
+               jq('#tb_comments :input').prop('disabled', true);
+               jq('#tb_treatment_start :input').prop('disabled', true);
+               jq('#on_tb_treatment :input').prop('disabled', true);
             if(val == 138571){
+                jq('#tb_comments :input').prop('disabled', false);
+                jq('#tb_treatment_start :input').prop('disabled', false);
+                jq('#on_tb_treatment :input').prop('disabled', false);
                 jq('#enrolled_to_hiv_care :input').prop('disabled', false);
              }
         }
@@ -253,6 +277,7 @@
         }
          
         jQuery(function() {
+            jq('#other_chief_complaint_text :input').prop('disabled', true);
             getField('weight.value').change(onWeightOrHeightChange);
             getField('height.value').change(onWeightOrHeightChange);
             onWeightOrHeightChange();
@@ -268,6 +293,8 @@
             jq('#referal').change(patientRefered);
             jq('#referra-options').change(patientReferedOther);
             jq('#diabetes_status').change(diabeteStatus);
+            jq('#occupation').change(occupationStatus);
+            jq('#other_chief_complaint').change(chiefComplaint);
             jq('#hiv_status').change(hivStatus);
             jq('#htn_status').change(htnStatus);
             jq('#checkboxAll').change(currentMeds);
@@ -355,11 +382,22 @@
                     <tr>
                         <td>
                             Occupation:
-                            <obs conceptId="1542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  answerConceptIds="1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,123801AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1538AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1539AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1540AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159465AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159466AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Unknown,Unemployed,Farmer,Trader,Employee,Retired,Student,Driver" answerSeparator="" />
+                            <obs required="true" conceptId="1542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  
+                            answerConceptIds="1540AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,038b7284-d322-4d91-9091-9e47a63e07fe,161382AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159465AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,5622" 
+                            answerLabels="Employed,Unemployed,Self employed,Student,Other"  id="occupation" answerSeparator="" />
+
+                            
+                        </td>
+                        <td colspan="2">
+                            <label>Other</label>
+                            <span id="other_occupation">
+                                <obs  conceptId="19bcd2bb-1228-4a06-a3b2-4c733a005115" /> 
+                            </span>
+
                         </td>
                         <td colspan="2">
                             Level of education:
-                            <obs conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Secondary,Primary,None,Pre-school,Special education,Tertiary education,College/university/polytechnic" style="dropdown" answerSeparator="" />
+                            <obs required="true" conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Secondary,Primary,None,Pre-school,Special education,Tertiary education,College/university/polytechnic" style="dropdown" answerSeparator="" />
 
                         </td>
                     </tr>
@@ -376,14 +414,14 @@
                         </td>
 
                         <td>
-                            <obs conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
+                            <obs required="true" conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
                                  answerSeparator="" id="diabetes_status" class="align-radio-input"/>                       
                         </td>
 
                         <td>
                             <label>Year of Diagnosis</label>
                             <span id="dm_diagnosis_year">
-                                <obs conceptId="95d4aa36-05ee-44cb-823b-35a62f07ce49" /> 
+                                <obs  conceptId="95d4aa36-05ee-44cb-823b-35a62f07ce49" /> 
                             </span>
 
                         </td>
@@ -393,14 +431,14 @@
                             <label>Hypertension:</label>
                         </td>
                         <td>
-                            <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
+                            <obs required="true" conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
                                  answerSeparator="" id="htn_status" class="align-radio-input"/>                                                   
                         </td>
             
                         <td>
                             <label>Year of Diagnosis</label>
                              <span id="htn_diagnosis_year">
-                                <obs conceptId="b863e568-1491-42d0-b881-04df389ad0de"/> 
+                                <obs  conceptId="b863e568-1491-42d0-b881-04df389ad0de"/> 
                             </span>                       
                         </td>
                     </tr>
@@ -408,13 +446,13 @@
                     <tr>
                         <td>
                             <label>HIV status:</label> 
-                            <obs conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
+                            <obs required="true" conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio"
                                  answerSeparator="" id="hiv_status" class="align-radio-input"/>
                         </td>
                         <td>
                         <label>If HIV+ enrolled to care.</label>
                          <span id="enrolled_to_hiv_care">
-                            <obs conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                            <obs  conceptId="159811" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" class="align-radio-input"/>
                          </span>                      
                         </td>
@@ -422,7 +460,25 @@
                         <td colspan="3">
                             <label>Other patient status:</label>
                             <span id="other_patient_status">
-                            <obs conceptId="33216318-4bd5-4b5c-9434-6f6f10a87d26"/> 
+                            <obs  conceptId="33216318-4bd5-4b5c-9434-6f6f10a87d26"/> 
+                            </span>                       
+                        </td>
+                    </tr>
+                    <tr> 
+                        <td>
+                            <label>TB Status:</label> 
+                            <obs id="on_tb_treatment" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptId="1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="On treatment" style="checkbox" class="align-checkbox-input"/></td> 
+                        <td>
+                        <label>Treatment start date.</label>
+                         <span id="tb_treatment_start">
+                            <obs  conceptId="cda0abc2-bf7d-4959-b619-bbfd1eb21517" />
+                         </span>                      
+                        </td>
+
+                        <td colspan="3">
+                            <label> Comment (details):</label>
+                            <span id="tb_comments">
+                            <obs  conceptId="b1d41c4d-d939-4818-9990-e2d9c5fefffe"/> 
                             </span>                       
                         </td>
                     </tr>
@@ -430,12 +486,14 @@
                      <tr>
                         <td>
                             <label>Patient covered by NHIF:</label>
-                            <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                            <obs required="true" conceptId="1917" answerConceptIds="1065,1066,5622" answerLabels="Yes,No,Other" style="radio"
                                  answerSeparator="" id="nhif" class="align-radio-input"/>
                         </td>
                         <td>
                             <label>Other:</label>
-                            <obs conceptId="cd2b38b5-ce2f-45fd-ba14-b5db1b68b81f" />
+                            <span id="other_nhif">
+                            <obs  conceptId="cd2b38b5-ce2f-45fd-ba14-b5db1b68b81f" />
+                            </span>
                         </td>
                         <td colspan="3" id="enroll_to_nhif">
                             <span id="nhif-comment" class="value"></span>                  
@@ -445,7 +503,7 @@
                      <tr>
                         <td valign="top">
                             <label>Is patient a referral?</label>
-                                 <obs conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 <obs required="true" conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator="" id="referal" class="align-radio-input"/>
 
                         </td>
@@ -453,7 +511,7 @@
                              <span id="refering_facility">
                              <label>Interreferral</label>
                                  <obs conceptId="164408" answerConceptIds="163146,160551,160542,160473,162050,5622" answerLabels="Maternity,In patient, OPD, Casualty ,CCC,Other" style="radio"
-                                      answerSeparator="" id="referra-options" class="align-radio-input" />
+                                      answerSeparator="" id="referral-options" class="align-radio-input" />
                             </span>
                          </td>
                          <td valign="top">
@@ -466,7 +524,7 @@
 
                          <td valign="top">
                              <span id="referral_details">
-                             <label>Details</label>
+                             <label>Comment (Specify)</label>
                                  <obs conceptId="dcc76feb-c2e7-4ef5-8455-eafda17b9b20" />
                              </span>
                          </td>
@@ -493,15 +551,27 @@
                         <td><obs conceptId="6042" answerConceptId="158627" answerLabel="Palpitations (heart racing)" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="156046" answerLabel="Recurrent dizziness" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="112961" answerLabel="Fainting" style="checkbox" class="align-checkbox-input"/></td>
-                        <td><obs conceptId="6042" answerConceptId="135966" answerLabel="Leg swelling" style="checkbox" class="align-checkbox-input"/></td>                                            
-                        <td><obs conceptId="6042" answerConceptId="134185" answerLabel="Frequent Urination and Fatigue" style="checkbox" class="align-checkbox-input"/></td>                                            
+                                                                  
                     </tr>                     
-                    <tr>                    
+                    <tr> 
+                        <td><obs conceptId="6042" answerConceptId="135966" answerLabel="Leg swelling" style="checkbox" class="align-checkbox-input"/></td>                                            
+                        <td><obs conceptId="6042" answerConceptId="134185" answerLabel="Frequent urination and fatigue" style="checkbox" class="align-checkbox-input"/></td>                   
                         <td><obs conceptId="6042" answerConceptId="135592" answerLabel="Loss of consciousness" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="147104" answerLabel="Blurring of vision" style="checkbox" class="align-checkbox-input"/></td>
+                    </tr>
+
+                    <tr>                    
                         <td><obs conceptId="6042" answerConceptId="6005" answerLabel="Focal weakness" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="164529" answerLabel="Foot complaints" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="6042" answerConceptId="115782" answerLabel="Headaches / Migraines" style="checkbox" class="align-checkbox-input"/></td>
+                        
+                    </tr>
+                    <tr>                    
+                        <td><obs id="other_chief_complaint" conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="3"><span id="other_chief_complaint_text">
+                        <label>Specify</label>
+                            <obs conceptId="3e9366c4-f93e-4f90-9ab7-b473f26d4169"/>
+                         </span></td>
                     </tr>
 
                 </tbody>
@@ -531,12 +601,12 @@
                     <tr>
                         <td>
                             <label>Do you smoke cigarettes?</label>
-                            <obs conceptId="152722" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio"
+                            <obs required="true" conceptId="152722" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio"
                                  answerSeparator="" class="align-radio-input"/>                       
                         </td>
                         <td>
                             <label>Do you sometimes drink alcohol?</label>
-                            <obs conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
+                            <obs required="true" conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
                                  answerSeparator="" class="align-radio-input"/>
                         </td>
                         <td>
