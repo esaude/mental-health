@@ -69,4 +69,158 @@ public class PersonAttributeTypes {
             return 0;
         }
     };
+
+    public static PersonAttributeTypeDescriptor TREATMENT_SUPPORTER_ADDRESS = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "0d54f47d-d633-4a81-b496-e5b66c0b38fc";
+        }
+
+        @Override
+        public String name() {
+            return "Treatment Supporter Address";
+        }
+
+        @Override
+        public String description() {
+            return "Treatment Supporter Physical Address details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor TREATMENT_SUPPORTER_PHONE_NUMBER = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "9fe7f9c2-877c-4209-83f1-abeba41b80a7";
+        }
+
+        @Override
+        public String name() {
+            return "Treatment Supporter Phone Number";
+        }
+
+        @Override
+        public String description() {
+            return "Treatment Supporter Phone Number details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor PATIENT_TYPE = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "3d49cb0e-be35-4afe-9f30-b218d011d3a7";
+        }
+
+        @Override
+        public String name() {
+            return "Patient Type";
+        }
+
+        @Override
+        public String description() {
+            return "Specifies the patient type eg new or on transit details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor OTHER_TREATMENT_SUPPORTER_PHONE_NUMBER = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "b082786c-43e8-11e8-889a-295d59a83e3b";
+        }
+
+        @Override
+        public String name() {
+            return "Other Treatment Supporter Phone Number";
+        }
+
+        @Override
+        public String description() {
+            return "Other Treatment Supporter Phone Number details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor ALTERNATIVE_TREATMENT_SUPPORTER_PHONE_NUMBER = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "24092d4f-43e9-11e8-889a-295d59a83e3b";
+        }
+
+        @Override
+        public String name() {
+            return "Alternative Treatment Supporter Phone Number";
+        }
+
+        @Override
+        public String description() {
+            return "Alternative Treatment Supporter Phone Number details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor OTHER_PATIENT_PHONE_NUMBER = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "a868656a-43e9-11e8-889a-295d59a83e3b";
+        }
+
+        @Override
+        public String name() {
+            return "Other Patient Phone Number";
+        }
+
+        @Override
+        public String description() {
+            return "Other Patient Phone Number details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
+
+    public static PersonAttributeTypeDescriptor ALTERNATIVE_PATIENT_PHONE_NUMBER = new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "b12462f6-43e9-11e8-889a-295d59a83e3b";
+        }
+
+        @Override
+        public String name() {
+            return "Alternative Patient Phone Number";
+        }
+
+        @Override
+        public String description() {
+            return "Alternative Patient Phone Number details";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
 }

@@ -25,6 +25,13 @@ public class CommonMetadataBundle extends AbstractMetadataBundle {
         log.info("Installing PatientAttributeTypes");
         install(PersonAttributeTypes.SERVICE_DELIVERY_POINT);
         install(PersonAttributeTypes.TREATMENT_SUPPORTER_NAME);
+        install(PersonAttributeTypes.TREATMENT_SUPPORTER_ADDRESS);
+        install(PersonAttributeTypes.TREATMENT_SUPPORTER_PHONE_NUMBER);
+        install(PersonAttributeTypes.PATIENT_TYPE);
+        install(PersonAttributeTypes.OTHER_TREATMENT_SUPPORTER_PHONE_NUMBER);
+        install(PersonAttributeTypes.ALTERNATIVE_TREATMENT_SUPPORTER_PHONE_NUMBER);
+        install(PersonAttributeTypes.OTHER_PATIENT_PHONE_NUMBER);
+        install(PersonAttributeTypes.ALTERNATIVE_PATIENT_PHONE_NUMBER);
         install(PersonAttributeTypes.TELEPHONE_NUMBER);
 
         log.info("Person AttributeTypes installed");
