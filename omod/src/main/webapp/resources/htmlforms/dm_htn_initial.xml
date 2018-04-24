@@ -107,11 +107,39 @@
                 }
                 else {
                     display = bmi.toFixed(2);
+                    flagBMI(display)
                 }
             }
-
+            
             jq('#calculated-bmi').html(display);
         }
+
+        function flagBMI(bmi) {
+                    var display ='bmi_flag';
+                    var normal_range_min = 18.50;
+                    var normal_range_max = 24.99;
+                    var overweight = 25.00;
+                    var obese = 30.00;  
+        jq('#'+display).html('');
+        if(bmi == obese || bmi>obese){
+            jq('#'+display).last().addClass("red_flag");
+            jq('#'+display).html('Obese');
+            return;
+        }  
+
+        if(bmi == overweight || bmi>overweight){
+            jq('#'+display).last().addClass("yellow_flag");
+            jq('#'+display).html('Over Weight');
+            return;
+        }
+        
+        if(bmi == normal_range_min || bmi>normal_range_min){
+            jq('#'+display).last().addClass("green_flag");
+            jq('#'+display).html('Normal');
+            return;
+        }
+        }
+
 
         function onTemperatureChange(){      
 
@@ -477,7 +505,7 @@ function bpCategory(){
                 jq('#other_referral_reasons :input').prop('disabled', false);
              }
         }
-         
+
         jQuery(function() {
             jq('#other_chief_complaint_text :input').prop('disabled', true);
             getField('weight.value').change(onWeightOrHeightChange);
@@ -927,7 +955,8 @@ function bpCategory(){
                         <td><label>Waist circ (cm)</label><obs conceptId="163080" id="wcirc" /><span id="wcirc_flag"></span></td>
                         <td><label>Height  (cm)</label><obs conceptId="5090" id="height"/></td>
                         <td><label>Weight  (KG)</label><obs conceptId="5089" id="weight"/></td>
-                        <td>BMI:<span id="calculated-bmi" class="value"></span></td>
+                        <td>BMI:<span id="calculated-bmi" class="value"></span> 
+                         <span id="bmi_flag"></span></td>
                     </tr>                   
                     <tr>
                         <td colspan="4">
