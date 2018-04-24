@@ -190,7 +190,7 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 
 			Facilities.saveLocations(path);
 			Facilities.markAllAsLoginLocations();
-			Facilities.removeLocations(Arrays.asList("St. Getrudes githogoro (Githogoro Runda Baptist Clinic (Getrudes Nairobi))", "National youth service HC (*HQ Dispensary (Ruaraka))", "Karura (Karura Health Centre Kiambu Road)", "Kamithi health centre"));
+			//Facilities.removeLocations(locationToDelete());
 			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
 
 
@@ -211,6 +211,14 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		List<GlobalProperty> properties = new ArrayList<GlobalProperty>();
 
 		return properties;
+	}
+
+	/**
+	 * get all the locations that need to be removed
+	 */
+	List<String> locationToDelete(){
+		return  Arrays.asList("Bristol park", "Mihang’o community dispensary", "Reliable medical Health Centre", "Well living", "Ruaraka clinic", "kahawa west health centre", "Hope medical (*Clinic Githurai)", "Mathare north health centre", "National youth service HC (Ruaraka)", "Marurui health centre (Dispensary)", "Korogocho health centre", "Kamiti health centre", "St. Johns hospital githurai", "St. Joseph mukasa (Dispensary)", "Kangemi health centre", "Jaralam medical", "Upendo medical clinic", "Lower kabete dispensary", "St. Getrudes githogoro", "Mji wa huruma (Dispensary)", "St. Joseph the worker disp."
+		);
 	}
 		
 }

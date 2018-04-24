@@ -160,7 +160,7 @@
         #county-logo{
             margin-left: 30%;
             padding-top: 5px;
-            height: 200px;
+            height: 170px;
             width: auto;
         }
 
@@ -171,16 +171,16 @@
         #bmz-logo{
                 width: 30%;
                 float: left;
-                padding: 10px;
+                padding: 5px;
         }
 
         #malteser-logo img{
             width: 30%;
             float: left;
             border-right-style: solid;
-            border-right-width: 1px;
+            border-right-width: 0;
             border-right-color: #e5e5e5;
-            padding: 3px;
+            padding: 0;
         }
         #aihd-logo img{
             width: 50%;
@@ -336,7 +336,7 @@ function validateSecurityInput(){
 <div class="center-div">
         <div style="align:center;">
             <a href="${ui.pageLink("referenceapplication", "home")}">
-                <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="200px" width="300px" id="county-logo"/>
+                <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="180px" width="280px" id="county-logo"/>
             </a>
         </div>
         <div id="body-wrapper">
