@@ -140,6 +140,37 @@
         }
         }
 
+        function flagLfMonofilament(){
+
+            var lf_monofilament= getValue('lf_monofilament.value');
+            if(lf_monofilament &gt; 5){
+                jq('#lf_flag').last().addClass("red_flag");
+                jq('#lf_flag').html('&#9432; Value greater than 5');
+            }else{
+                jq('#lf_flag').last().removeClass("red_flag");
+                jq('#lf_flag').html('');
+            }
+        }
+
+        function flagRfMonofilament(){
+
+            var rf_monofilament= getValue('rf_monofilament.value');
+
+            if(rf_monofilament &gt; 5){
+                jq('#rf_flag').last().addClass("red_flag");
+                jq('#rf_flag').html('&#9432; Value greater than 5');
+            }else{
+                jq('#rf_flag').last().removeClass("red_flag");
+                jq('#rf_flag').html('');
+            }
+        }
+        function counsellingEducation(){
+             var val= getValue('education.value');
+            jq('#education_other :input').prop('disabled', true);
+            if(val == 5622){
+                jq('#education_other :input').prop('disabled', false);
+             }
+        }
 
         function onTemperatureChange(){      
 
@@ -505,6 +536,13 @@ function bpCategory(){
                 jq('#other_referral_reasons :input').prop('disabled', false);
              }
         }
+        function visualImpairment(){
+            var val= getValue('visual_impairment.value');
+            jq('#impairment :input').prop('disabled', true);
+            if(val == 159298){
+                jq('#impairment :input').prop('disabled', false);
+             }
+        }
 
         jQuery(function() {
             jq('#other_chief_complaint_text :input').prop('disabled', true);
@@ -512,6 +550,7 @@ function bpCategory(){
             getField('height.value').change(onWeightOrHeightChange);
             onWeightOrHeightChange();
             jq('#nhif').change(onNHIFStatusChange);
+            jq('#visual_impairment').change(visualImpairment);
             jq('#temperature').focusout(onTemperatureChange);
             jq('#pr_in').focusout(prByAgeChange);
             jq('#adhering_to_current_medications').change(adheringToMedications);
@@ -541,7 +580,10 @@ function bpCategory(){
             jq('#diastolic1').change(checkFirstBpReading); 
 
             jq('#systolic2').change(checkSecondBpReading);            
-            jq('#diastolic2').change(checkSecondBpReading);            
+            jq('#diastolic2').change(checkSecondBpReading);  
+            jq('#lf_monofilament').change(flagLfMonofilament);  
+            jq('#rf_monofilament').change(flagRfMonofilament);  
+            jq('#education').change(counsellingEducation);  
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
 	
@@ -1051,9 +1093,11 @@ function bpCategory(){
                          <td><b>Monofilament test</b></td>
                          <td>
                             <label>RF (/5)</label>
-                            <obs conceptId="165116" />
+                            <obs conceptId="165116" id="rf_monofilament" />
+                             <span id="rf_flag"></span>
                             <label>LF (/5)</label>
-                            <obs conceptId="165117" />
+                            <obs conceptId="165117" id="lf_monofilament" />
+                            <span id="lf_flag"></span>
                         </td>
                     </tr>
                 </tbody>
@@ -1083,7 +1127,10 @@ function bpCategory(){
                   
                     <tr>
                         <td><label>PDT</label></td>
-                        <td><obs conceptId="165144" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        <td>
+                        <includeIf velocityTest="$patient.gender == 'F' ">
+                           <obs conceptId="165144" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </includeIf>
                         </td>
                     </tr>
                     <tr>
@@ -1195,7 +1242,14 @@ function bpCategory(){
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>5</td>
-                        <td><obs conceptId="6042" answerConceptId="159298" answerLabel="Visual Impairement" style="checkbox" class="align-checkbox-input"/></td>
+                        <td>
+
+                        <obs id="visual_impairment" conceptId="6042" answerConceptId="159298" answerLabel="Visual Impairement" style="checkbox" class="align-checkbox-input"/>
+                        <span id="impairment">
+                        <label>Specify</label>
+                           <obs conceptId="21f0e9c1-4e20-461d-b4de-15686dc6669f"/>
+                        </span>
+                        </td>
                         <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
@@ -1226,7 +1280,7 @@ function bpCategory(){
        <br/>
 
        <section>
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Nutrition and Counselling education provision</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Counselling/education provision</label>
             <table>
                 <tbody>
                     <tr>
@@ -1234,6 +1288,15 @@ function bpCategory(){
                          <obs conceptId="1379"  answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox" class="align-checkbox-input"/>
                          <obs conceptId="1379"  answerConceptId="159364"  answerLabel="Physical Activity"  style="checkbox" class="align-checkbox-input"/>
                          <obs conceptId="1379"  answerConceptId="5490"  answerLabel="Psychosocial"  style="checkbox" class="align-checkbox-input"/>
+                         <obs id="education" conceptId="1379"  answerConceptId="5622"  answerLabel="Other"  style="checkbox" class="align-checkbox-input"/>
+                         </td>
+                    </tr>
+                    <tr>
+                         <td>
+                         <label>Specify</label>
+                         <span id="education_other"> 
+                            <obs conceptId="e1002edd-7844-4d5f-a988-9d2323f891a1"/>
+                         </span>
                          </td>
                     </tr>
                 </tbody>
@@ -1257,6 +1320,7 @@ function bpCategory(){
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Plan</th>
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
                                     <th style="background:  #00b4ef; padding: 3px; color: #fff;">Frequency</th>
+                                    <!-- <th style="background:  #00b4ef; padding: 3px; color: #fff;">Comment</th> -->
                                 </tr>
                                 
                                 <obsgroup groupingConceptId="165140">
@@ -1265,6 +1329,7 @@ function bpCategory(){
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdwon" /></td>
                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,850,1000" answerLabels="500mg,850mg,1000mg" style="dropdown"/></td>
                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                       <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
                                     </tr>
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
@@ -1273,6 +1338,7 @@ function bpCategory(){
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown"  /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10" answerLabels="2.5mg,5mg,7.5mg,10mg" style="dropdown"/></td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
                                     </tr>
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
@@ -1281,6 +1347,7 @@ function bpCategory(){
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
                                     </tr>
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
@@ -1289,6 +1356,7 @@ function bpCategory(){
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
                                     </tr>
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
@@ -1297,13 +1365,15 @@ function bpCategory(){
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                         <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
                                         <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
                                     </tr>
                                 </obsgroup>
                                 <obsgroup groupingConceptId="165140">
                                     <tr>
                                        <td>Other glucose lowering drugs <obs conceptId="163101"/></td>
                                        <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
-                                       <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                                       <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td> -->
+                                       <td></td>
                                        <td></td>
                                     </tr>
                                 </obsgroup>
