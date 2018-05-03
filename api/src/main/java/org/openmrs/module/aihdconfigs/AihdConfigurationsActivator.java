@@ -93,6 +93,8 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		appFrameworkService.disableApp("reportingui.reports");
 		// disable the default find patient app to provide one which allows searching for patients at the footer of the search for patients page
         appFrameworkService.disableApp("coreapps.findPatient");
+		appFrameworkService.disableApp("coreapps.relationships");
+		//appFrameworkService.disableApp("attachments.patientDashboard.secondColumnFragments.att");
 
 		// install commonly used metadata
 		installCommonMetadata(deployService);
