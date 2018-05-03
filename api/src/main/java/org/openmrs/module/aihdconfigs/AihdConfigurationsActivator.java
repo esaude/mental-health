@@ -30,10 +30,14 @@ import org.openmrs.module.aihdconfigs.activator.AppConfigurationInitializer;
 import org.openmrs.module.aihdconfigs.activator.HtmlFormsInitializer;
 import org.openmrs.module.aihdconfigs.activator.Initializer;
 import org.openmrs.module.aihdconfigs.deploy.CommonMetadataBundle;
+import org.openmrs.module.aihdconfigs.metadata.PatientIdentifierTypes;
 import org.openmrs.module.appframework.service.AppFrameworkService;
+import org.openmrs.module.emrapi.EmrApiConstants;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
+import org.openmrs.module.metadatamapping.MetadataTermMapping;
+import org.openmrs.module.metadatamapping.api.MetadataMappingService;
 import org.openmrs.util.OpenmrsClassLoader;
 
 import java.io.InputStream;
@@ -209,7 +213,15 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 	 */
 	private List<GlobalProperty> configureGlobalProperties() {
 		List<GlobalProperty> properties = new ArrayList<GlobalProperty>();
+		// The primary identifier type now uses metadata mapping instead of a global property
+		MetadataMappingService metadataMappingService = Context.getService(MetadataMappingService.class);
+		MetadataTermMapping primaryIdentifierTypeMapping = metadataMappingService.getMetadataTermMapping(EmrApiConstants.EMR_METADATA_SOURCE_NAME, EmrApiConstants.PRIMARY_IDENTIFIER_TYPE);
+		PatientIdentifierType patintId = Context.getPatientService().getPatientIdentifierTypeByUuid(PatientIdentifierTypes.AIHD_PATIENT_NUMBER.uuid());
 
+		if(!patintId.getUuid().equals(primaryIdentifierTypeMapping.getMetadataUuid())){
+			primaryIdentifierTypeMapping.setMappedObject(patintId);
+			metadataMappingService.saveMetadataTermMapping(primaryIdentifierTypeMapping);
+		}
 		return properties;
 	}
 
