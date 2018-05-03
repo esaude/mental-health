@@ -1,14 +1,14 @@
 <div>
     <div class="info-header">
-    		<i class="icon-book"></i>
-    		<h3>${ ui.message("patient summary").toUpperCase() }</h3>
+    		<i class="icon-heart"></i>
+    		<h3>${ ui.message("Vitals").toUpperCase() }</h3>
 
     </div>
     <div class="info-body">
 
         <div>
             <table>
-                <% summary.each { key, value -> %>
+                <% vitals.each { key, value -> %>
                     <tr>
                         <td>${key}</td>
                         <td>${value}</td>
