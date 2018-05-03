@@ -7,7 +7,7 @@ public class EncounterTypes {
     public static EncounterTypeDescriptor DM_HTN_INITIAL_ENCOUNTER_TYPE = new EncounterTypeDescriptor() {
         @Override
         public String name() {
-            return "DM HTN Initial - Encounter Type";
+            return "DM HTN Initial";
         }
 
         @Override
@@ -23,7 +23,7 @@ public class EncounterTypes {
     public static EncounterTypeDescriptor DIABETIC_CLINICAL_FOLLOW_UP_ENCOUNTER_TYPE = new EncounterTypeDescriptor() {
         @Override
         public String name() {
-            return "Diabetic Clinical Follow Up - Encounter Type";
+            return "Diabetic Clinical Follow up";
         }
 
         @Override
