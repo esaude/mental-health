@@ -54,7 +54,7 @@ public class PatientVitalsWidgetFragmentController {
         CalculationResultMap lastBpSystolicObs = ConfigCalculations.lastObs(Dictionary.getConcept("5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"), Arrays.asList(patientId), context);
         CalculationResultMap lastDiastollicObs = ConfigCalculations.lastObs(Dictionary.getConcept("5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"), Arrays.asList(patientId), context);
         Double valueSystolic = ConfigEmrCalculationUtils.numericObsResultForPatient(lastBpSystolicObs, patientId);
-        Double valueDiastolic = ConfigEmrCalculationUtils.numericObsResultForPatient(lastBpSystolicObs, patientId);
+        Double valueDiastolic = ConfigEmrCalculationUtils.numericObsResultForPatient(lastDiastollicObs, patientId);
         if(valueSystolic != null && valueDiastolic != null){
             results.put("BP", String.valueOf(valueSystolic)+"/"+String.valueOf(valueDiastolic));
         }

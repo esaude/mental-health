@@ -14,5 +14,13 @@
       "provider" : "${project.parent.artifactId}",
       "fragment" : "patientVitalsWidget"
     }
+  },
+  {
+    "id" : "${project.parent.groupId}.${project.parent.artifactId}.patientDashboard.latest.obs",
+    "extensionPointId" : "patientDashboard.firstColumnFragments",
+    "extensionParams" : {
+      "provider" : "${project.parent.artifactId}",
+      "fragment" : "latestObsWidget"
+    }
   }
 ]
