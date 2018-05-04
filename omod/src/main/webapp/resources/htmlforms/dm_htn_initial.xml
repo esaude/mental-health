@@ -75,25 +75,47 @@
             color:red;
         }
 
-  .green_flag {
+  .green_flag input {
     color: green;
     font-weight: bold;
     font-size: 15px;
      padding-left:10px;
+     outline: 2px solid green;
   }
-  .yellow_flag {
+  .yellow_flag input{
     color: darkorange;
     font-weight: bold;
     font-size: 15px;
      padding-left:10px;
+     outline: 2px solid darkorange;
   }
-  .red_flag {
+  .red_flag input {
     color: red;
     font-weight: bold;
     font-size: 15px;
     padding-left:10px;
+    outline: 2px solid red;
   }
 
+  .flag_green {
+    color: green;
+    font-weight: bold;
+    font-size: 15px;
+    padding-left:10px;
+  }
+  .flag_yellow {
+    color: darkorange;
+    font-weight: bold;
+    font-size: 15px;
+    padding-left:10px;
+  }
+  .flag_red  {
+    color: red;
+     font-weight: bold;
+      font-size: 15px;
+      padding-left:10px;
+  }
+  
             </style>
     <script type="text/javascript">
         function onWeightOrHeightChange() {
@@ -115,33 +137,32 @@
         }
 
         function flagBMI(bmi) {
-                    var display ='bmi_flag';
+                    var display ='calculated-bmi';
                     var normal_range_min = 18.50;
                     var normal_range_max = 24.99;
                     var overweight = 25.00;
-                    var obese = 30.00;  
-        jq('#'+display).html('');
+                    var obese = 30.00; 
+                    jq('#'+display).last().removeClass("flag_green");
+                    jq('#'+display).last().removeClass("flag_yellow");
+                    jq('#'+display).last().removeClass("flag_red");
+  
         if(bmi == obese || bmi &gt; obese){
-            jq('#'+display).last().addClass("red_flag");
-            jq('#'+display).html('Obese');
+            jq('#'+display).last().addClass("flag_red");
             return;
         }  
 
         if(bmi == overweight || bmi &gt;overweight){
-            jq('#'+display).last().addClass("yellow_flag");
-            jq('#'+display).html('Over Weight');
+            jq('#'+display).last().addClass("flag_yellow");
             return;
         }
         
         if(bmi == normal_range_min || bmi &gt;normal_range_min){
-            jq('#'+display).last().addClass("green_flag");
-            jq('#'+display).html('Normal');
+            jq('#'+display).last().addClass("flag_green");
             return;
         }
 
         if(bmi &lt; normal_range_min){
-            jq('#'+display).last().addClass("red_flag");
-            jq('#'+display).html('Under weight');
+            jq('#'+display).last().addClass("flag_red");
             return;
         }
         }
@@ -151,23 +172,17 @@
             var lf_monofilament= getValue('lf_monofilament.value');
             if(lf_monofilament &gt; 5){
                 jq('#lf_flag').last().addClass("red_flag");
-                jq('#lf_flag').html('&#9432; Value greater than 5');
             }else{
                 jq('#lf_flag').last().removeClass("red_flag");
-                jq('#lf_flag').html('');
             }
         }
 
         function flagRfMonofilament(){
 
             var rf_monofilament= getValue('rf_monofilament.value');
-
+            jq('#rf_flag').last().removeClass("red_flag"); 
             if(rf_monofilament &gt; 5){
                 jq('#rf_flag').last().addClass("red_flag");
-                jq('#rf_flag').html('&#9432; Value greater than 5');
-            }else{
-                jq('#rf_flag').last().removeClass("red_flag");
-                jq('#rf_flag').html('');
             }
         }
         function counsellingEducation(){
@@ -185,7 +200,7 @@
             if (temp &lt; 36.1 || temp &gt; 37.1)  {            
                     display = 'Temperature should be between 36.1-37.1';
             }        
-            jq('#temperature_flag').html(display);
+
         }
 
         function prByAgeChange(){      
@@ -200,7 +215,7 @@
                     display = 'For patients aged 6-15 years should be between 60-100';
                 }
             }        
-            jq('#pr_in_flag').html(display);
+
         }
         
         function bPStatus(diastolic,systolic,min_systolic,max_systolic,min_diastolic,max_diastolic){
@@ -237,19 +252,26 @@
         }
 
     function checkFirstBpReading(){
-        jq('#first_reading_bp').html("");
         var systolic = getValue('systolic1.value');
         var diastolic = getValue('diastolic1.value');
+        removeFlags('first_reading_bp')
         bpFlag(diastolic,systolic,'first_reading_bp');
     }
 
     function checkSecondBpReading(){
-        jq('#second_reading_bp').html("");
+        removeFlags('second_reading_bp')
         var systolic = getValue('systolic2.value');
         var diastolic = getValue('diastolic2.value');
         bpFlag(diastolic,systolic,'second_reading_bp');
     }
 
+function removeFlags(display){
+
+            jq('#' + display).last().removeClass("green_flag");
+            jq('#' + display).last().removeClass("red_flag");
+            jq('#' + display).last().removeClass("yellow_flag");
+
+}
     function bpFlag(diastolic,systolic,display){
             var isNormal = false;
             var isNormalHigh = false;
@@ -259,19 +281,17 @@
             var cBp = bpCategory();
             var isDiabetic = getValue('diabetes_status.value'); 
             
-
             isNormal = bPStatus(diastolic,systolic,
                 cBp.normal.min.systolic,cBp.normal.max.systolic,
                 cBp.normal.min.diastolic,cBp.normal.max.diastolic
             );
 
-            if(isNormal){
-            jq('#'+display).html("Normal BP"); 
-             
+            if(isNormal){            
             if(isDiabetic == 165088){
-                jq('#'+display).last().addClass("yellow_flag");
+                jq('#'+display).last().addClass("yellow_flag");             
+                 
             }else{
-               jq('#'+display).last().addClass("green_flag");
+               jq('#' + display ).last().addClass("green_flag");
             }
             return;
             }
@@ -282,10 +302,10 @@
             );
 
             if(isNormalHigh){
-            jq('#'+display).html("Normal High BP"); 
+        
 
             if(isDiabetic == 165088){
-                jq('#'+display).last().addClass("red_flag");
+                jq('#' + display ).last().addClass("red_flag");
             }else{
                jq('#'+display).last().addClass("green_flag");
             }
@@ -298,12 +318,11 @@
             );
 
             if(isMild){
-            jq('#'+display).html("Mild Hypertension"); 
-
+    
             if(isDiabetic == 165088){
                 jq('#'+display).last().addClass("red_flag");
             }else{
-               jq('#'+display).last().addClass("green_flag");
+               jq('#' + display).last().addClass("green_flag");
             }
 
             return;
@@ -315,7 +334,6 @@
             );
 
             if(isModerate){
-            jq('#'+display).html("Moderate Hypertension"); 
             if(isDiabetic == 165088){
                 jq('#'+display).last().addClass("red_flag");
             }else{
@@ -330,8 +348,7 @@
             );
 
             if(isSevere){
-            jq('#'+display).html("Severe Hypertension"); 
-            jq('#'+display).last().addClass("red_flag");
+             jq('#'+display).last().addClass("red_flag");
             return;
             }
     }
@@ -985,26 +1002,29 @@ function bpCategory(){
                         <td><label>PR (/min)</label><obs conceptId="5087" id="pr_in" /><span id="pr_in_flag" class="red_flag"></span></td>
                         <td><label>BP (1st reading)</label>
                           <p>
-                              Systolic (mmHg)<obs conceptId="5085" id="systolic1" /><br />
+                          <span id="first_reading_bp">
+                              Systolic (mmHg) <obs conceptId="5085" id="systolic1" /><br />
                               Diastolic (mmHg)<obs conceptId="5086" id="diastolic1" />
-                              <span id="first_reading_bp"></span> 
+                          </span>
+                              
                           </p> 
                        </td>
                         <td>
                          <label>BP (2nd reading)</label>
-                          <p>
+                          <p> 
+                           <span id="second_reading_bp">
                               Systolic (mmHg)<obs conceptId="165111" id="systolic2" /><br />
-                              Diastolic (mmHg)<obs conceptId="165110"  id="diastolic2" />
-                               <span id="second_reading_bp"></span>
+                              Diastolic (mmHg)<obs conceptId="165110"  id="diastolic2" /> 
+                            </span>                              
                            </p>   
                         </td>
                     </tr>                        
-                    <tr>                        
-                        <td><label>Waist circ (cm)</label><obs conceptId="163080" id="wcirc" /><span id="wcirc_flag"></span></td>
+                    <tr>                      
+                        <td><label>Waist circ (cm)</label><span id="wcirc_flag"><obs conceptId="163080" id="wcirc" /></span></td>
                         <td><label>Height  (cm)</label><obs conceptId="5090" id="height"/></td>
                         <td><label>Weight  (KG)</label><obs conceptId="5089" id="weight"/></td>
-                        <td>BMI:<span id="calculated-bmi" class="value"></span> 
-                         <span id="bmi_flag"></span></td>
+                        <td>BMI:<span id="calculated-bmi" class="value"></span>
+                         </td>
                     </tr>                   
                     <tr>
                         <td colspan="4">
@@ -1107,11 +1127,14 @@ function bpCategory(){
                          <td><b>Monofilament test</b></td>
                          <td>
                             <label>RF (/5)</label>
-                            <obs conceptId="165116" id="rf_monofilament" />
-                             <span id="rf_flag"></span>
+                            <span id="rf_flag">
+                                <obs conceptId="165116" id="rf_monofilament" /> 
+                            </span>                            
                             <label>LF (/5)</label>
-                            <obs conceptId="165117" id="lf_monofilament" />
-                            <span id="lf_flag"></span>
+                            <span id="lf_flag">
+                                <obs conceptId="165117" id="lf_monofilament" />
+                            </span>
+                            
                         </td>
                     </tr>
                 </tbody>
