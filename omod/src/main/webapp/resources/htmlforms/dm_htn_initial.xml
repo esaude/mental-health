@@ -566,6 +566,13 @@ function bpCategory(){
                 jq('#impairment :input').prop('disabled', false);
              }
         }
+        function disableGDMFormMale(){
+             var gender= "<lookup expression="patient.gender"/>";            
+            if(gender=='M'){
+            jq('#pdt :input').prop('disabled', true);            
+            }
+              
+        }
 
         jQuery(function() {
             jq('#other_chief_complaint_text :input').prop('disabled', true);
@@ -604,12 +611,12 @@ function bpCategory(){
 
             jq('#systolic2').change(checkSecondBpReading);            
             jq('#diastolic2').change(checkSecondBpReading);  
-            jq('#lf_monofilament').change(flagLfMonofilament);  
+             jq('#lf_monofilament').change(flagLfMonofilament);  
             jq('#rf_monofilament').change(flagRfMonofilament);  
             jq('#education').change(counsellingEducation);  
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
-	
+	        disableGDMFormMale();
 			 var totalSize = jq(".ui-tabs-panel").size() - 1;
 	         var prevTag='';
              var nextTag='';
@@ -1164,10 +1171,8 @@ function bpCategory(){
                   
                     <tr>
                         <td><label>PDT</label></td>
-                        <td>
-                        <includeIf velocityTest="$patient.gender == 'F' ">
-                           <obs conceptId="165144" dateLabel="&lt;/td&gt;&lt;td&gt;" />
-                        </includeIf>
+                        <td>                       
+                           <obs id="pdt" conceptId="165144" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                         </td>
                     </tr>
                     <tr>

@@ -75,6 +75,7 @@
         }
     </style>
     <script type="text/javascript">
+    
         function onWeightOrHeightChange() {
             var display = '';
             var weightKg = parseFloat(getValue('weight.value'));
@@ -101,8 +102,51 @@
             jq('#recent-calculated-bmi').html(bmi.toFixed(2));
         }
 
-         function diabeteStatus(){
-            var val= getValue('diabetes_status.value');
+        function displayRecentDiabeticStatus(){
+            var lastObs = "<lookup expression="fn.latestObs(165086).valueCoded"/>";            
+            var sectionId = 'patient_diabetes_status';            
+            if(lastObs){
+             lastObs = lastObs.trim().split('#')[1];
+             selectElementByValue(sectionId,lastObs);
+            }
+                 
+        }        
+        function displayRecentHTNStatus(){
+            var lastObs = "<lookup expression="fn.latestObs(165091).valueCoded"/>"           
+            var sectionId = 'htn_status';            
+            if(lastObs){
+             lastObs = lastObs.trim().split('#')[1];
+             selectElementByValue(sectionId,lastObs);
+            }    
+        }
+        function disableGDMFormMale(){
+             var gender= "<lookup expression="patient.gender"/>";
+             var sectionId = 'type_of_diabetes';
+              
+            if(gender=='M'){
+            disableElementByValue(sectionId,1449);
+            jq('#pdt :input').prop('disabled', true);            
+            }
+              
+        }
+        function selectElementByValue(sectionId,value){
+            jq('#' + sectionId + ' :input').each(function(){
+            var inputElement = jq(this);
+            if(inputElement.val() == value){    
+                inputElement.prop("checked", true);
+            }
+         })
+        }
+        function disableElementByValue(sectionId,value){
+            jq('#' + sectionId + ' :input').each(function(){
+            var inputElement = jq(this);
+            if(inputElement.val() == value){    
+                inputElement.prop("disabled", true);
+            }
+         })
+        }
+        function diabeteStatus(){
+            var val= getValue('patient_diabetes_status.value');
             jq('#dm_diagnosis_date :input').prop('disabled', true);
             jq('#dm_treatment_start_date :input').prop('disabled', true);
             if(val == 165088){
@@ -137,15 +181,18 @@
         }
         jQuery(function() {
 
-             jq('#diabetes_status').change(diabeteStatus);
+             jq('#patient_diabetes_status').change(diabeteStatus);
              jq('#hiv_status').change(hivStatus);
              jq('#htn_status').change(htnStatus);
              jq('#nhif').change(onNHIFStatusChange);
             getField('weight.value').change(onWeightOrHeightChange);
             getField('height.value').change(onWeightOrHeightChange);            
             onWeightOrHeightChange();
-            displayRecentBmi();
-            /////
+            displayRecentBmi();            
+             displayRecentDiabeticStatus();
+             displayRecentHTNStatus();
+             disableGDMFormMale();
+            
 
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
@@ -230,7 +277,6 @@
                 <tbody>
                     <tr>
                         <td>
-                            DOPC/MOPC No: <patient  field="identifier" identifierTypeId="82609a20-f87b-11e7-bf96-cbcf7771ff78" reqiured="false" />
                         </td>
                         <td>
                             Treatment supporter's name:<obs conceptId="160638AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
@@ -247,8 +293,8 @@
                     <tr>
                         <td>                        
                         <label>DM Diagnosis </label>
-                        <obs conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio" class="align-radio-input"
-                                 answerSeparator="" id="diabetes_status"/>                                               
+                        <obs id="patient_diabetes_status" conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio" class="align-radio-input"
+                                 answerSeparator="" />                                               
                         </td>
 
                         <td>
@@ -299,7 +345,7 @@
                         <td>
                             <label>Type of Diabetes:</label>
                             <obs conceptId="165094" answerConceptIds="142474,1449,142473" answerLabels="Type 1,GDM,Type 2" style="radio" class="align-radio-input"
-                                 answerSeparator=""/>                        
+                                 answerSeparator="" id="type_of_diabetes"/>                        
                          </td>
                         <td>
                             <label>HIV status:</label>
@@ -312,52 +358,70 @@
             </table> 
         </div>
         <div id="tabs-2">     
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Dates of Assessments</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Assessments</label>
             <table>
                 <tbody>
 
                     <tr>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Symptoms</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Details</th>
 
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137593" answerLabel="Frequent urination"  style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                      <td><obs conceptId="1728" answerConceptId="137593" answerLabel="Frequent urination"  style="checkbox" class="align-checkbox-input"  /></td>
+                      <td><obs conceptId="3271de4a-f89d-4b1e-874c-9d6c6693df5b"/></td>
                    </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Excessive thirst"  style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Excessive thirst"  style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="4783b85c-1b49-4264-afdf-eb2e15c9d5da"/></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="165095" answerLabel="Extreme hunger"  style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                      <td><obs conceptId="1728" answerConceptId="165095" answerLabel="Extreme hunger"  style="checkbox" class="align-checkbox-input"  /></td>
+                      <td><obs conceptId="c3764396-cedb-4243-ae6e-6a995674d143"/></td>
                    </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="8e68b8fb-86db-4c7d-ad6f-9e614c6ed762"/></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                      <td><obs conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" class="align-checkbox-input"  /></td>
+                      <td><obs conceptId="f4fb93a4-c46a-4b22-af34-f9d67b080ef5"/></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="e555b84c-5e76-4252-a195-22f9c5473465"/></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137679" answerLabel="Impotence"  style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                      <td><obs conceptId="1728" answerConceptId="137679" answerLabel="Impotence"  style="checkbox" class="align-checkbox-input"  /></td>
+                       <td><obs conceptId="47525f42-4501-4e32-ad19-b32c3652c9b0"/></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="165097"  answerLabel="Numbness or tingling sensation" type="checkbox" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1728" answerConceptId="165097"  answerLabel="Numbness or tingling sensation" type="checkbox"  /></td>
+                        <td><obs conceptId="9af9c9d8-ea92-42cd-b0a0-69f86f326394"/></td>
                     </tr>
                 </tbody>
             </table>
-
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Daily Symptoms:</label>
             <table>
                 <tbody>
                     <tr>
                         <th colspan="4" style="background:  #00b4ef; padding: 3px; color: #fff;">TB Intensified case finding in adults</th>
                     </tr>                
-                    <tr><td><obs id="cough" conceptId="159800" answerConceptId="159799"  answerLabel="Cough of any duration"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td></tr>
-                    <tr><td><obs id="fever" conceptId="159800" answerConceptId="140238" answerLabel="Fever"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td></tr>
-                    <tr><td><obs id="weightloss" conceptId="159800" answerConceptId="150796" answerLabel="Noticeable weight Loss"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td></tr>
-                    <tr><td><obs id="sweat" conceptId="159800" answerConceptId="133027" answerLabel="Night sweats"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td></tr>
+                    <tr>
+                        <td><obs id="cough" conceptId="159800" answerConceptId="159799"  answerLabel="Cough of any duration"   style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="39d4852a-675c-4e7d-8fea-73eeb9dc27aa"/></td>
+                    </tr>
+                    <tr>
+                        <td><obs id="fever" conceptId="159800" answerConceptId="140238" answerLabel="Fever"   style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="46eb5caf-6d34-4238-b30b-a76252a35d61"/></td>
+                     </tr>
+                    <tr>
+                        <td><obs id="weightloss" conceptId="159800" answerConceptId="150796" answerLabel="Noticeable weight Loss"   style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="efe6ef01-1c9f-42d8-b2e4-6db3a759d70c"/></td>
+                     </tr>
+                    <tr>
+                        <td><obs id="sweat" conceptId="159800" answerConceptId="133027" answerLabel="Night sweats"   style="checkbox" class="align-checkbox-input"  /></td>
+                        <td><obs conceptId="c0f8a9aa-005a-4440-8076-837155d655bf"/></td>
+                    </tr>
                     <tr>
                         <td colspan="2">
                             <p id="yes">
