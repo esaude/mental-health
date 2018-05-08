@@ -1050,7 +1050,7 @@
                     <tr> 
                         <td valign="top"><label>Hip circ (cm)</label><obs conceptId="163081" id="hip_circ" /></td>                      
                         <td><label>Waist circ (cm)</label><span id="wcirc_flag"><obs conceptId="163080" id="wcirc" /></span></td>
-                        <td><label>Hip Waist ratio</label><span id="hip_waist_ratio" class="value"><obs conceptId="163081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="hwr" /></span></td>
+                        <td><label>Hip Waist ratio</label><span id="hip_waist_ratio" class="value"></span></td>
                         <td><label>Nutrition Comment</label>
                         <obs conceptId="8fa20d2c-0a19-46c5-bcbe-22d8239005a0"/>
                         </td>
