@@ -22,5 +22,13 @@
       "provider" : "${project.parent.artifactId}",
       "fragment" : "latestObsWidget"
     }
+  },
+  {
+    "id" : "${project.parent.groupId}.${project.parent.artifactId}.patientDashboard.family.history",
+    "extensionPointId" : "patientDashboard.secondColumnFragments",
+    "extensionParams" : {
+      "provider" : "${project.parent.artifactId}",
+      "fragment" : "familyHistoryWidget"
+    }
   }
 ]
