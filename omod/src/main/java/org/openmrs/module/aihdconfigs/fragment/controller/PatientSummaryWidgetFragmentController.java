@@ -112,17 +112,4 @@ public class PatientSummaryWidgetFragmentController {
         return  results;
     }
 
-    /*private Map<String, String> familyHistory(Integer patientId, PatientCalculationContext context){
-        Map<String, String> results = new HashMap<String, String>();
-        CalculationResultMap lastFbsObs = ConfigCalculations.lastObs(Dictionary.getConcept("0b7706e7-bcbe-48dc-9651-7d7a7688215f"), Arrays.asList(patientId), context);
-        Obs value = ConfigEmrCalculationUtils.obsResultForPatient(lastFbsObs, patientId);
-        if(value != null){
-            results.put("Hypertension/Diabetic in family", "");
-        }
-        else {
-            results.put("Hypertension/Diabetic in family", "No");
-        }
-        return  results;
-    }*/
-
 }

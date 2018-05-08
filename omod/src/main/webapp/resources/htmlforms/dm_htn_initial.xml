@@ -747,7 +747,7 @@
 
                         </td>
                         <td>
-                            <label>Diabetes run in the family</label>
+                            <label>Diabetes runs in the family</label>
                             <obs required="true" conceptId="140228" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""  class="align-radio-input"/>                       
                         </td>
@@ -768,7 +768,7 @@
                             </span>                       
                         </td>
                         <td>
-                            <label>Hypertension run in the family</label>
+                            <label>Hypertension runs in the family</label>
                             <obs required="true" conceptId="26d521eb-e1df-464c-8356-93616078080d" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
                                  answerSeparator=""  class="align-radio-input"/>                       
                         </td>
@@ -1050,7 +1050,7 @@
                     <tr> 
                         <td valign="top"><label>Hip circ (cm)</label><obs conceptId="163081" id="hip_circ" /></td>                      
                         <td><label>Waist circ (cm)</label><span id="wcirc_flag"><obs conceptId="163080" id="wcirc" /></span></td>
-                        <td><label>Hip Waist ratio</label><span id="hip_waist_ratio" class="value"></span></td>
+                        <td><label>Hip Waist ratio</label><span id="hip_waist_ratio" class="value"><obs conceptId="163081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="hwr" /></span></td>
                         <td><label>Nutrition Comment</label>
                         <obs conceptId="8fa20d2c-0a19-46c5-bcbe-22d8239005a0"/>
                         </td>
