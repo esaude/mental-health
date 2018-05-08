@@ -981,7 +981,7 @@
                     </tr> 
                     <tr>
                         <td colspan="2">
-                            <label>Other medication **</label>
+                            <label>Other medication</label>
                             <span id="other_current_medication">
                                <obs conceptId="1218ecbc-816c-47bb-a85d-ade3d090ae39"/>   
                             </span>                    
@@ -1116,7 +1116,7 @@
                         </td>
                         <td>
                             <span id="pa-abnormal">
-                                **<label>Describe</label><obs conceptId="808692e9-cf03-4d7d-acff-f155bf7fc745"/>
+                                <label>Describe</label><obs conceptId="808692e9-cf03-4d7d-acff-f155bf7fc745"/>
                             </span>
                         </td>
                     </tr>
@@ -1128,7 +1128,7 @@
                         </td>
                         <td>
                             <span id="cns-abnormal">
-                                **<label>Describe</label><obs conceptId="a6b0c37f-94f2-4e64-a270-e98959c95fed"/>
+                                <label>Describe</label><obs conceptId="a6b0c37f-94f2-4e64-a270-e98959c95fed"/>
                             </span>
                         </td>
                     </tr>
@@ -1507,7 +1507,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="J ASA"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="J ASA"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="75" answerLabels="75mg" style="dropdown"/></td>
                                     <td></td>
@@ -1515,7 +1515,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atorvastatin"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atorvastatin"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="10,20,40,80" answerLabels="10mg,20mg,40mg,80mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1523,7 +1523,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Lisinopril/HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Lisinopril/HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="15,20" answerLabels="15mg,20mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1531,7 +1531,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amlodipine"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amlodipine"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5mg,5mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
@@ -1539,7 +1539,7 @@
                             </obsgroup>
                             <obsgroup groupingConceptId="165141">
                                 <tr>
-                                    <td>**<obs conceptId="1282"  answerConceptId="71652"  answerLabel="Felodipine"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Felodipine"  style="checkbox" class="align-checkbox-input"/></td>
                                     <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
                                     <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5mg,5mg" style="dropdown"/></td>
                                     <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
