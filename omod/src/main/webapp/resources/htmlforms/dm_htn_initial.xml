@@ -1060,7 +1060,12 @@
                         <td><label>Weight  (KG)</label><obs conceptId="5089" id="weight"/></td>
                         <td  colspan="2">BMI:<span id="calculated-bmi" class="value"> </span>
                         </td>
-                    </tr>                   
+                    </tr>
+                    <tr>
+                        <td colspan="2"><label>Respiratory rate (B/m)</label><obs conceptId="5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="reprate" /> </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     <tr>
                         <td colspan="4">
                             <label>General Exam:</label>
