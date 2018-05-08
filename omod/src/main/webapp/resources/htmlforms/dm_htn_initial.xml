@@ -735,7 +735,7 @@
                             <label>Diabetes</label>
                         </td>
                         <td>
-                            <obs required="true" conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
+                            <obs required="true" conceptId="165086" answerConceptIds="165087,165088,1175" answerLabels="New DM patient,Known DM patient,NA" style="radio"
                                  answerSeparator="" id="diabetes_status" class="align-radio-input"/>                       
                         </td>
 
@@ -757,7 +757,7 @@
                             <label>Hypertension:</label>
                         </td>
                         <td>
-                            <obs required="true" conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio"
+                            <obs required="true" conceptId="165091" answerConceptIds="165092,165093,1175" answerLabels="New HTN patient,Known HTN patient,NA" style="radio"
                                  answerSeparator="" id="htn_status" class="align-radio-input"/>                                                   
                         </td>
             
