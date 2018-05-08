@@ -43,7 +43,11 @@ public class PatientSummaryWidgetFragmentController {
     private Map<String, String> diabetic(Integer patientId, PatientCalculationContext context){
         Map<String, String> results = new HashMap<String, String>();
         CalculationResultMap lastDiabeticObs = ConfigCalculations.lastObs(Dictionary.getConcept("2d0d45ca-a92f-4fb2-a6af-c53a1c079bf3"), Arrays.asList(patientId), context);
-        if(lastDiabeticObs != null){
+        Obs obs = ConfigEmrCalculationUtils.obsResultForPatient(lastDiabeticObs, patientId);
+        if(obs != null && obs.getValueCoded().equals(Dictionary.getConcept("78144858-1452-4b31-af12-fdfd303fc77a"))){
+            results.put("Diabetic", "Yes");
+        }
+        else if(obs != null && obs.getValueCoded().equals(Dictionary.getConcept("2e385fe5-2d51-4d86-862e-a7752470c508"))){
             results.put("Diabetic", "Yes");
         }
         else {
@@ -56,7 +60,11 @@ public class PatientSummaryWidgetFragmentController {
     private Map<String, String> hypertension(Integer patientId, PatientCalculationContext context){
         Map<String, String> results = new HashMap<String, String>();
         CalculationResultMap lastHypertensionObs = ConfigCalculations.lastObs(Dictionary.getConcept("02c2e1f7-7f0c-4bd1-b89e-1a1b37855a6a"), Arrays.asList(patientId), context);
-        if(lastHypertensionObs != null){
+        Obs obs = ConfigEmrCalculationUtils.obsResultForPatient(lastHypertensionObs, patientId);
+        if(obs != null && obs.getValueCoded().equals(Dictionary.getConcept("d88104a5-9126-4b5a-9380-e31a8e7e9442"))){
+            results.put("Hypertension", "Yes");
+        }
+        else if(obs != null && obs.getValueCoded().equals(Dictionary.getConcept("9b3d4986-ab44-41eb-afc8-504ab5bfe6e2"))){
             results.put("Hypertension", "Yes");
         }
         else {
