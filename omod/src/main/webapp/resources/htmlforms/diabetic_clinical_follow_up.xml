@@ -73,6 +73,55 @@
         .align-checkbox-input label] {
             color:red;
         }
+
+        .green_flag input {
+            color: green;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+            outline: 2px solid green;
+        }
+
+        .yellow_flag input{
+            color: darkorange;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+            outline: 2px solid darkorange;
+        }
+
+        .red_flag input {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+            outline: 2px solid red;
+        }
+
+        .flag_green {
+            color: green;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+
+        .flag_yellow {
+            color: darkorange;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+
+        .flag_red  {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+        .comment_field {
+         color: red;
+        }
+        
     </style>
     <script type="text/javascript">
     
@@ -80,31 +129,69 @@
             var display = '';
             var weightKg = parseFloat(getValue('weight.value'));
             var heightM = parseFloat(getValue('height.value')) / 100;
+            var displayDiv = 'calculated-bmi';
             if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
                 var bmi = weightKg / (heightM * heightM);
                 if (isNaN(bmi) || bmi &lt; 10 || bmi &gt; 50) {
-                    display = 'Abnormal value. Were height and height entered correctly?';
+                    display = 'Abnormal value. Were weight and height entered correctly?';
                 }
                 else {
                     display = bmi.toFixed(2);
+                    flagBMI(display,displayDiv);
                 }
             }
-
+            
             jq('#calculated-bmi').html(display);
+        }
+
+        function flagBMI(bmi,displayDiv) {
+                    var display =displayDiv;
+                    var normal_range_min = 18.50;
+                    var normal_range_max = 24.99;
+                    var overweight = 25.00;
+                    var obese = 30.00; 
+                    jq('#'+display).last().removeClass("flag_green");
+                    jq('#'+display).last().removeClass("flag_yellow");
+                    jq('#'+display).last().removeClass("flag_red");
+  
+        if(bmi == obese || bmi &gt; obese){
+            jq('#'+display).last().addClass("flag_red");
+            return;
+        }  
+
+        if(bmi == overweight || bmi &gt;overweight){
+            jq('#'+display).last().addClass("flag_yellow");
+            return;
+        }
+        
+        if(bmi == normal_range_min || bmi &gt;normal_range_min){
+            jq('#'+display).last().addClass("flag_green");
+            return;
+        }
+
+        if(bmi &lt; normal_range_min){
+            jq('#'+display).last().addClass("flag_red");
+            return;
+        }
         }
         function displayRecentBmi(){
             var weightKg = "<lookup expression="fn.latestObs(5089).valueNumeric"/>"
             var heightM = ("<lookup expression="fn.latestObs(5090).valueNumeric"/>")/100
             var bmi ='';
+            var displayDiv = 'recent-calculated-bmi';
             if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
                 bmi = weightKg / (heightM * heightM);
+                flagBMI(bmi,displayDiv);
             }
+            
             jq('#recent-calculated-bmi').html(bmi.toFixed(2));
         }
 
         function displayRecentDiabeticStatus(){
             var lastObs = "<lookup expression="fn.latestObs(165086).valueCoded"/>";            
-            var sectionId = 'patient_diabetes_status';            
+
+            var sectionId = 'diabetes_status';            
+
             if(lastObs){
              lastObs = lastObs.trim().split('#')[1];
              selectElementByValue(sectionId,lastObs);
@@ -146,7 +233,8 @@
          })
         }
         function diabeteStatus(){
-            var val= getValue('patient_diabetes_status.value');
+            var val= getValue('diabetes_status.value');
+
             jq('#dm_diagnosis_date :input').prop('disabled', true);
             jq('#dm_treatment_start_date :input').prop('disabled', true);
             if(val == 165088){
@@ -154,7 +242,7 @@
                 jq('#dm_treatment_start_date :input').prop('disabled', false);
              }
         }
-         function htnStatus(){
+        function htnStatus(){
             var val= getValue('htn_status.value');
             jq('#htn_diagnosis_date :input').prop('disabled', true);
             jq('#htn_treatment_start_date :input').prop('disabled', true);
@@ -172,16 +260,168 @@
             jq('#nhif-comment').html(display);
           }
 
-          function hivStatus(){
+        function hivStatus(){
             var val= getValue('hiv_status.value');
             jq('#enrolled_to_hiv_care :input').prop('disabled', true);
             if(val == 138571){
                 jq('#enrolled_to_hiv_care :input').prop('disabled', false);
              }
         }
-        jQuery(function() {
+        function bPStatus(diastolic,systolic,min_systolic,max_systolic,min_diastolic,max_diastolic){
+            var normal_diastolic_min = min_diastolic;
+            var normal_diastolic_max = max_diastolic;
 
-             jq('#patient_diabetes_status').change(diabeteStatus);
+            var normal_systolic_min = min_systolic;
+            var normal_systolic_max = max_systolic;
+
+            if(systolic &lt; normal_systolic_max || systolic == normal_systolic_max){
+                
+                if(systolic &gt; normal_systolic_min || systolic == normal_systolic_min){
+
+                } else {
+                return false;
+                }
+                
+            }else{
+                return false;
+            }  
+                        
+            if(diastolic &lt; normal_diastolic_max || diastolic == normal_diastolic_max){
+                if(diastolic &gt; normal_diastolic_min || diastolic == normal_diastolic_min){
+                status=true;
+                } else {
+                return false;
+                }
+                
+            }else{
+                return false;
+            }
+                        
+            return true;
+        }
+
+        function checkBpReading(){
+            var systolic = getValue('systolic.value');
+            var diastolic = getValue('diastolic.value');
+            removeFlags('bp_reading')
+            bpFlag(diastolic,systolic,'bp_reading');
+        }
+
+        function removeFlags(display){
+
+                    jq('#' + display).last().removeClass("green_flag");
+                    jq('#' + display).last().removeClass("red_flag");
+                    jq('#' + display).last().removeClass("yellow_flag");
+        }
+        function bpFlag(diastolic,systolic,display){
+            var isNormal = false;
+            var isNormalHigh = false;
+            var isMild = false;
+            var isModerate = false;
+            var isSevere = false;
+            var cBp = bpCategory();
+            var isDiabetic = getValue('diabetes_status.value'); 
+            
+            isNormal = bPStatus(diastolic,systolic,
+                cBp.normal.min.systolic,cBp.normal.max.systolic,
+                cBp.normal.min.diastolic,cBp.normal.max.diastolic
+            );
+
+            if(isNormal){            
+            if(isDiabetic == 165088){
+                jq('#'+display).last().addClass("yellow_flag");             
+                
+            }else{
+            jq('#' + display ).last().addClass("green_flag");
+            }
+            return;
+            }
+
+            isNormalHigh = bPStatus(diastolic,systolic,
+                cBp.high_normal.min.systolic,cBp.high_normal.max.systolic,
+                cBp.high_normal.min.diastolic,cBp.high_normal.max.diastolic
+            );
+
+            if(isNormalHigh){
+
+
+            if(isDiabetic == 165088){
+                jq('#' + display ).last().addClass("red_flag");
+            }else{
+            jq('#'+display).last().addClass("green_flag");
+            }
+            return;
+            }
+
+            isMild = bPStatus(diastolic,systolic,
+                cBp.mild.min.systolic,cBp.mild.max.systolic,
+                cBp.mild.min.diastolic,cBp.mild.max.diastolic
+            );
+
+            if(isMild){
+                    
+            if(isDiabetic == 165088){
+                jq('#'+display).last().addClass("red_flag");
+            }else{
+            jq('#' + display).last().addClass("green_flag");
+            }
+
+            return;
+            }
+
+            isModerate = bPStatus(diastolic,systolic,
+                cBp.moderate.min.systolic,cBp.moderate.max.systolic,
+                cBp.moderate.min.diastolic,cBp.moderate.max.diastolic
+            );
+
+            if(isModerate){
+            if(isDiabetic == 165088){
+                jq('#'+display).last().addClass("red_flag");
+            }else{
+            jq('#'+display).last().addClass("yellow_flag");
+            }
+            return;
+            }
+
+            isSevere = bPStatus(diastolic,systolic,
+                cBp.severe.min.systolic,cBp.severe.max.systolic,
+                cBp.severe.min.diastolic,cBp.severe.max.diastolic
+            );
+
+            if(isSevere){
+            jq('#'+display).last().addClass("red_flag");
+            return;
+            }
+        }
+
+        function bpCategory(){
+            return {
+            normal:{ 
+                min:{diastolic:80,systolic:120},
+                max:{diastolic:84,systolic:129}
+            },
+            high_normal:{ 
+                min:{diastolic:85,systolic:130},
+                max:{diastolic:89,systolic:139}
+            },
+            mild:{ 
+                min:{diastolic:90,systolic:140},
+                max:{diastolic:99,systolic:159}
+            },
+            moderate:{ 
+                min:{diastolic:100,systolic:160},
+                max:{diastolic:109,systolic:179}
+            },
+            severe:{ 
+                min:{diastolic:110,systolic:180},
+                max:{diastolic:1000,systolic:1000}
+            }
+            };
+        }
+        jQuery(function() {
+             jq('#diastolic').change(checkBpReading);
+             jq('#systolic').change(checkBpReading);
+             jq('#diabetes_status').change(diabeteStatus);
              jq('#hiv_status').change(hivStatus);
              jq('#htn_status').change(htnStatus);
              jq('#nhif').change(onNHIFStatusChange);
@@ -293,7 +533,7 @@
                     <tr>
                         <td>                        
                         <label>DM Diagnosis </label>
-                        <obs id="patient_diabetes_status" conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio" class="align-radio-input"
+                        <obs id="diabetes_status" conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio" class="align-radio-input"
                                  answerSeparator="" />                                               
                         </td>
 
@@ -368,36 +608,28 @@
 
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137593" answerLabel="Frequent urination"  style="checkbox" class="align-checkbox-input"  /></td>
-                      <td><obs conceptId="3271de4a-f89d-4b1e-874c-9d6c6693df5b"/></td>
+                      <td><obs conceptId="1728" answerConceptId="137593" answerLabel="Frequent urination"  style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                    </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Excessive thirst"  style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="4783b85c-1b49-4264-afdf-eb2e15c9d5da"/></td>
+                        <td><obs conceptId="1728" answerConceptId="140939" answerLabel="Excessive thirst"  style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="165095" answerLabel="Extreme hunger"  style="checkbox" class="align-checkbox-input"  /></td>
-                      <td><obs conceptId="c3764396-cedb-4243-ae6e-6a995674d143"/></td>
+                      <td><obs conceptId="1728" answerConceptId="165095" answerLabel="Extreme hunger"  style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                    </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="8e68b8fb-86db-4c7d-ad6f-9e614c6ed762"/></td>
+                        <td><obs conceptId="1728" answerConceptId="159214" answerLabel="Unexplained weight loss"  style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" class="align-checkbox-input"  /></td>
-                      <td><obs conceptId="f4fb93a4-c46a-4b22-af34-f9d67b080ef5"/></td>
+                      <td><obs conceptId="1728" answerConceptId="165096" type="checkbox" answerLabel="Increased fatigue" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="e555b84c-5e76-4252-a195-22f9c5473465"/></td>
+                        <td><obs conceptId="1728" answerConceptId="147104" answerLabel="Blurred Vision"  style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                      <td><obs conceptId="1728" answerConceptId="137679" answerLabel="Impotence"  style="checkbox" class="align-checkbox-input"  /></td>
-                       <td><obs conceptId="47525f42-4501-4e32-ad19-b32c3652c9b0"/></td>
+                      <td><obs conceptId="1728" answerConceptId="137679" answerLabel="Impotence"  style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1728" answerConceptId="165097"  answerLabel="Numbness or tingling sensation" type="checkbox"  /></td>
-                        <td><obs conceptId="9af9c9d8-ea92-42cd-b0a0-69f86f326394"/></td>
+                        <td><obs conceptId="1728" answerConceptId="165097"  answerLabel="Numbness or tingling sensation" type="checkbox" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -407,20 +639,17 @@
                         <th colspan="4" style="background:  #00b4ef; padding: 3px; color: #fff;">TB Intensified case finding in adults</th>
                     </tr>                
                     <tr>
-                        <td><obs id="cough" conceptId="159800" answerConceptId="159799"  answerLabel="Cough of any duration"   style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="39d4852a-675c-4e7d-8fea-73eeb9dc27aa"/></td>
+                        <td><obs id="cough" conceptId="159800" answerConceptId="159799"  answerLabel="Cough of any duration"   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
-                        <td><obs id="fever" conceptId="159800" answerConceptId="140238" answerLabel="Fever"   style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="46eb5caf-6d34-4238-b30b-a76252a35d61"/></td>
+                        <td><obs id="fever" conceptId="159800" answerConceptId="140238" answerLabel="Fever"   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                      </tr>
                     <tr>
-                        <td><obs id="weightloss" conceptId="159800" answerConceptId="150796" answerLabel="Noticeable weight Loss"   style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="efe6ef01-1c9f-42d8-b2e4-6db3a759d70c"/></td>
+                        <td><obs id="weightloss" conceptId="159800" answerConceptId="150796" answerLabel="Noticeable weight Loss"   style="checkbox" class="align-checkbox-input"  showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"/></td>
                      </tr>
                     <tr>
-                        <td><obs id="sweat" conceptId="159800" answerConceptId="133027" answerLabel="Night sweats"   style="checkbox" class="align-checkbox-input"  /></td>
-                        <td><obs conceptId="c0f8a9aa-005a-4440-8076-837155d655bf"/></td>
+                        <td><obs id="sweat" conceptId="159800" answerConceptId="133027" answerLabel="Night sweats"   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+
                     </tr>
                     <tr>
                         <td colspan="2">
@@ -432,6 +661,18 @@
                             </p>
                         </td>
                     </tr>
+                </tbody>
+            </table>
+            <table>
+                <tbody>
+                    <tr>
+                         <td><label>Indicator History of Contact</label>
+                         </td>
+                         <td>
+                         <obs conceptId="9ad88b2e-3b70-487a-86d4-e2241112f8a3" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input"
+                                 answerSeparator=""  />
+                        </td>
+                    </tr>                
                 </tbody>
             </table>
 
@@ -517,10 +758,12 @@
                     <tr>
                         <td><label>Blood pressure (mmHg)</label></td>
                         <td>
-                            <label>Systolic</label>
-                            <obs conceptId="5085"/>
-                            <label>Diastolic</label>
-                            <obs conceptId="5086"/>
+                            <span id="bp_reading">
+                                <label>Systolic</label>    
+                                <obs id="systolic" conceptId="5085"/>
+                                <label>Diastolic</label>
+                                <obs id="diastolic" conceptId="5086"/>
+                            </span>
                         </td>
                         <td>
                             <span class="value"><lookup expression="fn.latestObs(5085).valueNumeric"/>/<lookup expression="fn.latestObs(5086).valueNumeric"/></span>
@@ -534,22 +777,19 @@
                 <tbody>
                     <tr>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Exam</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Comment</th>
                     </tr>                 
-                    <tr>
-                        <td><obs conceptId="1391" answerConceptId="165099" answerLabel="Foot Check/Annual Foot Exam"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                   <tr>
+                        <td><obs conceptId="1391" answerConceptId="165099" answerLabel="Foot Check/Annual Foot Exam"   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1391" answerConceptId="165100" answerLabel="Eye Exam"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1391" answerConceptId="165100" answerLabel="Eye Exam"   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1391" answerConceptId="165101" answerLabel="Dental Exam"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1391" answerConceptId="165101" answerLabel="Dental Exam"   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                        <td><obs conceptId="1391" answerConceptId="165102" answerLabel="Eye Check up "   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;"/></td>
-                    </tr>
-                    <tr>
-                        <td><obs conceptId="1391" answerConceptId="165103" answerLabel="Nutritional Review"   style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="1391" answerConceptId="165102" answerLabel="Eye Check up "   style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -565,7 +805,7 @@
                     <obsgroup groupingConceptId="161487">                   
                     <tr>
                         <td><label>Fasting Blood Sugar (FBS)</label></td>
-                        <td><obs conceptId="160912" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><obs conceptId="160912" showCommentField="true" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
                     </tr>
                     <tr>
                         <td><label>Random Blood Sugar (RBS)</label></td>
@@ -645,40 +885,43 @@
                 <tbody>
                     <tr>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Assessment</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Details</th>
                     </tr>                   
                     <tr>                      
-                       <td><obs conceptId="165106" answerConceptId="119270" answerLabel="Cardiovascular Disease" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="119270" answerLabel="Cardiovascular Disease" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="117399"  answerLabel="High blood pressure" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="117399"  answerLabel="High blood pressure" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="117460"  answerLabel="High cholesterol" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="117460"  answerLabel="High cholesterol" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="114212"  answerLabel="Peripheral vascular disease" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="114212"  answerLabel="Peripheral vascular disease" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="118983"  answerLabel="Peripheral neuropathy" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="118983"  answerLabel="Peripheral neuropathy" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="155215"  answerLabel="Autonomic neuropathy" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="155215"  answerLabel="Autonomic neuropathy" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="113257"  answerLabel="Retinopathy" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="113257"  answerLabel="Retinopathy" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="6033"  answerLabel="Kidney disease" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="6033"  answerLabel="Kidney disease" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="121375"  answerLabel="Asthma/COPD" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="121375"  answerLabel="Asthma/COPD" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="148432"  answerLabel="Arthritis" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="148432"  answerLabel="Arthritis" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                     <tr>
-                       <td><obs conceptId="165106" answerConceptId="5622"  answerLabel="Other" style="checkbox" class="align-checkbox-input" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                       <td><obs conceptId="165106" answerConceptId="165104"  answerLabel="Foot amputation" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
+                    </tr>
+                    <tr>
+                       <td><obs conceptId="165106" answerConceptId="5622"  answerLabel="Other" style="checkbox" class="align-checkbox-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  /></td>
                     </tr>
                 </tbody>
             </table>
@@ -695,41 +938,6 @@
                     </tr>
                 </tbody>
             </table>
-          <label style="background:  #ff7100; padding: 5px; color: #fff;">Medication:</label>
-            <table>
-
-                            <tbody>
-                                <tr>
-                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drug</th>
-                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
-                                </tr>
-                                <repeat>
-                                    <template>
-                                        <obsgroup groupingConceptId="160741AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                                            <tr>
-                                               <td><obs conceptId="1282"  answerConceptIds="79651,77071,159459,78068,282,159459,5622"  answerLabels="Metformin,Glibenclamide,Insulin 70/30,NPH,Soluble Insulin(IU),Insulin 70/30(IU),Other"  style="dropdown"/></td>
-                                                <td><input type="text"/></td>
-                                            </tr>
-                                        </obsgroup>
-                                    </template>
-                                        <render n="1" />
-                                        <render n="2" />
-                                        <render n="3" />
-                                        <render n="4" />
-                                        <render n="5" />
-                                        <render n="6" />
-                                        <render n="7" />
-                                </repeat>
-
-                                    <tr>
-                                       <td><label>TCA</label></td>
-                                       <td><obs conceptId="5096" allowFutureDates="true" /></td>
-                                    </tr>
-                            
-                            </tbody>
-
-                    </table>
-
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Referrals:</label>
             <table>
                 <tbody>
@@ -738,8 +946,8 @@
                         <td><label>Referred To:</label><obs conceptId="161562" /></td>
                     </tr>
                     <tr>
-                        <td><label>Referral Note Number</label></td>
-                        <td><obs conceptId="165105"/></td>
+                        <td><label>Referral Note</label></td>
+                        <td><obs conceptId="4f19e4bb-5d3f-41ee-9ae2-689305a27f64"/></td>
                     </tr>
                 </tbody>
             </table>
@@ -750,7 +958,7 @@
                         <td colspan="2">Clinician Name:<obs conceptId="1473"/></td>
                     </tr>
                 </tbody>
-            </table>  
+            </table> 
    
 
         <ifMode mode="VIEW" include="false">

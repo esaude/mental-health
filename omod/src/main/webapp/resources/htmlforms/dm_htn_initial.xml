@@ -74,48 +74,47 @@
         .align-checkbox-input label] {
             color:red;
         }
+        .green_flag input {
+            color: green;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+            outline: 2px solid green;
+        }
+        .yellow_flag input{
+            color: darkorange;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+            outline: 2px solid darkorange;
+        }
+        .red_flag input {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+            outline: 2px solid red;
+        }
 
-  .green_flag input {
-    color: green;
-    font-weight: bold;
-    font-size: 15px;
-     padding-left:10px;
-     outline: 2px solid green;
-  }
-  .yellow_flag input{
-    color: darkorange;
-    font-weight: bold;
-    font-size: 15px;
-     padding-left:10px;
-     outline: 2px solid darkorange;
-  }
-  .red_flag input {
-    color: red;
-    font-weight: bold;
-    font-size: 15px;
-    padding-left:10px;
-    outline: 2px solid red;
-  }
-
-  .flag_green {
-    color: green;
-    font-weight: bold;
-    font-size: 15px;
-    padding-left:10px;
-  }
-  .flag_yellow {
-    color: darkorange;
-    font-weight: bold;
-    font-size: 15px;
-    padding-left:10px;
-  }
-  .flag_red  {
-    color: red;
-     font-weight: bold;
-      font-size: 15px;
-      padding-left:10px;
-  }
-  
+        .flag_green {
+            color: green;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+        .flag_yellow {
+            color: darkorange;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+        .flag_red  {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+        
             </style>
     <script type="text/javascript">
         function onWeightOrHeightChange() {
@@ -125,7 +124,7 @@
             if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
                 var bmi = weightKg / (heightM * heightM);
                 if (isNaN(bmi) || bmi &lt; 10 || bmi &gt; 50) {
-                    display = 'Abnormal value. Were height and height entered correctly?';
+                    display = 'Abnormal value. Were weight and height entered correctly?';
                 }
                 else {
                     display = bmi.toFixed(2);
@@ -134,6 +133,21 @@
             }
             
             jq('#calculated-bmi').html(display);
+        }
+        function onHipOrWaistCircChange() {
+            var display = '';
+            var hip_circ = parseFloat(getValue('hip_circ.value'));
+            var wcirc = parseFloat(getValue('wcirc.value'));
+            if (!isNaN(wcirc) &amp;&amp; !isNaN(hip_circ))  {
+                var hipWaist = hip_circ / wcirc;
+                if (isNaN(hipWaist)) {
+                    display = '';
+                }
+                else {
+                    display = hipWaist.toFixed(2);
+                }
+            }            
+            jq('#hip_waist_ratio').html(display);
         }
 
         function flagBMI(bmi) {
@@ -168,7 +182,6 @@
         }
 
         function flagLfMonofilament(){
-
             var lf_monofilament= getValue('lf_monofilament.value');
             if(lf_monofilament &gt; 5){
                 jq('#lf_flag').last().addClass("red_flag");
@@ -178,7 +191,6 @@
         }
 
         function flagRfMonofilament(){
-
             var rf_monofilament= getValue('rf_monofilament.value');
             jq('#rf_flag').last().removeClass("red_flag"); 
             if(rf_monofilament &gt; 5){
@@ -193,8 +205,7 @@
              }
         }
 
-        function onTemperatureChange(){      
-
+        function onTemperatureChange(){     
          var display = '';
             var temp = getValue('temperature.value');                
             if (temp &lt; 36.1 || temp &gt; 37.1)  {            
@@ -214,65 +225,64 @@
                 if (age &lt; age_15 ||age == age_15|| age &gt; age_6 || age == age_6)  {     
                     display = 'For patients aged 6-15 years should be between 60-100';
                 }
-            }        
-
+            }       
         }
         
         function bPStatus(diastolic,systolic,min_systolic,max_systolic,min_diastolic,max_diastolic){
-                    var normal_diastolic_min = min_diastolic;
-                    var normal_diastolic_max = max_diastolic;
+            var normal_diastolic_min = min_diastolic;
+            var normal_diastolic_max = max_diastolic;
 
-                    var normal_systolic_min = min_systolic;
-                    var normal_systolic_max = max_systolic;
+            var normal_systolic_min = min_systolic;
+            var normal_systolic_max = max_systolic;
 
-                    if(systolic &lt; normal_systolic_max || systolic == normal_systolic_max){
-                        
-                        if(systolic &gt; normal_systolic_min || systolic == normal_systolic_min){
+            if(systolic &lt; normal_systolic_max || systolic == normal_systolic_max){
+                
+                if(systolic &gt; normal_systolic_min || systolic == normal_systolic_min){
 
-                        } else {
-                        return false;
-                        }
+                } else {
+                return false;
+                }
+                
+            }else{
+                return false;
+            }  
                         
-                    }else{
-                        return false;
-                    }  
-        
-                    if(diastolic &lt; normal_diastolic_max || diastolic == normal_diastolic_max){
-                        if(diastolic &gt; normal_diastolic_min || diastolic == normal_diastolic_min){
-                        status=true;
-                        } else {
-                        return false;
-                        }
+            if(diastolic &lt; normal_diastolic_max || diastolic == normal_diastolic_max){
+                if(diastolic &gt; normal_diastolic_min || diastolic == normal_diastolic_min){
+                status=true;
+                } else {
+                return false;
+                }
+                
+            }else{
+                return false;
+            }
                         
-                    }else{
-                        return false;
-                    }
-        
-                return true;
+            return true;
         }
 
-    function checkFirstBpReading(){
-        var systolic = getValue('systolic1.value');
-        var diastolic = getValue('diastolic1.value');
-        removeFlags('first_reading_bp')
-        bpFlag(diastolic,systolic,'first_reading_bp');
-    }
+        function checkFirstBpReading(){
+            var systolic = getValue('systolic1.value');
+            var diastolic = getValue('diastolic1.value');
+            removeFlags('first_reading_bp')
+            bpFlag(diastolic,systolic,'first_reading_bp');
+        }
 
-    function checkSecondBpReading(){
-        removeFlags('second_reading_bp')
-        var systolic = getValue('systolic2.value');
-        var diastolic = getValue('diastolic2.value');
-        bpFlag(diastolic,systolic,'second_reading_bp');
-    }
+        function checkSecondBpReading(){
+            removeFlags('second_reading_bp')
+            var systolic = getValue('systolic2.value');
+            var diastolic = getValue('diastolic2.value');
+            bpFlag(diastolic,systolic,'second_reading_bp');
+        }
 
-function removeFlags(display){
+        function removeFlags(display){
 
-            jq('#' + display).last().removeClass("green_flag");
-            jq('#' + display).last().removeClass("red_flag");
-            jq('#' + display).last().removeClass("yellow_flag");
+                    jq('#' + display).last().removeClass("green_flag");
+                    jq('#' + display).last().removeClass("red_flag");
+                    jq('#' + display).last().removeClass("yellow_flag");
 
-}
-    function bpFlag(diastolic,systolic,display){
+        }
+        function bpFlag(diastolic,systolic,display){
             var isNormal = false;
             var isNormalHigh = false;
             var isMild = false;
@@ -289,9 +299,9 @@ function removeFlags(display){
             if(isNormal){            
             if(isDiabetic == 165088){
                 jq('#'+display).last().addClass("yellow_flag");             
-                 
+                
             }else{
-               jq('#' + display ).last().addClass("green_flag");
+            jq('#' + display ).last().addClass("green_flag");
             }
             return;
             }
@@ -302,12 +312,12 @@ function removeFlags(display){
             );
 
             if(isNormalHigh){
-        
+
 
             if(isDiabetic == 165088){
                 jq('#' + display ).last().addClass("red_flag");
             }else{
-               jq('#'+display).last().addClass("green_flag");
+            jq('#'+display).last().addClass("green_flag");
             }
             return;
             }
@@ -318,11 +328,11 @@ function removeFlags(display){
             );
 
             if(isMild){
-    
+                    
             if(isDiabetic == 165088){
                 jq('#'+display).last().addClass("red_flag");
             }else{
-               jq('#' + display).last().addClass("green_flag");
+            jq('#' + display).last().addClass("green_flag");
             }
 
             return;
@@ -337,7 +347,7 @@ function removeFlags(display){
             if(isDiabetic == 165088){
                 jq('#'+display).last().addClass("red_flag");
             }else{
-               jq('#'+display).last().addClass("yellow_flag");
+            jq('#'+display).last().addClass("yellow_flag");
             }
             return;
             }
@@ -348,35 +358,35 @@ function removeFlags(display){
             );
 
             if(isSevere){
-             jq('#'+display).last().addClass("red_flag");
+            jq('#'+display).last().addClass("red_flag");
             return;
             }
-    }
+        }
 
-function bpCategory(){
-    return {
-                    normal:{ 
-                        min:{diastolic:80,systolic:120},
-                        max:{diastolic:84,systolic:129}
-                    },
-                    high_normal:{ 
-                        min:{diastolic:85,systolic:130},
-                        max:{diastolic:89,systolic:139}
-                    },
-                    mild:{ 
-                        min:{diastolic:90,systolic:140},
-                        max:{diastolic:99,systolic:159}
-                    },
-                    moderate:{ 
-                        min:{diastolic:100,systolic:160},
-                        max:{diastolic:109,systolic:179}
-                    },
-                    severe:{ 
-                        min:{diastolic:110,systolic:180},
-                        max:{diastolic:1000,systolic:1000}
-                    }
+        function bpCategory(){
+            return {
+            normal:{ 
+                min:{diastolic:80,systolic:120},
+                max:{diastolic:84,systolic:129}
+            },
+            high_normal:{ 
+                min:{diastolic:85,systolic:130},
+                max:{diastolic:89,systolic:139}
+            },
+            mild:{ 
+                min:{diastolic:90,systolic:140},
+                max:{diastolic:99,systolic:159}
+            },
+            moderate:{ 
+                min:{diastolic:100,systolic:160},
+                max:{diastolic:109,systolic:179}
+            },
+            severe:{ 
+                min:{diastolic:110,systolic:180},
+                max:{diastolic:1000,systolic:1000}
+            }
             };
-}
+        }
 
         function onNHIFStatusChange() {
             var display = '';
@@ -614,6 +624,8 @@ function bpCategory(){
              jq('#lf_monofilament').change(flagLfMonofilament);  
             jq('#rf_monofilament').change(flagRfMonofilament);  
             jq('#education').change(counsellingEducation);  
+            jq('#wcirc').change(onHipOrWaistCircChange);  
+            jq('#hip_circ').change(onHipOrWaistCircChange);  
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
 	        disableGDMFormMale();
@@ -706,7 +718,7 @@ function bpCategory(){
 
                         </td>
                         <td colspan="2">
-                            Level of education:
+                             <label>Level of education:</label>
                             <obs required="true" conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Secondary,Primary,None,Pre-school,Special education,Tertiary education,College/university/polytechnic" style="dropdown" answerSeparator="" />
 
                         </td>
@@ -722,7 +734,6 @@ function bpCategory(){
                         <td>
                             <label>Diabetes</label>
                         </td>
-
                         <td>
                             <obs required="true" conceptId="165086" answerConceptIds="165087,165088" answerLabels="New DM patient,Known DM patient" style="radio"
                                  answerSeparator="" id="diabetes_status" class="align-radio-input"/>                       
@@ -734,6 +745,11 @@ function bpCategory(){
                                 <obs  conceptId="95d4aa36-05ee-44cb-823b-35a62f07ce49" /> 
                             </span>
 
+                        </td>
+                        <td>
+                            <label>Diabetes run in the family</label>
+                            <obs required="true" conceptId="140228" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 answerSeparator=""  class="align-radio-input"/>                       
                         </td>
                     </tr>
                     <tr>
@@ -750,6 +766,11 @@ function bpCategory(){
                              <span id="htn_diagnosis_year">
                                 <obs  conceptId="b863e568-1491-42d0-b881-04df389ad0de"/> 
                             </span>                       
+                        </td>
+                        <td>
+                            <label>Hypertension run in the family</label>
+                            <obs required="true" conceptId="26d521eb-e1df-464c-8356-93616078080d" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio"
+                                 answerSeparator=""  class="align-radio-input"/>                       
                         </td>
                     </tr>
 
@@ -1026,12 +1047,19 @@ function bpCategory(){
                            </p>   
                         </td>
                     </tr>                        
-                    <tr>                      
+                    <tr> 
+                        <td valign="top"><label>Hip circ (cm)</label><obs conceptId="163081" id="hip_circ" /></td>                      
                         <td><label>Waist circ (cm)</label><span id="wcirc_flag"><obs conceptId="163080" id="wcirc" /></span></td>
+                        <td><label>Hip Waist ratio</label><span id="hip_waist_ratio" class="value"></span></td>
+                        <td><label>Nutrition Comment</label>
+                        <obs conceptId="8fa20d2c-0a19-46c5-bcbe-22d8239005a0"/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><label>Height  (cm)</label><obs conceptId="5090" id="height"/></td>
                         <td><label>Weight  (KG)</label><obs conceptId="5089" id="weight"/></td>
-                        <td>BMI:<span id="calculated-bmi" class="value"></span>
-                         </td>
+                        <td  colspan="2">BMI:<span id="calculated-bmi" class="value"> </span>
+                        </td>
                     </tr>                   
                     <tr>
                         <td colspan="4">
@@ -1250,35 +1278,41 @@ function bpCategory(){
                     <tr>                    				
                         
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">No.</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Complications</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Status</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Complication Name</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date diagnosed</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Diagnosis management</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Details</th>
                     </tr>
-                    <obsgroup groupingConceptId="165124">
-                     <tr>
+                    <obsgroup groupingConceptId="165124"> 
+                     <tr> 
                         <td>1</td>
-                        <td><obs conceptId="6042" answerConceptId="111103" answerLabel="Stroke" style="checkbox" class="align-checkbox-input"/></td>                    
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="6042" answerConceptId="111103" answerLabel="Stroke" style="checkbox" class="align-checkbox-input"/></td> 
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"   answerSeparator=""/></td>
                      </tr>
                      </obsgroup>
                      <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>2</td>
                         <td><obs conceptId="6042" answerConceptId="139069" answerLabel="Heart failure" style="checkbox" class="align-checkbox-input"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>3</td>
                         <td><obs conceptId="6042" answerConceptId="113338" answerLabel="Kidney failure" style="checkbox" class="align-checkbox-input"/></td>
-                       <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>4</td>
                         <td><obs conceptId="6042" answerConceptId="118983" answerLabel="Peripheral Neuropathy" style="checkbox" class="align-checkbox-input"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
@@ -1292,28 +1326,32 @@ function bpCategory(){
                            <obs conceptId="21f0e9c1-4e20-461d-b4de-15686dc6669f"/>
                         </span>
                         </td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>6</td>
                         <td><obs conceptId="6042" answerConceptId="163411" answerLabel="Foot ulcers/deformities" style="checkbox" class="align-checkbox-input"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio"  showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>7</td>
                         <td><obs conceptId="6042" answerConceptId="156162" answerLabel="Erectile dysfunction" style="checkbox" class="align-checkbox-input"/></td>
-                        <td><obs conceptId="165127" answerConceptIds="1687,165126,6097" answerLabels="Add,Ongoing,Remove" style="radio" class="align-radio-input"   answerSeparator=""/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>                       
-                        <td></td>
+                        <td>8</td>
                         <td><obs conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>
-                        <td colspan="2"><obs conceptId="165125"/></td>
+                        <td><obs conceptId="159948"/></td>                   
+                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
                 </tbody>
@@ -1561,7 +1599,7 @@ function bpCategory(){
        <br/>
 
         <section>
-            <label>Tests Ordered</label>
+            <label>Tests ordered for next visit</label>
             <table>
                 <tbody>
                     <tr>
@@ -1608,7 +1646,6 @@ function bpCategory(){
                         
                     </tr> 
                     <tr>
-                        <label style="background:  #00b4ef; padding: 3px; color: #fff;">Referral Reasons</label>
                         <td>
                             <obs conceptId="1887" answerConceptId="165133"   answerLabel="Further management of DM"   style="checkbox" class="align-checkbox-input" />
                             <obs conceptId="1887" answerConceptId="165135"   answerLabel="Further management of HTN"   style="checkbox" class="align-checkbox-input" />
