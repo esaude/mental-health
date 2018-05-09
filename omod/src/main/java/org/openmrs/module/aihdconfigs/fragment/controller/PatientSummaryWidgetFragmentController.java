@@ -25,18 +25,23 @@ public class PatientSummaryWidgetFragmentController {
 
     public void controller(FragmentModel model, @FragmentParam("patient") PatientDomainWrapper patient){
         Map<String, String> summary = new HashMap<String, String>();
+        Map<String, String> diabetes = new HashMap<String, String>();
+        Map<String, String> hypertension = new HashMap<String, String>();
+
 
         //set context
         PatientCalculationService patientCalculationService = Context.getService(PatientCalculationService.class);
         PatientCalculationContext context = patientCalculationService.createCalculationContext();
         context.setNow(new Date());
-        summary.putAll(diabetic(patient.getId(), context));
-        summary.putAll(hypertension(patient.getId(), context));
+        diabetes.putAll(diabetic(patient.getId(), context));
+        hypertension.putAll(hypertension(patient.getId(), context));
         summary.putAll(rbs(patient.getId(), context));
         summary.putAll(fbs(patient.getId(), context));
         summary.putAll(uecs(patient.getId(), context));
         //summary.putAll(familyHistory(patient.getId(), context));
         model.addAttribute("summary", summary);
+        model.addAttribute("diabetes", diabetes);
+        model.addAttribute("hypertension", hypertension);
     }
 
     //Start processing the summaries here
