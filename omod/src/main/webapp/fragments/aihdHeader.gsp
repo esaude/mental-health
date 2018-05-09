@@ -131,7 +131,7 @@
         </li>
     </ul>
 
-    <div id="session-location">
+    <div style="display:none">
         <div id="spinner" style="position:absolute; display:none">
             <img src="${ui.resourceLink("uicommons", "images/spinner.gif")}">
         </div>
