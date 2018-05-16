@@ -1,6 +1,8 @@
 <%
     ui.includeFragment("appui", "standardEmrIncludes")
+    ui.includeJavascript("aihdconfigs", "bootstrap.min.js")
     ui.includeCss("referenceapplication", "login.css")
+    ui.includeCss("aihdconfigs", "bootstrap.min.css")
 
     def now = new Date()
     def year = now.getAt(Calendar.YEAR);
