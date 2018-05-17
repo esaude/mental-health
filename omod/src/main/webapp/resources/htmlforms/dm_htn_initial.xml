@@ -114,9 +114,27 @@
             font-size: 15px;
             padding-left:10px;
         }
+
+
+         
         
             </style>
     <script type="text/javascript">
+    beforeSubmit.push(function() {
+     
+    var nutrition_opt = getValue('nutrition_opt.value');
+    var physical_activity_opt = getValue('physical_activity_opt.value');
+    if (nutrition_opt == null || nutrition_opt == '' ) {
+    
+       jq('#nutrition_msg').html('Nutrition Required');
+        return false;
+    }
+    if (physical_activity_opt == null || physical_activity_opt == '' ) {
+        jq('#physical_activity_msg').html('Physical Activity Required');
+        return false;
+    }
+    return true;
+});
         function onWeightOrHeightChange() {
             var display = '';
             var weightKg = parseFloat(getValue('weight.value'));
@@ -226,6 +244,16 @@
                     display = 'For patients aged 6-15 years should be between 60-100';
                 }
             }       
+        }
+        function lmpDisableChange(){      
+            var age_55 = 660;
+
+            var age = "<lookup expression="fn.patientAgeInMonths()"/>"  
+            
+            jq('#lmpfield :input').prop('disabled', false);
+            if(age &gt; age_55){
+              jq('#lmpfield :input').prop('disabled', true);  
+             }
         }
         
         function bPStatus(diastolic,systolic,min_systolic,max_systolic,min_diastolic,max_diastolic){
@@ -629,6 +657,7 @@
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
 	        disableGDMFormMale();
+            lmpDisableChange();
 			 var totalSize = jq(".ui-tabs-panel").size() - 1;
 	         var prevTag='';
              var nextTag='';
@@ -719,7 +748,9 @@
                         </td>
                         <td colspan="2">
                              <label>Level of education:</label>
-                            <obs required="true" conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160289AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Secondary,Primary,None,Pre-school,Special education,Tertiary education,College/university/polytechnic" style="dropdown" answerSeparator="" />
+                            <obs required="true" conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
+                            answerConceptIds="1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160290AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
+                            answerLabels="None,Incomplete Primary,Primary,Secondary,Tertiary" style="dropdown" answerSeparator="" />
 
                         </td>
                     </tr>
@@ -732,12 +763,16 @@
                 <tbody>
                     <tr>
                         <td>
-                            <label>Diabetes</label>
-                        </td>
-                        <td>
+                            <label>Diabetes</label>                   
                             <obs required="true" conceptId="165086" answerConceptIds="165087,165088,1175" answerLabels="New DM patient,Known DM patient,NA" style="radio"
                                  answerSeparator="" id="diabetes_status" class="align-radio-input"/>                       
                         </td>
+                        <td>
+                            <label>Type of Diabetes:</label>
+                            <obs conceptId="165094" answerConceptIds="142474,1449,142473,44a5bd2a-e0c9-43f5-b96b-de00fad98bf0"
+                             answerLabels="Type 1,GDM,Type 2,Diabetes Secondary to other causes" style="radio" class="align-radio-input"
+                                 answerSeparator="" id="type_of_diabetes"/>                        
+                         </td>
 
                         <td>
                             <label>Year of Diagnosis</label>
@@ -755,10 +790,15 @@
                     <tr>
                         <td>
                             <label>Hypertension:</label>
+                            <obs required="true" conceptId="165091" answerConceptIds="165092,165093,1175" answerLabels="New HTN patient,Known HTN patient,NA" style="radio"
+                                 answerSeparator="" id="htn_status" class="align-radio-input"/> 
                         </td>
                         <td>
-                            <obs required="true" conceptId="165091" answerConceptIds="165092,165093,1175" answerLabels="New HTN patient,Known HTN patient,NA" style="radio"
-                                 answerSeparator="" id="htn_status" class="align-radio-input"/>                                                   
+                            <label>Type of Hypertension:</label>
+                            <obs conceptId="d4678d10-c650-4a2b-87ad-6e3d3283c06d" 
+                            answerConceptIds="c447006f-9923-4840-8a56-6b7ad8cb55a1,51879821-770d-4ba1-8cfe-e358c9209dab,fa3b33e0-bbd6-4d1a-b74b-26d411a928da,c9614f94-cf50-4ed4-b0cd-58e06c6266d6" 
+                            answerLabels="Mild Hypertension,Moderate Hypertension,Severe Hypertension,Preeclampsia" style="radio" class="align-radio-input"
+                                 answerSeparator="" id="htn_type"/>
                         </td>
             
                         <td>
@@ -816,16 +856,18 @@
 
                      <tr>
                         <td>
-                            <label>Patient covered by NHIF:</label>
+                            <label>Active NHIF Cover:</label>
                             <obs required="true" conceptId="1917" answerConceptIds="1065,1066,5622" answerLabels="Yes,No,Other" style="radio"
                                  answerSeparator="" id="nhif" class="align-radio-input"/>
                         </td>
-                        <td>
+                        <td colspan="2">
                             <label>Other:</label>
                             <span id="other_nhif">
                             <obs  conceptId="cd2b38b5-ce2f-45fd-ba14-b5db1b68b81f" />
                             </span>
                         </td>
+                    </tr>
+                     <tr>
                         <td colspan="3" id="enroll_to_nhif">
                             <span id="nhif-comment" class="value"></span>                  
                         </td>
@@ -916,7 +958,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <obs conceptId="1427"/>
+                                    <obs conceptId="1427" id="lmpfield"/>
                                 </td>
                             </tr>
                         </tbody>
@@ -926,9 +968,21 @@
        <br/>
 
        <section>
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Substance Use/Abuse:</label>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Risk factors:</label>
             <table>
                 <tbody>
+                    <tr>
+                        <td>
+                            <label>Do you Exercise?</label>
+                            <obs required="true" conceptId="13888755-b2ff-46b7-aab5-a267c6d2a4e3" answerConceptIds="1065,1066,163721" answerLabels="Yes,No,Stopped" style="radio"
+                                 answerSeparator="" class="align-radio-input"/>                       
+                        </td>
+                        <td>
+                            <label>Do you follow a balanced diet?</label>
+                            <obs required="true" conceptId="44e4197f-2feb-41da-a500-5b0dcf1ab335" answerConceptIds="1065,1066,163721" answerLabels="Yes,No,Stopped" style="radio"
+                                 answerSeparator="" class="align-radio-input"/>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <label>Do you smoke cigarettes?</label>
@@ -940,11 +994,14 @@
                             <obs required="true" conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio"
                                  answerSeparator="" class="align-radio-input"/>
                         </td>
-                        <td>
+                   </tr>
+                    <tr>    
+                        <td colspan="3">
                             <label>Others</label>
                             <obs conceptId="cf94e312-6812-429e-b513-f0bad3f7bd2f"/>
                         </td>
                     </tr>
+
                 </tbody>
             </table>
         </section>
@@ -1080,10 +1137,22 @@
                         <td><obs conceptId="1119" answerConceptId="143050" answerLabel="Cyanosis" style="checkbox" class="align-checkbox-input"/></td>                                       
                     </tr>
                     <tr> 
-                        <td><obs conceptId="1119" answerConceptId="116188" answerLabel="Lymphangitis" style="checkbox" class="align-checkbox-input"/></td>                        
+                        <td><obs conceptId="1119" answerConceptId="135488" answerLabel="Lymphadenopathy" style="checkbox" class="align-checkbox-input"/></td>                        
                         <td><obs conceptId="1119" answerConceptId="460" answerLabel="Oedema" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="1119" answerConceptId="142630" answerLabel="Dehydration" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="1119" answerConceptId="161602" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>                
+                    </tr>
+                    <tr>                        
+                        <td>
+                        <label>Visual impairment</label>
+                           <obs id="visual_impairment" conceptId="97f8c173-af0d-4b4e-b107-a4243b6176e0" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input" />
+                        </td>
+                        <td colspan="2">
+                           <span id="impairment">
+                            <label>Specify</label>
+                           <obs conceptId="21f0e9c1-4e20-461d-b4de-15686dc6669f"/>
+                         </span>
+                        </td>    
                     </tr>
                </tbody>
             </table>
@@ -1205,7 +1274,7 @@
                     <tr>
                         <td><label>PDT</label></td>
                         <td>                       
-                           <obs id="pdt" conceptId="165144" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                           <obs id="pdt" conceptId="165144"  commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  />
                         </td>
                     </tr>
                     <tr>
@@ -1320,24 +1389,10 @@
                         <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  style="radio" class="align-radio-input"   answerSeparator=""/></td>
                     </tr>
                     </obsgroup>
+
                     <obsgroup groupingConceptId="165124">
                     <tr>
                         <td>5</td>
-                        <td>
-
-                        <obs id="visual_impairment" conceptId="6042" answerConceptId="159298" answerLabel="Visual Impairement" style="checkbox" class="align-checkbox-input"/>
-                        <span id="impairment">
-                        <label>Specify</label>
-                           <obs conceptId="21f0e9c1-4e20-461d-b4de-15686dc6669f"/>
-                        </span>
-                        </td>
-                        <td><obs conceptId="159948"/></td>                   
-                        <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  style="radio" class="align-radio-input"   answerSeparator=""/></td>
-                    </tr>
-                    </obsgroup>
-                    <obsgroup groupingConceptId="165124">
-                    <tr>
-                        <td>6</td>
                         <td><obs conceptId="6042" answerConceptId="163411" answerLabel="Foot ulcers/deformities" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="159948"/></td>                   
                         <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio"  showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input"   answerSeparator=""/></td>
@@ -1345,7 +1400,7 @@
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>
-                        <td>7</td>
+                        <td>6</td>
                         <td><obs conceptId="6042" answerConceptId="156162" answerLabel="Erectile dysfunction" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="159948"/></td>                   
                         <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" style="radio" class="align-radio-input"   answerSeparator=""/></td>
@@ -1353,7 +1408,7 @@
                     </obsgroup>
                     <obsgroup groupingConceptId="165124">
                     <tr>                       
-                        <td>8</td>
+                        <td>7</td>
                         <td><obs conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="159948"/></td>                   
                         <td><obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  answerSeparator=""/></td>
@@ -1370,10 +1425,13 @@
                 <tbody>
                     <tr>
                          <td>
-                         <obs conceptId="1379"  answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox" class="align-checkbox-input"/>
-                         <obs conceptId="1379"  answerConceptId="159364"  answerLabel="Physical Activity"  style="checkbox" class="align-checkbox-input"/>
-                         <obs conceptId="1379"  answerConceptId="5490"  answerLabel="Psychosocial"  style="checkbox" class="align-checkbox-input"/>
+                         <obs conceptId="1379" id="nutrition_opt" answerConceptId="1380"  answerLabel="Nutrition"  style="checkbox" class="align-checkbox-input" />
+                        <obs conceptId="1379" id="physical_activity_opt" answerConceptId="159364"  answerLabel="Physical Activity"  style="checkbox" class="align-checkbox-input"  />
+                        <obs conceptId="1379"  answerConceptId="5490"  answerLabel="Psychosocial"  style="checkbox" class="align-checkbox-input"/>
                          <obs id="education" conceptId="1379"  answerConceptId="5622"  answerLabel="Other"  style="checkbox" class="align-checkbox-input"/>
+
+                         <span id="nutrition_msg" class="required"></span>
+                         <span id="physical_activity_msg" class="required"></span>
                          </td>
                     </tr>
                     <tr>
@@ -1592,6 +1650,42 @@
                             </table>
                         </td>
                     </tr>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="185c3281-058c-4f07-89cd-04417e18b3c7"  answerLabel="Diet"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="50ccbaf9-eebd-41b2-90e0-49640c401907" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="159364"  answerLabel=" Physical exercise"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="328635ac-0c4e-4dd9-aa69-9f7d79be4781" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="c2769cb4-6f2a-476b-b8a1-8a7a7cb7d62e"  answerLabel="Herbal"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="db7ce007-0d86-4637-a3a7-261126c4b6c0" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                   </obsgroup>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="5622"  answerLabel="Other"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="13e51eb2-cea2-4c68-ad57-bc30972b717c" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                    </obsgroup>
                     <tr>
                         <td colspan="5">
                             <label>Comments</label>
