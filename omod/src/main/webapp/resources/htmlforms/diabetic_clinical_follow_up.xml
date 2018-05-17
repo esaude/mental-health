@@ -418,6 +418,22 @@
             }
             };
         }
+
+        function onHipOrWaistCircChange() {
+            var display = '';
+            var hip_circ = parseFloat(getValue('hip_circ.value'));
+            var wcirc = parseFloat(getValue('wcirc.value'));
+            if (!isNaN(wcirc) &amp;&amp; !isNaN(hip_circ))  {
+                var hipWaist = hip_circ / wcirc;
+                if (isNaN(hipWaist)) {
+                    display = '';
+                }
+                else {
+                    display = hipWaist.toFixed(2);
+                }
+            }            
+            jq('#hip_waist_ratio').html(display);
+        }
         jQuery(function() {
              jq('#diastolic').change(checkBpReading);
              jq('#systolic').change(checkBpReading);
@@ -425,6 +441,8 @@
              jq('#hiv_status').change(hivStatus);
              jq('#htn_status').change(htnStatus);
              jq('#nhif').change(onNHIFStatusChange);
+             jq('#wcirc').change(onHipOrWaistCircChange);  
+             jq('#hip_circ').change(onHipOrWaistCircChange); 
             getField('weight.value').change(onWeightOrHeightChange);
             getField('height.value').change(onWeightOrHeightChange);            
             onWeightOrHeightChange();
@@ -524,6 +542,12 @@
                         <td>
                             Treatment Supporter's Cell phone Number:<obs conceptId="160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
                         </td>
+                        <td>
+                            Treatment Supporter's alternative cell phone Number:<obs conceptId="3cd268ad-f27a-42de-a998-c836ec7dd430" />
+                        </td>
+                        <td>
+                            Treatment Supporter's other cell phone Number:<obs conceptId="732034aa-65a8-4a9a-82cb-d58f615c2ba3" />
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -544,7 +568,7 @@
                             </span>                   
                         </td>
 
-                        <td>
+                        <td colspan="2"> 
                             <label>Date of starting clinic</label>
                             <span id="dm_treatment_start_date">
                               <obs conceptId="fbf22987-bdf7-4721-81ce-6b71e1630c5d" />
@@ -556,6 +580,13 @@
                             <label>Hypertension:</label>
                             <obs conceptId="165091" answerConceptIds="165092,165093" answerLabels="New HTN patient,Known HTN patient" style="radio" class="align-radio-input"
                                  answerSeparator="" id="htn_status"/>
+                        </td>
+                        <td>
+                            <label>Type of Hypertension:</label>
+                            <obs conceptId="d4678d10-c650-4a2b-87ad-6e3d3283c06d" 
+                            answerConceptIds="c447006f-9923-4840-8a56-6b7ad8cb55a1,51879821-770d-4ba1-8cfe-e358c9209dab,fa3b33e0-bbd6-4d1a-b74b-26d411a928da,c9614f94-cf50-4ed4-b0cd-58e06c6266d6" 
+                            answerLabels="Mild Hypertension,Moderate Hypertension,Severe Hypertension,Preeclampsia" style="radio" class="align-radio-input"
+                                 answerSeparator="" id="htn_type"/>
                         </td>
                         <td>
                             <label>Date of HTN Diagnosis </label>
@@ -573,7 +604,7 @@
                     </tr>
                      <tr>
                         <td>
-                            <label>Patient covered by NHIF:</label>
+                            <label>Active NHIF Cover:</label>
                             <obs conceptId="1917" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input"
                                  answerSeparator="" id="nhif"/>
                         </td>
@@ -584,7 +615,8 @@
                     <tr>
                         <td>
                             <label>Type of Diabetes:</label>
-                            <obs conceptId="165094" answerConceptIds="142474,1449,142473" answerLabels="Type 1,GDM,Type 2" style="radio" class="align-radio-input"
+                            <obs conceptId="165094" answerConceptIds="142474,1449,142473,44a5bd2a-e0c9-43f5-b96b-de00fad98bf0"
+                             answerLabels="Type 1,GDM,Type 2,Diabetes Secondary to other causes" style="radio" class="align-radio-input"
                                  answerSeparator="" id="type_of_diabetes"/>                        
                          </td>
                         <td>
@@ -769,6 +801,14 @@
                             <span class="value"><lookup expression="fn.latestObs(5085).valueNumeric"/>/<lookup expression="fn.latestObs(5086).valueNumeric"/></span>
                         </td>
                     </tr>
+                    <tr> 
+                        <td valign="top"><label>Hip circ (cm)</label><obs conceptId="163081" id="hip_circ" /></td>                      
+                        <td><label>Waist circ (cm)</label><span id="wcirc_flag"><obs conceptId="163080" id="wcirc" /></span></td>
+                        <td><label>Hip Waist ratio</label><span id="hip_waist_ratio" class="value"></span></td>
+                        <td><label>Nutrition Comment</label>
+                        <obs conceptId="8fa20d2c-0a19-46c5-bcbe-22d8239005a0"/>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -793,92 +833,7 @@
                     </tr>
                 </tbody>
             </table>
-
-           <label style="background:  #ff7100; padding: 5px; color: #fff;">Laboratory Investigations:</label>
-            <table>
-                <tbody>
-                    <tr>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
-                    </tr> 
-                    <obsgroup groupingConceptId="161487">                   
-                    <tr>
-                        <td><label>Fasting Blood Sugar (FBS)</label></td>
-                        <td><obs conceptId="160912" showCommentField="true" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Random Blood Sugar (RBS)</label></td>
-                        <td><obs conceptId="887" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    </obsgroup>
-                    <tr>
-                        <td><label>HbA1c</label></td>
-                        <td><obs conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <obsgroup groupingConceptId="161487">
-                    <tr>
-                        <td><label>HDL</label></td>
-                        <td><obs conceptId="1007"  dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>LDL</label></td>
-                        <td><obs conceptId="1008" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    </obsgroup>
-                    <tr>
-                        <td><label>Triglycerides</label></td>
-                        <td><obs conceptId="1009" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>UECs/ Creatinine</label></td>
-                        <td><obs conceptId="164364" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                </tbody>
-            </table>
-      </div>
-      <div id="tabs-4">
-           <label style="background:  #ff7100; padding: 5px; color: #fff;">Current Medical Treatment:</label>
-            <table>
-                <tbody>
-                
-                    <tr>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Medication</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drugs</th>
-                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
-                    </tr>
-
-                     <tr>
-                         <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                           <td><label>OGLAs:</label>
-                           <obs conceptId="2bac6fca-19d0-4e4b-99a7-4bb30f40470b" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input" answerSeparator="" />
-                           </td>
-                           <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
-                           <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
-                         </obsgroup>
-                    </tr>
-
-                    <tr>
-                        <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-                            <td><label>Insulin only:</label>
-                            <obs conceptId="f5b23ca2-ee78-4fa8-915d-8c81c8c9d8bd" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input"  answerSeparator="" />
-                            </td>
-                            <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
-                            <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
-                        </obsgroup>
-                    </tr>
-                    <tr>
-                        <obsgroup groupingConceptId="1442AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA">
-
-                            <td><label>OGLAs + Insulin:</label>
-                            <obs conceptId="6b90a512-39a4-4eac-a6dc-12b54932f536" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input" answerSeparator="" />
-                            </td>
-                            <td><obs conceptId="1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerClasses="Drug" style="autocomplete" /></td>
-                            <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
-                        </obsgroup>
-                    </tr>
-                </tbody>
-            </table>
+            <br/>
 
            <label style="background:  #ff7100; padding: 5px; color: #fff;">Assessments:</label>
             <table>
@@ -938,6 +893,306 @@
                     </tr>
                 </tbody>
             </table>
+           <label style="background:  #ff7100; padding: 5px; color: #fff;">Laboratory Investigations:</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
+                        <th style="background:  #00b4ef; padding: 3px; color: #fff;"></th>
+                    </tr> 
+                    <obsgroup groupingConceptId="161487">                   
+                    <tr>
+                        <td><label>Fasting Blood Sugar (FBS)</label></td>
+                        <td><obs conceptId="160912" showCommentField="true" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(160912).valueNumeric"/></span></td>
+                    </tr>
+                    <tr>
+                        <td><label>Random Blood Sugar (RBS)</label></td>
+                        <td><obs conceptId="887" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(887).valueNumeric"/></span></td>
+                    </tr>
+                    </obsgroup>
+                    <tr>
+                        <td><label>HbA1c</label></td>
+                        <td><obs conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(159644).valueNumeric"/></span></td>
+                    </tr>
+                    <obsgroup groupingConceptId="161487">
+                    <tr>
+                        <td><label>HDL</label></td>
+                        <td><obs conceptId="1007"  dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(1007).valueNumeric"/></span></td>
+                    </tr>
+                    <tr>
+                        <td><label>LDL</label></td>
+                        <td><obs conceptId="1008" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(1008).valueNumeric"/></span></td>
+                    </tr>
+                    </obsgroup>
+                    <tr>
+                        <td><label>Triglycerides</label></td>
+                        <td><obs conceptId="1009" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(1009).valueNumeric"/></span></td>
+                    </tr>
+                    <tr>
+                        <td><label>UECs/ Creatinine</label></td>
+                        <td><obs conceptId="164364" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                        <td><span class="value"><lookup expression="fn.latestObs(164364).valueNumeric"/></span></td>
+                    </tr>
+                </tbody>
+            </table>
+      </div>
+      <div id="tabs-4">
+<section>
+            <label style="background:  #ff7100; padding: 5px; color: #fff;">Treatment</label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            Glucose Lowering drugs
+                        </td>
+                        <td>
+                            <table width="80%">
+                                <tr>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Drug</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Plan</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Dose</th>
+                                    <th style="background:  #00b4ef; padding: 3px; color: #fff;">Frequency</th>
+                                    <!-- <th style="background:  #00b4ef; padding: 3px; color: #fff;">Comment</th> -->
+                                </tr>
+                                
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="79651"  answerLabel="Metformin"  style="checkbox" class="align-checkbox-input"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdwon" /></td>
+                                       <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,850,1000" answerLabels="500mg,850mg,1000mg" style="dropdown"/></td>
+                                       <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                       <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="77071"  answerLabel="Glibenclamide"  style="checkbox" class="align-checkbox-input"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown"  /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10" answerLabels="2.5mg,5mg,7.5mg,10mg" style="dropdown"/></td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="159459"  answerLabel="Insulin 70/30"  style="checkbox" class="align-checkbox-input"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="78068"  answerLabel="NPH"  style="checkbox" class="align-checkbox-input"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td><obs conceptId="1282"  answerConceptId="282"  answerLabel="Soluble Insulin"  style="checkbox" class="align-checkbox-input"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                        <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />IU</td>
+                                        <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160865AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160864AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="AM,PM" style="dropdown" /></td>
+                                        <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/></td> -->
+                                    </tr>
+                                </obsgroup>
+                                <obsgroup groupingConceptId="165140">
+                                    <tr>
+                                       <td>Other glucose lowering drugs <obs conceptId="163101"/></td>
+                                       <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                       <!-- <td><obs conceptId="163101AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td> -->
+                                       <td></td>
+                                       <td></td>
+                                    </tr>
+                                </obsgroup>
+
+                            </table>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td>Anti hypertensive agents</td>
+                        <td>
+                            <table width="80%">
+                            <obsgroup groupingConceptId="165141">
+                                <tr>
+                                   <td><obs conceptId="1282"  answerConceptId="75633"  answerLabel="Enalapril "  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,7.5,10,15,20" answerLabels="2.5mg,5mg,7.5mg,10mg,15mg,20mg" style="dropdown"/></td>
+                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">						
+                                <tr>                                   
+                                   <td><obs conceptId="1282"  answerConceptId="77696"  answerLabel="HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="12.5,25" answerLabels="12.5mg,25mg" style="dropdown"/></td>
+                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">						
+                                <tr>                                   
+                                   <td><obs conceptId="1282"  answerConceptId="79074"  answerLabel="Losartan"  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25mg,50mg" style="dropdown"/></td>
+                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">						
+                                <tr>                                   
+                                   <td><obs conceptId="1282"  answerConceptId="80637"  answerLabel="Nifedipine"  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="20,40" answerLabels="20mg,40mg" style="dropdown"/></td>
+                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">						
+                                <tr>                                   
+                                   <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atenolol"  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50,100" answerLabels="25mg,50mg,100mg" style="dropdown"/></td>
+                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">
+                                <tr>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="J ASA"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="75" answerLabels="75mg" style="dropdown"/></td>
+                                    <td></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">
+                                <tr>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Atorvastatin"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="10,20,40,80" answerLabels="10mg,20mg,40mg,80mg" style="dropdown"/></td>
+                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">
+                                <tr>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Lisinopril/HCTZ"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="15,20" answerLabels="15mg,20mg" style="dropdown"/></td>
+                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">
+                                <tr>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amlodipine"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5mg,5mg" style="dropdown"/></td>
+                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">
+                                <tr>
+                                    <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Felodipine"  style="checkbox" class="align-checkbox-input"/></td>
+                                    <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5mg,5mg" style="dropdown"/></td>
+                                    <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165141">						
+                                <tr>                                   
+                                   <td>Other anti hypertensive agents <obs conceptId="163101"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                                   <td></td>
+                                </tr>
+                            </obsgroup>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Peripheral neuropathy drugs</td>
+                        <td>
+                            <table>
+                            <obsgroup groupingConceptId="165142">
+                                <tr>                                   
+                                   <td><obs conceptId="1282"  answerConceptId="71652"  answerLabel="Amitriptylline"  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25mg,50mg" style="dropdown"/></td>
+                                   <td>Nocte</td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165142">						
+                                <tr>                                   
+                                   <td><obs conceptId="1282"  answerConceptId="72822"  answerLabel="Carbamazepine"  style="checkbox" class="align-checkbox-input"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                   <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="100,200" answerLabels="100mg,200mg" style="dropdown"/></td>
+                                   <td><obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD" style="dropdown" /></td>
+                                </tr>
+                            </obsgroup>
+                            <obsgroup groupingConceptId="165142">						
+                                <tr>                                   
+                                   <td>Other drugs<obs conceptId="163101"/></td>
+                                   <td><obs conceptId="165130" answerConceptIds="1256,159835,165131,159836" answerLabels="Start,CT,Change,Stop" style="dropdown" /></td>
+                                    <td><obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" /></td>
+                                   <td></td>
+                                </tr>
+                            </obsgroup>
+                            </table>
+                        </td>
+                    </tr>
+                                        <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="185c3281-058c-4f07-89cd-04417e18b3c7"  answerLabel="Diet"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="50ccbaf9-eebd-41b2-90e0-49640c401907" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="159364"  answerLabel=" Physical exercise"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="328635ac-0c4e-4dd9-aa69-9f7d79be4781" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="c2769cb4-6f2a-476b-b8a1-8a7a7cb7d62e"  answerLabel="Herbal"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="db7ce007-0d86-4637-a3a7-261126c4b6c0" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                   </obsgroup>
+                    <obsgroup groupingConceptId="165142">
+                    <tr>
+                        <td><obs conceptId="1282"  answerConceptId="5622"  answerLabel="Other"  style="checkbox" class="align-checkbox-input"/></td>
+                        <td colspan="4">
+                            <label>Specify</label>
+                            <obs conceptId="13e51eb2-cea2-4c68-ad57-bc30972b717c" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                    </obsgroup>
+                    <tr>
+                        <td colspan="5">
+                            <label>Comments</label>
+                            <obs conceptId="161011" rows="5" cols="50" style="textarea" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+       
             <label style="background:  #ff7100; padding: 5px; color: #fff;">Referrals:</label>
             <table>
                 <tbody>
