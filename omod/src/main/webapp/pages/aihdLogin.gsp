@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${ ui.message("referenceapplication.login.title") }</title>
     <link rel="shortcut icon" type="image/ico" href="/${ ui.contextPath() }/images/openmrs-favicon.ico"/>
     <link rel="icon" type="image/png\" href="/${ ui.contextPath() }/images/openmrs-favicon.png"/>
@@ -20,30 +21,41 @@
         body {
             font-family: "OpenSans", Arial, sans-serif;
             -webkit-font-smoothing: subpixel-antialiased;
-            max-width: 1000px;
             margin: 5px auto;
             background-color: white;
+            background-repeat: no-repeat;
+            height: 100%;
         }
-        #body-wrapper {
-            margin-top: 1px;
-            padding: 0;
-            background-color: white;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -o-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -khtml-border-radius: 3px;
-            border-radius: 3px;
+        form {border: 3px solid #f1f1f1;}
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
-        #body-wrapper #content {
-            margin-top: 2px;
-            padding: 0;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            -o-border-radius: 3px;
-            -ms-border-radius: 3px;
-            -khtml-border-radius: 3px;
-            border-radius: 3px;
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        .container {
+            padding: 16px;
         }
         .logo {
             margin: 0px;
@@ -193,16 +205,7 @@
             padding: 0;
             align:left;
         }
-        .center-div {
-           width: 750px;
-           height: 600px;
-           position: absolute;
-           left: 50%;
-           top: 45%;
-           margin-left: -300px;
-           margin-top: -310px;
-        }
-        </style>
+    </style>
 </head>
 <body>
 <script type="text/javascript">
@@ -349,7 +352,7 @@ function validateSecurityInput(){
         <div class="row">
             <div class="col-md-4">
                 <div class="row">
-                    <p>Our partiners</p>
+                    <button type="button" class="btn btn-success">Our Patiners</button>
                 </div>
                 <div class="row" id="malteser-logo">
                   <img src="${ui.resourceLink("aihdconfigs", "svg/malteser_logo.svg")}" height="95px" />
@@ -362,7 +365,7 @@ function validateSecurityInput(){
                 </div>
             </div>
             <div class="col-md-4">
-                <form method="post" autocomplete="off" class="modal-content animate">
+                <form method="post" autocomplete="off">
                     <div class="imgcontainer">
                         <i class="icon-lock small"></i>
                         ${ ui.message("referenceapplication.login.loginHeading") }
@@ -394,18 +397,12 @@ function validateSecurityInput(){
                             <span id="captcha_notification" style="color:red; font-size:18;"></span>
                          </div>
                     </div>
-                    <div>
-                        <table>
-                            <tr>
-                                <td colspan="2" align="right">
-                                    <a id="cant-login" href="javascript:void(0)">
-                                        <i class="icon-question-sign small"></i>
-                                        ${ ui.message("referenceapplication.login.cannotLogin") }
-                                    </a>
-                                    <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
-                                </td>
-                            <tr>
-                        </table>
+                    <div style="align:right;">
+                        <a id="cant-login" href="javascript:void(0)">
+                            <i class="icon-question-sign small"></i>
+                            ${ ui.message("referenceapplication.login.cannotLogin") }
+                        </a>
+                        <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
                     </div>
                         <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                          <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
