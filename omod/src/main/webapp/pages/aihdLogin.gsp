@@ -363,6 +363,10 @@ function validateSecurityInput(){
             </div>
             <div class="col-md-4">
                 <form method="post" autocomplete="off" class="modal-content animate">
+                    <div class="imgcontainer">
+                        <i class="icon-lock small"></i>
+                        ${ ui.message("referenceapplication.login.loginHeading") }
+                    </div>
                     <div class="form-group">
                         <label for="username">${ ui.message("referenceapplication.login.username") }:</label>
                         <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
@@ -390,29 +394,21 @@ function validateSecurityInput(){
                             <span id="captcha_notification" style="color:red; font-size:18;"></span>
                          </div>
                     </div>
-                    <fieldset>
-                        <legend>
-                            <i class="icon-lock small"></i>
-                            ${ ui.message("referenceapplication.login.loginHeading") }
-                        </legend>
-
+                    <div>
+                        <table>
+                            <tr>
+                                <td colspan="2" align="right">
+                                    <a id="cant-login" href="javascript:void(0)">
+                                        <i class="icon-question-sign small"></i>
+                                        ${ ui.message("referenceapplication.login.cannotLogin") }
+                                    </a>
+                                    <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
+                                </td>
+                            <tr>
+                        </table>
+                    </div>
                         <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                          <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
-                        <div>
-                            <table>
-                                <tr>
-                                    <td colspan="2" align="right">
-                                        <a id="cant-login" href="javascript:void(0)">
-                                            <i class="icon-question-sign small"></i>
-                                            ${ ui.message("referenceapplication.login.cannotLogin") }
-                                        </a>
-                                        <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
-                                    </td>
-                                <tr>
-                            </table>
-                        </div>
-
-                    </fieldset>
                     <input type="hidden" name="redirectUrl" value="${redirectUrl}" />
                 </form>
             </div>
