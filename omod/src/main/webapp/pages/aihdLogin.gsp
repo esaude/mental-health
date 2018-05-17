@@ -160,10 +160,11 @@
             margin-left: 8%;
         }
         #county-logo{
-            margin-left: 30%;
-            padding-top: 5px;
+            margin-left: 0;
+            padding-top: 0;
             height: 170px;
             width: auto;
+            align:left;
         }
 
         #bmz-logo img{
@@ -171,28 +172,26 @@
             height:auto;
         }
         #bmz-logo{
-                width: 30%;
+                width: auto;
                 float: left;
                 padding: 5px;
+                align:left;
         }
 
         #malteser-logo img{
-            width: 30%;
+            width: auto;
             float: left;
             border-right-style: solid;
             border-right-width: 0;
             border-right-color: #e5e5e5;
             padding: 0;
+            align:left;
         }
         #aihd-logo img{
-            width: 50%;
+            width: 100%;
             float: left;
             padding: 0;
-        }
-        #logo-container{
-        margin-left: 10%;
-        margin-right: 5%;
-        width: 100%;
+            align:left;
         }
         .center-div {
            width: 750px;
@@ -335,78 +334,67 @@ function validateSecurityInput(){
 }
 
 </script>
-<div class="center-div">
-        <div style="align:center;">
-            <a href="${ui.pageLink("referenceapplication", "home")}">
-                <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" height="180px" width="280px" id="county-logo"/>
-            </a>
-        </div>
-        <div id="body-wrapper">
-            <div id="content">
-                <form id="login-form" method="post" autocomplete="off">
-                    <fieldset>
 
+<div class="container">
+    <section>
+        <div class="page-header">
+            <a href="${ui.pageLink("referenceapplication", "home")}" class="pull-left">
+                <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" id="county-logo"/>
+            </a>
+            <div class="pull-right">
+                <h1>Sample tag line message to go here</h1>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <p>Our partiners</p>
+                </div>
+                <div class="row" id="malteser-logo">
+                  <img src="${ui.resourceLink("aihdconfigs", "svg/malteser_logo.svg")}" height="95px" />
+                </div>
+                <div class="row" id="bmz-logo">
+                  <img src="${ui.resourceLink("aihdconfigs", "images/bmz_logo2.png")}" height="125px" />
+                </div>
+                <div class="row" id="aihd-logo">
+                  <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_logo.jpg")}" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <form method="post" autocomplete="off" class="modal-content animate">
+                    <div class="form-group">
+                        <label for="username">${ ui.message("referenceapplication.login.username") }:</label>
+                        <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
+                    </div>
+                    <div class="form-group">
+                     <label for="password">${ ui.message("referenceapplication.login.password") }:</label>
+                     <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="sessionLocation">Health facility:</label>
+                         <select id="sessionLocation" class="form-control">
+                            <% locations.sort { ui.format(it) }.each { %>
+                            <option id="${it.name}" value="${it.id}">${ui.format(it)}</option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="security">Security Stamp:</label>
+                        <div id="security-container">
+                            <span id="first_number" style="color:red;"></span>
+                            <span id="operator"></span>
+                            <span id="second_number" style="color:red;"></span>
+                            <input id="computer_results_hidden" type="hidden"/>
+                            <input id="security_captcha_answer" type="text" name="security_check_answer" size="10" />
+                            <span id="captcha_notification" style="color:red; font-size:18;"></span>
+                         </div>
+                    </div>
+                    <fieldset>
                         <legend>
                             <i class="icon-lock small"></i>
                             ${ ui.message("referenceapplication.login.loginHeading") }
                         </legend>
-                        <table border="0" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td>
-
-                                    <label for="username">
-                                        ${ ui.message("referenceapplication.login.username") }:
-                                    </label>
-                                </td>
-                                <td>
-                                    <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <label for="password">
-                                        ${ ui.message("referenceapplication.login.password") }:
-                                    </label>
-                                </td>
-                                <td>
-                                    <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>
-                                    <label for="sessionLocation">
-                                        Health facility:
-                                    </label>
-                                </td>
-                                <td>
-                                    <select id="sessionLocation" class="select">
-                                        <% locations.sort { ui.format(it) }.each { %>
-                                        <option id="${it.name}" value="${it.id}">${ui.format(it)}</option>
-                                        <% } %>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="security">
-                                        Security Stamp:
-                                    </label>
-                                </td>
-                                <td>
-                                <div id="security-container">
-                                    <span id="first_number" style="color:red;"></span>
-                                    <span id="operator"></span>
-                                    <span id="second_number" style="color:red;"></span>
-                                    <input id="computer_results_hidden" type="hidden"/>
-                                    <input id="security_captcha_answer" type="text" name="security_check_answer" size="10" />
-                                    <span id="captcha_notification" style="color:red; font-size:18;"></span>
-                                 </div>
-                                </td>
-                            </tr>
-                        </table>
 
                         <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                          <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
@@ -429,19 +417,7 @@ function validateSecurityInput(){
                 </form>
             </div>
         </div>
-        <div id ="logo-container">
-
-            <div id="malteser-logo">
-                    <img src="${ui.resourceLink("aihdconfigs", "svg/malteser_logo.svg")}" height="95px" />
-            </div>
-            <div id="bmz-logo">
-                   <img src="${ui.resourceLink("aihdconfigs", "images/bmz_logo2.png")}" height="125px" />
-            </div>
-            <div id="aihd-logo">
-                   <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_logo.jpg")}" />
-            </div>
-
-        </div>
+    </section>
  </div>
 
 <div id="cannot-login-popup" class="dialog" style="display: none">
