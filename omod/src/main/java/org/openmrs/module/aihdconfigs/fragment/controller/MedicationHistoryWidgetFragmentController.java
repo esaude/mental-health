@@ -65,13 +65,13 @@ public class MedicationHistoryWidgetFragmentController {
         else if(initialEncounter != null){
             Set<Obs> initialObs = initialEncounter.getAllObs();
             if(initialObs != null) {
-                message = initialEncounter.toString();
+                message = initialEncounter.getEncounterDatetime().toString();
             }
         }
         else if(followUpEncounter != null){
             Set<Obs> followUpObs = followUpEncounter.getAllObs();
             if(followUpObs != null) {
-                message = followUpEncounter.toString();
+                message = followUpEncounter.getEncounterDatetime().toString();
             }
         }
 
