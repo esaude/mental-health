@@ -228,7 +228,10 @@
             var temp = getValue('temperature.value');                
             if (temp &lt; 36.1 || temp &gt; 37.1)  {            
                     display = 'Temperature should be between 36.1-37.1';
-            }        
+                     jq('#temperature').last().addClass("red_flag");
+            }else{
+                 jq('#temperature').last().removeClass("red_flag");
+            }       
 
         }
 
@@ -236,14 +239,16 @@
          var display = '';
             var age_6 = 72;
             var age_15 = 180;
+            var age_50 = 600;
             var age = "<lookup expression="fn.patientAgeInMonths()"/>"  
-            var pr = getValue('pr_in.value');                
-            if (pr &lt; 60 || pr &gt; 100)  {  
-
-                if (age &lt; age_15 ||age == age_15|| age &gt; age_6 || age == age_6)  {     
-                    display = 'For patients aged 6-15 years should be between 60-100';
-                }
-            }       
+            var pr = getValue('pr_in.value');  
+            jq('#pr_in').last().removeClass("red_flag");              
+            
+            if ((age &gt; age_6 ||age == age_6) &amp;&amp;  (age &gt; age_50 || age == age_50 || age &lt; age_50))  {  
+                if (pr &gt; 100 || pr &lt; 60)  {              
+                        jq('#pr_in').last().addClass("red_flag");
+                    } 
+            }             
         }
         function lmpDisableChange(){      
             var age_55 = 660;
@@ -600,8 +605,16 @@
         function visualImpairment(){
             var val= getValue('visual_impairment.value');
             jq('#impairment :input').prop('disabled', true);
-            if(val == 159298){
+            if(val == 1065){
                 jq('#impairment :input').prop('disabled', false);
+             }
+        }
+  
+        function otherGeneralExam(){
+            var val= getValue('other_general_exam.value');
+            jq('#other_general_exam_desc :input').prop('disabled', true);
+            if(val == 161602){
+                jq('#other_general_exam_desc :input').prop('disabled', false);
              }
         }
         function disableGDMFormMale(){
@@ -611,6 +624,9 @@
             }
               
         }
+        function otherGeneralExamDesc(){
+            jq('#other_general_exam_desc :input').prop('disabled', true);                       
+        }
 
         jQuery(function() {
             jq('#other_chief_complaint_text :input').prop('disabled', true);
@@ -619,6 +635,7 @@
             onWeightOrHeightChange();
             jq('#nhif').change(onNHIFStatusChange);
             jq('#visual_impairment').change(visualImpairment);
+            jq('#other_general_exam').change(otherGeneralExam);            
             jq('#temperature').focusout(onTemperatureChange);
             jq('#pr_in').focusout(prByAgeChange);
             jq('#adhering_to_current_medications').change(adheringToMedications);
@@ -657,6 +674,7 @@
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
 	        disableGDMFormMale();
+            otherGeneralExamDesc();
             lmpDisableChange();
 			 var totalSize = jq(".ui-tabs-panel").size() - 1;
 	         var prevTag='';
@@ -1083,8 +1101,8 @@
             <table>
                 <tbody>             
                     <tr>
-                        <td><label>Temp(<sup>o</sup>C)</label><obs conceptId="5088" id="temperature" /><span id="temperature_flag" class="red_flag"></span></td>
-                        <td><label>PR (/min)</label><obs conceptId="5087" id="pr_in" /><span id="pr_in_flag" class="red_flag"></span></td>
+                        <td><label>Temp(<sup>o</sup>C)</label><obs conceptId="5088" id="temperature" /></td>
+                        <td><label>PR (/min)</label><obs conceptId="5087" id="pr_in" /></td>
                         <td><label>BP (1st reading)</label>
                           <p>
                           <span id="first_reading_bp">
@@ -1140,19 +1158,25 @@
                         <td><obs conceptId="1119" answerConceptId="135488" answerLabel="Lymphadenopathy" style="checkbox" class="align-checkbox-input"/></td>                        
                         <td><obs conceptId="1119" answerConceptId="460" answerLabel="Oedema" style="checkbox" class="align-checkbox-input"/></td>
                         <td><obs conceptId="1119" answerConceptId="142630" answerLabel="Dehydration" style="checkbox" class="align-checkbox-input"/></td>
-                        <td><obs conceptId="1119" answerConceptId="161602" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>                
+                        <td><obs conceptId="1119" answerConceptId="161602" id="other_general_exam" answerLabel="Other" style="checkbox" class="align-checkbox-input"/></td>                
                     </tr>
                     <tr>                        
                         <td>
                         <label>Visual impairment</label>
-                           <obs id="visual_impairment" conceptId="97f8c173-af0d-4b4e-b107-a4243b6176e0" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" class="align-radio-input" />
+                          <obs  id="visual_impairment" conceptId="97f8c173-af0d-4b4e-b107-a4243b6176e0" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator=""  class="align-radio-input"/>
                         </td>
                         <td colspan="2">
                            <span id="impairment">
-                            <label>Specify</label>
-                           <obs conceptId="21f0e9c1-4e20-461d-b4de-15686dc6669f"/>
+                            <label>Specify visual impairment</label>
+                           <obs conceptId="21f0e9c1-4e20-461d-b4de-15686dc6669f"  rows="2" cols="30" style="textarea"/>
                          </span>
                         </td>    
+                    </tr>
+                    <tr>                        
+                        <td colspan="3"> 
+                        <label>Other(Specify)</label>
+                          <obs  id="other_general_exam_desc" conceptId="163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  rows="2" cols="50" style="textarea"/>
+                        </td>  
                     </tr>
                </tbody>
             </table>
