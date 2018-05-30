@@ -120,37 +120,22 @@
         
             </style>
     <script type="text/javascript">
-    beforeSubmit.push(function() {
-     
-    var nutrition_opt = getValue('nutrition_opt.value');
-    var physical_activity_opt = getValue('physical_activity_opt.value');
-    if (nutrition_opt == null || nutrition_opt == '' ) {
-    
-       jq('#nutrition_msg').html('Nutrition Required');
-        return false;
-    }
-    if (physical_activity_opt == null || physical_activity_opt == '' ) {
-        jq('#physical_activity_msg').html('Physical Activity Required');
-        return false;
-    }
-    return true;
-});
         function onWeightOrHeightChange() {
-            var display = '';
-            var weightKg = parseFloat(getValue('weight.value'));
-            var heightM = parseFloat(getValue('height.value')) / 100;
-            if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
-                var bmi = weightKg / (heightM * heightM);
-                if (isNaN(bmi) || bmi &lt; 10 || bmi &gt; 50) {
-                    display = 'Abnormal value. Were weight and height entered correctly?';
-                }
-                else {
-                    display = bmi.toFixed(2);
-                    flagBMI(display)
-                }
+        var display = '';
+        var weightKg = parseFloat(getValue('weight.value'));
+        var heightM = parseFloat(getValue('height.value')) / 100;
+        if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
+            var bmi = weightKg / (heightM * heightM);
+            if (isNaN(bmi) || bmi &lt; 10 || bmi &gt; 50) {
+                display = 'Abnormal value. Were weight and height entered correctly?';
             }
-            
-            jq('#calculated-bmi').html(display);
+            else {
+                display = bmi.toFixed(2);
+                flagBMI(display)
+            }
+        }
+
+        jq('#calculated-bmi').html(display);
         }
         function onHipOrWaistCircChange() {
             var display = '';
