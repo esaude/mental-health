@@ -47,8 +47,8 @@ public class MedicationHistoryWidgetFragmentController {
 
     }
 
-    private String medicationEncounter(Integer patientId, PatientCalculationContext context){
-        String message = "";
+    private Encounter medicationEncounter(Integer patientId, PatientCalculationContext context){
+        Encounter encounter = null;
         EncounterType lastInitial = Context.getEncounterService().getEncounterTypeByUuid(EncounterTypes.DM_HTN_INITIAL_ENCOUNTER_TYPE.uuid());
         EncounterType lastIFolloUp = Context.getEncounterService().getEncounterTypeByUuid(EncounterTypes.DIABETIC_CLINICAL_FOLLOW_UP_ENCOUNTER_TYPE.uuid());
         CalculationResultMap lastEncounterInitial = ConfigCalculations.lastEncounter(lastInitial, Arrays.asList(patientId), context );
@@ -59,22 +59,23 @@ public class MedicationHistoryWidgetFragmentController {
 
         if (initialEncounter != null && followUpEncounter != null) {
             //get the latest encounter
-            Date latestEncounterDate = ConfigCoreUtils.latest(initialEncounter.getEncounterDatetime(), followUpEncounter.getEncounterDatetime());
-            message = latestEncounterDate.toString();
+            encounter = followUpEncounter;
         }
         else if(initialEncounter != null){
-            Set<Obs> initialObs = initialEncounter.getAllObs();
+            encounter = initialEncounter;
+            Set<Obs> initialObs = encounter.getAllObs();
             if(initialObs != null) {
-                message = initialEncounter.getEncounterDatetime().toString();
+                //do something here to process the encounter
             }
         }
         else if(followUpEncounter != null){
-            Set<Obs> followUpObs = followUpEncounter.getAllObs();
+            encounter = followUpEncounter;
+            Set<Obs> followUpObs = encounter.getAllObs();
             if(followUpObs != null) {
-                message = followUpEncounter.getEncounterDatetime().toString();
+                //do some processing here to handle encounter
             }
         }
 
-        return message;
+        return encounter;
     }
 }
