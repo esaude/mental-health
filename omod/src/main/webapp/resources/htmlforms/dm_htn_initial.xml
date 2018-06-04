@@ -114,6 +114,13 @@
             font-size: 15px;
             padding-left:10px;
         }
+        .investigation  {
+            color: blue;
+            font-weight: bold;
+            font-size: 15px;
+            padding-left:10px;
+        }
+
 
 
          
@@ -220,6 +227,35 @@
 
         }
 
+        function flagInputByRange(inputElementId,min,max){ 
+            var value = getValue(inputElementId + '.value');                    
+            if (value &lt; min || value &gt; max)  {            
+                     jq('#'+inputElementId).last().addClass("red_flag");
+            }else{
+                 jq('#'+inputElementId).last().removeClass("red_flag");
+            }      
+
+        }
+
+       function flagInputByLimit(inputElementId,contraintValue,type){
+        var value = getValue(inputElementId + '.value'); 
+           if(type == 'min'){
+                if ( value &lt; contraintValue )  {            
+                    jq('#'+inputElementId).last().addClass("red_flag");
+                }else{
+                   jq('#'+inputElementId).last().removeClass("red_flag");
+                }   
+           }  
+
+           if(type == 'max'){
+                if ( value &gt; contraintValue)  {            
+                    jq('#'+inputElementId).last().addClass("red_flag");
+                }else{
+                   jq('#'+inputElementId).last().removeClass("red_flag");
+                }   
+           }                                   
+
+        }
         function prByAgeChange(){      
          var display = '';
             var age_6 = 72;
@@ -384,7 +420,7 @@
         function bpCategory(){
             return {
             normal:{ 
-                min:{diastolic:80,systolic:120},
+                min:{diastolic:60,systolic:90},
                 max:{diastolic:84,systolic:129}
             },
             high_normal:{ 
@@ -657,7 +693,8 @@
         }
 
        function flagAllowedNotFrequently(){
-            var categories = medCategory();      
+            var categories = medCategory();
+            console.log('categories.allowedNotFrequntyUsed[0].BetaBlockers' ,categories.allowedNotFrequntyUsed[0].BetaBlockers)     
 
             flagDrugCombination(
                     categories.allowedNotFrequntyUsed[0].BetaBlockers,
@@ -829,6 +866,56 @@
 	        disableGDMFormMale();
             otherGeneralExamDesc();
             lmpDisableChange();
+            // investigation flags:
+
+                 jq('#rbs').change(function(){
+                    flagInputByLimit('rbs',11.1,'max');
+      });
+       jq('#fbc').change(function(){
+       flagInputByLimit('fbc',7.8,'min');
+       });
+       jq('#sodium').change(function(){
+        flagInputByRange('sodium',135,155);
+       });
+       jq('#chloride').change(function(){
+        flagInputByRange('chloride',98,108);
+       });
+       jq('#potassium').change(function(){
+        flagInputByRange('potassium',3.5 ,5.5);
+       });
+       jq('#HDL').change(function(){
+        flagInputByRange('HDL',0.7 ,1.9);
+       });
+       jq('#LDL').change(function(){
+        flagInputByLimit('LDL',3.4 ,'max');
+       });
+       jq('#TotalCholesterol').change(function(){
+        flagInputByRange('TotalCholesterol',0 ,5.7);
+       });
+       jq('#Triglycerides').change(function(){
+        flagInputByRange('Triglycerides',0 ,5.7);
+       });
+       jq('#AST').change(function(){
+        flagInputByRange('AST',0,42);
+       });
+       jq('#ALTSGPT').change(function(){
+        flagInputByRange('ALTSGPT',0,37);
+       });
+       jq('#TotalBilirubin').change(function(){
+        flagInputByRange('TotalBilirubin',1.17,20.5);
+       });
+       jq('#GammaGT').change(function(){
+        flagInputByRange('GammaGT',9,48);
+       });
+       jq('#DirectBilirubin').change(function(){
+        flagInputByLimit('DirectBilirubin',5.1,'min');
+       });
+       jq('#hba1c').change(function(){
+        flagInputByLimit('hba1c',6.5,'max');
+       });
+       jq('#urea').change(function(){
+        flagInputByRange('urea',2.70 ,8.0);
+       });
             // medication flags
             var categories = medCategory();
             listenTOItemChanges(categories.notAllowed[0].listA,flagNotAllowed);
@@ -1442,97 +1529,272 @@
         </section>
        <br/>
 
-       <section>
-            <label style="background:  #ff7100; padding: 5px; color: #fff;">Investigations</label>
-            <table>
-                <tbody>
-                    <tr>
+<section>
+   <label style="background:  #ff7100; padding: 5px; color: #fff;">Investigations</label>
+   <table>
+      <tbody>
+         <tr>
+            <td >
+               <span class="investigation">Blood Work:</span>
+               <table>
+                  <tbody>
+                     <tr>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Test</th>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Results</th>
                         <th style="background:  #00b4ef; padding: 3px; color: #fff;">Date</th>
-                    </tr>
-                    <obsgroup groupingConceptId="161487">                    
-                    <tr>
-                        <td><label>RBS (mmols/L)</label></td>
-                        <td><obs conceptId="887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>FBS (mmols/L)</label></td>
-                        <td><obs conceptId="160912AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    </obsgroup>
-                  
-                    <tr>
-                        <td><label>PDT</label></td>
-                        <td>                       
-                           <obs id="pdt" conceptId="165144"  commentFieldLabel="&lt;/td&gt;&lt;td&gt;"  />
+                     </tr>
+                     <obsgroup groupingConceptId="161487">
+                        <tr>
+                           <td><label>1. RBS (mmols/L)</label></td>
+                           <td>
+                              <obs id="rbs" conceptId="887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                           </td>
+                        </tr>
+                        <tr>
+                           <td><label>2. FBS (mmols/L)</label></td>
+                           <td>
+                              <obs id="fbc" conceptId="160912AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <tr>
+                        <td><label>3. Hb A1C (%)</label></td>
+                        <td>
+                           <obs id="hba1c" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                         </td>
-                    </tr>
-                    <tr>
-                        <td> <label>ECG</label></td>
-                        <td><obs conceptId="159565" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
-                                 answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Hb A1C (%)</label></td>
-                        <td><obs conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
+                     </tr>
+                     <tr>
+                        <td colspan="3"><label>4. UECs</label></td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>i. Urea</label>
+                        </td>
+                        <td>
+                           <obs id="urea" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="3"><label>ii. Electrolytes</label></td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Sodium</label>
+                        </td>
+                        <td>
+                           <obs  id="sodium"  conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Chloride</label>
+                        </td>
+                        <td>
+                           <obs id="chloride" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Potassium</label>
+                        </td>
+                        <td>
+                           <obs id="potassium" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Creatinine</label>
+                        </td>
+                        <td>
+                           <obs id="Creatinine" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="3"><label>5. Lipid Profile</label></td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>HDL</label>
+                        </td>
+                        <td>
+                           <obs  id="HDL" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>LDL</label>
+                        </td>
+                        <td>
+                           <obs id="LDL" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Total Cholesterol</label>
+                        </td>
+                        <td>
+                           <obs id="TotalCholesterol" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Triglycerides TG</label>
+                        </td>
+                        <td>
+                           <obs id="Triglycerides" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
 
-                    <tr>
-                        <td><label>Urinalysis</label></td>
-                        <td><obs conceptId="302AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Normal,Abnormal,Unknown" answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
+                     <tr>
+                        <td colspan="3"><label>6. LFT</label></td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>AST (SGOT)</label>
+                        </td>
+                        <td>
+                           <obs id="AST" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>ALT (SGPT)</label>
+                        </td>
+                        <td>
+                           <obs id="ALTSGPT" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Total Bilirubin</label>
+                        </td>
+                        <td>
+                           <obs id="TotalBilirubin" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Direct Bilirubin</label>
+                        </td>
+                        <td>
+                           <obs id="DirectBilirubin" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <label>Gamma GT (GGT)</label>
+                        </td>
+                        <td>
+                           <obs id="GammaGT" conceptId="159644" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
 
-                        <td><label>Pus cells</label></td>
-                        <td><obs conceptId="165121" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Glucose</label></td>
-                        <td>                             
-                             <obs id="glucose" conceptId="159733" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+         <tr>
+            <td>
+            <span class="investigation">Urinalysis:</span>
+              
+               <table>
+                  <tbody>
+                  <tr>
+                        <td>
+                           <label>Glucose</label>
+                        </td>
+                        <td>
+                           <obs id="glucose" conceptId="159733" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
                              <hr />
                              <span id="glucose-level">
                              <obs conceptId="159733" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;"/>
                              </span>
-                         </td>
-                    </tr>
-                    <tr>
-                        <td>CXR</td>
-                        <td><obs conceptId="12" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
-                                 answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Protein</label></td>
-                         <td>
-                             <obs id="protein" conceptId="128340" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
+                        </td>
+                     </tr>
+                  <tr>
+                        <td>
+                           <label>Protein</label>
+                        </td>
+                        <td>
+                            <obs id="protein" conceptId="128340" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
                              <hr />
                              <span id="protein-level">
                                <obs conceptId="128340" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input"   answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                              </span>
-                         </td>
-                    </tr>
-                    <tr>
-                        <td><label>Ketone</label></td>
-                         <td>
-                             <obs id="ketone" conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
+                        </td>
+                     </tr>
+                  <tr>
+                        <td>
+                           <label>Ketones</label>
+                        </td>
+                        <td>
+                           <obs id="ketone" conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
                              <hr />
                              <span id="ketone-level">
                              <obs conceptId="161442" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input" answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                             </span>
-                         </td>
-                    </tr>
-                    <tr>
-                        <td><label>UECs</label></td>
-                        <td><obs conceptId="165123" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                    <tr>
-                        <td>Lipid profile</td>
-                        <td><obs conceptId="165118" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+                        </td>
+                     </tr>
+                   <tr>
+                        <td>
+                           <label>Deposits</label>
+                        </td>
+                        <td>
+                           <obs id="Deposits" conceptId="165121" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+                     </tr>
+                   <tr>
+                        <td>
+                           <label>Comment(Details)</label>
+                        </td>
+                        <td> 
+                           <obs id="DepositsDescription" conceptId="159644" rows="5" cols="50" style="textarea" />
+                        </td>
+                     </tr>
+
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+         <tr>
+            <td>
+            <span class="investigation">Radiological:</span>
+              
+               <table>
+                  <tbody>
+                  <tr>
+                        <td>
+                           <label>ECG</label>
+                        </td>
+                        <td><obs conceptId="159565" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
+                                 answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                     </tr>
+                  <tr>
+                        <td>
+                           <label>CXR</label>
+                        </td>
+                       <td><obs conceptId="12" answerConceptIds="1115,1116" answerLabels="Normal,Abnormal" style="radio" class="align-radio-input"
+                                 answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" /></td>
+                     </tr>
+                  <tr>
+                        <td>
+                           <label>Ultrasound</label>
+                        </td>
+                        <td>
+                           <obs id="Ultrasound" conceptId="161442" answerConceptIds="1066,1065" answerLabels="No,Yes" style="radio" class="align-radio-input" answerSeparator=""  />
+                             <hr />
+                             <span id="ketone-level">
+                             <obs conceptId="161442" answerConceptIds="1362,1363,1364" answerLabels="+,++,+++" style="radio" class="align-radio-input" answerSeparator="" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                            </span>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+</section>
        <br/>
     </div>
     <div id="tabs-3">
