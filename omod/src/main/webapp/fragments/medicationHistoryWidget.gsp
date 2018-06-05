@@ -13,13 +13,19 @@
                     <td colspan="2">Date: ${date}</td>
                 </tr>
                 <tr>
-                    <th>Drug</th>
+                    <th>Group</th>
                     <th>Formulation</th>
                 </tr>
                 <% medication.each { key, value -> %>
-                <tr>
+                    <tr>
                         <td>${key}</td>
-                        <td>${value}</td>
+                        <td>
+                            <ul>
+                                <% value.each {%>
+                                    <li>{it}</li>
+                                <%}%>
+                            </ul>
+                        </td>
                     </tr>
                 <%}%>
             </table>

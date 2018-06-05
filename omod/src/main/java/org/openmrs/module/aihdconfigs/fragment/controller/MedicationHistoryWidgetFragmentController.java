@@ -35,11 +35,11 @@ public class MedicationHistoryWidgetFragmentController {
     public void controller(FragmentModel model, @FragmentParam("patient") PatientDomainWrapper patient,
                            @SpringBean ConfigCalculationManager calculationManager){
 
-        Map<String, Map<String, List<Obs>>> medication = new HashMap<String, Map<String, List<Obs>>>();
+        Map<String, List<String>> medication = new HashMap<String, List<String>>();
         PatientCalculationService patientCalculationService = Context.getService(PatientCalculationService.class);
         PatientCalculationContext context = patientCalculationService.createCalculationContext();
         context.setNow(new Date());
-        medication.put("Medication", medications(patient.getId(), context));
+        medication.putAll(medications(patient.getId(), context));
         model.addAttribute("medication", medication);
         model.addAttribute("date", ConfigCoreUtils.formatDates(medicationEncounter(patient.getId(), context).getEncounterDatetime()));
 
@@ -71,9 +71,9 @@ public class MedicationHistoryWidgetFragmentController {
         return encounter;
     }
 
-    private Map<String, List<Obs>> medications(Integer patientId, PatientCalculationContext context){
-        Map<String, List<Obs>> medicationCategories = new HashMap<String, List<Obs>>();
-        List<Obs> groupA_ACEInhibitor = new ArrayList<Obs>();
+    private Map<String, List<String>> medications(Integer patientId, PatientCalculationContext context){
+        Map<String, List<String>> medicationCategories = new HashMap<String, List<String>>();
+        List<String> groupA_ACEInhibitor = new ArrayList<String>();
         List<Obs> groupA_ARB = new ArrayList<Obs>();
         List<Obs> groupB = new ArrayList<Obs>();
         List<Obs> groupC = new ArrayList<Obs>();
@@ -85,35 +85,33 @@ public class MedicationHistoryWidgetFragmentController {
         if(encounter != null){
             Set<Obs>  obsSet = encounter.getAllObs();
             for(Obs obs: obsSet){
-                if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupA_ACEInhibitor.add(obs);
-                }
-                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupA_ARB.add(obs);
-                }
-                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupB.add(obs);
-                }
-                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupC.add(obs);
-                }
-                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupD.add(obs);
-                }
-                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupZ.add(obs);
-                }
-                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
-                    groupOglas.add(obs);
+                if(obs.getConcept().equals(Dictionary.getConcept(Dictionary.MEDICATION_ORDER))){
+                    //start looking at the answers and the obsgroup comaprison to list the drugs
+
+                    if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Captopril))) {
+                        groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Enalapril))) {
+                        groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Lisinopril))) {
+                        groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Perindopril))) {
+                        groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Ramipril))) {
+                        groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
+                    }
                 }
             }
-            medicationCategories.put("groupA_ACEInhibitor", groupA_ACEInhibitor);
-            medicationCategories.put("groupA_ARB", groupA_ARB);
-            medicationCategories.put("groupB", groupB);
-            medicationCategories.put("groupC", groupC);
-            medicationCategories.put("groupD", groupD);
-            medicationCategories.put("groupZ", groupZ);
-            medicationCategories.put("groupOglas", groupOglas);
+            medicationCategories.put("GA ACE Inhibitor", groupA_ACEInhibitor);
+            //medicationCategories.put("groupA_ARB", groupA_ARB);
+            //medicationCategories.put("groupB", groupB);
+            //medicationCategories.put("groupC", groupC);
+            //medicationCategories.put("groupD", groupD);
+            //medicationCategories.put("groupZ", groupZ);
+            //medicationCategories.put("groupOglas", groupOglas);
         }
         return medicationCategories;
     }
