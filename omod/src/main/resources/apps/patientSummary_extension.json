@@ -38,5 +38,13 @@
       "provider" : "${project.parent.artifactId}",
       "fragment" : "medicationHistoryWidget"
     }
+  },
+  {
+    "id" : "${project.parent.groupId}.${project.parent.artifactId}.patientDashboard.appointment.history",
+    "extensionPointId" : "patientDashboard.firstColumnFragments",
+    "extensionParams" : {
+      "provider" : "${project.parent.artifactId}",
+      "fragment" : "appointmentHistoryWidget"
+    }
   }
 ]

@@ -2298,7 +2298,7 @@
                     </tr>
                     <tr>
                         <td><obs conceptId="165122"  answerConceptId="165132"  answerLabel="Continue Care in clinic"  style="checkbox" class="align-checkbox-input" /></td>
-                        <td>Return date:<obs conceptId="5096"/> </td>
+                        <td>Return date:<obs conceptId="5096" allowFutureDates="true" /> </td>
                     </tr>
                     <tr>
                         <td><obs conceptId="165122"  answerConceptId="164165"  answerLabel="Refer to referral facility"  style="checkbox" class="align-checkbox-input"/>

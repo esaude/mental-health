@@ -102,4 +102,6 @@ public class ConfigCoreUtils {
         gp.setPropertyValue(value);
         Context.getAdministrationService().saveGlobalProperty(gp);
     }
+
+    
 }
