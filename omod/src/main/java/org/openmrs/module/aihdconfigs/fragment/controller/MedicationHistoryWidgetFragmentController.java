@@ -35,20 +35,18 @@ public class MedicationHistoryWidgetFragmentController {
     public void controller(FragmentModel model, @FragmentParam("patient") PatientDomainWrapper patient,
                            @SpringBean ConfigCalculationManager calculationManager){
 
-        Map<String, String> medication = new HashMap<String, String>();
+        Map<String, Map<String, List<Obs>>> medication = new HashMap<String, Map<String, List<Obs>>>();
         PatientCalculationService patientCalculationService = Context.getService(PatientCalculationService.class);
         PatientCalculationContext context = patientCalculationService.createCalculationContext();
         context.setNow(new Date());
-
-        medication.put("test drug", "test formulation");
-
+        medication.put("Medication", medications(patient.getId(), context));
         model.addAttribute("medication", medication);
-        model.addAttribute("date", medicationEncounter(patient.getId(), context));
+        model.addAttribute("date", ConfigCoreUtils.formatDates(medicationEncounter(patient.getId(), context).getEncounterDatetime()));
 
     }
 
     private Encounter medicationEncounter(Integer patientId, PatientCalculationContext context){
-        Encounter encounter = null;
+        Encounter encounter = new Encounter();
         EncounterType lastInitial = Context.getEncounterService().getEncounterTypeByUuid(EncounterTypes.DM_HTN_INITIAL_ENCOUNTER_TYPE.uuid());
         EncounterType lastIFolloUp = Context.getEncounterService().getEncounterTypeByUuid(EncounterTypes.DIABETIC_CLINICAL_FOLLOW_UP_ENCOUNTER_TYPE.uuid());
         CalculationResultMap lastEncounterInitial = ConfigCalculations.lastEncounter(lastInitial, Arrays.asList(patientId), context );
@@ -57,25 +55,66 @@ public class MedicationHistoryWidgetFragmentController {
         Encounter initialEncounter = ConfigEmrCalculationUtils.encounterResultForPatient(lastEncounterInitial, patientId);
         Encounter followUpEncounter = ConfigEmrCalculationUtils.encounterResultForPatient(lastEncounterFollowUp, patientId);
 
+
+
         if (initialEncounter != null && followUpEncounter != null) {
-            //get the latest encounter
             encounter = followUpEncounter;
         }
         else if(initialEncounter != null){
             encounter = initialEncounter;
-            Set<Obs> initialObs = encounter.getAllObs();
-            if(initialObs != null) {
-                //do something here to process the encounter
-            }
         }
         else if(followUpEncounter != null){
             encounter = followUpEncounter;
-            Set<Obs> followUpObs = encounter.getAllObs();
-            if(followUpObs != null) {
-                //do some processing here to handle encounter
-            }
+
         }
 
         return encounter;
+    }
+
+    private Map<String, List<Obs>> medications(Integer patientId, PatientCalculationContext context){
+        Map<String, List<Obs>> medicationCategories = new HashMap<String, List<Obs>>();
+        List<Obs> groupA_ACEInhibitor = new ArrayList<Obs>();
+        List<Obs> groupA_ARB = new ArrayList<Obs>();
+        List<Obs> groupB = new ArrayList<Obs>();
+        List<Obs> groupC = new ArrayList<Obs>();
+        List<Obs> groupD = new ArrayList<Obs>();
+        List<Obs> groupZ = new ArrayList<Obs>();
+        List<Obs> groupOglas = new ArrayList<Obs>();
+
+        Encounter encounter = medicationEncounter(patientId, context);
+        if(encounter != null){
+            Set<Obs>  obsSet = encounter.getAllObs();
+            for(Obs obs: obsSet){
+                if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupA_ACEInhibitor.add(obs);
+                }
+                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupA_ARB.add(obs);
+                }
+                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupB.add(obs);
+                }
+                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupC.add(obs);
+                }
+                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupD.add(obs);
+                }
+                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupZ.add(obs);
+                }
+                else if(obs.getObsGroup().getConcept().equals(Dictionary.getConcept("165140"))){
+                    groupOglas.add(obs);
+                }
+            }
+            medicationCategories.put("groupA_ACEInhibitor", groupA_ACEInhibitor);
+            medicationCategories.put("groupA_ARB", groupA_ARB);
+            medicationCategories.put("groupB", groupB);
+            medicationCategories.put("groupC", groupC);
+            medicationCategories.put("groupD", groupD);
+            medicationCategories.put("groupZ", groupZ);
+            medicationCategories.put("groupOglas", groupOglas);
+        }
+        return medicationCategories;
     }
 }

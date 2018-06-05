@@ -109,9 +109,11 @@ public class ConfigCoreUtils {
 
         Format formatter;
         formatter = new SimpleDateFormat("dd-MM-yyyy");
-        String s = formatter.format(date);
+        if(date == null){
+            return "";
+        }
 
-        return s;
+        return formatter.format(date);
 
     }
 }
