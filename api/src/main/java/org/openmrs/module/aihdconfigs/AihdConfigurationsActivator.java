@@ -97,6 +97,10 @@ public class AihdConfigurationsActivator implements ModuleActivator {
 		appFrameworkService.disableApp("coreapps.latestObsForConceptList");
 		appFrameworkService.disableApp("coreapps.obsAcrossEncounters");
 		appFrameworkService.disableApp("coreapps.obsGraph");
+		appFrameworkService.disableApp("appointmentschedulingui.schedulingAppointmentApp");
+		appFrameworkService.disableApp("appointmentschedulingui.requestAppointmentApp");
+		appFrameworkService.disableExtension("appointmentschedulingui.tab");
+		appFrameworkService.disableExtension("org.openmrs.module.appointmentschedulingui.firstColumnFragments.patientDashboard.patientAppointments");
 
 		// install commonly used metadata
 		installCommonMetadata(deployService);
