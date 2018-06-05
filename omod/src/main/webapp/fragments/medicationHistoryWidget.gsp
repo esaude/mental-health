@@ -17,16 +17,18 @@
                     <th>Formulation</th>
                 </tr>
                 <% medication.each { key, value -> %>
-                    <tr>
-                        <td>${key}</td>
-                        <td>
-                            <ul>
-                                <% value.each {%>
-                                    <li>{it}</li>
-                                <%}%>
-                            </ul>
-                        </td>
-                    </tr>
+                    <% if(value.size > 0) {%>
+                        <tr>
+                            <td>${key}</td>
+                            <td>
+                                <ul>
+                                    <% value.each {%>
+                                        <li>${it}</li>
+                                    <%}%>
+                                </ul>
+                            </td>
+                        </tr>
+                    <%}%>
                 <%}%>
             </table>
         <%} else {%>
