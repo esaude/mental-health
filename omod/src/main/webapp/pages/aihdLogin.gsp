@@ -364,31 +364,37 @@ function validateSecurityInput(){
                   <img src="${ui.resourceLink("aihdconfigs", "images/AIHD_logo.jpg")}" />
                 </div>
             </div>
-            <div class="col-md-4">
-                <form method="post" autocomplete="off">
+            <div class="col-md-8">
+                <form method="post" autocomplete="off" class="form-horizontal">
                     <div class="imgcontainer">
                         <i class="icon-lock small"></i>
                         ${ ui.message("referenceapplication.login.loginHeading") }
                     </div>
-                    <div class="form-group">
-                        <label for="username">${ ui.message("referenceapplication.login.username") }:</label>
-                        <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
+                    <div class="form-group form-group-lg">
+                        <label for="username" class="col-md-4 control-label">${ ui.message("referenceapplication.login.username") }:</label>
+                        <div class="col-md-8">
+                            <input id="username" type="text" name="username" placeholder="${ ui.message("referenceapplication.login.username.placeholder") }"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-lg">
+                     <label for="password" class="col-md-4 control-label">${ ui.message("referenceapplication.login.password") }:</label>
+                     <div class="col-md-8">
+                        <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
+                     </div>
+                    </div>
+                    <div class="form-group form-group-lg">
+                        <label for="sessionLocation" class="col-md-4 control-label">Health facility:</label>
+                        <div class="col-md-8">
+                             <select id="sessionLocation" class="form-control">
+                                <% locations.sort { ui.format(it) }.each { %>
+                                <option id="${it.name}" value="${it.id}">${ui.format(it)}</option>
+                                <% } %>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                     <label for="password">${ ui.message("referenceapplication.login.password") }:</label>
-                     <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="sessionLocation">Health facility:</label>
-                         <select id="sessionLocation" class="form-control">
-                            <% locations.sort { ui.format(it) }.each { %>
-                            <option id="${it.name}" value="${it.id}">${ui.format(it)}</option>
-                            <% } %>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="security">Security Stamp:</label>
-                        <div id="security-container">
+                        <label for="security" class="col-md-4 control-label">Security Stamp:</label>
+                        <div id="security-container" class="col-md-4">
                             <span id="first_number" style="color:red;"></span>
                             <span id="operator"></span>
                             <span id="second_number" style="color:red;"></span>
@@ -397,12 +403,14 @@ function validateSecurityInput(){
                             <span id="captcha_notification" style="color:red; font-size:18;"></span>
                          </div>
                     </div>
-                    <div style="align:right;">
+                    <div class="form-group">
+                    <div class="col-sm-12 text-right">
                         <a id="cant-login" href="javascript:void(0)">
                             <i class="icon-question-sign small"></i>
                             ${ ui.message("referenceapplication.login.cannotLogin") }
                         </a>
                         <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
+                    </div>
                     </div>
                         <input type="hidden" id="sessionLocationInput" name="sessionLocation"
                          <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
