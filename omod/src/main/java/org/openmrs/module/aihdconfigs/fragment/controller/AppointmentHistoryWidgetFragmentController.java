@@ -7,6 +7,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculationContext;
 import org.openmrs.calculation.patient.PatientCalculationService;
 import org.openmrs.calculation.result.CalculationResultMap;
+import org.openmrs.module.aihdconfigs.ConfigCoreUtils;
 import org.openmrs.module.aihdconfigs.Dictionary;
 import org.openmrs.module.aihdconfigs.Metadata;
 import org.openmrs.module.aihdconfigs.calculation.ConfigCalculations;
@@ -42,7 +43,7 @@ public class AppointmentHistoryWidgetFragmentController {
         CalculationResultMap lastDiabeticObs = ConfigCalculations.lastObs(Dictionary.getConcept(Dictionary.RETURN_VISIT_DATE), Arrays.asList(patientId), context);
         Obs obs =  ConfigEmrCalculationUtils.obsResultForPatient(lastDiabeticObs, patientId);
         if(obs != null){
-            results.put("Appointment on:", obs.getValueDatetime().toString());
+            results.put("Appointment on:", ConfigCoreUtils.formatDates(obs.getValueDatetime()));
         }
         else {
             results.put("Appointment on:", "None");

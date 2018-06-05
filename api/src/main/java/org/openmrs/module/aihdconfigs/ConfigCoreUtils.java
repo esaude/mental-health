@@ -17,6 +17,8 @@ import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.util.OpenmrsUtil;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -103,5 +105,13 @@ public class ConfigCoreUtils {
         Context.getAdministrationService().saveGlobalProperty(gp);
     }
 
-    
+    public static String formatDates(Date date){
+
+        Format formatter;
+        formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String s = formatter.format(date);
+
+        return s;
+
+    }
 }
