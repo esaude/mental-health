@@ -344,9 +344,6 @@ function validateSecurityInput(){
             <a href="${ui.pageLink("referenceapplication", "home")}" class="pull-left">
                 <img src="${ui.resourceLink("aihdconfigs", "images/banners/city_county_logo.jpg")}" id="county-logo"/>
             </a>
-            <div class="pull-right">
-                <h1>Sample tag line message to go here</h1>
-            </div>
             <div class="clearfix"></div>
         </div>
         <div class="row">
