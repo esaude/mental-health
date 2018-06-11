@@ -120,6 +120,9 @@
             font-size: 15px;
             padding-left:10px;
         }
+        .showinline  {
+            
+        }
 
 
 
@@ -127,6 +130,7 @@
         
             </style>
     <script type="text/javascript">
+       var checkedRequired =false;
         function onWeightOrHeightChange() {
         var display = '';
         var weightKg = parseFloat(getValue('weight.value'));
@@ -818,6 +822,58 @@
                 jq(init + items.replace(/,/g,',#')).change(onchangeMethod);
             }            
         }
+        function  showRequiredFields(){
+            var requiredFields=getRequiredFields();
+            var divHtml="";
+ 
+              jq.each(requiredFields, function( index, fieldObject ) {
+                 var fieldValue = getValue(fieldObject.name+'.value');
+                  jq('#'+fieldObject.name+'_msg').html('');
+                  jq('#'+fieldObject.name+'_msg').removeClass('required');
+                  if(!fieldValue){
+                  divHtml=divHtml+'<span class="required">'+'. '+ fieldObject.message+'</span><br></br>';
+                   jq('#'+fieldObject.name+'_msg').html('Required');
+                   jq('#'+fieldObject.name+'_msg').addClass('required');                  
+                  }
+
+                });
+                jq('#displayRequiredFields').html(divHtml);
+                if(divHtml){
+                return true;
+                }
+                return false;
+
+        }        
+
+        function addRequiredChecksOnChange(){
+            var requiredFields=getRequiredFields();
+            jq.each(requiredFields, function( index, fieldObject ) {                           
+                jq('#'+fieldObject.name).change(showRequiredFields);
+            });
+                       
+        }
+
+       function getRequiredFields(){
+        return [
+                {name:'occupation',message:'Occupation is required', location:'page1'}, 
+                {name:'education_level',message:'Education Level is required', location:'page1'}, 
+                {name:'diabetes_status',message:'Diabetes Status is required', location:'page1'}, 
+                {name:'diabetes_runs_in_family',message:'Diabetes runs in family is required', location:'page1'}, 
+                {name:'htn_status',message:'Hypertension status is required', location:'page1'}, 
+                {name:'hypertension_runs_in_family',message:'Hypertension runs in family is required', location:'page1'}, 
+                {name:'hiv_status',message:'HIV Status is required', location:'page1'}, 
+                {name:'nhif',message:'Nhif status is required', location:'page1'}, 
+                {name:'referal',message:'Patint referral status is required', location:'page1'}, 
+                {name:'do_you_exercise',message:'Do you exercise question is required', location:'page1'}, 
+                {name:'follow_a_balanced_diet',message:'Do you follow a balanced question diet is required', location:'page1'}, 
+                {name:'smoke_cigarettes',message:'Do you smoke cigarettes question is required', location:'page1'}, 
+                {name:'follow_a_balanced_diet',message:'Do you follow a balanced diet question is required', location:'page1'}, 
+                {name:'drink_alcohol',message:'Do you drink alcohol question is required', location:'page1'},
+                {name:'nutrition_opt',message:'Nutrition counselling/education is required', location:'page3'},
+                {name:'physical_activity_opt',message:'Physical activity counselling/education is required', location:'page3'}
+                 
+         ];
+        }
 
         jQuery(function() {
             jq('#other_chief_complaint_text :input').prop('disabled', true);
@@ -970,7 +1026,16 @@
 		           return false;
 		       });
        
-        });            
+        });  
+
+        beforeSubmit.push(function() {
+            var val = showRequiredFields();
+            if (val === true) {
+                addRequiredChecksOnChange();
+                return false;
+            }
+            return true;
+        });          
     
     </script>
 
@@ -981,6 +1046,7 @@
    <div style="display:none">
       <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
    </div>
+   <div id="displayRequiredFields">xxxxxxx</div>
    <div id="tab-wrap">
       <div id="tabs">
          <ul>
@@ -1008,6 +1074,7 @@
                         <obs required="true" conceptId="1542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"  
                            answerConceptIds="1540AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,038b7284-d322-4d91-9091-9e47a63e07fe,161382AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,159465AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,5622" 
                            answerLabels="Employed,Unemployed,Self employed,Student,Other"  id="occupation" answerSeparator="" />
+                           <span id="occupation_msg"></span>
                      </td>
                      <td colspan="2">
                         <label>Other Occupation</label>
@@ -1017,9 +1084,10 @@
                      </td>
                      <td colspan="2">
                         <label>Level of education:</label>
-                        <obs required="true" conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
+                        <obs required="true" id="education_level" conceptId="1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
                            answerConceptIds="1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160290AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
                            answerLabels="None,Incomplete Primary,Primary,Secondary,Tertiary" style="dropdown" answerSeparator="" />
+                           <span id="education_level_msg"></span>
                      </td>
                   </tr>
                </tbody>
@@ -1032,6 +1100,7 @@
                         <td>
                            <label>Diabetes</label>
                            <obs required="true" conceptId="165086" answerConceptIds="165087,165088,1175" answerLabels="New DM patient,Known DM patient,NA" style="radio" answerSeparator="" id="diabetes_status" class="align-radio-input"/>
+                           <span id="diabetes_status_msg"></span>
                         </td>
                         <td>
                            <label>Type of Diabetes:</label>
@@ -1045,13 +1114,15 @@
                         </td>
                         <td>
                            <label>Diabetes runs in the family</label>
-                           <obs required="true" conceptId="140228" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs required="true" id="diabetes_runs_in_family" conceptId="140228" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <span id="diabetes_runs_in_family_msg"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>
                            <label>Hypertension:</label>
                            <obs required="true" conceptId="165091" answerConceptIds="165092,165093,1175" answerLabels="New HTN patient,Known HTN patient,NA" style="radio" answerSeparator="" id="htn_status" class="align-radio-input"/>
+                           <span id="htn_status_msg"></span>
                         </td>
                         <td>
                            <label>Type of Hypertension:</label>
@@ -1065,13 +1136,15 @@
                         </td>
                         <td>
                            <label>Hypertension runs in the family</label>
-                           <obs required="true" conceptId="26d521eb-e1df-464c-8356-93616078080d" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs required="true" id="hypertension_runs_in_family" conceptId="26d521eb-e1df-464c-8356-93616078080d" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <span id="hypertension_runs_in_family_msg"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>
                            <label>HIV status:</label>
                            <obs required="true" conceptId="138405" answerConceptIds="664,138571,1067" answerLabels="HIV -ve,HIV +ve,Unknown" style="radio" answerSeparator="" id="hiv_status" class="align-radio-input"/>
+                           <span id="hiv_status_msg"></span>
                         </td>
                         <td>
                            <label>If HIV+ enrolled to care.</label>
@@ -1108,6 +1181,7 @@
                         <td>
                            <label>Active NHIF Cover:</label>
                            <obs required="true" conceptId="1917" answerConceptIds="1065,1066,5622" answerLabels="Yes,No,Other" style="radio" answerSeparator="" id="nhif" class="align-radio-input"/>
+                           <span id="nhif_msg"></span>
                         </td>
                         <td colspan="2">
                            <label>Other:</label>
@@ -1125,6 +1199,7 @@
                         <td valign="top">
                            <label>Is patient a referral?</label>
                            <obs required="true" conceptId="1648" answerConceptIds="1065,1066" answerLabels="Yes,No" style="radio" answerSeparator="" id="referal" class="align-radio-input"/>
+                           <span id="referal_msg"></span>
                         </td>
                         <td valign="top">
                            <span id="refering_facility">
@@ -1235,21 +1310,25 @@
                      <tr>
                         <td>
                            <label>Do you Exercise?</label>
-                           <obs required="true" conceptId="13888755-b2ff-46b7-aab5-a267c6d2a4e3" answerConceptIds="1065,1066,163721" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs required="true" id="do_you_exercise" conceptId="13888755-b2ff-46b7-aab5-a267c6d2a4e3" answerConceptIds="1065,1066,163721" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <span id="do_you_exercise_msg"></span>
                         </td>
                         <td>
                            <label>Do you follow a balanced diet?</label>
-                           <obs required="true" conceptId="44e4197f-2feb-41da-a500-5b0dcf1ab335" answerConceptIds="1065,1066,163721" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs required="true" id="follow_a_balanced_diet" conceptId="44e4197f-2feb-41da-a500-5b0dcf1ab335" answerConceptIds="1065,1066,163721" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <span id="follow_a_balanced_diet_msg"></span>
                         </td>
                      </tr>
                      <tr>
                         <td>
                            <label>Do you smoke cigarettes?</label>
-                           <obs required="true" conceptId="152722" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs required="true" conceptId="152722" id="smoke_cigarettes" answerConceptIds="1065,1066,158939" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <span id="smoke_cigarettes_msg"></span>
                         </td>
                         <td>
                            <label>Do you drink alcohol?</label>
-                           <obs required="true" conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs required="true" id="drink_alcohol" conceptId="159449" answerConceptIds="159450,1090,159452" answerLabels="Yes,No,Stopped" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <span id="drink_alcohol_msg"></span>
                         </td>
                      </tr>
                      <tr>
@@ -1996,13 +2075,19 @@
                <table>
                   <tbody>
                      <tr>
-                        <td>
+                        <td> 
+                          <div class="showinline">
                            <obs conceptId="1379" id="nutrition_opt" answerConceptId="1380" answerLabel="Nutrition" style="checkbox" class="align-checkbox-input" />
+                           <span id="nutrition_opt_msg" class="required"></span>
+                          </div> 
+                          <div class="showinline">  
                            <obs conceptId="1379" id="physical_activity_opt" answerConceptId="159364" answerLabel="Physical Activity" style="checkbox" class="align-checkbox-input" />
+                           <span id="physical_activity_opt_msg" class="required"></span>
+                           </div>
                            <obs conceptId="1379" answerConceptId="5490" answerLabel="Psychosocial" style="checkbox" class="align-checkbox-input"/>
                            <obs id="education" conceptId="1379" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/>
-                           <span id="nutrition_msg" class="required"></span>
-                           <span id="physical_activity_msg" class="required"></span>
+                           
+                            
                         </td>
                      </tr>
                      <tr>
