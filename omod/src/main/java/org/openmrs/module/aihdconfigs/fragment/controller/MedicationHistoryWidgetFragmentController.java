@@ -74,12 +74,13 @@ public class MedicationHistoryWidgetFragmentController {
     private Map<String, List<String>> medications(Integer patientId, PatientCalculationContext context){
         Map<String, List<String>> medicationCategories = new HashMap<String, List<String>>();
         List<String> groupA_ACEInhibitor = new ArrayList<String>();
-        List<Obs> groupA_ARB = new ArrayList<Obs>();
-        List<Obs> groupB = new ArrayList<Obs>();
-        List<Obs> groupC = new ArrayList<Obs>();
-        List<Obs> groupD = new ArrayList<Obs>();
-        List<Obs> groupZ = new ArrayList<Obs>();
-        List<Obs> groupOglas = new ArrayList<Obs>();
+        List<String> groupA_ARB = new ArrayList<String>();
+        List<String> groupB = new ArrayList<String>();
+        List<String> groupC = new ArrayList<String>();
+        List<String> groupD = new ArrayList<String>();
+        List<String> groupZ = new ArrayList<String>();
+        List<String> groupOglas = new ArrayList<String>();
+        List<String> insulin = new ArrayList<String>();
 
         Encounter encounter = medicationEncounter(patientId, context);
         if(encounter != null){
@@ -103,15 +104,127 @@ public class MedicationHistoryWidgetFragmentController {
                     else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Ramipril))) {
                         groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
                     }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_ace))) {
+                        groupA_ACEInhibitor.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Candesartan))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Irbesartan))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Losartan))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Telmisartan))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Valsartan))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Olmesartan))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_arb))) {
+                        groupA_ARB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Atenolol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Labetolol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Propranolol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Carvedilol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Nebivolol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Metoprolol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Bisoprolol))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_b))) {
+                        groupB.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Amlodipine))) {
+                        groupC.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Felodipine))) {
+                        groupC.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Nifedipine))) {
+                        groupC.add(obs.getValueCoded().getName().getName());
+                    }else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Chlorthalidone))) {
+                        groupD.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.HydrochlorothiazideHCTZ))) {
+                        groupD.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Indapamide))) {
+                        groupD.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_d1))) {
+                        groupD.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_d2))) {
+                        groupD.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Methyldopa))) {
+                        groupZ.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Hydralazine))) {
+                        groupZ.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Prazocin))) {
+                        groupZ.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_z))) {
+                        groupZ.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Prazocin))) {
+                        groupOglas.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other))) {
+                        groupOglas.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Metformin))) {
+                        groupOglas.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.Glibenclamide))) {
+                        groupOglas.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.insulin_70_30))) {
+                        insulin.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.other_insulin))) {
+                        insulin.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.soluble_insulin))) {
+                        insulin.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.NPH_Type_1))) {
+                        insulin.add(obs.getValueCoded().getName().getName());
+                    }
+                    else if(obs.getValueCoded().equals(Dictionary.getConcept(Dictionary.NPH_Type_2))) {
+                        insulin.add(obs.getValueCoded().getName().getName());
+                    }
+
                 }
             }
             medicationCategories.put("GA ACE Inhibitor", groupA_ACEInhibitor);
-            //medicationCategories.put("groupA_ARB", groupA_ARB);
-            //medicationCategories.put("groupB", groupB);
-            //medicationCategories.put("groupC", groupC);
-            //medicationCategories.put("groupD", groupD);
-            //medicationCategories.put("groupZ", groupZ);
-            //medicationCategories.put("groupOglas", groupOglas);
+            medicationCategories.put("GA ARB", groupA_ARB);
+            medicationCategories.put("Group B", groupB);
+            medicationCategories.put("Group C", groupC);
+            medicationCategories.put("Group D", groupD);
+            medicationCategories.put("Group Z", groupZ);
+            medicationCategories.put("Oglas", groupOglas);
+            medicationCategories.put("Insulin", insulin);
         }
         return medicationCategories;
     }
