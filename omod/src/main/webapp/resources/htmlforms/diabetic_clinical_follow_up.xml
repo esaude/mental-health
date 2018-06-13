@@ -491,6 +491,17 @@
             var isSevere = false;
             var cBp = bpCategory();
             var isDiabetic = getValue('diabetes_status.value'); 
+
+            // Hypotension
+            if(systolic &lt; cBp.normal.min.systolic || diastolic &lt;cBp.normal.min.diastolic){            
+            if(isDiabetic == 165088 || isDiabetic == 165087){
+                jq('#'+display).last().addClass("red_flag");             
+                
+            }else{
+            jq('#' + display ).last().addClass("yellow_flag");
+            }
+            return;
+            }
             
             isNormal = bPStatus(diastolic,systolic,
                 cBp.normal.min.systolic,cBp.normal.max.systolic,

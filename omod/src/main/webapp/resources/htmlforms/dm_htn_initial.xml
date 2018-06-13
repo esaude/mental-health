@@ -348,13 +348,23 @@
             var isModerate = false;
             var isSevere = false;
             var cBp = bpCategory();
-            var isDiabetic = getValue('diabetes_status.value'); 
-            
+            var isDiabetic = getValue('diabetes_status.value');        
+        // Hypotension
+            if(systolic &lt; cBp.normal.min.systolic || diastolic &lt;cBp.normal.min.diastolic){            
+            if(isDiabetic == 165088 || isDiabetic == 165087){
+                jq('#'+display).last().addClass("red_flag");             
+                
+            }else{
+            jq('#' + display ).last().addClass("yellow_flag");
+            }
+            return;
+            }
+
             isNormal = bPStatus(diastolic,systolic,
                 cBp.normal.min.systolic,cBp.normal.max.systolic,
                 cBp.normal.min.diastolic,cBp.normal.max.diastolic
             );
-
+    
             if(isNormal){            
             if(isDiabetic == 165088 || isDiabetic == 165087){
                 jq('#'+display).last().addClass("yellow_flag");             
@@ -750,7 +760,6 @@
         var drugs = obsIds.split(',');
         var hasPrimaryDrug = false;
           jq.each(drugs, function( index, value ) {
-           console.log( index + ": " + value +'----------DD='+getValue(value+'.value'));
                 if( getValue(value+'.value')){
                 hasPrimaryDrug = true;
                 return false;
@@ -858,16 +867,15 @@
                 {name:'occupation',message:'Occupation is required', location:'page1'}, 
                 {name:'education_level',message:'Education Level is required', location:'page1'}, 
                 {name:'diabetes_status',message:'Diabetes Status is required', location:'page1'}, 
-                {name:'diabetes_runs_in_family',message:'Diabetes runs in family is required', location:'page1'}, 
+                {name:'diabetes_runs_in_family',message:'Diabetes runs in the family is required', location:'page1'}, 
                 {name:'htn_status',message:'Hypertension status is required', location:'page1'}, 
-                {name:'hypertension_runs_in_family',message:'Hypertension runs in family is required', location:'page1'}, 
+                {name:'hypertension_runs_in_family',message:'Hypertension runs in the family question is required', location:'page1'}, 
                 {name:'hiv_status',message:'HIV Status is required', location:'page1'}, 
                 {name:'nhif',message:'Nhif status is required', location:'page1'}, 
-                {name:'referal',message:'Patint referral status is required', location:'page1'}, 
+                {name:'referal',message:'Patient referral status is required', location:'page1'}, 
                 {name:'do_you_exercise',message:'Do you exercise question is required', location:'page1'}, 
-                {name:'follow_a_balanced_diet',message:'Do you follow a balanced question diet is required', location:'page1'}, 
+                {name:'follow_a_balanced_diet',message:'Do you follow a balanced diet question  is required', location:'page1'}, 
                 {name:'smoke_cigarettes',message:'Do you smoke cigarettes question is required', location:'page1'}, 
-                {name:'follow_a_balanced_diet',message:'Do you follow a balanced diet question is required', location:'page1'}, 
                 {name:'drink_alcohol',message:'Do you drink alcohol question is required', location:'page1'},
                 {name:'nutrition_opt',message:'Nutrition counselling/education is required', location:'page3'},
                 {name:'physical_activity_opt',message:'Physical activity counselling/education is required', location:'page3'}
