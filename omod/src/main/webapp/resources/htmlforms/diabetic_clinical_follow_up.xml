@@ -410,6 +410,7 @@
             if(val == 165088){
                 jq('#dm_diagnosis_date :input').prop('disabled', false);
                 jq('#dm_treatment_start_date :input').prop('disabled', false);
+
              }
         }
         function htnStatus(){
@@ -474,7 +475,10 @@
             var systolic = getValue('systolic.value');
             var diastolic = getValue('diastolic.value');
             removeFlags('bp_reading')
-            bpFlag(diastolic,systolic,'bp_reading');
+            if(systolic &gt;0 &amp;&amp; diastolic &gt;0  ){
+              bpFlag(diastolic,systolic,'bp_reading');
+            }
+            
         }
 
         function removeFlags(display){
@@ -483,7 +487,7 @@
                     jq('#' + display).last().removeClass("red_flag");
                     jq('#' + display).last().removeClass("yellow_flag");
         }
-                function bpFlag(diastolic,systolic,display){
+        function bpFlag(diastolic,systolic,display){
             var isNormal = false;
             var isNormalHigh = false;
             var isMild = false;
@@ -610,10 +614,30 @@
                 }
                 else {
                     display = hipWaist.toFixed(2);
+                    flagWaistRatio(display);
                 }
             }            
             jq('#hip_waist_ratio').html(display);
         }
+        function flagWaistRatio(waistRatio) {
+           
+            var gender= "<lookup expression="patient.gender"/>";
+            var maxMaleRatio = 0.9;
+            var maxFemaleRatio = 0.85;      
+                
+            jq('#hip_waist_ratio').last().removeClass("red_flag");
+              
+            if(gender=='M' &amp;&amp; waistRatio &gt; maxMaleRatio){
+            jq('#hip_waist_ratio').last().addClass("red_flag");
+            return;        
+            }
+
+            if(gender=='F' &amp;&amp; waistRatio &gt; maxFemaleRatio){
+            jq('#hip_waist_ratio').last().addClass("red_flag");
+            return;        
+            }
+        }
+
         jQuery(function() {
              jq('#diastolic').change(checkBpReading);
              jq('#systolic').change(checkBpReading);

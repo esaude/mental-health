@@ -120,14 +120,35 @@
             font-size: 15px;
             padding-left:10px;
         }
-        .showinline  {
-            
+        .flagRed  {
+            color: blue;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .sub-title  {
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            background-color:#007fff;
+            width: 100%;
+            display: block;
+            overflow: auto;
+            padding: 5px;
+        }
+        .sub-title-1  {
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            background-color:#00b4ef;
+            width: 100%;
+            display: block;
+            overflow: auto;
+            padding: 5px;
         }
 
-
-
-         
         
+
+ 
             </style>
     <script type="text/javascript">
        var checkedRequired =false;
@@ -159,6 +180,7 @@
                 }
                 else {
                     display = hipWaist.toFixed(2);
+                    flagWaistRatio(display);
                 }
             }            
             jq('#hip_waist_ratio').html(display);
@@ -324,14 +346,19 @@
             var systolic = getValue('systolic1.value');
             var diastolic = getValue('diastolic1.value');
             removeFlags('first_reading_bp')
+            if(systolic &gt;0 &amp;&amp; diastolic &gt;0  ){
             bpFlag(diastolic,systolic,'first_reading_bp');
+            }
         }
+        
 
         function checkSecondBpReading(){
             removeFlags('second_reading_bp')
             var systolic = getValue('systolic2.value');
             var diastolic = getValue('diastolic2.value');
-            bpFlag(diastolic,systolic,'second_reading_bp');
+            if(systolic &gt;0 &amp;&amp; diastolic &gt;0  ){
+               bpFlag(diastolic,systolic,'second_reading_bp');
+            }
         }
 
         function removeFlags(display){
@@ -489,6 +516,8 @@
             if(val == 165088){
                 jq('#dm_diagnosis_year :input').prop('disabled', false);
              }
+                checkFirstBpReading();
+                checkSecondBpReading();
         }
         function occupationStatus(){
             var val= getValue('occupation.value');
@@ -881,6 +910,25 @@
                 {name:'physical_activity_opt',message:'Physical activity counselling/education is required', location:'page3'}
                  
          ];
+        }
+
+        function flagWaistRatio(waistRatio) {
+           
+            var gender= "<lookup expression="patient.gender"/>";
+            var maxMaleRatio = 0.9;
+            var maxFemaleRatio = 0.85;      
+                
+            jq('#hip_waist_ratio').last().removeClass("flagRed");
+              
+            if(gender=='M' &amp;&amp; waistRatio &gt; maxMaleRatio){
+            jq('#hip_waist_ratio').last().addClass("flagRed");
+            return;        
+            }
+
+            if(gender=='F' &amp;&amp; waistRatio &gt; maxFemaleRatio){
+            jq('#hip_waist_ratio').last().addClass("flagRed");
+            return;        
+            }
         }
 
         jQuery(function() {
@@ -1781,7 +1829,7 @@
                   <tbody>
                      <tr>
                         <td >
-                           <span class="investigation">Blood Work:</span>
+                           <span class="sub-title">Blood Work:</span>
                            <table>
                               <tbody>
                                  <tr>
@@ -1816,8 +1864,8 @@
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td colspan="3">
-                                       <label>4. UECs</label>
+                                    <td colspan="3" >
+                                       <span class="sub-title-1">4. UECs</span>
                                     </td>
                                  </tr>
                                  <tr>
@@ -1829,7 +1877,7 @@
                                     </td>
                                  </tr>
                                  <tr>
-                                    <td colspan="3">
+                                    <td colspan="3" > 
                                        <label>ii. Electrolytes</label>
                                     </td>
                                  </tr>
@@ -1867,7 +1915,7 @@
                                  </tr>
                                  <tr>
                                     <td colspan="3">
-                                       <label>5. Lipid Profile</label>
+                                       <span  class="sub-title-1">5. Lipid Profile</span>
                                     </td>
                                  </tr>
                                  <tr>
@@ -1904,7 +1952,7 @@
                                  </tr>
                                  <tr>
                                     <td colspan="3">
-                                       <label>6. LFT</label>
+                                       <span class="sub-title-1">6. LFT</span>
                                     </td>
                                  </tr>
                                  <tr>
@@ -1953,7 +2001,7 @@
                      </tr>
                      <tr>
                         <td>
-                           <span class="investigation">Urinalysis:</span>
+                          <span class="sub-title">Urinalysis:</span>
                            <table>
                               <tbody>
                                  <tr>
@@ -2014,7 +2062,7 @@
                      </tr>
                      <tr>
                         <td>
-                           <span class="investigation">Radiological:</span>
+                           <span class="sub-title" >Radiological:</span>
                            <table>
                               <tbody>
                                  <tr>
@@ -2047,10 +2095,17 @@
                      </tr>
                      <tr>
                         <td>
-                           <label>PDT</label>
-                        </td>
-                        <td>
-                           <obs id="pdt" conceptId="165144" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" />
+                         <label>PDT</label>
+                        <table>                           
+                            <tr>
+                                <th>Date</th><th>Comment</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <obs id="pdt" conceptId="165144" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" />
+                                </td>
+                            </tr>
+                        </table>
                         </td>
                      </tr>
                   </tbody>
