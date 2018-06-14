@@ -69,5 +69,28 @@
         </sql>
     </changeSet>
 
+    <changeSet id="aihd-20180614-1022" author="ningosi" dbms="mysql">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM scheduler_task_config
+                WHERE schedulable_class = 'org.openmrs.module.aihdconfigs.tasks.GenerateOpenMRSPatientIdentifierTask'
+                And name = 'Automation of OpenMRS Ids'
+            </sqlCheck>
+        </preConditions>
+        <comment>Creating OpenMRS id for patients who are lacking</comment>
+        <insert tableName="scheduler_task_config">
+            <column name="name" value="Automation of OpenMRS Ids" />
+            <column name="description" value="Scan through all and flag out those who are missing the OpenMRS ID and create one for them" />
+            <column name="schedulable_class" value="org.openmrs.module.aihdconfigs.tasks.GenerateOpenMRSPatientIdentifierTask" />
+            <column name="start_time_pattern" value="MM/dd/yyyy HH:mm:ss" />
+            <column name="start_time" valueDate="2018-01-20T23:59:59" />
+            <column name="repeat_interval" value="90" />
+            <column name="start_on_startup" value="1" />
+            <column name="date_created" valueDate="CURRENT_TIMESTAMP" />
+            <column name="created_by" value="1" />
+            <column name="uuid" value="308ca680-6fa4-11e8-b784-cf4238658c5b" />
+        </insert>
+    </changeSet>
+
     
 </databaseChangeLog>
