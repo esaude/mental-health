@@ -1504,7 +1504,7 @@
                            <obs conceptId="1282" answerConceptId="79074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Losartan" answerLabel="Losartan" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="50,100" answerLabels="25-50 mg,100 mg" style="dropdown"/>
+                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="50,100" answerLabels="50 mg,100 mg" style="dropdown"/>
                         </td>                        
                      </tr>
                   </obsgroup>
@@ -2285,7 +2285,7 @@
                                        <obs conceptId="1282" answerConceptId="72806AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Captopril" answerLabel="Captopril" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2550,50" answerLabels="25-50 mg,50 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25 mg,50 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2387,7 +2387,7 @@
                                        <obs conceptId="1282" answerConceptId="79074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Losartan" answerLabel="Losartan" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="50,100" answerLabels="25-50 mg,100 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="50,100" answerLabels="50 mg,100 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2438,7 +2438,7 @@
                                     <label>Other ARB</label>
                                  </td>
                                  <td colspan="2">
-                                    <obs conceptId="03860e0e-9bc2-40c3-8e1e-c97602cd9a50" rows="2" cols="50" style="textarea" />
+                                    <obs conceptId="03860e0e-9bc2-40c3-8e1e-c97602cd9a50" />
                                  </td>
                               </tr>
                            </table>
@@ -2829,18 +2829,46 @@
                                     </td>
                                  </tr>
                               </obsgroup>
-                              <tr>
-                                 <td>
-                                    <label>Other insulin medication</label>
-                                 </td>
-                                 <td colspan="2">
-                                    <obs conceptId="5fdb89e1-d6f5-484d-abaa-ff2a18e12621" />
-                                 </td>
-                              </tr>
+                              <obsgroup groupingConceptId="5a91ad01-fd51-4501-b6a2-8637c9bc1555">
+                                 <tr>
+                                    <td>
+                                       <obs conceptId="1282" answerConceptId="ee5647b4-3ebf-48ae-9428-2558118de260" answerLabel="Other insulin medication" style="checkbox" class="align-checkbox-input"/>
+                                    </td>
+                                    <td>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                                    </td>
+                                    <td>
+                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
+                                    </td>
+                                 </tr>
+                              </obsgroup>
                            </table>
                         </td>
                      </tr>
-                     <obsgroup groupingConceptId="165142">
+                     
+                     <obsgroup groupingConceptId="44b5478f-7a63-46f0-af66-c5c13d5c8ec5">
+                        <tr>
+                           <td>
+                              <obs conceptId="1282" answerConceptId="6c3216ec-0f76-4915-8e7f-5606a9aaec24" answerLabel="Non Insulin Injectable" style="checkbox" class="align-checkbox-input"/>
+                           </td>
+                           <td colspan="2">
+                              <label>Specify</label>
+                              <obs conceptId="6c3216ec-0f76-4915-8e7f-5606a9aaec24" rows="3" cols="50" style="textarea" />
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <obsgroup groupingConceptId="4e0762be-80bd-4269-9d18-7e0ad0df594d">
+                        <tr>
+                           <td>
+                              <obs conceptId="1282" answerConceptId="287e075d-61d6-4273-89a7-e9bcb3d925e5" answerLabel="Both OGLAs And Insulin" style="checkbox" class="align-checkbox-input"/>
+                           </td>
+                           <td colspan="2">
+                              <label>Specify</label>
+                              <obs conceptId="287e075d-61d6-4273-89a7-e9bcb3d925e5" rows="3" cols="50" style="textarea" />
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <obsgroup groupingConceptId="f0cf3fb8-8519-443a-9901-1791d2a39817">
                         <tr>
                            <td>
                               <obs conceptId="1282" answerConceptId="185c3281-058c-4f07-89cd-04417e18b3c7" answerLabel="Diet" style="checkbox" class="align-checkbox-input"/>
@@ -2851,10 +2879,10 @@
                            </td>
                         </tr>
                      </obsgroup>
-                     <obsgroup groupingConceptId="165142">
+                     <obsgroup groupingConceptId="c40a5f34-3193-489b-8ec6-0d63ef63edf8">
                         <tr>
                            <td>
-                              <obs conceptId="1282" answerConceptId="159364" answerLabel=" Physical exercise" style="checkbox" class="align-checkbox-input"/>
+                              <obs conceptId="1282" answerConceptId="159364" answerLabel="Physical exercise" style="checkbox" class="align-checkbox-input"/>
                            </td>
                            <td colspan="2">
                               <label>Specify</label>
@@ -2862,7 +2890,7 @@
                            </td>
                         </tr>
                      </obsgroup>
-                     <obsgroup groupingConceptId="165142">
+                     <obsgroup groupingConceptId="0f4f101a-1846-4be2-9909-da92187f9191">
                         <tr>
                            <td>
                               <obs conceptId="1282" answerConceptId="c2769cb4-6f2a-476b-b8a1-8a7a7cb7d62e" answerLabel="Herbal" style="checkbox" class="align-checkbox-input"/>
@@ -2873,7 +2901,7 @@
                            </td>
                         </tr>
                      </obsgroup>
-                     <obsgroup groupingConceptId="165142">
+                     <obsgroup groupingConceptId="cac3fc45-7083-49cc-9292-fa0f261bb6aa">
                         <tr>
                            <td>
                               <obs conceptId="1282" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/>
