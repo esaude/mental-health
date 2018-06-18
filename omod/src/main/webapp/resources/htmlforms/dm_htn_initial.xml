@@ -146,6 +146,11 @@
             padding: 5px;
         }
 
+        .educationFlags {
+           margin-top: 5px;
+           padding-left: 25px;
+        }
+
         
 
  
@@ -685,6 +690,7 @@
         function disableGDMFormMale(){
              var gender= "<lookup expression="patient.gender"/>"; 
             if(gender=='M'){
+            jq('#pdt_desc :input').prop('disabled', true);            
             jq('#pdt :input').prop('disabled', true);            
             }
               
@@ -870,9 +876,16 @@
                   jq('#'+fieldObject.name+'_msg').html('');
                   jq('#'+fieldObject.name+'_msg').removeClass('required');
                   if(!fieldValue){
-                  divHtml=divHtml+'<span class="required">'+'. '+ fieldObject.message+'</span><br></br>';
-                   jq('#'+fieldObject.name+'_msg').html('Required');
-                   jq('#'+fieldObject.name+'_msg').addClass('required');                  
+                  divHtml=divHtml+'<span class="required">' + fieldObject.message+'</span><br></br>';
+                  // handle nutrition and physical exercise
+                    if(fieldObject.name=='nutrition_opt' || fieldObject.name=='physical_activity_opt' ){
+                        jq('#'+fieldObject.name+'_msg').html(fieldObject.message + '<br></br>');
+                    }else{
+                        jq('#'+fieldObject.name+'_msg').html('Required');
+                        
+                    }
+                    jq('#'+fieldObject.name+'_msg').addClass('required');    
+                                 
                   }
 
                 });
@@ -2122,11 +2135,15 @@
                          <label>PDT</label>
                         <table>                           
                             <tr>
-                                <th>Date</th><th>Comment</th>
+                                <th style="background:  #00b4ef;">Commrent</th>
+                                <th style="background:  #00b4ef;">Date</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <obs id="pdt" conceptId="165144" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" />
+                                    <obs id="pdt_desc" conceptId="2717cc0f-cd1a-4302-9b19-a7b89825400a"  />
+                                </td>
+                                <td>
+                                    <obs id="pdt" conceptId="165144" />
                                 </td>
                             </tr>
                         </table>
@@ -2257,18 +2274,14 @@
                   <tbody>
                      <tr>
                         <td> 
-                          <div class="showinline">
-                           <obs conceptId="1379" id="nutrition_opt" answerConceptId="1380" answerLabel="Nutrition" style="checkbox" class="align-checkbox-input" />
-                           <span id="nutrition_opt_msg" class="required"></span>
-                          </div> 
-                          <div class="showinline">  
+                           <obs conceptId="1379" id="nutrition_opt" answerConceptId="1380" answerLabel="Nutrition" style="checkbox" class="align-checkbox-input" /> 
                            <obs conceptId="1379" id="physical_activity_opt" answerConceptId="159364" answerLabel="Physical Activity" style="checkbox" class="align-checkbox-input" />
-                           <span id="physical_activity_opt_msg" class="required"></span>
-                           </div>
                            <obs conceptId="1379" answerConceptId="5490" answerLabel="Psychosocial" style="checkbox" class="align-checkbox-input"/>
                            <obs id="education" conceptId="1379" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/>
-                           
-                            
+                           <div class="educationFlags">
+                            <span id="nutrition_opt_msg" class="required"></span>
+                            <span id="physical_activity_opt_msg" class="required"></span>
+                           </div>
                         </td>
                      </tr>
                      <tr>

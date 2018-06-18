@@ -736,7 +736,7 @@
             var invalidMeds = checkInvalidMedication();
              if(invalidMeds === true){
                return false;
-             }             
+             }          
             return true;
         });     
     </script>
@@ -1297,7 +1297,18 @@
                            <lookup expression="fn.latestObs(164364).valueNumeric"/>
                         </span>
                      </td>
-                  </tr>
+                </tr>
+                <tr>
+                     <td><label>urinalysis:</label></td>
+                     <td>
+                        <obs conceptId="160987AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                     </td>
+                     <td>
+                        <span class="value">
+                           <lookup expression="fn.latestObs(160987).valueText"/>
+                        </span>
+                     </td>
+                </tr>
                </tbody>
             </table>
          </div>
