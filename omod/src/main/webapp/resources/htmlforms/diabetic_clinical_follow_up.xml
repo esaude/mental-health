@@ -258,6 +258,7 @@
        function flagNotAllowed(){
             var categories = medCategory();
             flagDrugCombination(categories.notAllowed[0].listA,categories.notAllowed[0].listB,categories.notAllowed[0].class);
+            checkInvalidMedication();
         }
 
        function flagAllowedNotFrequently(){
@@ -291,6 +292,16 @@
                     categories.allowed[2].ACEInhibitors,
                     categories.allowed[2].ThiazideDiuretic,
                     categories.allowed[2].class);
+       }
+
+        function containsCombination(group1,group2){
+        var hasPrimaryDrugs = hasDrugs(group1);
+        var hasSecondaryDrugs =hasDrugs(group2);
+
+        if(hasSecondaryDrugs &amp;&amp; hasPrimaryDrugs) {
+        return true;
+        }
+        return false;
        }
 
        function flagDrugCombination(group1,group2,cssClass){
@@ -702,6 +713,32 @@
 		       });
        
         });
+
+        function checkInvalidMedication(){
+        var categories = medCategory();  
+        
+            var hasBoth = containsCombination(categories.notAllowed[0].listA,categories.notAllowed[0].listB);
+            if (hasBoth === true) {
+               jq('#displayRequiredFields').html('You have selected invalid drug combination');
+               jq('#displayRequiredFields').addClass('required');
+             }else {
+                jq('#displayRequiredFields').removeClass('required');
+                jq('#displayRequiredFields').html('');
+             }
+             return hasBoth;
+
+        }
+
+
+        beforeSubmit.push(function() {
+
+         // check medication combination and prevent submission
+            var invalidMeds = checkInvalidMedication();
+             if(invalidMeds === true){
+               return false;
+             }             
+            return true;
+        });     
     </script>
 
     <div class="ai-page-frame" id="followup-form">
@@ -711,6 +748,7 @@
    <div style="display: none">
       <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
    </div>
+   <div id="displayRequiredFields"></div>
    <div id="tab-wrap">
       <div id="tabs">
          <ul>
