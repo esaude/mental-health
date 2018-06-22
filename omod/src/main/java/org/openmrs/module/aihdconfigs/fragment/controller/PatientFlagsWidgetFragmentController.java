@@ -2,6 +2,7 @@ package org.openmrs.module.aihdconfigs.fragment.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Concept;
 import org.openmrs.Person;
 import org.openmrs.PersonAttribute;
 import org.openmrs.PersonAttributeType;
@@ -42,6 +43,7 @@ public class PatientFlagsWidgetFragmentController {
         flags.add(missedAppointments(patient.getId(), context));
         flags.add(lostToFollowUp(patient.getId(), context));
         flags.add(inTransit(patient.getId()));
+        flags.add(transferredOut(patient.getId(), context));
 
         model.addAttribute("flags", flags);
 
@@ -77,6 +79,17 @@ public class PatientFlagsWidgetFragmentController {
             if(person.getAttribute(personAttributeType).getValue().equals("patient_in_transit")) {
                 message = "In Transit";
             }
+        }
+
+        return message;
+    }
+
+    private String transferredOut(Integer patientId, PatientCalculationContext context){
+        String message = "";
+        CalculationResultMap lastDiscontinueReason = ConfigCalculations.lastObs(Dictionary.getConcept(Dictionary.DISCONTINUE_REASON), Arrays.asList(patientId), context);
+        Concept transferOut = ConfigEmrCalculationUtils.codedObsResultForPatient(lastDiscontinueReason, patientId);
+        if (transferOut != null && transferOut.equals(Dictionary.getConcept(Dictionary.TRANSFER_OUT))) {
+            message = "Transferred Out";
         }
 
         return message;

@@ -7,11 +7,13 @@
 	<div class="info-body">
 
     <div id="flag-fragment-dashboard-widget">
-        <ul>
-            <% flags.each { name -> %>
-                <li>${name}</li>
-            <%}%>
-        </ul>
+        <% if(flags){ %>
+            <ul>
+                <% flags.each { name -> %>
+                    <li>${name}</li>
+                <%}%>
+            </ul>
+        <%}%>
     </div>
 
 	</div>

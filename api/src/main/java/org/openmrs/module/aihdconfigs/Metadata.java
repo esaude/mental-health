@@ -5,6 +5,8 @@ public class Metadata {
     public static class Concept{
         public static final String RETURN_VISIT_DATE = "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         public static final String MEDICATION_ORDER = "1282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        public static final String DISCONTINUE_REASON = "161555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        public static final String TRANSFER_OUT = "159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         //ACE  inhibitor
         public static final String Captopril = "72806AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         public static final String Enalapril = "75633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
