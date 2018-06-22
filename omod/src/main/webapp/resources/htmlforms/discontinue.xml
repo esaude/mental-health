@@ -1,0 +1,47 @@
+<htmlform formName="Discontinue Patient"
+          formDescription="Discontinue patient from care from this facility"
+          formEncounterType="d67972c4-75f5-11e8-9e72-9738ea3173f2"
+          formUuid="98512f5e-75f6-11e8-912d-7b3f1d167488"
+          formVersion="1.0"
+          formAddMetadata="yes"
+          formUILocation="patientDashboard.overallActions"
+          formOrder="3"
+          formIcon="icon-medkit"
+          formShowIf=""
+          formDisplayStyle="Standard"
+          formLabel="Discontinue Patient">
+
+    <div class="headers" style="text-align: center;">
+        <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Discontinue Patient From this Facility</h3>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td>Reason for discontinuation</td>
+                <td>
+                    <obs conceptId="161555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Transferred Out,Unknown"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Transferred out to</td>
+                <td><encounterLocation default="SessionAttribute:emrContext.sessionLocationId" /></td>
+            </tr>
+            <tr>
+                <td>Transferred out date</td>
+                <td><encounterDate default="today" disallowMultipleEncountersOnDate="block"/></td>
+            </tr>
+            <tr>
+                <td>Transferred out by</td>
+                <td><encounterProvider default="currentUser" /></td>
+            </tr>
+        </table>
+    </div>
+    <ifMode mode="VIEW" include="false">
+        <div class="buttons-container">
+            <div id="buttons">
+                <submit submitClass="confirm right" submitCode="general.save"/>
+                <button type="button" class="cancel"><uimessage code="general.cancel"/></button>
+            </div>
+        </div>
+    </ifMode>
+</htmlform>

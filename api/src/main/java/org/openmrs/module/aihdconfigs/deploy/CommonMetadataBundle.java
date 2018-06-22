@@ -40,6 +40,7 @@ public class CommonMetadataBundle extends AbstractMetadataBundle {
         log.info("Installing EncounterTypes");
         install(EncounterTypes.DIABETIC_CLINICAL_FOLLOW_UP_ENCOUNTER_TYPE);
         install(EncounterTypes.DM_HTN_INITIAL_ENCOUNTER_TYPE);
+        install(EncounterTypes.DISCONTINUE_ENCOUNTER_TYPE);
 
         //installing programs metadata
         log.info("Installing Programs");

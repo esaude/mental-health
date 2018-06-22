@@ -35,4 +35,20 @@ public class EncounterTypes {
             return "2da542a4-f87d-11e7-8eb4-37dc291c1b12";
         }
     };
+
+    public static EncounterTypeDescriptor DISCONTINUE_ENCOUNTER_TYPE = new EncounterTypeDescriptor() {
+        @Override
+        public String name() {
+            return "Discontinue patient";
+        }
+
+        @Override
+        public String description() {
+            return "Discontinue patient from care from this facility";
+        }
+
+        public String uuid() {
+            return "d67972c4-75f5-11e8-9e72-9738ea3173f2";
+        }
+    };
 }
