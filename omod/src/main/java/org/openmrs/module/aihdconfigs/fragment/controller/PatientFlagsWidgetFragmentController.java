@@ -2,6 +2,9 @@ package org.openmrs.module.aihdconfigs.fragment.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Person;
+import org.openmrs.PersonAttribute;
+import org.openmrs.PersonAttributeType;
 import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculationContext;
 import org.openmrs.calculation.patient.PatientCalculationService;
@@ -12,6 +15,7 @@ import org.openmrs.module.aihdconfigs.calculation.ConfigCalculationManager;
 import org.openmrs.module.aihdconfigs.calculation.ConfigCalculations;
 import org.openmrs.module.aihdconfigs.calculation.ConfigEmrCalculationUtils;
 import org.openmrs.module.aihdconfigs.calculation.PatientFlagCalculation;
+import org.openmrs.module.aihdconfigs.metadata.PersonAttributeTypes;
 import org.openmrs.module.emrapi.patient.PatientDomainWrapper;
 import org.openmrs.ui.framework.SimpleObject;
 import org.openmrs.ui.framework.annotation.FragmentParam;
@@ -37,6 +41,7 @@ public class PatientFlagsWidgetFragmentController {
 
         flags.add(missedAppointments(patient.getId(), context));
         flags.add(lostToFollowUp(patient.getId(), context));
+        flags.add(inTransit(patient.getId()));
 
         model.addAttribute("flags", flags);
 
@@ -59,6 +64,19 @@ public class PatientFlagsWidgetFragmentController {
         Date lastScheduledReturnDate = ConfigEmrCalculationUtils.datetimeObsResultForPatient(lastReturnDateObss, patientId);
         if (lastScheduledReturnDate != null && ConfigEmrCalculationUtils.daysSince(lastScheduledReturnDate, context) > 90) {
             message = "Lost to Followup";
+        }
+
+        return message;
+    }
+    private String inTransit(Integer patientId){
+        String message = "";
+        PersonAttributeType personAttributeType = Context.getPersonService().getPersonAttributeTypeByUuid(PersonAttributeTypes.PATIENT_TYPE.uuid());
+        Person person = Context.getPersonService().getPerson(patientId);
+
+        if (person != null && person.getAttribute(personAttributeType) != null) {
+            if(person.getAttribute(personAttributeType).getValue().equals("patient_in_transit")) {
+                message = "In Transit";
+            }
         }
 
         return message;
