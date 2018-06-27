@@ -144,6 +144,7 @@
             display: block;
             overflow: auto;
             padding: 5px;
+
         }
 
         .educationFlags {
@@ -311,6 +312,14 @@
             jq('#lmpfield :input').prop('disabled', false);
             if(age &gt; age_55 || gender=='M'){
               jq('#lmpfield :input').prop('disabled', true);  
+             }
+        }
+        
+        function disableByAgeChange(maxAge,fieldId){      
+            var age = "<lookup expression="fn.patientAgeInMonths()"/>" ;                
+            jq('#'+ fieldId +' :input').prop('disabled', false);
+            if(age &gt; maxAge){
+              jq('#'+ fieldId + ' :input').prop('disabled', true);  
              }
         }
         
@@ -542,12 +551,8 @@
             var val= getValue('hiv_status.value');
                jq('#enrolled_to_hiv_care :input').prop('disabled', true);
                jq('#tb_comments :input').prop('disabled', true);
-               jq('#tb_treatment_start :input').prop('disabled', true);
-               jq('#on_tb_treatment :input').prop('disabled', true);
             if(val == 138571){
                 jq('#tb_comments :input').prop('disabled', false);
-                jq('#tb_treatment_start :input').prop('disabled', false);
-                jq('#on_tb_treatment :input').prop('disabled', false);
                 jq('#enrolled_to_hiv_care :input').prop('disabled', false);
              }
         }
@@ -677,6 +682,13 @@
             jq('#impairment :input').prop('disabled', true);
             if(val == 1065){
                 jq('#impairment :input').prop('disabled', false);
+             }
+        }   
+        function onTbTreatment(){
+            var val= getValue('on_tb_treatment.value');
+            jq('#tb_treatment_start :input').prop('disabled', true);
+            if(val == 1662){
+                jq('#tb_treatment_start :input').prop('disabled', false);
              }
         }
   
@@ -962,6 +974,7 @@
             onWeightOrHeightChange();
             jq('#nhif').change(onNHIFStatusChange);
             jq('#visual_impairment').change(visualImpairment);
+            jq('#on_tb_treatment').change(onTbTreatment);
             jq('#other_general_exam').change(otherGeneralExam);            
             jq('#temperature').focusout(onTemperatureChange);
             jq('#pr_in').focusout(prByAgeChange);
@@ -998,10 +1011,18 @@
             jq('#education').change(counsellingEducation);  
             jq('#wcirc').change(onHipOrWaistCircChange);  
             jq('#hip_circ').change(onHipOrWaistCircChange);  
+           
+          
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
 	        disableGDMFormMale();
             otherGeneralExamDesc();
+
+            // disable based on age
+            var maxAge_60 =720;
+            disableByAgeChange(maxAge_60,'Glibenclamide');
+            disableByAgeChange(maxAge_60,'Glibenclamide_dose'); 
+            disableByAgeChange(maxAge_60,'Glibenclamide_frequency');
             lmpDisableChange();
             // investigation flags:
 
@@ -1053,6 +1074,7 @@
        jq('#urea').change(function(){
         flagInputByRange('urea',2.70 ,8.0);
        });
+            initializeProviderName();
             // medication flags
             var categories = medCategory();
             listenTOItemChanges(categories.notAllowed[0].listA,flagNotAllowed);
@@ -1113,9 +1135,33 @@
              return hasBoth;
 
         } 
+        
+        function initializeProviderName(){
+            
+            var userLoc;
+            var server = getServerPath();   
+            if(server){
+                url_content('/'+server + "/ws/rest/v1/appui/session").success(function(data){ 
+                userLoc = data?data.currentProvider.person:null;  
+                setValue('clinician_name.value',userLoc.display);     
+                });
+                return userLoc;
+            }
+            
+        }
+
+        function url_content(url){
+            return jq.get(url);
+        }
+
+        function getServerPath(){
+        var pathname = window.location.pathname;
+        return pathname?pathname.split('/')[1]:null; 
+        }
 
         beforeSubmit.push(function() {
             // check unfilled required fields and prevent submission
+
             var val = showRequiredFields();
             if (val === true) {
                 addRequiredChecksOnChange();
@@ -1127,6 +1173,7 @@
              if(invalidMeds === true){
                return false;
              }           
+
             return true;
         });          
     
@@ -1139,7 +1186,7 @@
    <div style="display:none">
       <encounterLocation default="SessionAttribute:emrContext.sessionLocationId"/>
    </div>
-   <div id="displayRequiredFields"></div>
+   
    <div id="tab-wrap">
       <div id="tabs">
          <ul>
@@ -1157,8 +1204,8 @@
                         <encounterDate default="today" disallowMultipleEncountersOnDate="block"/>
                      </td>
                      <td colspan="2">
-                        <label>Care giver:</label>
-                        <encounterProvider default="currentUser" />
+                        <!-- <label>Care giver:</label>
+                        <encounterProvider default="currentUser" /> -->
                      </td>
                   </tr>
                   <tr>
@@ -1254,6 +1301,10 @@
                      </tr>
                      <tr>
                         <td>
+                           <label>Screened for TB:</label>
+                           <obs id="screened_for_tb" conceptId="164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"     answerConceptIds="1065,1066,1175" answerLabels="Yes,No,NA" style="radio" answerSeparator="" class="align-radio-input"/>
+                        </td>
+                        <td>
                            <label>TB Status:</label>
                            <obs id="on_tb_treatment" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptId="1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="On treatment" style="checkbox" class="align-checkbox-input"/>
                         </td>
@@ -1263,7 +1314,7 @@
                               <obs  conceptId="cda0abc2-bf7d-4959-b619-bbfd1eb21517" />
                            </span>
                         </td>
-                        <td colspan="3">
+                        <td colspan="2">
                            <label> Comment (details):</label>
                            <span id="tb_comments">
                               <obs  conceptId="b1d41c4d-d939-4818-9990-e2d9c5fefffe"/>
@@ -1276,7 +1327,7 @@
                            <obs required="true" conceptId="1917" answerConceptIds="1065,1066,5622" answerLabels="Yes,No,Other" style="radio" answerSeparator="" id="nhif" class="align-radio-input"/>
                            <span id="nhif_msg"></span>
                         </td>
-                        <td colspan="2">
+                        <td colspan="3">
                            <label>Other:</label>
                            <span id="other_nhif">
                               <obs conceptId="cd2b38b5-ce2f-45fd-ba14-b5db1b68b81f" />
@@ -1284,7 +1335,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <td colspan="3" id="enroll_to_nhif">
+                        <td colspan="4" id="enroll_to_nhif">
                            <span id="nhif-comment" class="value"></span>
                         </td>
                      </tr>
@@ -1461,17 +1512,17 @@
                            <obs conceptId="1282" answerConceptId="79651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Metformin" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,1000" answerLabels="500 mg,1000 mg" style="dropdown"/>
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                        
                      </tr>
                   </obsgroup>
                   <obsgroup groupingConceptId="1442">
                      <tr>
                         <td>
-                           <obs conceptId="1282" id="Glibenclamide" answerConceptId="77071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Glibenclamide" style="checkbox" class="align-checkbox-input"/>
+                           <obs conceptId="1282" answerConceptId="77071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Glibenclamide" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5 mg,5 mg" style="dropdown"/>
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>
                      </tr>
                   </obsgroup>
@@ -1481,7 +1532,7 @@
                            <obs conceptId="1282" answerConceptId="159459AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Insulin 70/30 " style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>
                      </tr>
                   </obsgroup>
@@ -1491,7 +1542,7 @@
                            <obs conceptId="1282" answerConceptId="e4f96288-5a75-4259-a610-fa380d469f1f" answerLabel="NPH Type 1" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                        
                      </tr>
                   </obsgroup>
@@ -1501,7 +1552,7 @@
                            <obs conceptId="1282" answerConceptId="ee5647b4-3ebf-48ae-9428-2558118de260" answerLabel="NPH Type 2" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                       
                      </tr>
                   </obsgroup>
@@ -1511,7 +1562,7 @@
                            <obs conceptId="1282" id="soluble_insulin" answerConceptId="282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Soluble Insulin" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>
                      </tr>
                   </obsgroup>
@@ -1521,7 +1572,7 @@
                            <obs conceptId="1282" answerConceptId="75633" id="Enalapril" answerLabel="Enalapril" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="1020,20" answerLabels="10-20 mg,20 mg" style="dropdown"/>
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                        
                      </tr>
                   </obsgroup>
@@ -1531,7 +1582,7 @@
                            <obs conceptId="1282" answerConceptId="77696AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="HydrochlorothiazideHCTZ" answerLabel="Hydrochlorothia zide (HCTZ)" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="12.5,25" answerLabels="12.5 mg,25 mg" style="dropdown"/>
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                       
                      </tr>
                   </obsgroup>
@@ -1541,7 +1592,7 @@
                            <obs conceptId="1282" answerConceptId="79074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Losartan" answerLabel="Losartan" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="50,100" answerLabels="50 mg,100 mg" style="dropdown"/>
+                          <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                        
                      </tr>
                   </obsgroup>
@@ -1551,7 +1602,7 @@
                            <obs conceptId="1282" answerConceptId="80637AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Nifedipine" answerLabel="Nifedipine" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="20,30,60" answerLabels="Retard tabs:20 mg,LA tabs: 30 mg,LA tabs: 60 mg" style="dropdown"/>
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                        
                      </tr>
                   </obsgroup>
@@ -1561,7 +1612,7 @@
                            <obs conceptId="1282" answerConceptId="71652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Atenolol" answerLabel="Atenolol" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
-                           <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,100" answerLabels="25 mg,100 mg" style="dropdown"/>
+                           <obs conceptId="1e2a1995-9460-4208-88d7-5bf0097b06c2"/>
                         </td>                        
                      </tr>
                   </obsgroup>
@@ -2254,6 +2305,20 @@
                         <tr>
                            <td>7</td>
                            <td>
+                              <obs conceptId="6042" answerConceptId="159298AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Visual Impairment" style="checkbox" class="align-checkbox-input"/>
+                           </td>
+                           <td>
+                              <obs conceptId="159948"/>
+                           </td>
+                           <td>
+                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <obsgroup groupingConceptId="165124">
+                        <tr>
+                           <td>7</td>
+                           <td>
                               <obs conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/>
                            </td>
                            <td>
@@ -2274,7 +2339,7 @@
                   <tbody>
                      <tr>
                         <td> 
-                           <obs conceptId="1379" id="nutrition_opt" answerConceptId="1380" answerLabel="Nutrition" style="checkbox" class="align-checkbox-input" /> 
+                           <obs conceptId="1379" id="nutrition_opt" answerConceptId="1380" answerLabel="Nutrition" style="checkbox" class="align-checkbox-input" />
                            <obs conceptId="1379" id="physical_activity_opt" answerConceptId="159364" answerLabel="Physical Activity" style="checkbox" class="align-checkbox-input" />
                            <obs conceptId="1379" answerConceptId="5490" answerLabel="Psychosocial" style="checkbox" class="align-checkbox-input"/>
                            <obs id="education" conceptId="1379" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/>
@@ -2298,7 +2363,7 @@
             <br/>
          </div>
          <div id="tabs-4">
-            <section>
+                        <section>
                <label style="background:  #ff7100; padding: 5px; color: #fff;">Treatment</label>
                <table>
                   <tbody>
@@ -2335,7 +2400,7 @@
                                        <obs conceptId="1282" answerConceptId="75633" id="Enalapril" answerLabel="Enalapril" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="1020,20" answerLabels="10-20 mg,20 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="10,20" answerLabels="10 mg,20 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2348,7 +2413,7 @@
                                        <obs conceptId="1282" answerConceptId="78945AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Lisinopril" answerLabel="Lisinopril" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="10,40" answerLabels="10 mg,40 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="20,40" answerLabels="20 mg,40 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2361,7 +2426,7 @@
                                        <obs conceptId="1282" answerConceptId="81822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Perindopril" answerLabel="Perindopril" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="5,10" answerLabels="5 mg,10 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2,4,8,5,10"  answerLabels="2 mg,4 mg,8 mg,5 mg,10 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2374,7 +2439,7 @@
                                        <obs conceptId="1282" answerConceptId="83067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Ramipril" answerLabel="Ramipril" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,10" answerLabels="2.5 mg,10 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="1.25,2.5,10" answerLabels="1.25 mg,2.5 mg,10 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2398,7 +2463,7 @@
                                        <obs conceptId="1282" answerConceptId="72758AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Candesartan" answerLabel="Candesartan" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="8,32" answerLabels="8 mg,32 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="4,8,16,32" answerLabels="4 mg, 8 mg, 16 mg,32 mg " style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2411,7 +2476,7 @@
                                        <obs conceptId="1282" answerConceptId="78210AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Irbesartan" answerLabel="Irbesartan" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="150,300" answerLabels="150 mg,300 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="75,150,300" answerLabels="75 mg,150 mg,300 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2437,7 +2502,7 @@
                                        <obs conceptId="1282" answerConceptId="84764AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Telmisartan" answerLabel="Telmisartan" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="40,80" answerLabels="40 mg,80 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="20,40,80" answerLabels="20 mg,40 mg,80 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2450,7 +2515,7 @@
                                        <obs conceptId="1282" answerConceptId="86056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Valsartan" answerLabel="Valsartan" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="80,160" answerLabels="80 mg,160 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="40,80,160,320" answerLabels="40 mg,80 mg,160 mg,320 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2494,7 +2559,7 @@
                                        <obs conceptId="1282" answerConceptId="71652AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Atenolol" answerLabel="Atenolol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,100" answerLabels="25 mg,100 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50,100" answerLabels="25 mg,50 mg, 100 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2507,7 +2572,7 @@
                                        <obs conceptId="1282" answerConceptId="78599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Labetolol" answerLabel="Labetolol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="200,2500" answerLabels="200 mg,2500 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="100,200,300" answerLabels="100 mg,200 mg,300 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2520,7 +2585,7 @@
                                        <obs conceptId="1282" answerConceptId="82732AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Propranolol" answerLabel="Propranolol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="40,160" answerLabels="40 mg,160 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="40,80" answerLabels="40 mg,80 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2533,7 +2598,8 @@
                                        <obs conceptId="1282" answerConceptId="72944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Carvedilol" answerLabel="Carvedilol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="6.25,50" answerLabels="6.25 mg,25 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,3.12,6.25,12.5,10,20,40,80" 
+                                       answerLabels="25 mg, 3.12 mg, 6.25 mg, 12.5 mg, 10 mg, 20 mg, 40 mg, 80 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2546,7 +2612,8 @@
                                        <obs conceptId="1282" answerConceptId="80470AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Nebivolol" answerLabel="Nebivolol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="6.25,50" answerLabels="6.25 mg,25 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,10,20" 
+                                       answerLabels="2.5 mg,5 mg,10 mg,20 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2559,7 +2626,8 @@
                                        <obs conceptId="1282" answerConceptId="79764AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Metoprolol" answerLabel="Metoprolol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,100" answerLabels="25 mg,100 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,37.5,50,75,100,200" 
+                                       answerLabels="25 mg, 37.5 mg, 50 mg, 75 mg, 100 mg, 200 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2572,7 +2640,7 @@
                                        <obs conceptId="1282" answerConceptId="72247AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Bisoprolol" answerLabel="Bisoprolol" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,10" answerLabels="2.5 mg,10 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="5,10" answerLabels="5 mg,10 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2603,7 +2671,7 @@
                                        <obs conceptId="1282" answerConceptId="71137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Amlodipine" answerLabel="Amlodipine" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="5,10" answerLabels="5 mg,10 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,10" answerLabels="2.5 mg,5 mg,10 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2616,7 +2684,7 @@
                                        <obs conceptId="1282" answerConceptId="76211AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Felodipine" answerLabel="Felodipine" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="5,10" answerLabels="5 mg,10 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5,10" answerLabels="2.5 mg,5 mg,10 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2629,7 +2697,7 @@
                                        <obs conceptId="1282" answerConceptId="80637AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Nifedipine" answerLabel="Nifedipine" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="20,30,60" answerLabels="Retard tabs:20 mg,LA tabs: 30 mg,LA tabs: 60 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="10,20" answerLabels="10 mg,20 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2660,7 +2728,7 @@
                                        <obs conceptId="1282" answerConceptId="73338AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Chlorthalidone" answerLabel="Chlorthalidone" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25 mg,50 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="15,25,50,100" answerLabels="15 mg, 25 mg, 50 mg, 100 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2673,7 +2741,7 @@
                                        <obs conceptId="1282" answerConceptId="77696AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="HydrochlorothiazideHCTZ" answerLabel="Hydrochlorothia zide (HCTZ)" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="12.5,25" answerLabels="12.5 mg,25 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,50" answerLabels="25 mg,50 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2697,7 +2765,7 @@
                                        <obs conceptId="1282" answerConceptId="77985AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Indapamide" answerLabel="Indapamide" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="1.5,255" answerLabels="1.5 mg,2.5-5 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="1.5,2.5" answerLabels="1.5 mg,2.5 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2738,7 +2806,7 @@
                                        <obs conceptId="1282" answerConceptId="77675AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Hydralazine" answerLabel="Hydralazine" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25,150" answerLabels="Min 25 mg,Max 150 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="25" answerLabels="Min 25 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2751,7 +2819,7 @@
                                        <obs conceptId="1282" answerConceptId="77985AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Prazocin" answerLabel="Prazocin" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="0.5,150" answerLabels="Min 0.5 mg,Max 150 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="0.5,1" answerLabels="Min 0.5 mg,Max 1 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2779,7 +2847,7 @@
                                        <obs conceptId="1282" answerConceptId="79651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Metformin" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,1000" answerLabels="500 mg,1000 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="500,850,1000" answerLabels="500 mg,850 mg,1000 mg" style="dropdown"/>
                                     </td>
                                     <td>
                                        <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
@@ -2789,13 +2857,13 @@
                               <obsgroup groupingConceptId="4f6f6640-4350-4d36-b946-69a5f79c3c46">
                                  <tr>
                                     <td>
-                                       <obs conceptId="1282" id="disableover60" answerConceptId="77071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Glibenclamide" style="checkbox" class="align-checkbox-input"/>
+                                       <obs conceptId="1282" id="Glibenclamide" answerConceptId="77071AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Glibenclamide" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answers="2.5,5" answerLabels="2.5 mg,5 mg" style="dropdown"/>
+                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Glibenclamide_dose" answers="5" answerLabels="5 mg" style="dropdown"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
+                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" id="Glibenclamide_frequency" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
                                     </td>
                                  </tr>
                               </obsgroup>
@@ -3069,11 +3137,12 @@
                      <tr>
                         <td>
                            Provider Name:                                        
-                           <obs conceptId="1473"/>
+                           <obs conceptId="1473" id="clinician_name"/>
                         </td>
                         <td>
                            Designation:                                        
-                           <obs conceptId="163556" answerConceptIds="164222,164223" answerLabels="Attending surgeon,Surgion Supervisor" style="dropdown" />
+                           <obs conceptId="163556" answerConceptIds="5507AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,162591AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1574AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1577AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" 
+                           answerLabels="Consultant,Medical officer,Clinical Officer,Nurse" style="dropdown" />
                         </td>
                      </tr>
                   </tbody>
@@ -3091,6 +3160,7 @@
                      </div>
                   </div>
                </ifMode>
+               <div id="displayRequiredFields"></div>
             </div>
          </div>
       </div>
