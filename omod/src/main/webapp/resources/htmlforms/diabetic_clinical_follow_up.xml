@@ -129,6 +129,9 @@
             var display = '';
             var weightKg = parseFloat(getValue('weight.value'));
             var heightM = parseFloat(getValue('height.value')) / 100;
+            numericValues('weight');
+            numericValues('height');
+            validateWeightAndHeight();
             var displayDiv = 'calculated-bmi';
             if (!isNaN(weightKg) &amp;&amp; !isNaN(heightM))  {
                 var bmi = weightKg / (heightM * heightM);
@@ -228,12 +231,12 @@
                       jq('#'+value).addClass(cssClass);
                    }
 
-                      console.log( index + ": " + value +'cssClass'+cssClass+'=='+action);
+                      
                 }
                             
                 if(action=='remove'){
                     jq('#'+value).removeClass(cssClass);
-                       console.log( index + ": " + value +'cssClass'+cssClass+'=='+action);
+                       
                }
          });
             
@@ -323,7 +326,7 @@
         var drugs = obsIds.split(',');
         var hasPrimaryDrug = false;
           jq.each(drugs, function( index, value ) {
-           console.log( index + ": " + value +'----------DD='+getValue(value+'.value'));
+
                 if( getValue(value+'.value')){
                 hasPrimaryDrug = true;
                 return false;
@@ -618,6 +621,8 @@
             var display = '';
             var hip_circ = parseFloat(getValue('hip_circ.value'));
             var wcirc = parseFloat(getValue('wcirc.value'));
+            numericValues('hip_circ');
+            numericValues('wcirc');
             if (!isNaN(wcirc) &amp;&amp; !isNaN(hip_circ))  {
                 var hipWaist = hip_circ / wcirc;
                 if (isNaN(hipWaist)) {
@@ -630,6 +635,8 @@
             }            
             jq('#hip_waist_ratio').html(display);
         }
+       
+       
         function flagWaistRatio(waistRatio) {
            
             var gender= "<lookup expression="patient.gender"/>";
@@ -680,7 +687,7 @@
             var categories = medCategory();
             listenTOItemChanges(categories.notAllowed[0].listA,flagNotAllowed);
             listenTOItemChanges(categories.notAllowed[0].listB,flagNotAllowed);                    
-
+            limitedDoseChanges();
             var tabsObj=jq( "#tabs" ).tabs();
             jq(".ui-tabs-panel").each(function(i){
 	
@@ -792,13 +799,193 @@
              }
         }
 
+        function medLimitByCategory(){
+            return [
+            {name:'insulin_70_30', minIuByKg:0.5,maxIuByKg:0,dayLimit:true,message:'Invalid Insulin 70/30 prescription'},
+            {name:'soluble_insulin', minIuByKg:0.1,maxIuByKg:0.2,dayLimit:true,message:'Invalid Soluble Insulin prescription'},
+            {name:'nph_type_1_obese', minIuByKg:0.8,maxIuByKg:1.2,dayLimit:true,obese:1,message:'Invalid NPH Type 1 prescription (obese)'},
+            {name:'nph_type_1_none_obese', minIuByKg:0.4,maxIuByKg:0.6,dayLimit:true,obese:2,message:'Invalid NPH Type 1 prescription (none obese)'},
+            {name:'nph_type_2', minIuByKg:0.2,maxIuByKg:0,dayLimit:true,message:'Invalid NPH Type 2 prescription'}
+            ];
+        }
+ 
+        function isValidPrescription(drug,value){
+            var weight = getValue('weight.value');
+            var max = weight * drug.maxIuByKg;
+            var min = weight * drug.minIuByKg;
+            var nph = drug.name.includes('nph_type_1_');
+            var obese = isObese();
+            var nph = drug.name.includes('nph_type_1_');
+
+             if(nph){ 
+                var nphGMin = 0.5 * weight;
+                var nphGMax = 1 * weight;
+                if(drug.obese==1 &amp;&amp; obese==true){
+                  if(value &gt; max || value &lt; min) {
+                   return drug.message;
+                  } 
+                }else{
+                    if(drug.obese==2  &amp;&amp; obese==false){
+                    if(value &gt; max || value &lt; min) {
+                    return drug.message;
+                    } 
+                    }
+                }
+
+                
+            }
+
+            if(drug.maxIuByKg &gt; 0) {
+               if(value &gt; max || value &lt; min) {
+                   return drug.message;
+               } 
+            } else {
+                if(value &lt; min) {
+                    return drug.message;
+                } 
+            }
+            
+           return 1;
+        }
+
+        function isObese(){
+            var weightKg = parseFloat(getValue('weight.value'));
+            var heightM = parseFloat(getValue('height.value')) / 100;
+            var bmi = weightKg / (heightM * heightM);
+            var obese = 30.00;
+            if(bmi == obese || bmi &gt; obese) {
+            return true;
+            }
+            return false;
+        }
+
+        function validateWeightAndHeight(){            
+            var weightKg = parseFloat(getValue('weight.value'));
+            var heightM = parseFloat(getValue('height.value')) / 100;
+
+            if (isNaN(weightKg) || !weightKg) {
+                jq('#displayRequiredFields').html('A numeric value is required for weight');
+                jq('#displayRequiredFields').addClass('required');
+                return false;
+            }
+            if (isNaN(heightM) || !heightM) {
+                jq('#displayRequiredFields').html('A numeric value is required for height');
+                jq('#displayRequiredFields').addClass('required');
+                return false;
+            }
+            return true ;      
+        }
+
+        function getCurrentDosage(doseId){
+            var dose = getValue(doseId+'.value');
+            if (dose==160862)  {                
+                      return 1;
+              }    
+            if (dose==160858)  {                
+                      return 2;
+              } 
+  
+            if (dose==160866)  {             
+                      return 3;
+              }   
+              return 0; 
+          }
+
+   
+        function  invalidDrugPrescription(){
+            
+            var requiredFields=medLimitByCategory();
+            var divHtml="";         
+
+                var obese = isObese();   
+                     
+                 divHtml=divHtml+checkDrug(requiredFields[0] );
+                 divHtml=divHtml+checkDrug(requiredFields[1]);
+
+                 if(obese==true){
+                   divHtml=divHtml+checkDrug(requiredFields[2]);
+                 }
+              
+                 if(obese == false){                
+                   divHtml=divHtml+checkDrug(requiredFields[3]);
+                 }              
+                divHtml=divHtml+checkDrug(requiredFields[4]); 
+                                
+                jq('#displayRequiredFields').html(divHtml);
+                if(divHtml){
+                return true;
+                }
+                return false;
+
+        } 
+
+       function checkDrug(fieldObject) {
+                 var fieldValue = getValue(fieldObject.name+'.value');
+                 var doseId =fieldObject.name+'_frequency';
+                 var prescribedValue = 0;
+                 var dose=getCurrentDosage(doseId);
+                 var nph = fieldObject.name.includes('nph_type_1_');
+                 if(nph){
+                     fieldValue= getValue('nph_type_1.value');
+                 }            
+                 
+                 if(fieldValue){
+                    prescribedValue =dose * fieldValue;
+                    var prescriptionMSg=isValidPrescription(fieldObject,prescribedValue);
+                    if(prescriptionMSg !==1){
+                        return '<span class="required">' + prescriptionMSg +'</span><br></br>';
+                    }
+                    
+                   }
+                   return '';
+      }
+
+        function numericValues(id){
+                jq("#"+id).keydown(function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if (jq.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl/cmd+A
+                    (e.keyCode == 65 &amp;&amp; (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: Ctrl/cmd+C
+                    (e.keyCode == 67 &amp;&amp; (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: Ctrl/cmd+X
+                    (e.keyCode == 88 &amp;&amp; (e.ctrlKey === true || e.metaKey === true)) ||
+                    // Allow: home, end, left, right
+                    (e.keyCode &gt; 34 &amp;&amp; e.keyCode &lt; 40)) {
+                        // let it happen, don't do anything
+                        return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode &lt; 48 || e.keyCode &gt; 57)) &amp;&amp; (e.keyCode &lt; 96 || e.keyCode &gt; 105)) {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        function limitedDoseChanges(){
+            jq("#insulin_70_30, #insulin_70_30_frequency, #soluble_insulin, #soluble_insulin_frequency, #nph_type_1, #nph_type_1_frequency, #nph_type_2, #nph_type_2_frequency").change(invalidDrugPrescription);
+        }
+
         beforeSubmit.push(function() {
 
          // check medication combination and prevent submission
+
+         // check weight and height entries and prevent submission
+            var validWH = validateWeightAndHeight();
+             if(validWH === false){
+               return false;
+             } 
+
             var invalidMeds = checkInvalidMedication();
              if(invalidMeds === true){
                return false;
-             }          
+             }   
+
+            // check medication dosage and prevent submission
+             var invalidMedPrescription = invalidDrugPrescription();
+             if(invalidMedPrescription === true){
+               return false;
+             }        
             return true;
         });     
     </script>
@@ -1919,26 +2106,26 @@
                               <obsgroup groupingConceptId="a0a14658-16b7-4f4d-8a29-6e3f8245789f">
                                  <tr>
                                     <td width="35%">
-                                       <obs conceptId="1282" answerConceptId="159459AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Insulin 70/30 " style="checkbox" class="align-checkbox-input"/>
+                                       <obs conceptId="1282"  answerConceptId="159459AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Insulin 70/30 " style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                                       <obs id="insulin_70_30" conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
                                     </td>
                                     <td>
-                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
+                                       <obs id="insulin_70_30_frequency" conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
                                     </td>
                                  </tr>
                               </obsgroup>
                               <obsgroup groupingConceptId="95777807-b15f-4706-9b54-fc2547528b0f">
                                  <tr>
                                     <td>
-                                       <obs conceptId="1282" id="soluble_insulin" answerConceptId="282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Soluble Insulin" style="checkbox" class="align-checkbox-input"/>
+                                       <obs conceptId="1282"  answerConceptId="282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Soluble Insulin" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                                       <obs id="soluble_insulin" conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
                                     </td>
                                     <td>
-                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
+                                       <obs id="soluble_insulin_frequency" conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
                                     </td>
                                  </tr>
                               </obsgroup>
@@ -1948,10 +2135,10 @@
                                        <obs conceptId="1282" answerConceptId="e4f96288-5a75-4259-a610-fa380d469f1f" answerLabel="NPH Type 1" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                                       <obs id="nph_type_1" conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
                                     </td>
                                     <td>
-                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
+                                       <obs id="nph_type_1_frequency" conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
                                     </td>
                                  </tr>
                               </obsgroup>
@@ -1961,10 +2148,10 @@
                                        <obs conceptId="1282" answerConceptId="ee5647b4-3ebf-48ae-9428-2558118de260" answerLabel="NPH Type 2" style="checkbox" class="align-checkbox-input"/>
                                     </td>
                                     <td>
-                                       <obs conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
+                                       <obs id="nph_type_2" conceptId="1443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" />
                                     </td>
                                     <td>
-                                       <obs conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
+                                       <obs id="nph_type_2_frequency" conceptId="160855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptIds="160862AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160858AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,160866AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="OD,BD,TDS" style="dropdown" />
                                     </td>
                                  </tr>
                               </obsgroup>
