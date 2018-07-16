@@ -1497,11 +1497,12 @@
                      <tr>
                         <td>
                            <label>Screened for TB:</label>
-                           <obs id="screened_for_tb" conceptId="164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"     answerConceptIds="1065,1066,1175" answerLabels="Yes,No,NA" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs id="screened_for_tb" required="true" conceptId="164800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"     answerConceptIds="1065,1066,1175" answerLabels="Yes,No,NA" style="radio" answerSeparator="" class="align-radio-input"/>
                         </td>
                         <td>
                            <label>TB Status:</label>
-                           <obs id="on_tb_treatment" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptId="1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="On treatment" style="checkbox" class="align-checkbox-input"/>
+                           <obs id="tb_status" required="true" conceptId="8bbf58d8-ab67-4601-95e6-7cd2f400d60d"     answerConceptIds="1065,1066,1175" answerLabels="Yes,No,NA" style="radio" answerSeparator="" class="align-radio-input"/>
+                           <obs id="on_tb_treatment" required="true" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptId="1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="On treatment" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
                            <label>Treatment start date.</label>
@@ -2422,7 +2423,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2436,7 +2437,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2450,7 +2451,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2464,7 +2465,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" style="radio" class="align-radio-input" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" style="radio" class="align-radio-input" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2478,7 +2479,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" class="align-radio-input" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2492,7 +2493,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" style="radio" class="align-radio-input" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" style="radio" class="align-radio-input" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2506,7 +2507,49 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <obsgroup groupingConceptId="165124">
+                        <tr>
+                           <td>7</td>
+                           <td>
+                              <obs conceptId="6042" answerConceptId="145339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Gastropathy" style="checkbox" class="align-checkbox-input"/>
+                           </td>
+                           <td>
+                              <obs conceptId="159948"/>
+                           </td>
+                           <td>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <obsgroup groupingConceptId="165124">
+                        <tr>
+                           <td>7</td>
+                           <td>
+                              <obs conceptId="6042" answerConceptId="120860AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Cataracts" style="checkbox" class="align-checkbox-input"/>
+                           </td>
+                           <td>
+                              <obs conceptId="159948"/>
+                           </td>
+                           <td>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                           </td>
+                        </tr>
+                     </obsgroup>
+                     <obsgroup groupingConceptId="165124">
+                        <tr>
+                           <td>7</td>
+                           <td>
+                              <obs conceptId="6042" answerConceptId="0e34f15a-0f94-4c3e-bdcd-4576b7e4d3d5" answerLabel="Dental complications" style="checkbox" class="align-checkbox-input"/>
+                           </td>
+                           <td>
+                              <obs conceptId="159948"/>
+                           </td>
+                           <td>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>
@@ -2520,7 +2563,7 @@
                               <obs conceptId="159948"/>
                            </td>
                            <td>
-                              <obs conceptId="165127" answerConceptIds="6097,0766f882-4ca8-4c75-89ca-52e01a16b045" answerLabels="Resolved,Referral" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
+                              <obs conceptId="165127" answerConceptIds="6097,bae5a386-1bda-4ed4-b746-b055fd0efcdf" answerLabels="Yes,No" style="radio" class="align-radio-input" showCommentField="true" commentFieldLabel="&lt;/td&gt;&lt;td&gt;" answerSeparator=""/>
                            </td>
                         </tr>
                      </obsgroup>

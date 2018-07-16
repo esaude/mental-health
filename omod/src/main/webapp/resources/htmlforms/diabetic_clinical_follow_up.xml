@@ -121,6 +121,11 @@
         .comment_field {
          color: red;
         }
+        .flagRed  {
+            color: red;
+            font-weight: bold;
+            font-size: 15px;
+        }
         
     </style>
     <script type="text/javascript">
@@ -637,21 +642,21 @@
         }
        
        
-        function flagWaistRatio(waistRatio) {
+     function flagWaistRatio(waistRatio) {
            
             var gender= "<lookup expression="patient.gender"/>";
             var maxMaleRatio = 0.9;
             var maxFemaleRatio = 0.85;      
                 
-            jq('#hip_waist_ratio').last().removeClass("red_flag");
+            jq('#hip_waist_ratio').last().removeClass("flagRed");
               
             if(gender=='M' &amp;&amp; waistRatio &gt; maxMaleRatio){
-            jq('#hip_waist_ratio').last().addClass("red_flag");
+            jq('#hip_waist_ratio').last().addClass("flagRed");
             return;        
             }
 
             if(gender=='F' &amp;&amp; waistRatio &gt; maxFemaleRatio){
-            jq('#hip_waist_ratio').last().addClass("red_flag");
+            jq('#hip_waist_ratio').last().addClass("flagRed");
             return;        
             }
         }
@@ -1126,6 +1131,7 @@
                         </td>
                         <td>
                            <label>TB Status:</label>
+                           <obs id="tb_status" conceptId="8bbf58d8-ab67-4601-95e6-7cd2f400d60d"     answerConceptIds="1065,1066,1175" answerLabels="Yes,No,NA" style="radio" answerSeparator="" class="align-radio-input"/>
                            <obs id="on_tb_treatment" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptId="1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="On treatment" style="checkbox" class="align-checkbox-input"/>
                         </td>
                         <td>
@@ -1492,7 +1498,7 @@
                      <tr>
                         <td><label>Fasting Blood Sugar (FBS)</label></td>
                         <td>
-                           <obs conceptId="160912" showCommentField="true" dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                           <obs conceptId="160912" dateLabel="&lt;/td&gt;&lt;td&gt;" />
                         </td>
                         <td>
                            <span class="value">
