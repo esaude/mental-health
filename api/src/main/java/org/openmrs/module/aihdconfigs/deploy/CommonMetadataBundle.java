@@ -33,6 +33,7 @@ public class CommonMetadataBundle extends AbstractMetadataBundle {
         install(PersonAttributeTypes.OTHER_PATIENT_PHONE_NUMBER);
         install(PersonAttributeTypes.ALTERNATIVE_PATIENT_PHONE_NUMBER);
         install(PersonAttributeTypes.TELEPHONE_NUMBER);
+        install(PersonAttributeTypes.PATIENT_LOCATION);
 
         log.info("Person AttributeTypes installed");
 

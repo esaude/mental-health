@@ -43,6 +43,14 @@
 			Allows one to set the name of the facility that this installation implements
 		</description>
 	</globalProperty>
+
+	<globalProperty>
+		<property>aihdconfigs.locationAttributeUuid</property>
+		<defaultValue></defaultValue>
+		<description>
+			Patients are supposed to be tied on the facility so that they can be tracked well
+		</description>
+	</globalProperty>
 	
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.AihdConfigurationsActivator</activator>
@@ -70,6 +78,11 @@
 		<file>messages_es.properties</file>
 	</messages>
 	<!-- /Internationalization -->
+
+	<advice>
+		<point>org.openmrs.api.PatientService</point>
+		<class>org.openmrs.module.aihdconfigs.advice.PatientSearchAdviser</class>
+	</advice>
 
 </module>
 

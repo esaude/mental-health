@@ -223,4 +223,26 @@ public class PersonAttributeTypes {
             return 0;
         }
     };
+
+    public static PersonAttributeTypeDescriptor PATIENT_LOCATION= new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "9d08e97c-88d1-11e8-84f4-7f46ca7cf7b5";
+        }
+
+        @Override
+        public String name() {
+            return "Patient Location";
+        }
+
+        @Override
+        public String description() {
+            return "Tie a patient to a location in the database";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
 }
