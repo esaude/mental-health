@@ -79,11 +79,11 @@
          <tr>
             <td> Foot risk assessment</td>
             <td>
-               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="0d2aa75a-3903-45ed-a040-c948842479ba" answerLabel="Low current risk" style="checkbox" class="align-checkbox-input"   />
-               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="a3758dd9-b172-40fb-b78a-8697aa9abe9a" answerLabel="At risk" style="checkbox" class="align-checkbox-input" />
-               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="e39ac969-5f99-4674-9cfa-8e0439a5eea8" answerLabel="High risk" style="checkbox" class="align-checkbox-input"   />
-               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="123919" answerLabel="Ulcerated foot" style="checkbox" class="align-checkbox-input" />
-               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="f8f1dae8-9674-4957-b93e-d842832d7416" answerLabel="Foot emergency" style="checkbox" class="align-checkbox-input" />
+               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="0d2aa75a-3903-45ed-a040-c948842479ba" answerLabel="Low current risk" style="radio" answerSeparator="" class="align-radio-input"   />
+               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="a3758dd9-b172-40fb-b78a-8697aa9abe9a" answerLabel="At risk" style="radio" answerSeparator="" class="align-radio-input" />
+               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="e39ac969-5f99-4674-9cfa-8e0439a5eea8" answerLabel="High risk" style="radio" answerSeparator="" class="align-radio-input"   />
+               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="123919" answerLabel="Ulcerated foot" style="radio" answerSeparator="" class="align-radio-input" />
+               <obs conceptId="db47c759-d53e-4057-a2d7-e54d074276fd" answerConceptId="f8f1dae8-9674-4957-b93e-d842832d7416" answerLabel="Foot emergency" style="radio" answerSeparator="" class="align-radio-input" />
             </td>
          </tr>
       </table>
