@@ -6,12 +6,12 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Location;
 import org.openmrs.Patient;
 import org.openmrs.PersonAttribute;
 import org.openmrs.PersonAttributeType;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.Daemon;
-import org.openmrs.module.aihdconfigs.AihdConstants;
 import org.openmrs.module.aihdconfigs.metadata.PersonAttributeTypes;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.support.StaticMethodMatcherPointcutAdvisor;
@@ -53,6 +53,7 @@ public class PatientSearchAdviser extends StaticMethodMatcherPointcutAdvisor imp
             if (Daemon.isDaemonUser(Context.getAuthenticatedUser()) || Context.getAuthenticatedUser().isSuperUser()) {
                 return object;
             }
+
             Integer sessionLocationId = Context.getUserContext().getLocationId();
             String locationAttributeUuid = PersonAttributeTypes.PATIENT_LOCATION.uuid();
             if (StringUtils.isNotBlank(locationAttributeUuid)) {
@@ -94,7 +95,20 @@ public class PatientSearchAdviser extends StaticMethodMatcherPointcutAdvisor imp
         }
 
         private Boolean compare(String value1, String value2) {
-            return (StringUtils.isNotBlank(value1) && StringUtils.isNotBlank(value2)) && value1.equals(value2);
+            boolean isSame = false;
+            Location loc1 = getMyLocation(value1);
+            Location loc2 = Context.getLocationService().getLocationByUuid(value2);
+            if(loc1 != null && loc2 != null && loc1.equals(loc2)){
+                isSame = true;
+            }
+            return  isSame;
+        }
+
+        private String correctValue(String str){
+            return str.replace("_", " ");
+        }
+        private Location getMyLocation(String name){
+            return Context.getLocationService().getLocation(correctValue(name));
         }
     }
 }
