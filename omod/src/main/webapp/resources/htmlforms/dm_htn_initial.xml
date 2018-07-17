@@ -2513,7 +2513,7 @@
                      </obsgroup>
                      <obsgroup groupingConceptId="165124">
                         <tr>
-                           <td>7</td>
+                           <td>8</td>
                            <td>
                               <obs conceptId="6042" answerConceptId="145339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Gastropathy" style="checkbox" class="align-checkbox-input"/>
                            </td>
@@ -2527,7 +2527,7 @@
                      </obsgroup>
                      <obsgroup groupingConceptId="165124">
                         <tr>
-                           <td>7</td>
+                           <td>9</td>
                            <td>
                               <obs conceptId="6042" answerConceptId="120860AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="Cataracts" style="checkbox" class="align-checkbox-input"/>
                            </td>
@@ -2541,7 +2541,7 @@
                      </obsgroup>
                      <obsgroup groupingConceptId="165124">
                         <tr>
-                           <td>7</td>
+                           <td>10</td>
                            <td>
                               <obs conceptId="6042" answerConceptId="0e34f15a-0f94-4c3e-bdcd-4576b7e4d3d5" answerLabel="Dental complications" style="checkbox" class="align-checkbox-input"/>
                            </td>
@@ -2555,7 +2555,7 @@
                      </obsgroup>
                      <obsgroup groupingConceptId="165124">
                         <tr>
-                           <td>7</td>
+                           <td>11</td>
                            <td>
                               <obs conceptId="6042" answerConceptId="5622" answerLabel="Other" style="checkbox" class="align-checkbox-input"/>
                            </td>
