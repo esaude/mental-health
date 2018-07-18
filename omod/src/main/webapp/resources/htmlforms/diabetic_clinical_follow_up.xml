@@ -1131,8 +1131,7 @@
                         </td>
                         <td>
                            <label>TB Status:</label>
-                           <obs id="tb_status" conceptId="8bbf58d8-ab67-4601-95e6-7cd2f400d60d"     answerConceptIds="1065,1066,1175" answerLabels="Yes,No,NA" style="radio" answerSeparator="" class="align-radio-input"/>
-                           <obs id="on_tb_treatment" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerConceptId="1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabel="On treatment" style="checkbox" class="align-checkbox-input"/>
+                           <obs id="tb_status" conceptId="1659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"     answerConceptIds="703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,1662AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" answerLabels="Positive,Negative,On treatment" style="radio" answerSeparator="" class="align-radio-input"/>
                         </td>
                         <td>
                            <label>Treatment start date.</label>
