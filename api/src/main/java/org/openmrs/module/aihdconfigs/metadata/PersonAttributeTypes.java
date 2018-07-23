@@ -245,4 +245,26 @@ public class PersonAttributeTypes {
             return 0;
         }
     };
+
+    public static PersonAttributeTypeDescriptor USER_LOCATION= new PersonAttributeTypeDescriptor() {
+        @Override
+        public String uuid() {
+            return "8930b69a-8e7c-11e8-9599-337483600ed7";
+        }
+
+        @Override
+        public String name() {
+            return "User Location";
+        }
+
+        @Override
+        public String description() {
+            return "Tie a a user to a location in the database";
+        }
+
+        @Override
+        public double sortWeight() {
+            return 0;
+        }
+    };
 }
