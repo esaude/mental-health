@@ -46,5 +46,14 @@
       "provider" : "${project.parent.artifactId}",
       "fragment" : "appointmentHistoryWidget"
     }
+  },
+  {
+    "id": "${project.parent.groupId}.${project.parent.artifactId}.user.accounts.menuItem",
+    "extensionPointId": "systemAdministration.apps",
+    "type": "link",
+    "label": "User Location",
+    "url": "aihdconfigs/accounts/userLocation.page",
+    "icon": "icon-legal",
+    "order": 21
   }
 ]
