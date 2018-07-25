@@ -379,7 +379,7 @@ function validateSecurityInput(){
                         <input id="password" type="password" name="password" placeholder="${ ui.message("referenceapplication.login.password.placeholder") }"/>
                      </div>
                     </div>
-                    <div class="form-group form-group-lg">
+                    <div class="form-group form-group-lg" style="display: none;">
                         <label for="sessionLocation" class="col-md-4 control-label">Health facility:</label>
                         <div class="col-md-8">
                              <select id="sessionLocation" class="form-control">

@@ -15,9 +15,9 @@
 <table id="list-accounts" cellspacing="0" cellpadding="2">
     <thead>
         <tr>
-            <th class="adminui-expand-column">${ ui.message("Name")}</th>
+            <th>${ ui.message("Name")}</th>
             <th class="adminui-shrink-column">${ ui.message("Gender")}</th>
-            <th class="adminui-expand-column">${ ui.message("Facility")}</th>
+            <th>${ ui.message("Facility")}</th>
             <th class="adminui-shrink-column">${ ui.message("Code")}</th>
             <th class="adminui-shrink-column">${ ui.message("Action")}</th>
         </tr>

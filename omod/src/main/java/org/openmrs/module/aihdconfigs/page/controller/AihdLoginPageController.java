@@ -35,6 +35,8 @@ import org.openmrs.User;
 import org.openmrs.api.LocationService;
 import org.openmrs.api.context.Context;
 import org.openmrs.api.context.ContextAuthenticationException;
+import org.openmrs.api.context.Daemon;
+import org.openmrs.module.aihdconfigs.AihdUser;
 import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.appui.UiSessionContext;
 import org.openmrs.module.emrapi.EmrApiConstants;
@@ -192,11 +194,17 @@ public class AihdLoginPageController {
 
             try {
                 Context.authenticate(username, password);
-                    //System.out.println("The number of online users are ::"+onlineUsers.size());
 
                  if (Context.isAuthenticated()) {
-                    if (log.isDebugEnabled())
+                    if (log.isDebugEnabled()) {
                         log.debug("User has successfully authenticated");
+                    }
+                    AihdUser aihdUser = new AihdUser();
+                    aihdUser.setPerson(Context.getAuthenticatedUser().getPerson());
+
+                    if(aihdUser.getLocation() != null) {
+                        sessionLocation = aihdUser.getLocation();
+                    }
 
                     sessionContext.setSessionLocation(sessionLocation);
 
