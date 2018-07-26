@@ -232,12 +232,12 @@ ${ ui.includeFragment("referenceapplication", "infoAndErrorMessages") }
     };
 
     jQuery(function() {
-        updateSelectedOption();
+        //updateSelectedOption();
 
-        jQuery('#sessionLocation').change( function() {
-            jQuery('#sessionLocationInput').val(jQuery(this).val());
+        //jQuery('#sessionLocation').change( function() {
+            //jQuery('#sessionLocationInput').val(jQuery(this).val());
             //updateSelectedOption();
-        });
+        //});
 
         var cannotLoginController = emr.setupConfirmationDialog({
             selector: '#cannot-login-popup',
@@ -299,7 +299,7 @@ function checkSecurityResponse(){
   var securityAnswer = parseInt(jQuery('#computer_results_hidden').val());
   var sessionLocationVal = jQuery('#sessionLocationInput').val();
 
-        if(parseInt(sessionLocationVal, 10) > 0 && securityAnswer == userInputAnswer){
+        if(securityAnswer == userInputAnswer){
             jQuery('#login-button').removeClass('disabled');
             jQuery('#login-button').removeAttr('disabled');
             jQuery("#captcha_notification").text('');
@@ -409,7 +409,7 @@ function validateSecurityInput(){
                         <input id="login-button" class="confirm" type="submit" value="${ ui.message("referenceapplication.login.button") }"/>
                     </div>
                     </div>
-                        <input type="hidden" id="sessionLocationInput" name="sessionLocation"
+                        <input type="hidden" id="sessionLocationInput" name="sessionLocation" value="1"
                          <% if (lastSessionLocation != null) { %> value="${lastSessionLocation.id}" <% } %> />
                     <input type="hidden" name="redirectUrl" value="${redirectUrl}" />
                 </form>
