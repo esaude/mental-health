@@ -39,7 +39,11 @@ function getCurrentUserLocation(){
     if(server){
         url_content('/'+server + "/ws/rest/v1/appui/session").success(function(data){ 
         userLoc = data?data.sessionLocation:null;  
-         getRegisteredPatients(userLoc.uuid);     
+        getRegisteredPatients(userLoc.uuid);
+        document.getElementById('subcounty').value = userLoc ?userLoc.countyDistrict:null  ;   
+        document.getElementById('county').value = userLoc ?userLoc.stateProvince:null  ;   
+        document.getElementById('village').value = userLoc ?userLoc.cityVillage:null  ;   
+
         });
         return userLoc;
     }
