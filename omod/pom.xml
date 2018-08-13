@@ -4,14 +4,14 @@
 
 	<parent>
 		<groupId>org.openmrs.module</groupId>
-		<artifactId>aihdconfigs</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<artifactId>mentalhealth</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>aihdconfigs-omod</artifactId>
+	<artifactId>mentalhealth-omod</artifactId>
 	<packaging>jar</packaging>
-	<name>AIHD Configurations Module OMOD</name>
-	<description>OMOD project for AIHD Configurations</description>
+	<name>Mental Health Configurations Module OMOD</name>
+	<description>OMOD project for Mental Health Configurations</description>
 
 	<dependencies>
 

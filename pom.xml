@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.openmrs.module</groupId>
-	<artifactId>aihdconfigs</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<artifactId>mentalhealth</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>AIHD Configurations Module</name>
-	<description>The module help configure several metadata for AIHD</description>
+	<name>Mental Health Configurations Module</name>
+	<description>The module help configure several metadata for Mental health project</description>
 	<url></url>
 	
 	<developers>
@@ -22,9 +22,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:https://github.com/IntelliSOFT-Consulting/AIHD.git</connection>
-		<developerConnection>scm:https://github.com/IntelliSOFT-Consulting/AIHD.git</developerConnection>
-		<url>https://github.com/IntelliSOFT-Consulting/AIHD</url>
+		<connection>scm:https://github.com/esaude/mental-health.git</connection>
+		<developerConnection>scm:https://github.com/esaude/mental-health.git</developerConnection>
+		<url>https://github.com/esaude/mental-health.git</url>
 		<tag>HEAD</tag>
 	</scm>
 

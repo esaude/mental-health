@@ -1,0 +1,17 @@
+<htmlform formName="Admit Patient"
+          formDescription="Admit patient into this facility"
+          formEncounterType="e22e39fd-7db2-45e7-80f1-60fa0d5a4378"
+          formUuid="d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a"
+          formVersion="1.0">
+    <script>
+
+    
+    </script>
+
+    <div class="headers" style="text-align: center;">
+        <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Mental Health Initial Form</h3>
+    </div>
+    <div>
+
+    </div>
+</htmlform>

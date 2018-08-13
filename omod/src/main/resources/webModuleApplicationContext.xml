@@ -23,10 +23,10 @@
 	<!-- Add here beans related to the web context -->
 
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	<context:component-scan base-package="org.openmrs.module.aihdconfigs.web.controller" />
+	<context:component-scan base-package="org.openmrs.module.mentalhealth.web.controller" />
 
 	<bean class="org.openmrs.ui.framework.StandardModuleUiConfiguration">
-		<property name="moduleId" value="aihdconfigs" />
+		<property name="moduleId" value="mentalhealth" />
 	</bean>
 		
 </beans>

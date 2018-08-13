@@ -31,9 +31,9 @@
 						<ref bean="transactionManager" />
 					</property>
 					<property name="target">
-						<bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.AihdConfigsServiceImpl">
+						<bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.MentalHealthConfigsServiceImpl">
 							<property name="dao">
-								<bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.HibernateAihdConfigsDAO">
+								<bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.HibernateMentalHealthConfigsDAO">
 									<property name="sessionFactory">
 										<ref bean="sessionFactory" />
 									</property>

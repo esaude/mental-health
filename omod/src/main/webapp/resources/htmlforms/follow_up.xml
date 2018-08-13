@@ -1,0 +1,14 @@
+<htmlform formName="Mental Health Follow Up"
+          formDescription="USed for collecting follow up details about mental health"
+          formEncounterType="2da542a4-f87d-11e7-8eb4-37dc291c1b12"
+          formUuid="fa3295cb-07d7-4554-972b-ce959d10732c"
+          formVersion="1.0">
+    <style>
+        
+    </style>
+    <script type="text/javascript">
+    </script>
+   <div class="headers" style="text-align: center;">
+      <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Mental Health Follow Up Details</h3>
+   </div>
+</htmlform>
