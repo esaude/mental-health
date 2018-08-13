@@ -11,34 +11,32 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.mentalhealth.api.impl;
+package org.openmrs.module.mentalhealth.api.db.hibernate;
 
-import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.mentalhealth.api.AihdConfigsService;
-import org.openmrs.module.mentalhealth.api.db.AihdConfigsDAO;
+import org.hibernate.SessionFactory;
+import org.openmrs.module.mentalhealth.api.db.MentalHealthConfigsDAO;
 
 /**
- * It is a default implementation of {@link AihdConfigsService}.
+ * It is a default implementation of  {@link MentalHealthConfigsDAO}.
  */
-public class AihdConfigsServiceImpl extends BaseOpenmrsService implements AihdConfigsService {
-	
+public class HibernateMentalHealthConfigsDAO implements MentalHealthConfigsDAO {
 	protected final Log log = LogFactory.getLog(this.getClass());
 	
-	private AihdConfigsDAO dao;
+	private SessionFactory sessionFactory;
 	
 	/**
-     * @param dao the dao to set
+     * @param sessionFactory the sessionFactory to set
      */
-    public void setDao(AihdConfigsDAO dao) {
-	    this.dao = dao;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+	    this.sessionFactory = sessionFactory;
     }
     
-    /**
-     * @return the dao
+	/**
+     * @return the sessionFactory
      */
-    public AihdConfigsDAO getDao() {
-	    return dao;
+    public SessionFactory getSessionFactory() {
+	    return sessionFactory;
     }
 }

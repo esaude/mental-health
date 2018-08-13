@@ -13,12 +13,12 @@
  */
 package org.openmrs.module.mentalhealth.api.db;
 
-import org.openmrs.module.mentalhealth.api.AihdConfigsService;
+import org.openmrs.module.mentalhealth.api.MentalHealthConfigsService;
 
 /**
- *  Database methods for {@link AihdConfigsService}.
+ *  Database methods for {@link MentalHealthConfigsService}.
  */
-public interface AihdConfigsDAO {
+public interface MentalHealthConfigsDAO {
 	
 	/*
 	 * Add DAO methods here

@@ -27,7 +27,7 @@ public class CommonMetadataBundle extends AbstractMetadataBundle {
         log.info("Installing EncounterTypes");
         install(EncounterTypes.INITIAL_ENCOUNTER_TYPE);
         install(EncounterTypes.FOLLOW_UP_ENCOUNTER_TYPE);
-        
+
 
         //installing programs metadata
         log.info("Installing Programs");

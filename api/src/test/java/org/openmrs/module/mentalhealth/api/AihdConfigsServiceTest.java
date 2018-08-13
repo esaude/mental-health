@@ -21,12 +21,12 @@ import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
 /**
- * Tests {@link ${AihdConfigsService}}.
+ * Tests {@link ${MentalHealthConfigsService}}.
  */
 public class AihdConfigsServiceTest extends BaseModuleContextSensitiveTest {
 	@Ignore
 	@Test
 	public void shouldSetupContext() {
-		assertNotNull(Context.getService(AihdConfigsService.class));
+		assertNotNull(Context.getService(MentalHealthConfigsService.class));
 	}
 }
