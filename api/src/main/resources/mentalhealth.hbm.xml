@@ -6,7 +6,7 @@
 <hibernate-mapping package="org.openmrs.module.mentalhealth">
 
 <!--
-	<class name="Aihdconfigs"
+	<class name="MentalHealthconfigs"
 		table="${project.parent.artifactId}_Bkkhconfigs">
 		<id name="id" type="int" column="id" unsaved-value="0">
 			<generator class="native" />

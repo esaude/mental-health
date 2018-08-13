@@ -82,25 +82,6 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 		MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
 
-		appFrameworkService.disableExtension("referenceapplication.realTime.simpleAdmission");
-		appFrameworkService.disableExtension("referenceapplication.realTime.simpleVisitNote");
-		appFrameworkService.disableApp("coreapps.mostRecentVitals");
-		appFrameworkService.disableApp("referenceapplication.vitals"); // Capture Vitals
-		appFrameworkService.disableApp("xforms.formentry");
-		appFrameworkService.disableExtension("xforms.formentry.cfpd");
-		appFrameworkService.disableExtension("referenceapplication.realTime.vitals");
-		appFrameworkService.disableApp("coreapps.diagnoses");
-		appFrameworkService.disableApp("reportingui.reports");
-		// disable the default find patient app to provide one which allows searching for patients at the footer of the search for patients page
-        appFrameworkService.disableApp("coreapps.findPatient");
-		appFrameworkService.disableApp("coreapps.relationships");
-		appFrameworkService.disableApp("coreapps.latestObsForConceptList");
-		appFrameworkService.disableApp("coreapps.obsAcrossEncounters");
-		appFrameworkService.disableApp("coreapps.obsGraph");
-		appFrameworkService.disableApp("appointmentschedulingui.schedulingAppointmentApp");
-		appFrameworkService.disableApp("appointmentschedulingui.requestAppointmentApp");
-		appFrameworkService.disableExtension("appointmentschedulingui.tab");
-		appFrameworkService.disableExtension("org.openmrs.module.appointmentschedulingui.firstColumnFragments.patientDashboard.patientAppointments");
 
 		// install commonly used metadata
 		installCommonMetadata(deployService);
@@ -195,21 +176,13 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 
 	private void installCommonMetadata(MetadataDeployService deployService) {
 		try {
-			log.info("Installing commonly used metadata");
-
-			//install the locations heremetadata/facilities.csv
-            InputStream path = OpenmrsClassLoader.getInstance().getResourceAsStream("metadata/facilities.csv");
-
-			Facilities.saveLocations(path);
-			Facilities.markAllAsLoginLocations();
-			//Facilities.removeLocations(locationToDelete());
 			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
 
 
 		}
 		catch (Exception e) {
 			Module mod = ModuleFactory.getModuleById("mentalhealth");
-			//ModuleFactory.stopModule(mod);
+			ModuleFactory.stopModule(mod);
 			throw new RuntimeException("failed to install the common metadata ", e);
 		}
 	}
@@ -224,7 +197,7 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 		// The primary identifier type now uses metadata mapping instead of a global property
 		MetadataMappingService metadataMappingService = Context.getService(MetadataMappingService.class);
 		MetadataTermMapping primaryIdentifierTypeMapping = metadataMappingService.getMetadataTermMapping(EmrApiConstants.EMR_METADATA_SOURCE_NAME, EmrApiConstants.PRIMARY_IDENTIFIER_TYPE);
-		PatientIdentifierType patintId = Context.getPatientService().getPatientIdentifierTypeByUuid(PatientIdentifierTypes.AIHD_PATIENT_NUMBER.uuid());
+		PatientIdentifierType patintId = Context.getPatientService().getPatientIdentifierTypeByUuid("e2b966d0-1d5f-11e0-b929-000c29ad1d07");
 
 		if(!patintId.getUuid().equals(primaryIdentifierTypeMapping.getMetadataUuid())){
 			primaryIdentifierTypeMapping.setMappedObject(patintId);
@@ -233,12 +206,5 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 		return properties;
 	}
 
-	/**
-	 * get all the locations that need to be removed
-	 */
-	List<String> locationToDelete(){
-		return  Arrays.asList("Bristol park", "Mihang’o community dispensary", "Reliable medical Health Centre", "Well living", "Ruaraka clinic", "kahawa west health centre", "Hope medical (*Clinic Githurai)", "Mathare north health centre", "National youth service HC (Ruaraka)", "Marurui health centre (Dispensary)", "Korogocho health centre", "Kamiti health centre", "St. Johns hospital githurai", "St. Joseph mukasa (Dispensary)", "Kangemi health centre", "Jaralam medical", "Upendo medical clinic", "Lower kabete dispensary", "St. Getrudes githogoro", "Mji wa huruma (Dispensary)", "St. Joseph the worker disp."
-		);
-	}
 		
 }

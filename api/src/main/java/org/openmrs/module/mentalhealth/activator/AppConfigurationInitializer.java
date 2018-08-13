@@ -3,7 +3,7 @@ package org.openmrs.module.mentalhealth.activator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.mentalhealth.AihdConstants;
+import org.openmrs.module.mentalhealth.MentalHealthConstants;
 import org.openmrs.scheduler.SchedulerService;
 import org.openmrs.scheduler.TaskDefinition;
 
@@ -16,7 +16,7 @@ public class AppConfigurationInitializer implements Initializer {
 
     @Override
     public void started() {
-        log.info("Setting administrative configurations for " + AihdConstants.MODULE_ID);
+        log.info("Setting administrative configurations for " + MentalHealthConstants.MODULE_ID);
 
         SchedulerService schedulerService = Context.getSchedulerService();
 

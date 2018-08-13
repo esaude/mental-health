@@ -8,7 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.mentalhealth.AihdConstants;
+import org.openmrs.module.mentalhealth.MentalHealthConstants;
 import org.openmrs.module.mentalhealth.utils.ExtensionFormUtil;
 import org.openmrs.module.formentryapp.FormEntryAppService;
 import org.openmrs.module.formentryapp.FormManager;
@@ -36,7 +36,7 @@ public class HtmlFormsInitializer implements Initializer {
      * @see Initializer#started()
      */
     public synchronized void started() {
-        log.info("Setting HFE forms for " + AihdConstants.MODULE_ID);
+        log.info("Setting HFE forms for " + MentalHealthConstants.MODULE_ID);
 
         final ResourceFactory resourceFactory = ResourceFactory.getInstance();
         final ResourceProvider resourceProvider = resourceFactory.getResourceProviders().get(providerName);
