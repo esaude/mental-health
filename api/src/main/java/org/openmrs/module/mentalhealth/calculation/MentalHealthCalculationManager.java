@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class ConfigCalculationManager implements CalculationProvider {
+public class MentalHealthCalculationManager implements CalculationProvider {
 
-    protected static final Log log = LogFactory.getLog(ConfigCalculationManager.class);
+    protected static final Log log = LogFactory.getLog(MentalHealthCalculationManager.class);
 
 
     private List<Class<? extends PatientFlagCalculation>> flagCalculationClasses = new ArrayList<Class<? extends PatientFlagCalculation>>();
@@ -46,7 +46,7 @@ public class ConfigCalculationManager implements CalculationProvider {
         if (clazz == null)
             throw new InvalidCalculationException("Not Found: " + calculationName + " (valid values are: " + calculationClasses.keySet() + ")");
 
-        return ConfigCalculationUtils.instantiateCalculation(clazz, configuration);
+        return MentalHealthConfigCalculationUtils.instantiateCalculation(clazz, configuration);
     }
 
     /**
@@ -57,7 +57,7 @@ public class ConfigCalculationManager implements CalculationProvider {
         List<PatientFlagCalculation> ret = new ArrayList<PatientFlagCalculation>();
 
         for (Class<? extends PatientFlagCalculation> calculationClass : flagCalculationClasses) {
-            ret.add((PatientFlagCalculation) ConfigCalculationUtils.instantiateCalculation(calculationClass, null));
+            ret.add((PatientFlagCalculation) MentalHealthConfigCalculationUtils.instantiateCalculation(calculationClass, null));
         }
 
         return ret;

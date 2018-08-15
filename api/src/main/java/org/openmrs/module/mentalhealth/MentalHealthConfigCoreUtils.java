@@ -30,7 +30,7 @@ import java.util.TreeSet;
 /**
  * General utility functions
  */
-public class ConfigCoreUtils {
+public class MentalHealthConfigCoreUtils {
 
     /**
      * Merges multiple collections into a list with natural ordering of elements

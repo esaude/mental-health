@@ -17,9 +17,9 @@ package org.openmrs.module.mentalhealth.activator;
 
 /**
  * Interface for code to be run during the module activation process
- * @see {@link https://raw.githubusercontent.com/PIH/openmrs-module-pihmalawi/master/api/src/main/java/org/openmrs/module/pihmalawi/activator/Initializer.java}
+ * @see {@link https://raw.githubusercontent.com/PIH/openmrs-module-pihmalawi/master/api/src/main/java/org/openmrs/module/pihmalawi/activator/MentalHealthInitializer.java}
  */
-public interface Initializer {
+public interface MentalHealthInitializer {
 
     /**
      * Run during the activator started method

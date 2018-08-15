@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Dictionary for concepts used by AIHD
+ * MentalHealthDictionary for concepts used by AIHD
  */
-public class Dictionary extends Metadata.Concept{
+public class MentalHealthDictionary extends MentalHealthMetadata.Concepts {
 
     /**
      * Gets a concept by an identifier (mapping or UUID)

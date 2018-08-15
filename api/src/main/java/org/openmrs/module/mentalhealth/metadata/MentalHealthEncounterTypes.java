@@ -2,7 +2,7 @@ package org.openmrs.module.mentalhealth.metadata;
 
 import org.openmrs.module.metadatadeploy.descriptor.EncounterTypeDescriptor;
 
-public class EncounterTypes {
+public class MentalHealthEncounterTypes {
 
     public static EncounterTypeDescriptor INITIAL_ENCOUNTER_TYPE = new EncounterTypeDescriptor() {
         @Override

@@ -1,8 +1,6 @@
 package org.openmrs.module.mentalhealth.deploy;
 
-import org.openmrs.module.mentalhealth.metadata.EncounterTypes;
-import org.openmrs.module.mentalhealth.metadata.PatientIdentifierTypes;
-import org.openmrs.module.mentalhealth.metadata.PersonAttributeTypes;
+import org.openmrs.module.mentalhealth.metadata.MentalHealthEncounterTypes;
 import org.openmrs.module.metadatadeploy.bundle.AbstractMetadataBundle;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +23,9 @@ public class MentalHealthCommonMetadataBundle extends AbstractMetadataBundle {
         log.info("Person AttributeTypes installed");
 
         //Install Encounter Type
-        log.info("Installing EncounterTypes");
-        install(EncounterTypes.INITIAL_ENCOUNTER_TYPE);
-        install(EncounterTypes.FOLLOW_UP_ENCOUNTER_TYPE);
+        log.info("Installing MentalHealthEncounterTypes");
+        install(MentalHealthEncounterTypes.INITIAL_ENCOUNTER_TYPE);
+        install(MentalHealthEncounterTypes.FOLLOW_UP_ENCOUNTER_TYPE);
 
 
         //installing programs metadata

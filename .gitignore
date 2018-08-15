@@ -57,7 +57,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 ################
-
 ### Linux ###
 .*
 !.gitignore

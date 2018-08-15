@@ -49,7 +49,7 @@ import java.util.Set;
 /**
  * Calculation utility methods
  */
-public class ConfigCalculationUtils {
+public class MentalHealthConfigCalculationUtils {
     /**
      * Instantiates and configures a patient calculation
      * @param clazz the calculation class
