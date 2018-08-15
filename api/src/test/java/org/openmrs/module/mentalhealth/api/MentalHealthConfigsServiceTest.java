@@ -23,7 +23,7 @@ import org.openmrs.test.BaseModuleContextSensitiveTest;
 /**
  * Tests {@link ${MentalHealthConfigsService}}.
  */
-public class AihdConfigsServiceTest extends BaseModuleContextSensitiveTest {
+public class MentalHealthConfigsServiceTest extends BaseModuleContextSensitiveTest {
 	@Ignore
 	@Test
 	public void shouldSetupContext() {

@@ -29,8 +29,7 @@ import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.mentalhealth.activator.AppConfigurationInitializer;
 import org.openmrs.module.mentalhealth.activator.HtmlFormsInitializer;
 import org.openmrs.module.mentalhealth.activator.Initializer;
-import org.openmrs.module.mentalhealth.deploy.CommonMetadataBundle;
-import org.openmrs.module.mentalhealth.metadata.PatientIdentifierTypes;
+import org.openmrs.module.mentalhealth.deploy.MentalHealthCommonMetadataBundle;
 import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.emrapi.EmrApiConstants;
 import org.openmrs.module.idgen.IdentifierSource;
@@ -38,11 +37,8 @@ import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
 import org.openmrs.module.metadatamapping.MetadataTermMapping;
 import org.openmrs.module.metadatamapping.api.MetadataMappingService;
-import org.openmrs.util.OpenmrsClassLoader;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -176,7 +172,7 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 
 	private void installCommonMetadata(MetadataDeployService deployService) {
 		try {
-			deployService.installBundle(Context.getRegisteredComponents(CommonMetadataBundle.class).get(0));
+			deployService.installBundle(Context.getRegisteredComponents(MentalHealthCommonMetadataBundle.class).get(0));
 
 
 		}

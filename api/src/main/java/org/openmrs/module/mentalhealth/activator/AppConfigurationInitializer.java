@@ -25,25 +25,6 @@ public class AppConfigurationInitializer implements Initializer {
             TaskDefinition autoCloseVisitsTask = (TaskDefinition) schedulerService.getTaskByName("Auto Close Visits Task");
             autoCloseVisitsTask.setStartOnStartup(true);
             schedulerService.saveTaskDefinition(autoCloseVisitsTask);
-
-            // check the Database Backup Task
-            /*TaskDefinition backupDatabase = (TaskDefinition) schedulerService.getTaskByName("Database Backup Task");
-            if (backupDatabase != null) {
-                // only execute if the task exists
-                backupDatabase.setStartOnStartup(true);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm:ss");
-                Calendar taskDefinitionCalendar = new GregorianCalendar(2016, 8, 28, 23, 59, 59);
-                Calendar aihdMRCalendar = new GregorianCalendar(2016, 8, 28, 15, 59, 59);
-
-                // change the start date
-                if(sdf.format(taskDefinitionCalendar.getTime()).equals(sdf.format(backupDatabase.getStartTime()))) {
-                    // set it to the new time for Uganda
-                    backupDatabase.setStartTime(aihdMRCalendar.getTime());
-                    log.info("AIHD backup time set");
-                }
-                schedulerService.saveTaskDefinition(backupDatabase);
-                log.info("Database Backup Task set to start on Startup");
-            }*/
         }
         catch (Exception e) {
             log.error("Failed to setup scheduled tasks ", e);

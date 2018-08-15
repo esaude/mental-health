@@ -7,7 +7,7 @@ import org.openmrs.module.metadatadeploy.bundle.AbstractMetadataBundle;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CommonMetadataBundle extends AbstractMetadataBundle {
+public class MentalHealthCommonMetadataBundle extends AbstractMetadataBundle {
 
     /**
      * @see org.openmrs.module.metadatadeploy.bundle.AbstractMetadataBundle#install()
@@ -21,6 +21,7 @@ public class CommonMetadataBundle extends AbstractMetadataBundle {
         log.info("Installing PatientAttributeTypes");
 
 
+        //instal person attribute types here
         log.info("Person AttributeTypes installed");
 
         //Install Encounter Type

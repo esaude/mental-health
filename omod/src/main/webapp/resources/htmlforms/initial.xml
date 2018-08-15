@@ -1,6 +1,6 @@
 <htmlform formName="Admit Patient"
           formDescription="Admit patient into this facility"
-          formEncounterType="e22e39fd-7db2-45e7-80f1-60fa0d5a4378"
+          formEncounterType="e7c5643e-9efe-11e8-a4c3-2b65da6977a7"
           formUuid="d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a"
           formVersion="1.0">
     <script>
