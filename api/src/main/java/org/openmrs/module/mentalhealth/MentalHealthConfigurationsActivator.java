@@ -23,6 +23,7 @@ import org.openmrs.PatientIdentifierType;
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleActivator;
 import org.openmrs.module.ModuleFactory;
@@ -45,7 +46,7 @@ import java.util.UUID;
 /**
  * This class contains the logic that is run every time this module is either started or stopped.
  */
-public class MentalHealthConfigurationsActivator implements ModuleActivator {
+public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 	
 	protected Log log = LogFactory.getLog(getClass());
 		
@@ -53,21 +54,21 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 	 * @see ModuleActivator#willRefreshContext()
 	 */
 	public void willRefreshContext() {
-		log.info("Refreshing Aihd Configurations Module");
+		log.info("Refreshing Mental Health Configurations Module");
 	}
 	
 	/**
 	 * @see ModuleActivator#contextRefreshed()
 	 */
 	public void contextRefreshed() {
-		log.info("Aihd Configurations Module refreshed");
+		log.info("Mental Health Configurations Module refreshed");
 	}
 	
 	/**
 	 * @see ModuleActivator#willStart()
 	 */
 	public void willStart() {
-		log.info("Starting Aihd Configurations Module");
+		log.info("Starting Mental Health Configurations Module");
 	}
 	
 	/**
@@ -75,7 +76,6 @@ public class MentalHealthConfigurationsActivator implements ModuleActivator {
 	 */
 	public void started() {
 		AdministrationService administrationService = Context.getAdministrationService();
-		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 		MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
 
 

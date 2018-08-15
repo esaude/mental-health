@@ -24,7 +24,7 @@
 	<bean parent="serviceContext">
 		<property name="moduleService">
 			<list>
-				<value>${project.parent.groupId}.${project.parent.artifactId}.api.AihdConfigsService</value>
+				<value>${project.parent.groupId}.${project.parent.artifactId}.api.MentalHealthConfigsService</value>
 				<bean
 					class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 					<property name="transactionManager">
@@ -35,7 +35,7 @@
 							<property name="dao">
 								<bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.HibernateMentalHealthConfigsDAO">
 									<property name="sessionFactory">
-										<ref bean="sessionFactory" />
+										<ref bean="dbSessionFactory" />
 									</property>
 								</bean>
 							</property>
