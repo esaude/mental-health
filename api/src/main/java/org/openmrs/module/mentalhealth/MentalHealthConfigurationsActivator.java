@@ -16,7 +16,6 @@ package org.openmrs.module.mentalhealth;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.GlobalProperty;
 import org.openmrs.Patient;
 import org.openmrs.PatientIdentifier;
 import org.openmrs.PatientIdentifierType;
@@ -27,17 +26,13 @@ import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleActivator;
 import org.openmrs.module.ModuleFactory;
+import org.openmrs.module.idgen.IdentifierSource;
+import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.mentalhealth.activator.MentalHealthAppConfigurationInitializer;
 import org.openmrs.module.mentalhealth.activator.MentalHealthHtmlFormsInitializer;
 import org.openmrs.module.mentalhealth.activator.MentalHealthInitializer;
 import org.openmrs.module.mentalhealth.deploy.MentalHealthCommonMetadataBundle;
-import org.openmrs.module.appframework.service.AppFrameworkService;
-import org.openmrs.module.emrapi.EmrApiConstants;
-import org.openmrs.module.idgen.IdentifierSource;
-import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
-import org.openmrs.module.metadatamapping.MetadataTermMapping;
-import org.openmrs.module.metadatamapping.api.MetadataMappingService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +70,6 @@ public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 	 * @see ModuleActivator#started()
 	 */
 	public void started() {
-		AdministrationService administrationService = Context.getAdministrationService();
 		MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
 
 
@@ -88,10 +82,6 @@ public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 		}
 		// generate OpenMRS ID for patients without the identifier
 		generateOpenMRSIdentifierForPatientsWithout();
-
-		// save defined global properties
-		administrationService.saveGlobalProperties(configureGlobalProperties());
-
 
 
 		log.info("Aihd Configurations Module started");
@@ -183,24 +173,5 @@ public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 		}
 	}
 
-	/**
-	 * Configure the global properties for the expected functionality
-	 *
-	 * @return
-	 */
-	private List<GlobalProperty> configureGlobalProperties() {
-		List<GlobalProperty> properties = new ArrayList<GlobalProperty>();
-		// The primary identifier type now uses metadata mapping instead of a global property
-		MetadataMappingService metadataMappingService = Context.getService(MetadataMappingService.class);
-		MetadataTermMapping primaryIdentifierTypeMapping = metadataMappingService.getMetadataTermMapping(EmrApiConstants.EMR_METADATA_SOURCE_NAME, EmrApiConstants.PRIMARY_IDENTIFIER_TYPE);
-		PatientIdentifierType patintId = Context.getPatientService().getPatientIdentifierTypeByUuid("e2b966d0-1d5f-11e0-b929-000c29ad1d07");
 
-		if(!patintId.getUuid().equals(primaryIdentifierTypeMapping.getMetadataUuid())){
-			primaryIdentifierTypeMapping.setMappedObject(patintId);
-			metadataMappingService.saveMetadataTermMapping(primaryIdentifierTypeMapping);
-		}
-		return properties;
-	}
-
-		
 }

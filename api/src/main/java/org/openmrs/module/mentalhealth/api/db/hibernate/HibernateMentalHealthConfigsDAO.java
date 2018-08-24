@@ -16,7 +16,6 @@ package org.openmrs.module.mentalhealth.api.db.hibernate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
-import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.module.mentalhealth.api.db.MentalHealthConfigsDAO;
 
 /**
@@ -25,19 +24,19 @@ import org.openmrs.module.mentalhealth.api.db.MentalHealthConfigsDAO;
 public class HibernateMentalHealthConfigsDAO implements MentalHealthConfigsDAO {
 	protected final Log log = LogFactory.getLog(this.getClass());
 	
-	private DbSessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	/**
      * @param sessionFactory the sessionFactory to set
      */
-    public void setSessionFactory(DbSessionFactory sessionFactory) {
+    public void setSessionFactory(SessionFactory sessionFactory) {
 	    this.sessionFactory = sessionFactory;
     }
     
 	/**
      * @return the sessionFactory
      */
-    public DbSessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
 	    return sessionFactory;
     }
 }

@@ -63,6 +63,7 @@ public class MentalHealthHtmlFormsInitializer implements MentalHealthInitializer
                 htmlForm = HtmlFormUtil.getHtmlFormFromUiResource(resourceFactory, formService, hfeService, providerName, formPath);
                 try {
                     // Adds meta data
+                    System.out.println("The form is found here :::"+htmlForm.getName());
                     ExtensionForm extensionForm = MentalHealthExtensionFormUtil.getExtensionFormFromUiResourceAndForm(resourceFactory, providerName, formPath, hfeAppService, formManager, htmlForm.getForm());
                     log.info("The form at " + formPath + " has been successfully loaded with its metadata");
                 } catch (Exception e) {

@@ -35,7 +35,7 @@
 							<property name="dao">
 								<bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.HibernateMentalHealthConfigsDAO">
 									<property name="sessionFactory">
-										<ref bean="dbSessionFactory" />
+										<ref bean="sessionFactory" />
 									</property>
 								</bean>
 							</property>

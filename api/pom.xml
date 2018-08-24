@@ -61,10 +61,6 @@
 				
 		<!-- End OpenMRS core -->
 		<!--Start of other module dependancies-->
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>addresshierarchy-api</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
@@ -74,21 +70,6 @@
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
 			<artifactId>calculation-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>dataintegrity-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>emrapi-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>emrapi-api-1.12</artifactId>
 		</dependency>
 
 		<dependency>
@@ -118,16 +99,6 @@
 
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
-			<artifactId>idgen-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>legacyui-omod</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
 			<artifactId>metadatadeploy-api</artifactId>
 		</dependency>
 
@@ -143,32 +114,7 @@
 
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
-			<artifactId>providermanagement-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>registrationcore-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>registrationapp-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
 			<artifactId>reporting-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>serialization.xstream-api</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>serialization.xstream-api-2.0</artifactId>
 		</dependency>
 
 		<dependency>
@@ -177,7 +123,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
-			<artifactId>attachments-api</artifactId>
+			<artifactId>idgen-api</artifactId>
 		</dependency>
 
 	</dependencies>
