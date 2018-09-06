@@ -56,7 +56,7 @@
 		<emrapiVersion>1.18</emrapiVersion>
 		<eventVersion>2.5</eventVersion>
 		<metadatasharingVersion>1.2.2</metadatasharingVersion>
-		<metadatamappingVersion>1.2.0</metadatamappingVersion>
+		<metadatamappingVersion>1.3.2</metadatamappingVersion>
 
 	</properties>
 
