@@ -61,8 +61,8 @@
 		<file>messages_fr.properties</file>
 	</messages>
 	<messages>
-		<lang>es</lang>
-		<file>messages_es.properties</file>
+		<lang>pt</lang>
+		<file>messages_pt.properties</file>
 	</messages>
 	<!-- /Internationalization -->
 
