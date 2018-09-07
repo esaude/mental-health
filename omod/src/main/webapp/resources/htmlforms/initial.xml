@@ -267,7 +267,7 @@
                     <tr>
                         <td>
                             <uimessage code="mentalhealth.form.initial.patient.obs.use.traditional.medicine" />
-                            <obs conceptId="b222e3ba-b9fc-4f0d-b9fd-23cc8e65ebf8" answerConceptIds="032a3ccc-9f01-4122-9815-ec6ee0bf9997,4eded626-dcf4-4756-8e4d-624173377071,e1d84074-1d5f-11e0-b929-000c29ad1d07" answerLabels="Currently,In the past,Never used" style="radio" />
+                            <obs conceptId="b222e3ba-b9fc-4f0d-b9fd-23cc8e65ebf8" answerConceptIds="858b2bb3-d93a-41a8-afeb-c84ef24cbe7a,4eded626-dcf4-4756-8e4d-624173377071,e1d84074-1d5f-11e0-b929-000c29ad1d07" answerLabels="Currently,In the past,Never used" style="radio" />
                             <br />
                             <uimessage code="mentalhealth.form.initial.patient.obs.use.describe" />
                             <obs conceptId="83baba80-73fd-4621-8279-83a28396046f" rows="2" cols="50" />
@@ -280,7 +280,7 @@
             <div id="symptom-assessment">
                 <table class="table">
                     <tr>
-                        
+
                     </tr>
                 </table>
             </div>
@@ -288,5 +288,5 @@
             <div id="mental-health-disorders"></div>
         </div>
     </div>
-
+    <enrollInProgram programId="cb1e24be-aa03-11e8-a5b5-f34e18407f07" />
 </htmlform>
