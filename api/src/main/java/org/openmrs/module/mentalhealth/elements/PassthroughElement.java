@@ -30,6 +30,8 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 	
 	protected String m_closeTag;
 	
+	protected Integer m_obsNumber;
+	
 	public PassthroughElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
 		
 		//store the original node to pass through when generating HTML
@@ -58,6 +60,16 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 				throw new IllegalArgumentException("Cannot find value attribute for element with conceptId " + conceptId
 				        + " in conceptId attribute value. Parameters: " + parameters);
 			}
+			
+			try {
+				
+				m_obsNumber = Integer.parseInt(m_parameters.get("data-obs-number"));
+			
+			} catch (Exception e) {
+				m_obsNumber = 0;
+			}
+			
+			
 		}
 
 		String tags[] = NodeUtil.generateSeparateTags(originalNode);
@@ -77,7 +89,6 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 	@Override
 	public String generateHtml(FormEntryContext context) {
 		
-		//(fieldset will handle radios checked on view/edit and submission handling)
 		if( m_originalNode!=null  )
 		{
 			switch(context.getMode()) {

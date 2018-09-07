@@ -60,11 +60,19 @@ public class RadioElement extends InputElement implements IHandleHTMLEdit, IChil
 
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
-		// TODO Auto-generated method stub
+
+		if(m_openMRSConcept == null || m_parentElement == null) {
+			return;
+		}
+		
 		if(m_parentElement.getValueStoredInOpenMRS(this)) {
+			
 			((Element)m_originalNode).setAttribute("checked", "true");
+			
 		} else {
+
 			((Element)m_originalNode).removeAttribute("checked");
+			
 		}
 	}
 	

@@ -67,11 +67,30 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 	
 	public void takeActionForEditMode(FormEntryContext context)
 	{
+		if(m_openMRSConcept == null) {
+			return;
+		}
 		//Encounter viewEncounter = context.getExistingEncounter();
 		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
 		//viewEncounter.
+		
+		if(existingObs == null) {
+			return;
+		}
+		
 		List<Obs> observations = existingObs.get(m_openMRSConcept);
-		((Element)m_originalNode).setAttribute("value", observations.get(0).getValueText());
+		
+		if(observations==null || m_obsNumber >= observations.size()) {
+			return;
+		}
+		
+		Obs answer = observations.get(m_obsNumber);
+		
+		if(answer == null) {
+			return;
+		}
+		
+		((Element)m_originalNode).setAttribute("value", answer.getValueText());
 		//result = NodeUtil.stringify();
 	
 	}

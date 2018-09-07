@@ -32,7 +32,9 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	
 	private Map<String, Concept> m_radios = new HashMap<String, Concept>();
 	
-	private Map<Concept, Boolean> m_radioStates = new HashMap<Concept, Boolean>();
+	//private Map<String, Boolean> m_radioStates = new HashMap<String, Boolean>();
+	
+	private String m_selectedChildConceptId = "";
 	
 	private boolean m_responsibleFieldset = false;
 	
@@ -121,19 +123,33 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 		
+		if(m_openMRSConcept == null || !m_responsibleFieldset) {
+			return;
+		}
+		
 		//Encounter viewEncounter = context.getExistingEncounter();
 		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
 		//viewEncounter.
+		if(existingObs == null) {
+			return;
+		}
+		
 		List<Obs> observations = existingObs.get(m_openMRSConcept);
 		
-		//NodeList childRadios = ((Element)m_originalNode).getElementsByTagName("radio");
+		if(observations == null || m_obsNumber >= observations.size())
+		{
+			return;
+		}
 		
-		m_radioStates.put(observations.get(0).getConcept(), true);
-		//when this is parsing for view/edit, the radios wont have been
-		//encountered yet, but we can still build the map
+		Integer answerConcept = observations.get(m_obsNumber).getValueCoded().getId();
 		
-		//((Element)m_originalNode).setAttribute("value", observations.get(0).getValueText());
-		//result = NodeUtil.stringify();
+		if(answerConcept == null) {
+			return;
+		}
+
+		m_selectedChildConceptId = String.valueOf(answerConcept);
+		((Element)m_originalNode).setAttribute("data-answered-concept-id", m_selectedChildConceptId);
+		
 	}
 	
 	@Override
@@ -147,7 +163,7 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		
 		//if no conceptid was provided, or this is not the fieldset responsible
 		//for a set of child radios, just return
-		if(m_openMRSConcept == null || m_responsibleFieldset) {
+		if(m_openMRSConcept == null || !m_responsibleFieldset) {
 			return;
 		}
 		
@@ -206,11 +222,13 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		
 		Map<String, String> childAttrs = child.getAttrs();
 		
+		if(childAttrs == null)
+			return;
+		
 		String childName = childAttrs.get("name");
 		String childValue = childAttrs.get("value");
 		
 		log.info("attaching child with name "+ childName + " and value "+ childValue + " to fieldset " + m_parameters.get("id"));
-		
 		
 		if(m_radioGroupName == null){
 			m_radioGroupName = childName;
@@ -224,8 +242,22 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 
 	@Override
 	public boolean getValueStoredInOpenMRS(IChildElement child) {
-		// TODO Auto-generated method stub
-		return m_radioStates.get(child.getConcept());
+
+		Map<String, String> childAttrs = child.getAttrs();
+		
+		if( childAttrs == null ) {
+			return false;
+		}
+		
+		String childConceptId = childAttrs.get("data-concept-id");
+		
+		if(		childConceptId == null ||
+				childConceptId.isEmpty() ||
+				m_selectedChildConceptId.isEmpty() ) {
+			return false;
+		}
+		
+		return childConceptId.equals(m_selectedChildConceptId);
 	}
 	
 	@Override
