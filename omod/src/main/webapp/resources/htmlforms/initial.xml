@@ -214,8 +214,76 @@
                     </tr>
                 </table>
             </div>
-            <div id="patient-history"></div>
-            <div id="symptom-assessment"></div>
+            <div id="patient-history">
+                <table class="table">
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.other.chronic.diseases" />
+                            <obs conceptId="8b928244-ef8f-47ea-a78a-07bce56ca7bc" answerConceptIds="e1d81b62-1d5f-11e0-b929-000c29ad1d07,e1d81c70-1d5f-11e0-b929-000c29ad1d07,e1d8e10a-1d5f-11e0-b929-000c29ad1d07" answerLabels="Yes,No,Do not know" style="radio" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.other.substances.specify" />
+                            <obs conceptId="aa8505c4-7037-4478-af8c-34b2c6dd760c" rows="2" cols="50" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.tb.test" />
+                            <obs conceptId="efd69778-eac1-4132-88be-1222af97e6b8" answerConceptIds="5ab65682-608d-49e1-b581-2cde8def6df9,106e2529-2759-4bae-970d-d0c108034465,bcce96fe-ee90-4b23-8537-50a62f7bbbdf" answerLabels="Yes,No,Never tested" style="radio" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.tb.diagnosed.date" />
+                            <obs conceptId="743d7058-ee4f-49a5-8266-80b85b416ecb" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.hiv.test" />
+                            <obs conceptId="e1dd198c-1d5f-11e0-b929-000c29ad1d07" answerConceptIds="e1d8dab6-1d5f-11e0-b929-000c29ad1d07,e1d81c70-1d5f-11e0-b929-000c29ad1d07,e1dbff8e-1d5f-11e0-b929-000c29ad1d07" answerLabels="Yes,No,Never tested" style="radio" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.hiv.diagnosed.date" />
+                            <obs conceptId="54b65bbd-a0b0-4dfa-a3b1-de14d41bc314" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.hiv.art.start.date" />
+                            <obs conceptId="aa75aafb-fb9a-4ab6-90fd-8354898df2a1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.alcohol.use" />
+                            <obs conceptId="e1dcabf0-1d5f-11e0-b929-000c29ad1d07" answerConceptIds="5bb90676-908a-11e6-a98e-000c29db4475,4eded626-dcf4-4756-8e4d-624173377071,e1d84074-1d5f-11e0-b929-000c29ad1d07" answerLabels="Currently,In the past,Never used" style="radio" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.use.describe" />
+                            <obs conceptId="8c1cb1c7-67c7-4923-8f10-0f2c03a2ac63" rows="2" cols="50" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.use.other.drugs" />
+                            <obs conceptId="2d2c6fdd-0065-4ec6-9f87-0cbddb4e5ac1" answerConceptIds="858b2bb3-d93a-41a8-afeb-c84ef24cbe7a,4eded626-dcf4-4756-8e4d-624173377071,e1d84074-1d5f-11e0-b929-000c29ad1d07" answerLabels="Currently,In the past,Never used" style="radio" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.use.describe" />
+                            <obs conceptId="a2329316-bce3-4d81-9928-97f093b32549" rows="2" cols="50" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.use.traditional.medicine" />
+                            <obs conceptId="b222e3ba-b9fc-4f0d-b9fd-23cc8e65ebf8" answerConceptIds="032a3ccc-9f01-4122-9815-ec6ee0bf9997,4eded626-dcf4-4756-8e4d-624173377071,e1d84074-1d5f-11e0-b929-000c29ad1d07" answerLabels="Currently,In the past,Never used" style="radio" />
+                            <br />
+                            <uimessage code="mentalhealth.form.initial.patient.obs.use.describe" />
+                            <obs conceptId="83baba80-73fd-4621-8279-83a28396046f" rows="2" cols="50" />
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+            <div id="symptom-assessment">
+                <table class="table">
+                    <tr>
+                        
+                    </tr>
+                </table>
+            </div>
             <div id="patient-overview"></div>
             <div id="mental-health-disorders"></div>
         </div>
