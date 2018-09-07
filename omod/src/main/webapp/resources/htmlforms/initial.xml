@@ -1,4 +1,4 @@
-<htmlform formName="Mental Health Initial Form"
+<htmlform formName="MENTAL HEALTH INITIAL FORM"
           formDescription="Initial form field for mental health patients"
           formEncounterType="e7c5643e-9efe-11e8-a4c3-2b65da6977a7"
           formUuid="d2c7532c-fb01-11e2-8ff2-fd54ab5fdb2a"
@@ -374,31 +374,53 @@
             <div id="mental-health-disorders">
                 <table>
                     <tr>
+                        <th></th>
+                        <th><uimessage code="mentalhealth.form.initial.patient.obs.date" /></th>
+                    </tr>
+                    <tr>
                         <td>
-                            <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="1be1978a-9084-11e6-a98e-000c29db4475" style="checkbox"/>
+                            <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="1be1978a-9084-11e6-a98e-000c29db4475" answerLabel="" style="checkbox"/>
                             <uimessage code="mentalhealth.form.initial.patient.obs.depresive.disorder"  dateLabel="&lt;/td&gt;&lt;td&gt;" />
                         </td>
 
                     </tr>
+                    <obsgroup groupingConceptId="e1cf1d50-1d5f-11e0-b929-000c29ad1d07">
                     <tr>
-                        <obsgroup groupingConceptId="e1cf1d50-1d5f-11e0-b929-000c29ad1d07">
+
                             <td>
-                                <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="fc5805e5-c11c-4ae0-9441-d3562fc82b40" style="checkbox"/>
+                                <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="fc5805e5-c11c-4ae0-9441-d3562fc82b40" answerLabel="" style="checkbox"/>
                                 <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.disorder" />(
-                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="2a0ecc35-b60c-466a-aa9e-a4ff38919169" style="checkbox" />
+                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="2a0ecc35-b60c-466a-aa9e-a4ff38919169" answerLabel="" style="checkbox" />
                                 <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.ptsd" />
-                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="c9be08ea-fbed-4179-8f85-b2f035272ad7" style="checkbox" />
+                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="c9be08ea-fbed-4179-8f85-b2f035272ad7" answerLabel="" style="checkbox" />
                                 <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.panic" />
-                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="fea17a55-9083-11e6-a98e-000c29db4475" style="checkbox" />
-                                <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.tag" />
+                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="fea17a55-9083-11e6-a98e-000c29db4475" answerLabel="" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.tag" />)
                             </td>
                             <td>
-                                <uimessage code="mentalhealth.form.initial.patient.obs.date" />
                                 <obs conceptId="9c3b229f-353e-4c9e-8b95-877898603f6c" />
                             </td>
-                        </obsgroup>
 
                     </tr>
+                    </obsgroup>
+                    <obsgroup groupingConceptId="e1cf1d50-1d5f-11e0-b929-000c29ad1d07">
+                    <tr>
+
+                            <td>
+                                <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="e96b83bf-6988-4b8d-b17e-c1d0ad6641d4" answerLabel="" style="checkbox"/>
+                                <uimessage code="mentalhealth.form.initial.patient.obs.adjustment.disorder" />(
+                                <obs conceptId="27bd39b1-9e66-47be-826f-4dcae2ae40ed" answerConceptId="2c238052-9f8a-4341-8e59-eeb886c9590d" answerLabel="" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.adjustment.disorder.anxiety" />
+                                <obs conceptId="27bd39b1-9e66-47be-826f-4dcae2ae40ed" answerConceptId="e1d004a4-1d5f-11e0-b929-000c29ad1d07" answerLabel="" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.adjustment.disorder.depression" />
+                                <obs conceptId="27bd39b1-9e66-47be-826f-4dcae2ae40ed" answerConceptId="558e1817-9087-11e6-a98e-000c29db4475" answerLabel="" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.adjustment.disorder.agitation" />)
+                            </td>
+                            <td>
+                                <obs conceptId="26875607-cabb-4d11-ba3d-90e8030bc859" />
+                            </td>
+                    </tr>
+                    </obsgroup>
                 </table>
             </div>
         </div>
