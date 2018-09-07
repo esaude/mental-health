@@ -7,7 +7,6 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.handler.AbstractTagHandler;
 import org.openmrs.module.mentalhealth.elements.SelectElement;
-import org.openmrs.module.mentalhealth.elements.LabelElement;
 import org.openmrs.module.mentalhealth.elements.OptionElement;
 import org.openmrs.module.mentalhealth.elements.PassthroughElement;
 import org.w3c.dom.Node;

@@ -102,7 +102,7 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 					this.takeActionForEnterMode(context);
 					break;
 			}
-		
+			
 			return NodeUtil.generateSeparateTags(m_originalNode)[0];
 		}
 		
@@ -110,6 +110,7 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 	}
 	
 	public String closeTag() {
+		
 		return m_closeTag;
 	}
 
@@ -145,5 +146,4 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 		// TODO Auto-generated method stub
 		throw new IllegalArgumentException("PassthroughElement getTagName() should be overridden by derived type!");
 	}
-
 }

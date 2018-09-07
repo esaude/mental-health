@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.Concept;
 import org.openmrs.Obs;
-import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
@@ -16,9 +15,11 @@ import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLView;
 import org.openmrs.module.mentalhealth.elements.interfaces.IPassthrough;
-import org.openmrs.module.mentalhealth.utils.NodeUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class InputElement extends PassthroughElement implements IHandleHTMLEdit, IHandleHTMLView, FormSubmissionControllerAction, IPassthrough {
 	
@@ -37,12 +38,6 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 	public String closeTag() {
 		//Inputs should always be self closing
 		return "";
-	}
-
-
-	@Override
-	public void handleSubmission(FormEntrySession session, HttpServletRequest submission) {
-		throw new IllegalStateException("This handleSubmission stub should not be registered");
 	}
 
 
@@ -93,6 +88,47 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		((Element)m_originalNode).setAttribute("value", answer.getValueText());
 		//result = NodeUtil.stringify();
 	
+	}
+	
+	@Override
+	public void handleSubmission(FormEntrySession session, HttpServletRequest submission) {
+		
+		if( m_openMRSConcept == null ) {
+			return;
+		}
+		
+		FormEntryContext context = session.getContext();
+		
+		String value = submission.getParameter(m_parameters.get("name"));
+		
+		if( value == null || value.isEmpty() ) {
+			return;
+		}
+		
+		String safeValue = "";
+		
+		try {
+			 safeValue = URLEncoder.encode(value, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return;
+		}
+		
+		//shouldnt happen, play it safe anyway
+		if(safeValue == null || safeValue.isEmpty()) {
+			return;
+		}
+		
+		switch(context.getMode()) {
+			case EDIT:
+				break;
+			case VIEW:
+				break;
+			case ENTER:
+				session.getSubmissionActions().createObs(m_openMRSConcept, safeValue, null, null, null);
+				break;
+		
+		}
 	}
 	
 	@Override

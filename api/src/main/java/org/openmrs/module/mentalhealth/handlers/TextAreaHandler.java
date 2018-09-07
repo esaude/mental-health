@@ -8,10 +8,8 @@ import org.openmrs.module.htmlformentry.BadFormDesignException;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.handler.AbstractTagHandler;
-import org.openmrs.module.mentalhealth.elements.OptionElement;
 import org.openmrs.module.mentalhealth.elements.PassthroughElement;
-import org.openmrs.module.mentalhealth.elements.StringValueObsElement;
-import org.openmrs.module.mentalhealth.elements.StringValueObsElement.Type;
+import org.openmrs.module.mentalhealth.elements.TextAreaElement;
 import org.w3c.dom.Node;
 
 public class TextAreaHandler extends AbstractTagHandler {
@@ -31,7 +29,7 @@ public class TextAreaHandler extends AbstractTagHandler {
 		FormEntryContext context = session.getContext();
 		
 		//instantiate a new instance of our observation controller adapter
-		StringValueObsElement elem = new StringValueObsElement(context, getAttributes(node), node, Type.TextArea);
+		TextAreaElement elem = new TextAreaElement(context, getAttributes(node), node);
 		
 		//element implements FormSubmissionController interface
 		session.getSubmissionController().addAction(elem);
@@ -42,6 +40,8 @@ public class TextAreaHandler extends AbstractTagHandler {
 		//keep track of nested tags
 		context.pushToStack(elem);
 		
+		//if in view mode a child text node is added to the actual dom
+		//so the generator will parse that node as normal
 		//Returns whether or not to handle the body also. (True = Yes)
 		return true;
 	}
@@ -56,7 +56,7 @@ public class TextAreaHandler extends AbstractTagHandler {
 		
 		Object baseObj = context.popFromStack();
 		//node.compareDocumentPosition(node.getOwnerDocument());
-		if(!(baseObj instanceof StringValueObsElement && ((StringValueObsElement)baseObj).getStringValueType()==StringValueObsElement.Type.TextArea )) {
+		if(!(baseObj instanceof TextAreaElement) ) {
 			throw new IllegalStateException("Element on top of stack wasn't a textarea tag." + " Parameters: " + getAttributes(node));
 		}
 		

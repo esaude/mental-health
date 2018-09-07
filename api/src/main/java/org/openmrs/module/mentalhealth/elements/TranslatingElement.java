@@ -6,28 +6,26 @@ import java.util.Map;
 
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.FormEntryContext;
-import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEnter;
-import org.openmrs.module.mentalhealth.utils.NodeUtil;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class TranslatingElement extends PassthroughElement implements IHandleHTMLEnter {
 
 	static final protected String m_serverLocale =  Context.getLocale().toString();
-
-	protected Node m_originalNode;
-	protected Node m_nodeClone;
 	
 	protected boolean m_translate = false;
 
-	protected ArrayList<AbstractMap.SimpleEntry<String, Node>> m_toTranslate;
+	protected ArrayList<AbstractMap.SimpleEntry<String, Node>> m_toTranslate = new ArrayList<AbstractMap.SimpleEntry<String, Node>>();
 	
 	public TranslatingElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
 		super(context, parameters, originalNode);
 
-		//m_translate = m_parameters.get("data-translate").equals("true");
-		m_translate = false;
+		String translateAttr = m_parameters.get("data-translate");
+		
+		if(translateAttr != null) {
+			m_translate = translateAttr.equals("true");
+		}
 		
 		if(m_translate) {
 			findTranslationKeys();
@@ -36,9 +34,7 @@ public class TranslatingElement extends PassthroughElement implements IHandleHTM
 	
 	private void findTranslationKeys() {
 		
-		m_nodeClone = m_originalNode.cloneNode(true);
-		
-		NodeList list = m_nodeClone.getChildNodes();
+		NodeList list = m_originalNode.getChildNodes();
 		
 		for( int i=0; i < list.getLength(); i++ )
 		{
@@ -65,7 +61,7 @@ public class TranslatingElement extends PassthroughElement implements IHandleHTM
 				
 				for(AbstractMap.SimpleEntry<String, Node> translationPair : m_toTranslate) {
 					//lookup translation of provided textContent
-					String translatedString = context.getTranslator().translate(m_serverLocale, translationPair.getKey());
+					String translatedString = Context.getMessageSourceService().getMessage(translationPair.getKey());
 					
 					Node originalChild = translationPair.getValue();
 					
@@ -73,7 +69,7 @@ public class TranslatingElement extends PassthroughElement implements IHandleHTM
 					
 					changeling.setNodeValue(translatedString);
 					
-					m_nodeClone.replaceChild(changeling, originalChild);
+					m_originalNode.replaceChild(changeling, originalChild);
 				}
 				
 				//return NodeUtil.stringify(m_nodeClone);

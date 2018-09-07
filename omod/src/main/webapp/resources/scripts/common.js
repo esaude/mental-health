@@ -1,15 +1,20 @@
 //namespace datastore by page path, internally localStorage uses only host (dns:port)
 var dataStoreNS = window.location.pathname;
 
-const initializeDefaultSrc = {
-    //emulate a HTMLInputElement, type "checkbox", "radio"
-    "checked": false,
-    //emulate a HTMLInputElement type "date", "number", "tel", "text", "textarea"
-    "value": "",
-    //emulate a HTMLSelectElement
-    0: { "id": "not-selected"},
-    selectedIndex: 0,
-};
+function initializeDefaultSrc(control) {
+
+    const defaultSrc = {
+        //emulate a HTMLInputElement, type "checkbox", "radio"
+        "checked": control.defaultChecked,
+        //emulate a HTMLInputElement type "date", "number", "tel", "text", "textarea"
+        "value": control.defaultValue,
+        //emulate a HTMLSelectElement
+        0: { "value": ""},
+        selectedIndex: 0,
+    };
+
+    return defaultSrc;
+}
 
 function fnForFieldsetRadios(control, fn=function(radio){}){
     var childRadios = $(`fieldset[id=${control.id}] input[type=radio]`);
@@ -22,7 +27,7 @@ function fnForFieldsetRadios(control, fn=function(radio){}){
 function clearDisabledInputByType(control, alwaysClear=false){
 
     if(control.disabled || alwaysClear){
-        setMemberByType(initializeDefaultSrc, control, control);
+        setMemberByType(initializeDefaultSrc(control), control, control);
     }
 
     var inputEvent = new Event("input");
@@ -33,17 +38,37 @@ function clearDisabledInputByType(control, alwaysClear=false){
 
 function setDependentDisabledState(clickedElement, specificRadio, specificTarget, stateOverride=false, disabledOverrideValue){
 
+    var multiSource = false;
+    var multiSourceState = false;
+
     if(specificRadio) {
-        //console.log("setting clickedElement to ", specificRadio);
-        clickedElement = document.querySelector(specificRadio);
+
+        if(Array.isArray(specificRadio)){
+
+            multiSource = true;
+
+            for(radio of specificRadio){
+                clickedElement = document.querySelector(radio);
+                multiSourceState |= clickedElement.checked;
+            }
+
+            //if one of the specified elements is checked, then remove disabled attribute
+            multiSourceState=!multiSourceState;
+
+        } else {
+            //console.log("setting clickedElement to ", specificRadio);
+            clickedElement = document.querySelector(specificRadio);
+        }
     }
 
-    let el = clickedElement.parentElement;
+    var el = clickedElement.parentElement;
 
-    let targetState = !clickedElement.checked || clickedElement.selected;
+    var targetState = !clickedElement.checked || clickedElement.selected;
 
     if(stateOverride){
         targetState = disabledOverrideValue;
+    } else if (multiSource) {
+        targetState = multiSourceState;
     }
 
     
@@ -85,9 +110,7 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
     }
 };
 
-function getIndexFromOptionID(control, optionID){
-
-    var option = control.namedItem(optionID);
+function getIndexFromOptionValue(control, optionValue){
 
     var optionIndex = -1;
     
@@ -98,7 +121,7 @@ function getIndexFromOptionID(control, optionID){
         var curOption = control[iteratedOption];
         //console.log(iteratedOption, curOption);
 
-        if(curOption == option){
+        if(curOption.value == optionValue){
             //console.log(curOption);
             optionIndex = iteratedOption;
             
@@ -129,9 +152,11 @@ function loadLocalSiteInfo(attach=false){
             DOMSelect = jQuerySelect[0];
         }
 
-        if(DOMSelect && localStorage[dataStoreNS+"mhf-"+selectID]){
+        var storageName = dataStoreNS+"mhf-"+selectID;
+
+        if(DOMSelect && localStorage[storageName]){
             
-            var optionIndex = getIndexFromOptionID(DOMSelect, localStorage[dataStoreNS+"mhf-"+selectID]);
+            var optionIndex = getIndexFromOptionValue(DOMSelect, localStorage[storageName]);
             
             if(optionIndex) {
                 DOMSelect.selectedIndex = optionIndex;
@@ -144,12 +169,16 @@ function loadLocalSiteInfo(attach=false){
             jQuerySelect.on("change", function(event){
                 //console.log(this[this.selectedIndex].value);
 
-                let storageName=dataStoreNS+"mhf-"+this.id.slice(0, this.id.lastIndexOf("-select"));
+                //this is built during handling of change event
+                var storageName=dataStoreNS+"mhf-"+this.id.slice(0, this.id.lastIndexOf("-select"));
                 //console.log("storage name", storageName);
 
-                var prevOptionID = localStorage[storageName];
-                if(prevOptionID != undefined) {
-                    var prevOptionSelected = this.options[prevOptionID];
+                var prevOptionValue = localStorage[storageName];
+                if(prevOptionValue != undefined) {
+
+                    var prevOptionIndex = getIndexFromOptionValue(this, prevOptionValue);
+
+                    var prevOptionSelected = this.options[prevOptionIndex];
 
                     //console.log(prevOptionID, prevOptionSelected);
 
@@ -159,7 +188,7 @@ function loadLocalSiteInfo(attach=false){
                 
                 var newOptionSelected = this[this.selectedIndex];
                                         
-                localStorage[storageName] = newOptionSelected.id;
+                localStorage[storageName] = newOptionSelected.value;
                 //Set this as the new default to return to when resetting the form
                 newOptionSelected.defaultSelected = true;
             });
@@ -188,7 +217,7 @@ function setAllDisabledStates(){
                 handler: "onclick"
             },
             {
-                set: $("fieldset[onchange*='setDependentDisabledState']"),
+                set: $("[onchange*='setDependentDisabledState']"),
                 handler: "onchange"
             }
     ];
@@ -206,21 +235,26 @@ function setAllDisabledStates(){
             //also splits arrays of targets which need to be rebuilt too
             allParams = argsStr.split(",");
 
+            var paramArrayRanges=[];
             
             //console.log("allParams", allParams)
 
-            if(allParams.length>2){
-                var beginArrayIndex=-1;
+            //doesnt support nested arrays, neither does the function that is being called
+            if(allParams.length>1){
                 var foundArray=false;
-                var endArrayIndex=-1;
 
                 for(i=0; i<allParams.length; i++){
                     var param = allParams[i];
                     //selector like '[id=example]' also begins with '[', make sure there is more than one '[' in this param
                     //var segmentsAfterOpenBracket = param.split("[").length;
 
-                    if(param.search(/\[ *('|"|`)/) != -1 /*&& param.split("[").length > 2*/){
-                        beginArrayIndex = i;
+                    if(param.search(/\[ *('|"|`)/) != -1 ){
+                        
+                        paramArrayRanges[paramArrayRanges.length] = {
+                            "beginArrayIndex": i,
+                            "paramIndex": paramArrayRanges.length?paramArrayRanges[paramArrayRanges.length-1].paramIndex+1:i,
+                        }
+
                         foundArray = true;
                         allParams[i] = param.replace(/\[ */, "");
                     }
@@ -228,25 +262,30 @@ function setAllDisabledStates(){
                     //a selector like '[id=example]' also ends with ']', there should be more than ']', (n+1 if n)
                     //in case someone decides to write (this, input[independent], [ input[id=dependent] ])
                     //var segmentsAfterCloseBracket = param.split("]").length;
-                    if(foundArray && param.search(/('|"|`) *\]/) != -1 /*&& param.split("]").length > 2*/){
-                        endArrayIndex = i;
+                    if(foundArray && param.search(/('|"|`) *\]/) != -1 ){
 
+                        paramArrayRanges[paramArrayRanges.length-1].endArrayIndex = i;
+                        foundArray = false;
                         allParams[i] = param.replace(/\] *('|"|`) *\]/, "]'");
                     }
                 }
 
                 allParams = allParams.map(param => param.replace(/'/g, " ").trim());
 
-                if( foundArray ) {
-                    //console.log("target array found");
-                    allParams[2] = allParams.slice(beginArrayIndex, endArrayIndex);
-
-                    allParams = allParams.slice(0, 3);
+                for(range of paramArrayRanges){
+                    allParams[range.paramIndex] = allParams.slice(range.beginArrayIndex, range.endArrayIndex+1);
                 }
+
+                //if there were any arrays, move any remaining parameters forward, i.e. this, [], target
+                if(paramArrayRanges.length){
+                    var lastRange = paramArrayRanges[paramArrayRanges.length-1];
+                    allParams.splice(lastRange.paramIndex+1, lastRange.endArrayIndex-lastRange.paramIndex);
+                }
+
+                allParams = allParams.slice(0, 3);
             }
 
             //console.log(argsStr, allParams, allParams[0]=="this");
-
 
             setDependentDisabledState(allParams[0]=="this"?clickedElement=inputSetsDisabled:allParams[0],allParams[1]=="undefined"?undefined:specificRadio=allParams[1], specificTarget=allParams[2], stateOverride=true, disabledOverrideValue=true);
         }
@@ -280,8 +319,6 @@ function warnMaxDateToday(dateInput, alertSelector){
     var alertjQuery = $(alertSelector);
     var alert = alertjQuery[0];
 
-    //alert.clientWidth = dateInput.clientWidth;
-
     var alertText = "";
 
     if(specifiedDay > todayDate){
@@ -296,6 +333,18 @@ function warnMaxDateToday(dateInput, alertSelector){
 
     alert.textContent = alertText;
 
+}
+
+function watchRange(control, alertSelector){
+    var alert = $(alertSelector);
+    
+    if(control.value && (Number(control.value) < Number(control.min) || Number(control.value) > Number(control.max))){
+        alert.removeAttr("hidden");
+        alert[0].textContent = `Value is outside of range of ${control.min} to ${control.max}`;
+    } else {
+        alert.attr("hidden", "true");
+        //alert[0].textContent = "";
+    }
 }
 
 function calculateAge(dobDateInput, targetSelector){
@@ -314,6 +363,19 @@ function calculateAge(dobDateInput, targetSelector){
     
     $(targetSelector)[0].value=age;
 }
+
+function calculateDOB(ageInput, targetSelector){
+
+    var today = new Date();
+    var specifiedDay = new Date(Number(today.getFullYear())-Number(ageInput.value), today.getMonth(), today.getDate());
+
+    if(isNaN(specifiedDay)) {
+        return;
+    }
+
+    $(targetSelector)[0].value=specifiedDay.toISOString().split("T")[0];
+}
+
 
 function setHiddenCheckbox(checkboxSelector, value){
     $(checkboxSelector)[0].checked = value;
@@ -344,6 +406,11 @@ function initializeLocalStore(clear){
 
 function setMemberByType(src, dest, control)
 {
+    //don't set disabled controls
+    if(control.disabled){
+        return;
+    }
+
     if(control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement) {
         switch(control.type){
             case "checkbox":
@@ -362,12 +429,12 @@ function setMemberByType(src, dest, control)
     } else if (control instanceof HTMLSelectElement) {
         
         if(dest instanceof HTMLSelectElement) {
-            var optionIndex = getIndexFromOptionID(control, src.id);
+            var optionIndex = getIndexFromOptionValue(control, src.value);
 
             dest.selectedIndex= optionIndex;
         }
         else {
-            dest.id= src[src.selectedIndex].id;
+            dest.value= src[src.selectedIndex].value;
         }
     }
 }
@@ -417,7 +484,8 @@ function localDataStore(control, load){
 
             dest = dataStore[control.id] = {"class": control.constructor.name};
 
-            src = initializeDefaultSrc;
+            //reasonable deep copy, avoid changing the prototype, if the default is something other
+            src = initializeDefaultSrc(control);
 
         } else {
             return;
@@ -445,17 +513,9 @@ function applyScrollPositionPersistence(){
     });
 }
 
-function initializeInputValuePersistence(reset=false){
+function getFieldsetsWithRadios(){
     
-    var inputs = [];
-    inputs = jQuery.makeArray($('form#mh-form input'));
-    inputs = inputs.concat(jQuery.makeArray($('form#mh-form select')));
-    
-    var textAreas = jQuery.makeArray($('form#mh-form textarea'));
-    inputs = inputs.concat(textAreas);
-
-
-    var fieldsets = jQuery.makeArray($('form#mh-form fieldset'));
+    var fieldsets = jQuery.makeArray($('form#htmlform fieldset'));
 
     var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
         if(fieldset.id=="") {
@@ -474,14 +534,27 @@ function initializeInputValuePersistence(reset=false){
 
         });
 
+    return fieldsetsWithRadios;
+}
+
+function initializeInputValuePersistence(reset=false){
+    
+    var inputs = [];
+    inputs = jQuery.makeArray($('form#htmlform input'));
+    inputs = inputs.concat(jQuery.makeArray($('form#htmlform select')));
+    
+    var textAreas = jQuery.makeArray($('form#htmlform textarea'));
+    inputs = inputs.concat(textAreas);
+
+    var fieldsetsWithRadios = getFieldsetsWithRadios();
 
     //if just re-initializing, clear the local datastore
     initializeLocalStore(clear=(false||reset));
 
     //attach listener to locally store all data to all inputs
     for(input of inputs){
-        
-        if(input.type!="radio"){
+
+        //radios only generate their own input when checked is set to true (not when set to false implicitly), but when clearing disabled radios, the input event is still used to trigger storage to the localDataStore, so it is attached here, the fieldsets input listeners are attached to store all the child radios states whenever one in the fieldset is selected
 
             //if not resetting, attach event listeners (this only need to be done on document.ready())
             //if resetting local data store, don't re-attach input event listeners
@@ -491,7 +564,6 @@ function initializeInputValuePersistence(reset=false){
     
             //load locally stored data, if it exists, otherwise initialize data storage object
             localDataStore(input, load=true);
-        }
     }
 
     for(fieldset of fieldsetsWithRadios){
@@ -501,24 +573,16 @@ function initializeInputValuePersistence(reset=false){
         //if not resetting, attach event listeners (this only need to be done on document.ready())
         //if resetting local data store, don't re-attach input event listeners
         if(!reset){
+            
             //attach event listener to the radios parent fieldset
             fieldset.addEventListener("input", function oninputFieldsetStore(event){
-                /*var childRadios = $(`fieldset[id=${this.id}] input[type=radio]`);
-
-                for(radio of childRadios){
-                    localDataStore(radio, load=false);
-                }*/
-                fnForFieldsetRadios(this, function(radio){ localDataStore(radio, load=false);})
+                
+                fnForFieldsetRadios(this, function storeRadioState(radio){ localDataStore(radio, load=false); });
             });
         }
-        //load stored data to child radios
-/*        var childRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`);
+        
+        fnForFieldsetRadios(fieldset, function loadRadioState(radio){ localDataStore(radio, load=true); });
 
-        for(radio of childRadios){
-            localDataStore(radio, load=true);
-        }*/
-
-        fnForFieldsetRadios(fieldset, function(radio){localDataStore(radio, load=true);})
     }
 
 }
@@ -545,7 +609,27 @@ $(document).ready(
 
             //console.log(settings);
 
-            if(settings.tabbed=="true"){
+            if(settings.tabbed=="false"){
+                
+                //console.log("monolithic");
+                
+                //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
+
+                var tabContent = $("#tab-content-sections");
+
+                //console.log(tabContent);
+                tabContent.removeClass("tab-content");
+
+                var panes = $(".tab-pane");
+
+                //console.log(panes);
+
+                for(pane of panes) { 
+                    //console.log(pane);
+                    $(pane).addClass("show");
+                }
+
+            }else{
                 //console.log("tabbed version");
                 
                 var tabs = $("#section-tabs");
@@ -575,25 +659,6 @@ $(document).ready(
                         //e.target // newly activated tab
                         $(e.relatedTarget).removeClass("active");
                     });
-
-            }else{
-                //console.log("monolithic");
-                
-                //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
-
-                var tabContent = $("#tab-content-sections");
-
-                //console.log(tabContent);
-                tabContent.removeClass("tab-content");
-
-                var panes = $(".tab-pane");
-
-                //console.log(panes);
-
-                for(pane of panes) { 
-                    //console.log(pane);
-                    $(pane).addClass("show");
-                }
             }
 
 
@@ -605,7 +670,80 @@ $(document).ready(
                 textarea.addEventListener("input", function(event){localDataStore(this, load=false)});
             }
 */
+            var templateProvidedValues = $("[id^=template-rendered]");
 
+            for(value of templateProvidedValues){
+
+                var targetControl = $(`[id=${value.dataset.targetId}`)[0];
+
+                var value = value.textContent;
+
+                if(targetControl.type == "date"){
+                    try {
+                        value = new Date(value).toISOString().split("T")[0];
+                    } catch {
+                        value = "";
+                    }
+                } else if( targetControl instanceof HTMLFieldSetElement) {
+                    var radios = $(`fieldset[id=${targetControl.id}] input[type=radio]`);
+                    for(radio of radios){
+                        if( radio.value == value)
+                        {
+                            radio.checked = true;
+                        }
+                    }
+                }
+
+
+
+                targetControl.value = value;
+
+                var inputEvent = new Event("input");
+
+                targetControl.dispatchEvent(inputEvent);
+            }
+            
+            $("[id=encounterDate] input[type=text]").on("focus",
+                function bringDatePickerToFrontAndFixPosition(){
+                    var datepicker = $("div[id=ui-datepicker-div]");
+                    datepicker.css("z-index", 1000000);
+                    datepicker.css("position", "fixed");
+                    var parentInput = $(this);
+                    var position = parentInput.position().top+/*parentInput.offset().top-$(window).scrollTop+*/parentInput.outerHeight(true);
+                    datepicker.css("top", position);
+            });
+
+            if( settings.dev=="true" ) {
+
+                $("input").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+                $("textarea").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+                $("select").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+                $("option").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+                var fieldsetsWithRadios = getFieldsetsWithRadios();
+
+                fieldsetsWithRadios.forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+            }
+
+            var form = $("form#htmlform");
+
+            //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
+            form.attr("onreset", "setAllDisabledStates();");
+
+            var onsubmitStr = form.attr("onsubmit");
+
+            //inject localStorage reset to onsubmit string
+            
+            //regex for "; return"
+            var endOfExpressionBeforeReturn = onsubmitStr.search("(; return)");
+
+            //substring?
+            //var expressionsSplit = endOfExpressionBeforeReturn.split(" ");
+            
+            //onsubmitStr.replace("(; return)", expressionsSplit[0] + " initializeInputValuePersistence(reset=true); " + expressionsSplit[1]);
             
             loadLocalSiteInfo(true);
         }

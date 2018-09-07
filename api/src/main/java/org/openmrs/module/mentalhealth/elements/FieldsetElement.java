@@ -15,15 +15,12 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
-import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IPassthrough;
-import org.openmrs.module.mentalhealth.utils.NodeUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class FieldsetElement extends PassthroughElement implements IHandleHTMLEdit, FormSubmissionControllerAction, IParentElement, IPassthrough {
 	

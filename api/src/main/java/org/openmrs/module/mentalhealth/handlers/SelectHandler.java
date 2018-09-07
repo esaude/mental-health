@@ -6,11 +6,8 @@ import org.openmrs.module.htmlformentry.BadFormDesignException;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.handler.AbstractTagHandler;
-import org.openmrs.module.mentalhealth.elements.OptionElement;
 import org.openmrs.module.mentalhealth.elements.PassthroughElement;
 import org.openmrs.module.mentalhealth.elements.SelectElement;
-import org.openmrs.module.mentalhealth.elements.StringValueObsElement;
-import org.openmrs.module.mentalhealth.elements.StringValueObsElement.Type;
 import org.w3c.dom.Node;
 
 //

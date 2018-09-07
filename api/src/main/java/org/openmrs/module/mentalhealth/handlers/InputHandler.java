@@ -14,8 +14,7 @@ import org.openmrs.module.mentalhealth.elements.FieldsetElement;
 import org.openmrs.module.mentalhealth.elements.InputElement;
 import org.openmrs.module.mentalhealth.elements.PassthroughElement;
 import org.openmrs.module.mentalhealth.elements.RadioElement;
-import org.openmrs.module.mentalhealth.elements.StringValueObsElement;
-import org.openmrs.module.mentalhealth.elements.StringValueObsElement.Type;
+
 import org.w3c.dom.Node;
 
 /**
@@ -81,7 +80,7 @@ public class InputHandler extends AbstractTagHandler {
 		}
 		//instantiate a new instance of our observation controller adapter
 		else {
-			elem = new StringValueObsElement(context, attrs, node, Type.Input);
+			elem = new InputElement(context, attrs, node);
 			session.getSubmissionController().addAction(elem);
 		}
 		

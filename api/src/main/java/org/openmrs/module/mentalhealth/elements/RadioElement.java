@@ -1,14 +1,11 @@
 package org.openmrs.module.mentalhealth.elements;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Concept;
-import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
-import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;

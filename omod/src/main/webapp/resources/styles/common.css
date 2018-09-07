@@ -4,19 +4,20 @@ textarea {
     width: 95%;
 }
 
-label {
+/*label {
+    padding-left: 1em;
     padding-right: 1em;
-}
+}*/
 
-table tr td:nth-of-type(2){
+table#patient-overview-table tr td:nth-of-type(2){
     width: 80%;
 }
 
-table tr td input {
+table#patient-overview-table tr td input {
     width: 90%;
 }
 
-table tr td:first {
+table#patient-overview-table tr td:first {
     width: 20%;
 }
 
@@ -29,10 +30,10 @@ fieldset fieldset input[type=date] {
 }
 
 fieldset {
-    margin: 0.5em;
+    margin: 0.25em;
 }
 fieldset input{
-    margin: 0.5em;
+    margin: 0.25em;
 }
 
 fieldset fieldset legend {
@@ -41,3 +42,30 @@ fieldset fieldset legend {
 fieldset fieldset fieldset{
     border-style: none;
 }
+
+.mental-health-radio-fieldset-table{
+    width: 100%;
+}
+
+.mental-health-radio-fieldset-table td:nth-of-type(odd) {
+    min-width: 1%;
+    width:1%;
+    max-width: 1%;
+}
+
+.mental-health-radio-fieldset-table td:nth-of-type(even) {
+    min-width: 10%;
+    width:10%;
+    max-width: 10%;
+}
+
+table tr:nth-child(even) {
+    background: #EEF;
+}
+
+/*.mental-health-radio-fieldset-table td:nth-child(even){
+    width: 1%;
+}
+.mental-health-radio-fieldset-table td:nth-child(odd){
+    min-width: 10px;
+}*/

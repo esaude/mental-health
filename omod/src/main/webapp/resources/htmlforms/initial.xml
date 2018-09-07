@@ -243,7 +243,7 @@
                 <legend>Medical History (Anamnesis)</legend>
                 <fieldset id="anamnesis-principal-complaint" class="">
                     <legend>Principal Complaint</legend>
-                    <textarea name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
+                    <textarea data-concept-id="23706" name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
                 <fieldset class="" id="anamnesis-reason-for-consult">
                     <legend>Reason for Consultation</legend>
