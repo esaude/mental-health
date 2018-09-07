@@ -314,7 +314,60 @@
             <div id="patient-overview">
                 <table class="table">
                     <tr>
-                        
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.appearance.posture" />
+                        </td>
+                        <td>
+                            <obs conceptId="f1c78c38-f015-4675-852b-39785fe3319d" cols="50" rows="2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.synthesis.functions" />
+                        </td>
+                        <td>
+                            <obs conceptId="23bace48-763d-4996-9563-abba1e37f236" cols="50" rows="2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.sensory.perception" />
+                        </td>
+                        <td>
+                            <obs conceptId="935ef714-7f50-47d7-a31e-f21d9f401695" cols="50" rows="2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.thought.judgement" />
+                        </td>
+                        <td>
+                            <obs conceptId="5c72c0e6-94a2-4ab5-8bf5-ec5bd2331aff" cols="50" rows="2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.humor" />
+                        </td>
+                        <td>
+                            <obs conceptId="2be2c4fa-f168-4ff2-b4e1-05b8979306d0" cols="50" rows="2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.conduct" />
+                        </td>
+                        <td>
+                            <obs conceptId="6722a5d1-dc1c-44e9-8c90-4256974b7849" cols="50" rows="2" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.relationship.functions" />
+                        </td>
+                        <td>
+                            <obs conceptId="f5bf98f5-34bb-4e28-b7ec-2312654e5aa1" cols="50" rows="2" />
+                        </td>
                     </tr>
                 </table>
             </div>
