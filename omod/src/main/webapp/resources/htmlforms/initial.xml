@@ -371,7 +371,36 @@
                     </tr>
                 </table>
             </div>
-            <div id="mental-health-disorders"></div>
+            <div id="mental-health-disorders">
+                <table>
+                    <tr>
+                        <td>
+                            <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="1be1978a-9084-11e6-a98e-000c29db4475" style="checkbox"/>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.depresive.disorder"  dateLabel="&lt;/td&gt;&lt;td&gt;" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <obsgroup groupingConceptId="e1cf1d50-1d5f-11e0-b929-000c29ad1d07">
+                            <td>
+                                <obs conceptId="e1eb7806-1d5f-11e0-b929-000c29ad1d07" answerConceptId="fc5805e5-c11c-4ae0-9441-d3562fc82b40" style="checkbox"/>
+                                <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.disorder" />(
+                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="2a0ecc35-b60c-466a-aa9e-a4ff38919169" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.ptsd" />
+                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="c9be08ea-fbed-4179-8f85-b2f035272ad7" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.panic" />
+                                <obs conceptId="32880723-015b-491a-894e-84599d4d26f9" answerConceptId="fea17a55-9083-11e6-a98e-000c29db4475" style="checkbox" />
+                                <uimessage code="mentalhealth.form.initial.patient.obs.anxiety.tag" />
+                            </td>
+                            <td>
+                                <uimessage code="mentalhealth.form.initial.patient.obs.date" />
+                                <obs conceptId="9c3b229f-353e-4c9e-8b95-877898603f6c" />
+                            </td>
+                        </obsgroup>
+
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
     <enrollInProgram programId="cb1e24be-aa03-11e8-a5b5-f34e18407f07" />
