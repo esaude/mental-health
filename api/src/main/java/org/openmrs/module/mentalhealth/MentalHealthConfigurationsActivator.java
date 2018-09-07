@@ -26,12 +26,19 @@ import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleActivator;
 import org.openmrs.module.ModuleFactory;
+import org.openmrs.module.htmlformentry.HtmlFormEntryService;
 import org.openmrs.module.idgen.IdentifierSource;
 import org.openmrs.module.idgen.service.IdentifierSourceService;
 import org.openmrs.module.mentalhealth.activator.MentalHealthAppConfigurationInitializer;
 import org.openmrs.module.mentalhealth.activator.MentalHealthHtmlFormsInitializer;
 import org.openmrs.module.mentalhealth.activator.MentalHealthInitializer;
 import org.openmrs.module.mentalhealth.deploy.MentalHealthCommonMetadataBundle;
+import org.openmrs.module.mentalhealth.handlers.FieldsetWithRadiosHandler;
+import org.openmrs.module.mentalhealth.handlers.InputHandler;
+import org.openmrs.module.mentalhealth.handlers.LabelHandler;
+import org.openmrs.module.mentalhealth.handlers.SelectHandler;
+import org.openmrs.module.mentalhealth.handlers.TextAreaHandler;
+import org.openmrs.module.mentalhealth.handlers.OptionHandler;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
 
 import java.util.ArrayList;
@@ -57,6 +64,20 @@ public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 	 */
 	public void contextRefreshed() {
 		log.info("Mental Health Configurations Module refreshed");
+		
+		final HtmlFormEntryService hfeService = Context.getService(HtmlFormEntryService.class);
+        
+		hfeService.addHandler("input", new InputHandler());
+		hfeService.addHandler("label", new LabelHandler());
+		
+		//also handles rendering all children (including radios, if responsible radio parent)
+		hfeService.addHandler("fieldset", new FieldsetWithRadiosHandler());
+		
+		hfeService.addHandler("textarea", new TextAreaHandler());
+		
+		hfeService.addHandler("select", new SelectHandler());
+		hfeService.addHandler("option", new OptionHandler());
+
 	}
 	
 	/**
