@@ -280,11 +280,44 @@
             <div id="symptom-assessment">
                 <table class="table">
                     <tr>
+                        <td>
 
+                            <uimessage code="mentalhealth.form.initial.patient.obs.phq9" />
+                            <obs conceptId="5d6928f5-f470-44d6-8b6a-325955a7c40c" />0-27
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.gad7" />
+                            <obs conceptId="9270abbe-cc39-41c4-8ea9-9414894efd7c" />0-21
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.audit" />
+                            <obs conceptId="907cea1f-92aa-4368-b7ff-64f14ce1a70e" />0-40
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <uimessage code="mentalhealth.form.initial.patient.obs.whodas" />
+                            <obs conceptId="d14dec0e-833b-49d4-b3f2-02c4111ab4f9" />0-48
+                        </td>
+
+                    </tr>
+
+                </table>
+            </div>
+            <div id="patient-overview">
+                <table class="table">
+                    <tr>
+                        
                     </tr>
                 </table>
             </div>
-            <div id="patient-overview"></div>
             <div id="mental-health-disorders"></div>
         </div>
     </div>
