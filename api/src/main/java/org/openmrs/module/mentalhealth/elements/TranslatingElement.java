@@ -14,7 +14,7 @@ public class TranslatingElement extends PassthroughElement implements IHandleHTM
 
 	static final protected String m_serverLocale =  Context.getLocale().toString();
 	
-	protected boolean m_translate = false;
+	protected boolean m_translate = true;
 
 	protected ArrayList<AbstractMap.SimpleEntry<String, Node>> m_toTranslate = new ArrayList<AbstractMap.SimpleEntry<String, Node>>();
 	

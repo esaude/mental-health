@@ -30,8 +30,7 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 	
 	@Override
 	public Collection<FormSubmissionError> validateSubmission(FormEntryContext context, HttpServletRequest submission) {
-		
-		throw new IllegalStateException("This validate stub should not be registered");
+		return null;
 	}
 	
 	@Override

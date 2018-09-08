@@ -27,19 +27,20 @@
 
     <div>
 
-<form autocomplete="off" class="" id="htmlform">
+<form autocomplete="off" class="" id="htmlform" onsubmit="submitHtmlForm(); return false;">
         <div class="sticky-top bg-white d-flex flex-column">
-            <h1 class="bg-primary d-flex justify-content-center">Patient's Process - Mental Health</h1>
+            <label class="bg-primary d-flex justify-content-center">mentalhealth.form.initial.title</label>
             <div class="d-flex flex-row justify-content-around m-2">
                 
                 <div class="text-center align-self-center p-4 border bg-primary text-white">
-                    Blue Card
+                    <label data-translate="true">mentalhealth.form.initial.name</label>
+                    <label>mentalhealth.form.provider</label>
                     <encounterProvider/>
                 </div>
                 <table>
                     <tr id="blue-card-header-common">
                         <td>
-                            <label for="province-select">Province</label>
+                            <label for="province-select">mentalhealth.form.initial.province</label>
                         </td>
                         <td>
                             <select name="province-select" id="province-select" autocomplete="off" class="mb-2" tabindex="1">
@@ -48,7 +49,7 @@
                             </select>
                         </td>
                        <td>
-                            <label for="district-select" class="d-flex flex-fill justify-content-center">District</label>
+                            <label for="district-select" class="d-flex flex-fill justify-content-center">mentalhealth.form.initial.district</label>
                         </td>
                         <td>
                             <select name="district-select" id="district-select" class="mb-2" tabindex="2">
@@ -59,7 +60,7 @@
                         
                         <td>
                         <span class="d-flex flex-fill">
-                            <label for="health-facility-select" class="flex-fill d-flex justify-content-center">Health Facility</label>
+                            <label for="health-facility-select" class="flex-fill d-flex justify-content-center">mentalhealth.form.initial.facility</label>
                         </span>
                         </td>
                         <td>
@@ -72,7 +73,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>                                <label for="transfer-or-consult-date" class="d-flex flex-fill justify-content-center" >Date of Consulation/Transfer</label>
+                        <td>                                <label for="transfer-or-consult-date" class="d-flex flex-fill justify-content-center" >mentalhealth.form.initial.consultation.date</label>
                         </td>
                         <td>
                             <span class="">
@@ -82,7 +83,7 @@
                                 </span>
                         </td>
                         <td>
-                            <label for="NID" class="d-flex flex-fill justify-content-center">Patient's NID</label>
+                            <label for="NID" class="d-flex flex-fill justify-content-center">mentalhealth.form.initial.patient.nid</label>
                         </td>
                         <td>
                             <input type="text" id="NID" name="NID" autocomplete="off" class="" tabindex="5"/>
@@ -92,9 +93,9 @@
                         </td>
                         <td>
                             <span class="d-flex flex-fill mt-2">
-                                <input type="submit" value="Create record" id="submit-form-btn" class="btn btn-primary mr-2"/>
+                                <input type="submit" data-translate-value="true" value="mentalhealth.form.initial.save" id="submit-form-btn" class="btn btn-primary mr-2"/>
                                 <submit/>
-                                <input type="reset" value="Reset All" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);"/>
+                                <input type="reset" data-translate-value="true" value="mentalhealth.form.initial.reset" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);"/>
                             </span>
                         </td>
                     </tr>
@@ -102,39 +103,39 @@
             </div>
             <div class="nav nav-tabs" id="section-tabs" hidden="true" role="tablist">
                 <div class="nav-item">
-                    <a class="nav-link active" id="patient-details-tab" role="tab" data-toggle="tab" href="#patient-details" aria-controls="patient-details" aria-selected="true">1. Patient/Companion Details</a> 
+                    <a class="nav-link active" id="patient-details-tab" role="tab" data-toggle="tab" href="#patient-details" aria-controls="patient-details" aria-selected="true"> <label>mentalhealth.form.initial.patient.details</label></a>
                 </div>
                 <div class="nav-item">
-                    <a class="nav-link" id="anamnesis-tab" role="tab" data-toggle="tab" href="#anamnesis" aria-controls="anamnesis" aria-selected="false">2. Anamnesis</a> 
+                    <a class="nav-link" id="anamnesis-tab" role="tab" data-toggle="tab" href="#anamnesis" aria-controls="anamnesis" aria-selected="false"><label>mentalhealth.form.initial.patient.anamnesis</label></a>
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="family-history-tab" role="tab" data-toggle="tab" href="#family-history" aria-controls="family-history" aria-selected="false">3. Family History</a> 
+                        <a class="nav-link" id="family-history-tab" role="tab" data-toggle="tab" href="#family-history" aria-controls="family-history" aria-selected="false"><label>mentalhealth.form.initial.patient.family.history</label></a>
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="patient-history-tab" role="tab" data-toggle="tab" href="#patient-history" aria-controls="patient-history" aria-selected="false">4. Patient History</a> 
+                        <a class="nav-link" id="patient-history-tab" role="tab" data-toggle="tab" href="#patient-history" aria-controls="patient-history" aria-selected="false"><label>mentalhealth.form.initial.patient.patient.history</label></a>
                 </div>
                 <div class="nav-item">
-                    <a class="nav-link" id="symptom-assessment-tab" role="tab" data-toggle="tab" href="#symptom-assessment" aria-controls="symptom-assessment" aria-selected="false">5. Symptom Assessment</a> 
+                    <a class="nav-link" id="symptom-assessment-tab" role="tab" data-toggle="tab" href="#symptom-assessment" aria-controls="symptom-assessment" aria-selected="false"><label>mentalhealth.form.initial.patient.symptoms</label></a>
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="patient-overview-tab" role="tab" data-toggle="tab" href="#patient-overview" aria-controls="patient-overview" aria-selected="false">6. Patient Overview</a> 
+                        <a class="nav-link" id="patient-overview-tab" role="tab" data-toggle="tab" href="#patient-overview" aria-controls="patient-overview" aria-selected="false"><label>mentalhealth.form.initial.patient.patient.overview</label></a>
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="mental-health-disorders-tab" role="tab" data-toggle="tab" href="#mental-health-disorders" aria-controls="mental-health-disorders" aria-selected="false">7.Mental Health Disorders</a> 
+                        <a class="nav-link" id="mental-health-disorders-tab" role="tab" data-toggle="tab" href="#mental-health-disorders" aria-controls="mental-health-disorders" aria-selected="false"><label>mentalhealth.form.initial.patient.disorders</label></a>
                 </div>
             </div>
         </div>
         <div class="tab-content" id="tab-content-sections">
             <fieldset id="patient-details" class="form-group tab-pane show active fade" role="tabpanel">
-                <legend>Patient/Companion Details</legend>
+                <label>mentalhealth.form.initial.patient.details</label>
                 <div>
                     <span class="d-flex ">
-                        <label for="patient-details-patient-name" class="">Patient Name</label>
+                        <label for="patient-details-patient-name" class="">mentalhealth.form.initial.patient.names</label>
                         <input type="text" id="patient-details-patient-name" name="patient-details-patient-name"  class="form-control" disabled="true"/>
                         <span id="template-rendered-patient-name" data-target-id="patient-details-patient-name" hidden="true"><lookup expression="patient.personName"/></span>
                     </span>
                     <fieldset id="patient-details-gender" class="" disabled="true">
-                        <span class="">Gender</span>
+                        <label class="">mentalhealth.form.initial.patient.sex</label>
                         <span class="m-2">
                             <input name="gender" id="gender-m" value="M" type="radio"/>
                             <label for="gender-m" aria-label="Gender Male">Male</label>
@@ -147,9 +148,9 @@
                     <span id="template-rendered-patient-gender" data-target-id="patient-details-gender" hidden="true"><lookup expression="patient.gender" codePrefix="gender_"/></span>
                     <span class="d-flex flex-row">
                         <span class="d-flex flex-column">
-                            <label for="dob" class="">Date of Birth</label>
+                            <label for="dob" class="">mentalhealth.form.initial.patient.dob</label>
                             <span>or</span>
-                            <label for="age" class="">Age</label>
+                            <label for="age" class="">mentalhealth.form.initial.patient.age</label>
                         </span>
                         <span class="d-flex flex-column">
                             <input type="date" name="dob" id="dob" disabled="true"/>
@@ -163,106 +164,103 @@
                         <span id="template-rendered-patient-dob" data-target-id="dob" hidden="true"><lookup expression="patient.birthdate"/></span>
                         <span id="template-rendered-patient-age" data-target-id="age" hidden="true"><lookup expression="patient.age"/></span>
                     </span>
-                    <label for="neighborhood" class="">Neighborhood</label>
+                    <label for="neighborhood" class="">mentalhealth.form.initial.patient.neighbourhood</label>
                         <select id="neighborhood" name="neighborhood" onchange="setDependentDisabledState(this, undefined, 'input[id=neighborhood-other]', true, this[this.selectedIndex].value!='other');">
                             <option value="" id="neighborhood-not-selected-option">--Not-Selected--</option>
                             <option value="other" id="neighborhood-other-option">Other</option>
                         </select>
                         <label for="neighborhood-other">If other, please specify</label>
                         <input type="text" name="neighborhood-other" id="neighborhood-other" disabled="true"/>
-                    <label for="nearby-landmark" class="d-block">Nearby Landmark
-                        <input type="text" name="nearby-landmark" id="nearby-landmark"/>
-                    </label>
+                    <label for="nearby-landmark" class="d-block">mentalhealth.form.initial.patient.landmark</label>
+                    <input type="text" name="nearby-landmark" id="nearby-landmark"/>
                 </div>
                 <span>
-                    <label for="patient-telephone-number" class="">Patient Telephone Number</label>
+                    <label for="patient-telephone-number" class="">mentalhealth.form.initial.patient.telephone</label>
                     <input type="tel" name="patient-telephone-number" id="patient-telephone-number" pattern="[0-9]{2,3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="off" class=""/>
                 </span>
-                <label for="homeless-status" aria-label="homelessness status" class="d-block">Homeless
+                <label for="homeless-status" aria-label="homelessness status" class="d-block">mentalhealth.form.initial.patient.obs.homeless
                     </label>
                     <fieldset data-concept-id="23703" id="homeless-status">
                             
                             <input data-concept-id="1065" type="radio" name="homeless" value="homeless-yes" id="homeless-yes"/>
-                            <label for="homeless-yes" aria-label="homeless">Yes</label>
+                            <label for="homeless-yes" aria-label="homeless">mentalhealth.form.initial.patient.obs.yes</label>
                             
                             <input data-concept-id="1066" type="radio" name="homeless" value="homeless-no" id="homeless-no"/>
-                            <label for="homeless-no" aria-label="has home">No</label>
+                            <label for="homeless-no" aria-label="has home">mentalhealth.form.initial.patient.obs.no</label>
                     </fieldset>
                 
-                <label for="martial-status" aria-label="marital status" class="d-block">Marital Status</label>
+                <label for="martial-status" aria-label="marital-status" class="d-block">mentalhealth.form.initial.patient.obs.civil.state</label>
                     <fieldset id="marital-status">
                         
                         <input type="radio" name="marital-status" value="single" id="marital-status-single"/>
-                        <label for="marital-status-single">Single</label>
+                        <label for="marital-status-single">mentalhealth.form.initial.patient.obs.single</label>
 
                         <input type="radio" name="marital-status" value="married" id="marital-status-married"/>
-                        <label for="marital-status-married">Married</label>
+                        <label for="marital-status-married">mentalhealth.form.initial.patient.obs.married</label>
 
                         <input type="radio" name="marital-status" value="union-de-facto" id="martial-status-union-de-facto"/>
-                        <label for="martial-status-union-de-facto">Union de Facto</label>
+                        <label for="martial-status-union-de-facto">mentalhealth.form.initial.patient.obs.common.law.marriage</label>
 
                         <input type="radio" name="marital-status" value="divorced" id="marital-status-divorced"/>
-                        <label for="marital-status-divorced">Divorced</label>
+                        <label for="marital-status-divorced">mentalhealth.form.initial.patient.obs.divorced</label>
 
                         <input type="radio" name="marital-status" value="widowed" id="marital-status-widowed"/>
-                        <label for="marital-status-widowed">Widowed</label>
+                        <label for="marital-status-widowed">mentalhealth.form.initial.patient.obs.widowed</label>
 
                         <input type="radio" name="marital-status" value="separated" id="marital-status-separated"/>
-                        <label for="marital-status-separated">Separated</label>
+                        <label for="marital-status-separated">mentalhealth.form.initial.patient.obs.separated</label>
                     </fieldset>
                 
-                <label for="number-of-children" class="d-block">Number of Children</label>
+                <label for="number-of-children" class="d-block">mentalhealth.form.initial.patient.obs.number.of.children</label>
                 <input type="number" id="number-of-children" name="number-of-children" min="0"/>
                 
-                <label for="community-agreement" aria-label="agrees with community suggestion" class="d-block">Agrees with community process</label>
+                <label for="community-agreement" aria-label="community-agreement" class="d-block">mentalhealth.form.initial.patient.obs.agree.with.community</label>
                 <fieldset id="community-agreement">
-                    
-                    
                     <input type="radio" name="community-agreement" id="community-agreement-yes" value="y"/>
-                    <label for="community-agreement-yes" aria-label="community agreement yes">Yes</label>
+                    <label for="community-agreement-yes" aria-label="community agreement yes">mentalhealth.form.initial.patient.obs.yes</label>
                     
                     <input type="radio" name="community-agreement" id="community-agreement-no" value="n"/>
-                    <label for="community-agreement-no" aria-label="community agreement no">No</label>
+                    <label for="community-agreement-no" aria-label="community agreement no">mentalhealth.form.initial.patient.obs.no</label>
                 </fieldset>
                 <fieldset id="companion-information" class="d-block ">
-                    <legend class="">Companion Information</legend>
+                    <label class="">mentalhealth.form.initial.patient.obs.treatment.supporter</label>
                     <!-- conceptId="23699" -->
                     <!-- <obs conceptId="23699" labelText="Name"/> -->
-                    <label for="companion-name" class="d-block">Name</label>
+                    <label for="companion-name" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.name</label>
                     <input data-concept-id="23699" type="text" name="companion-name" id="companion-name" autocomplete="off" class=""/>
                     
-                    <label for="companion-telephone-number" class="d-block">Telephone</label>
+                    <label for="companion-telephone-number" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.telephone</label>
                     <input type="tel" name="companion-telephone-number" id="companion-telephone-number" pattern="[0-9]{2,3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="off" class=""/>
 
-                    <label for="companion-relationship" class="d-block  ">Relationship to Patient</label>
+                    <label for="companion-relationship" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.relationship</label>
                     <input type="text" id="companion-relationship" name="companion-relationship" class=""/>
                     
                 </fieldset>
             </fieldset>
             <fieldset id="anamnesis" class="tab-pane fade" role="tabpanel">
-                <legend>Medical History (Anamnesis)</legend>
+                <label>Medical History (Anamnesis)</label>
                 <fieldset id="anamnesis-principal-complaint" class="">
-                    <legend>Principal Complaint</legend>
-                    <textarea data-concept-id="23706" name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
+                    <label>mentalhealth.form.initial.patient.obs.main.complaint</label>
+                    <textarea name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
                 <fieldset class="" id="anamnesis-reason-for-consult">
-                    <legend>Reason for Consultation</legend>
+                    <label>mentalhealth.form.initial.patient.obs.reason.consultation</label>
                     <textarea name="anamnesis-reason-for-consult-text" id="anamnesis-reason-for-consult-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
                 <fieldset class="" id="anamnesis-disease-history">
-                    <legend>History of the Current Disease</legend>
+                    <label>mentalhealth.form.initial.patient.obs.history.current.illiness</label>
                     <textarea name="anamnesis-disease-history-text" id="anamnesis-disease-history-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
                 <fieldset class="" id="anamnesis-previous-personal-history">
-                    <legend>Previous Personal History</legend>
+                    <label>mentalhealth.form.initial.patient.obs.prevoius.history</label>
                     <textarea name="anamnesis-previous-personal-history-text" id="anamnesis-previous-personal-history-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
             </fieldset>
             <fieldset id="family-history" class="tab-pane fade" role="tabpanel">
                 <!--div>(fieldset>legend+(label>input)*3+label>input:text+(label>input:date)*2)*6 -->
-                <legend>Family History</legend>
+                <label>Family History</label>
                 <fieldset id="family-history-epilepsy">
-                    <legend>Epilepsy</legend>
+                    <label>mentalhealth.form.initial.patient.obs.family.history.epilepsy</label>
                     <label for="family-history-epilepsy-np">Not Provided</label>
                     <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-np" value="np" checked="true"/>
                     
@@ -278,7 +276,7 @@
                     
                 </fieldset>
                 <fieldset id="family-history-mental-disease" onchange="setDependentDisabledState(this, 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-yes]', 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-specific]');">
-                    <legend>Mental Disease</legend>
+                    <legend>mentalhealth.form.initial.patient.obs.mental.illness</legend>
                     <label for="family-history-mental-disease-np">Not Provided</label>
                     <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-np" value="np" checked="true"/>
                     
@@ -297,7 +295,7 @@
                 </fieldset>
                 
                 <fieldset id="family-history-suicide">
-                    <legend>Suicide</legend>
+                    <label>mentalhealth.form.initial.patient.obs.suicidal</label>
 
                     <label for="family-history-suicide-np">Not Provided</label>
                     <input type="radio" name="family-history-suicide" id="family-history-suicide-np" value="np" checked="true"/>
@@ -313,7 +311,7 @@
                     
                 </fieldset>
                 <fieldset id="family-history-alcoholism">
-                    <legend>Alcoholism</legend>
+                    <label>mentalhealth.form.initial.patient.obs.alcoholism</label>
 
                     <label for="family-history-alcoholism-np">Not Provided</label>
                     <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-np" value="np" checked="true"/>
@@ -329,7 +327,7 @@
                     
                 </fieldset>
                 <fieldset id="family-history-other-substances" onchange="setDependentDisabledState(this, 'fieldset[id=family-history-other-substances] input[id=family-history-other-substances-yes]', 'fieldset[id=family-history-other-substances] input[id=family-history-other-substances-specific]');">
-                    <legend>Other Substances</legend>
+                    <label>mentalhealth.form.initial.patient.obs.other.substances</label>
                     
                     <label for="family-history-other-substances-np">Not Provided</label>
                     <input type="radio" name="family-history-other-substances" id="family-history-other-substances-np" value="np" checked="true"/>
@@ -1193,6 +1191,6 @@
             </fieldset>
         </div>-->
     </form>
-    
+
     </div>
 </htmlform>

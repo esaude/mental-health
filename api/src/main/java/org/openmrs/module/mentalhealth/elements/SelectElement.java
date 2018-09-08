@@ -2,24 +2,29 @@ package org.openmrs.module.mentalhealth.elements;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.Concept;
+import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
+import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class SelectElement extends PassthroughElement implements HtmlGeneratorElement, FormSubmissionControllerAction, IParentElement {
+public class SelectElement extends PassthroughElement implements IHandleHTMLEdit, FormSubmissionControllerAction, IParentElement {
 
 	private Map<String, Concept> m_options = new HashMap<String, Concept>();
 	
+	private String m_selectedChildConceptId = "";
 	
 	public void addHTMLValueConceptMapping(IChildElement opt) {
 		String childValue = opt.getAttrs().get("value");
@@ -88,10 +93,56 @@ public class SelectElement extends PassthroughElement implements HtmlGeneratorEl
 	}
 
 	@Override
-	public boolean getValueStoredInOpenMRS(IChildElement child) {
-		return false;
-		// TODO Auto-generated method stub
+	public void takeActionForEditMode(FormEntryContext context) {
 		
+		if(m_openMRSConcept == null) {
+			return;
+		}
+		
+		//Encounter viewEncounter = context.getExistingEncounter();
+		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
+		//viewEncounter.
+		if(existingObs == null) {
+			return;
+		}
+		
+		List<Obs> observations = existingObs.get(m_openMRSConcept);
+		
+		if(observations == null || m_obsNumber >= observations.size())
+		{
+			return;
+		}
+		
+		Integer answerConcept = observations.get(m_obsNumber).getValueCoded().getId();
+		
+		if(answerConcept == null) {
+			return;
+		}
+
+		m_selectedChildConceptId = String.valueOf(answerConcept);
+		((Element)m_originalNode).setAttribute("data-answered-concept-id", m_selectedChildConceptId);
+		
+	}
+
+	
+	@Override
+	public boolean getValueStoredInOpenMRS(IChildElement child) {
+		
+		Map<String, String> childAttrs = child.getAttrs();
+		
+		if( childAttrs == null ) {
+			return false;
+		}
+		
+		String childConceptId = childAttrs.get("data-concept-id");
+		
+		if(		childConceptId == null ||
+				childConceptId.isEmpty() ||
+				m_selectedChildConceptId.isEmpty() ) {
+			return false;
+		}
+		
+		return childConceptId.equals(m_selectedChildConceptId);
 	}
 	
 	@Override

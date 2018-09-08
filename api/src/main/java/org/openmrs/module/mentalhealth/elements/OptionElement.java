@@ -7,10 +7,12 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 
 import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
+import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class OptionElement extends TranslatingElement implements HtmlGeneratorElement, IChildElement{
+public class OptionElement extends TranslatingElement implements IHandleHTMLEdit, IChildElement{
 
 	/*
 	 * Instance Initialization Block (IIB) in Java
@@ -33,6 +35,24 @@ This attribute lets you specify the form element to which the select element is 
 		
 		m_parentSelect.addHTMLValueConceptMapping(this);
 	
+	}
+	
+	@Override
+	public void takeActionForEditMode(FormEntryContext context) {
+
+		if(m_openMRSConcept == null || m_parentSelect == null) {
+			return;
+		}
+		
+		if(m_parentSelect.getValueStoredInOpenMRS(this)) {
+			
+			((Element)m_originalNode).setAttribute("selected", "true");
+			
+		} else {
+
+			((Element)m_originalNode).removeAttribute("selected");
+			
+		}
 	}
 
 	@Override
