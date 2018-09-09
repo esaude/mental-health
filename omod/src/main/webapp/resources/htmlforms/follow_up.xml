@@ -30,7 +30,7 @@
       <h3 style="background:  #00b4ef; padding: 10px; color: #fff;">Mental Health Follow Up Details</h3>
    </div>
 <div>
-    <form autocomplete="off" onReset="setAllDisabledStates();" class="" id="mh-form">
+    <form autocomplete="off" onReset="setAllDisabledStates();" class="" id="htmlform">
         <div class="sticky-top bg-white d-flex flex-column">
 <label class="bg-primary d-flex justify-content-center">mentalhealth.form.initial.title</label>
             <div class="d-flex flex-row justify-content-around m-2">

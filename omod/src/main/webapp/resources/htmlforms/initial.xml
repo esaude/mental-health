@@ -241,7 +241,7 @@
                 <label>Medical History (Anamnesis)</label>
                 <fieldset id="anamnesis-principal-complaint" class="">
                     <label>mentalhealth.form.initial.patient.obs.main.complaint</label>
-                    <textarea name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
+                    <textarea data-concept-id="23706" name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
                 <fieldset class="" id="anamnesis-reason-for-consult">
                     <label>mentalhealth.form.initial.patient.obs.reason.consultation</label>

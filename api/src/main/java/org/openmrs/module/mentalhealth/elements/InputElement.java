@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.openmrs.Concept;
 import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
@@ -18,8 +19,6 @@ import org.openmrs.module.mentalhealth.elements.interfaces.IPassthrough;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 public class InputElement extends PassthroughElement implements IHandleHTMLEdit, IHandleHTMLView, FormSubmissionControllerAction, IPassthrough {
 	
@@ -106,12 +105,7 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		
 		String safeValue = "";
 		
-		try {
-			 safeValue = URLEncoder.encode(value, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return;
-		}
+		safeValue = StringEscapeUtils.escapeHtml(value);
 		
 		//shouldnt happen, play it safe anyway
 		if(safeValue == null || safeValue.isEmpty()) {
