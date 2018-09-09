@@ -24,7 +24,7 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 
 	private Map<String, Concept> m_options = new HashMap<String, Concept>();
 	
-	private String m_selectedChildConceptId = "";
+	private Concept m_selectedChildConcept = null;
 	
 	public void addHTMLValueConceptMapping(IChildElement opt) {
 		String childValue = opt.getAttrs().get("value");
@@ -113,14 +113,14 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 			return;
 		}
 		
-		Integer answerConcept = observations.get(m_obsNumber).getValueCoded().getId();
+		Concept answerConcept = observations.get(m_obsNumber).getValueCoded();
 		
 		if(answerConcept == null) {
 			return;
 		}
 
-		m_selectedChildConceptId = String.valueOf(answerConcept);
-		((Element)m_originalNode).setAttribute("data-answered-concept-id", m_selectedChildConceptId);
+		m_selectedChildConcept = answerConcept;
+		((Element)m_originalNode).setAttribute("data-answered-concept-id", m_selectedChildConcept.getUuid());
 		
 	}
 
@@ -128,21 +128,14 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 	@Override
 	public boolean getValueStoredInOpenMRS(IChildElement child) {
 		
-		Map<String, String> childAttrs = child.getAttrs();
+		Concept childConcept = child.getConcept();
 		
-		if( childAttrs == null ) {
+		if(		childConcept == null ||
+				m_selectedChildConcept == null ) {
 			return false;
 		}
 		
-		String childConceptId = childAttrs.get("data-concept-id");
-		
-		if(		childConceptId == null ||
-				childConceptId.isEmpty() ||
-				m_selectedChildConceptId.isEmpty() ) {
-			return false;
-		}
-		
-		return childConceptId.equals(m_selectedChildConceptId);
+		return childConcept.equals(m_selectedChildConcept);
 	}
 	
 	@Override

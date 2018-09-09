@@ -14,6 +14,7 @@ import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
+import org.openmrs.module.htmlformentry.HtmlFormEntryUtil;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
@@ -31,7 +32,7 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	
 	//private Map<String, Boolean> m_radioStates = new HashMap<String, Boolean>();
 	
-	private String m_selectedChildConceptId = "";
+	private Concept m_selectedChildConcept = null;
 	
 	private boolean m_responsibleFieldset = false;
 	
@@ -138,14 +139,14 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 			return;
 		}
 		
-		Integer answerConcept = observations.get(m_obsNumber).getValueCoded().getId();
+		Concept answerConcept = observations.get(m_obsNumber).getValueCoded();
 		
 		if(answerConcept == null) {
 			return;
 		}
 
-		m_selectedChildConceptId = String.valueOf(answerConcept);
-		((Element)m_originalNode).setAttribute("data-answered-concept-id", m_selectedChildConceptId);
+		m_selectedChildConcept = answerConcept;
+		((Element)m_originalNode).setAttribute("data-answered-concept-id", String.valueOf(m_selectedChildConcept.getUuid()));
 		
 	}
 	
@@ -240,21 +241,14 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	@Override
 	public boolean getValueStoredInOpenMRS(IChildElement child) {
 
-		Map<String, String> childAttrs = child.getAttrs();
+		Concept childConcept = child.getConcept();
 		
-		if( childAttrs == null ) {
+		if(		childConcept == null ||
+				m_selectedChildConcept == null ) {
 			return false;
 		}
 		
-		String childConceptId = childAttrs.get("data-concept-id");
-		
-		if(		childConceptId == null ||
-				childConceptId.isEmpty() ||
-				m_selectedChildConceptId.isEmpty() ) {
-			return false;
-		}
-		
-		return childConceptId.equals(m_selectedChildConceptId);
+		return childConcept.equals(m_selectedChildConcept);
 	}
 	
 	@Override
