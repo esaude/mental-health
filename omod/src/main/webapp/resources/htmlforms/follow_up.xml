@@ -385,6 +385,7 @@
                     <input data-concept-id="e1e2e934-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-height" id="vital-signs-height" min="0" max="500"/>
                 </div>
                 <div>
+                	<!-- [weight (kg) / height (cm) / height (cm)] x 10,000 -->
                     <label for="vital-signs-bmi" class="">mentalhealth.form.followup.vitals.bmi</label>
                     <input type="number" name="vital-signs-bmi" id="vital-signs-bmi" min="0" max="100"/>
                 </div>

@@ -185,11 +185,11 @@
                         <label class="">mentalhealth.form.initial.patient.sex</label>
                         <span class="m-2">
                             <input name="gender" id="gender-m" value="M" type="radio"/>
-                            <label for="gender-m" aria-label="Gender Male">Male</label>
+                            <label for="gender-m">mentalhealth.form.initial.patient.sex.male</label>
                         </span>
                         <span class="m-2">
                             <input name="gender" id="gender-f" value="F" type="radio"/>
-                            <label for="gender-f" aria-label="Gender Female">Female</label>
+                            <label for="gender-f">mentalhealth.form.initial.patient.sex.female</label>
                         </span>
                     </fieldset>
                     <span id="template-rendered-patient-gender" data-target-id="patient-details-gender" hidden="true"><lookup expression="patient.gender" codePrefix="gender_"/></span>
@@ -231,17 +231,17 @@
                     <input type="tel" name="patient-telephone-number" id="patient-telephone-number" pattern="[0-9]{2,3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="off" class="" disabled="true"/>
                     <span id="template-rendered-telephone-number" data-target-id="patient-telephone-number" hidden="true"><lookup expression="personAddress.address3"/></span>
                 </span>
-                <label for="homeless-status" aria-label="homelessness status" class="d-block">mentalhealth.form.initial.patient.obs.homeless</label>
+                <label for="homeless-status" class="d-block">mentalhealth.form.initial.patient.obs.homeless</label>
                     <fieldset data-concept-id="ad8f819c-c83e-49cb-bc63-6dc6372a3823" id="homeless-status">
                             
                             <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="homeless" value="homeless-yes" id="homeless-yes"/>
-                            <label for="homeless-yes" aria-label="homeless">mentalhealth.form.initial.patient.obs.yes</label>
+                            <label for="homeless-yes">mentalhealth.form.initial.patient.obs.yes</label>
                             
                             <input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="homeless" value="homeless-no" id="homeless-no"/>
-                            <label for="homeless-no" aria-label="has home">mentalhealth.form.initial.patient.obs.no</label>
+                            <label for="homeless-no">mentalhealth.form.initial.patient.obs.no</label>
                     </fieldset>
                 
-                <label for="martial-status" aria-label="marital-status" class="d-block">mentalhealth.form.initial.patient.obs.civil.state</label>
+                <label for="martial-status" class="d-block">mentalhealth.form.initial.patient.obs.civil.state</label>
                     <fieldset data-concept-id="e1d80fbe-1d5f-11e0-b929-000c29ad1d07" id="marital-status">
                         
                         <input data-concept-id="e1d812e8-1d5f-11e0-b929-000c29ad1d07" type="radio" name="marital-status" value="single" id="marital-status-single"/>
@@ -266,22 +266,22 @@
                 <label for="number-of-children" class="d-block">mentalhealth.form.initial.patient.obs.number.of.children</label>
                 <input data-concept-id="e1e7495c-1d5f-11e0-b929-000c29ad1d07" type="number" id="number-of-children" name="number-of-children" min="0"/>
                 
-                <label for="community-agreement" aria-label="community-agreement" class="d-block">mentalhealth.form.initial.patient.obs.agree.with.community</label>
-                <fieldset id="community-agreement">
-                    <input type="radio" name="community-agreement" id="community-agreement-yes" value="y"/>
-                    <label for="community-agreement-yes" aria-label="community agreement yes">mentalhealth.form.initial.patient.obs.yes</label>
+                <label for="community-agreement" class="d-block">mentalhealth.form.initial.patient.obs.agree.with.community</label>
+                <fieldset data-concept-id="bd51ee44-b8cc-4931-9c7a-f5518d15b388" id="community-agreement">
+                    <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="community-agreement" id="community-agreement-yes" value="y"/>
+                    <label for="community-agreement-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     
-                    <input type="radio" name="community-agreement" id="community-agreement-no" value="n"/>
-                    <label for="community-agreement-no" aria-label="community agreement no">mentalhealth.form.initial.patient.obs.no</label>
+                    <input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="community-agreement" id="community-agreement-no" value="n"/>
+                    <label for="community-agreement-no">mentalhealth.form.initial.patient.obs.no</label>
                 </fieldset>
-                <fieldset data-concept-id="bd51ee44-b8cc-4931-9c7a-f5518d15b388" id="companion-information" class="d-block ">
+                <fieldset id="companion-information" class="d-block ">
                     <label class="">mentalhealth.form.initial.patient.obs.treatment.supporter</label>
                     <!-- conceptId="23699" -->
                     <!-- <obs conceptId="23699" labelText="Name"/> -->
                     <label for="companion-name" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.name</label>
                     <input data-concept-id="e1de46a4-1d5f-11e0-b929-000c29ad1d07" type="text" name="companion-name" id="companion-name" autocomplete="off" class=""/>
                     
-                    <label for="companion-telephone-number" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.telephone</label>
+                    <label for="companion-telephone-number" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.telephone</label> <label>mentalhealth.form.initial.patient.obs.treatment.supporter.telephone.format</label>
                     <input data-concept-id="eb23c94a-2c2e-40fa-ab82-22308b1c5f27" type="tel" name="companion-telephone-number" id="companion-telephone-number" pattern="[0-9]{2,3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="off" class=""/>
 
                     <label for="companion-relationship" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.relationship</label>
@@ -314,7 +314,7 @@
                 <fieldset data-concept-id="e4248283-f93f-40b4-bc9d-d6cb1059e092" id="family-history-epilepsy">
                     <label>mentalhealth.form.initial.patient.obs.family.history.epilepsy</label>
                     <label for="family-history-epilepsy-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-np" value="" checked="true"/>
+                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-np" value="np" checked="true"/>
                     
                     <label for="family-history-epilepsy-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <!-- conceptId="23711" -->
@@ -330,7 +330,7 @@
                 <fieldset data-concept-id="928d5265-44ec-4b78-8626-d10cb29ee8bf" id="family-history-mental-disease" onchange="setDependentDisabledState(this, 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-yes]', 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-specific]');">
                     <label>mentalhealth.form.initial.patient.obs.mental.illness</label>
                     <label for="family-history-mental-disease-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-np" value="" checked="true"/>
+                    <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-np" value="np" checked="true"/>
                     
                     <label for="family-history-mental-disease-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-mental-disease" id="family-history-mental-disease-yes" value="y"/>
@@ -350,7 +350,7 @@
                     <label>mentalhealth.form.initial.patient.obs.suicidal</label>
 
                     <label for="family-history-suicide-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-suicide" id="family-history-suicide-np" value="" checked="true"/>
+                    <input type="radio" name="family-history-suicide" id="family-history-suicide-np" value="np" checked="true"/>
                     
                     <label for="family-history-suicide-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-suicide" id="family-history-suicide-yes" value="y"/>
@@ -366,7 +366,7 @@
                     <label>mentalhealth.form.initial.patient.obs.alcoholism</label>
 
                     <label for="family-history-alcoholism-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-np" value="" checked="true"/>
+                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-np" value="np" checked="true"/>
                     
                     <label for="family-history-alcoholism-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-alcoholism" id="family-history-alcoholism-yes" value="y"/>
@@ -382,7 +382,7 @@
                     <label>mentalhealth.form.initial.patient.obs.other.substances</label>
                     
                     <label for="family-history-other-substances-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-other-substances" id="family-history-other-substances-np" value="" checked="true"/>
+                    <input type="radio" name="family-history-other-substances" id="family-history-other-substances-np" value="np" checked="true"/>
 
                     <label for="family-history-other-substances-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-other-substances" id="family-history-other-substances-yes" value="y"/>
@@ -404,7 +404,7 @@
                     <label>mentalhealth.form.initial.patient.obs.other.chronic.diseases</label>
 
                     <label for="patient-history-other-chronic-diseases-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-np" value="" checked="true"/>
+                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-np" value="np" checked="true"/>
 
                     <label for="patient-history-other-chronic-diseases-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-yes" value="y"/>
@@ -424,7 +424,7 @@
                     <label>mentalhealth.form.initial.patient.obs.tb.test</label>
 
                     <label for="patient-history-tuberculosis-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-np" value="" checked="true"/>
+                    <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-np" value="np" checked="true"/>
 
                     <label for="patient-history-tuberculosis-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="5ab65682-608d-49e1-b581-2cde8def6df9" type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-yes" value="y"/>
@@ -445,7 +445,7 @@
                     <label>mentalhealth.form.initial.patient.obs.hiv.test</label>
                     
                     <label for="patient-history-hiv-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-hiv" id="patient-history-hiv-np" value="" checked="true"/>
+                    <input type="radio" name="patient-history-hiv" id="patient-history-hiv-np" value="np" checked="true"/>
 
                     <label for="patient-history-hiv-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d8dab6-1d5f-11e0-b929-000c29ad1d07" type="radio" name="patient-history-hiv" id="patient-history-hiv-yes" value="y"/>
@@ -469,7 +469,7 @@
                     <label>mentalhealth.form.initial.patient.obs.alcohol.use</label>
 
                     <label for="patient-history-alcohol-use-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-np" value="" checked="true"/>
+                    <input type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-np" value="np" checked="true"/>
 
                     <label for="patient-history-alcohol-use-current">mentalhealth.form.initial.patient.obs.use.current</label>
                     <input data-concept-id="5bb90676-908a-11e6-a98e-000c29db4475" type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-current" value="c"/>
@@ -488,7 +488,7 @@
                     <label>mentalhealth.form.initial.patient.obs.use.other.drugs</label>
 
                     <label for="patient-history-other-drug-use-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-np" value="" checked="true"/>
+                    <input type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-np" value="np" checked="true"/>
 
                     <label for="patient-history-other-drug-use-current">mentalhealth.form.initial.patient.obs.use.current</label>
                     <input data-concept-id="858b2bb3-d93a-41a8-afeb-c84ef24cbe7a" type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-current" value="c"/>
@@ -507,7 +507,7 @@
                     <label>mentalhealth.form.initial.patient.obs.use.traditional.medicine</label>
                     
                     <label for="patient-history-traditional-medicine-use-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-np" value="" checked="true"/>
+                    <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-np" value="np" checked="true"/>
 
                     <label for="patient-history-traditional-medicine-use-current">mentalhealth.form.initial.patient.obs.use.current</label>
                     <input data-concept-id="858b2bb3-d93a-41a8-afeb-c84ef24cbe7a" type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-current" value="c"/>
@@ -604,254 +604,271 @@
                 <label>mentalhealth.form.initial.patient.disorders</label>
                 <table>
                     <tr>
-                    
-                        <!--<legend>Depressive Disorder</legend>-->
-                        <td>
-                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="depressive-disorder" id="depressive-disorder" value="1be1978a-9084-11e6-a98e-000c29db4475" onclick="setDependentDisabledState(this, undefined, 'input[id=depressive-disorder-diagnosis-date]');" class=""/>
-                        </td>
-                        <td>
-                            <label for="depressive-disorder" aria-label="depressive disorder" class="">mentalhealth.form.initial.patient.obs.depresive.disorder</label>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <label for="depressive-disorder-diagnosis-date" class="">mentalhealth.form.initial.patient.obs.date</label>
-                        </td>
-                        <td>
-                            <input data-concept-id="" type="date" name="depressive-disorder-diagnosis-date" id="depressive-disorder-diagnosis-date" disabled="true"/>
-                        </td>
-                            
-                    </tr>
-                    <tr>
-                    
-                        <!--<legend>Anxiety Disorder</legend>-->
-                        <td>
-                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="anxiety-disorder" id="anxiety-disorder" value="fc5805e5-c11c-4ae0-9441-d3562fc82b40" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=anxiety-disorder-radio-fieldset]', 'input[id=anxiety-disorder-diagnosis-date]' ], true, !this.checked);"/>
-                        </td>
-                        <td>
-                            <label for="anxiety-disorder" aria-label="anxiety disorder">mentalhealth.form.initial.patient.obs.anxiety.disorder</label>
-                        </td>
-                        <td>
-                            <fieldset data-concept-id="" disabled="true" id="anxiety-disorder-radio-fieldset">
-                                <table class="mental-health-radio-fieldset-table">
-                                    <tr>
-                                        <td>
-                                            <input data-concept-id="2a0ecc35-b60c-466a-aa9e-a4ff38919169" type="radio" name="anxiety-disorder-type" id="anxiety-disorder-ptsd" value="ptsd"/>
-                                        </td>
-                                        <td>
-                                            <label for="anxiety-disorder-ptsd" aria-label="ptsd">mentalhealth.form.initial.patient.obs.anxiety.ptsd</label>
-                                        </td>
-
-                                        <td>
-                                            <input data-concept-id="c9be08ea-fbed-4179-8f85-b2f035272ad7" type="radio" name="anxiety-disorder-type" id="anxiety-disorder-panic" value="panic"/>
-                                        </td>
-                                        <td>
-                                            <label for="anxiety-disorder-panic" aria-label="panic">mentalhealth.form.initial.patient.obs.anxiety.panic</label>
-                                        </td>
-                                            
-                                        <td>
-                                            <input data-concept-id="fea17a55-9083-11e6-a98e-000c29db4475" type="radio" name="anxiety-disorder-type" id="anxiety-disorder-gad"  value="gad"/>
-                                        </td>
-                                        <td>
-                                            <label for="anxiety-disorder-gad" aria-label="generalized anxiety disorder G A D">mentalhealth.form.initial.patient.obs.anxiety.tag</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </fieldset>
-                        </td>
-                        <td>
-                            <label for="anxiety-disorder-diagnosis-date" aria-label="anxiety disorder diagnosis date">mentalhealth.form.initial.patient.obs.date</label>
-                        </td>
-                        <td>
-                            <input data-concept-id="" type="date" name="anxiety-disorder-diagnosis-date" id="anxiety-disorder-diagnosis-date"  disabled="true"/>
-                        </td>
-                    
-                    </tr>
-                    <tr>
-                    
-
-                        <td>
-                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="mental-health-disorders-adjustment-disorder" id="mental-health-disorders-adjustment-disorder-comorbidity" value="e96b83bf-6988-4b8d-b17e-c1d0ad6641d4" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-adjustment-disorder-radio-fieldset]','input[id=mental-health-disorders-adjustment-disorder-diagnosis-date]'], true, !this.checked);"/>
-                        </td>
-                        <td>
-                            <label for="mental-health-disorders-adjustment-disorder-comorbidity">mentalhealth.form.initial.patient.obs.adjustment.disorder</label>
-                        </td>
-                        <td>
-                            <fieldset data-concept-id="" disabled="true" id="mental-health-disorders-adjustment-disorder-radio-fieldset">
-                                <table class="mental-health-radio-fieldset-table">
-                                    <tr>
-                                        <td>
-                                            <!-- conceptId="23745" -->
-                                            <input data-concept-id="2c238052-9f8a-4341-8e59-eeb886c9590d" type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-anxiety" value="anxiety"/>
-                                        </td>
-                                        <td>
-                                            <label for="mental-health-disorders-adjustment-disorder-comorbid-anxiety">mentalhealth.form.initial.patient.obs.adjustment.disorder.anxiety</label>
-                                        </td>
-                                        <td>
-                                            <input data-concept-id="e1d004a4-1d5f-11e0-b929-000c29ad1d07" type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-depression" value="depression"/>
-                                        </td>
-                                        <td>
-                                                <label for="mental-health-disorders-adjustment-disorder-comorbid-depression">mentalhealth.form.initial.patient.obs.adjustment.disorder.depression</label>
-                                        </td>
-                                        <td>
-                                            <input data-concept-id="558e1817-9087-11e6-a98e-000c29db4475" type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-agitation" value="agitation"/>
-                                        </td>
-                                        <td>
-                                            <label for="mental-health-disorders-adjustment-disorder-comorbid-agitation">mentalhealth.form.initial.patient.obs.adjustment.disorder.agitation</label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </fieldset>
-                        </td>
-                        <td>
-                            <label for="mental-health-disorders-adjustment-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-                        </td>
-                        <td>
-                            <input data-concept-id="" type="date" name="mental-health-disorders-adjustment-disorder-diagnosis-date" id="mental-health-disorders-adjustment-disorder-diagnosis-date" disabled="true"/>
-                        </td>
-                    </tr>
-                    <tr>
-
-                        <td>
-                            <!-- conceptId="23747" -->
-                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="bipolar-affective-disorder" id="bipolar-affective-disorder" value="4873ee8e-3e3d-46ff-8fb3-a3ad5443053e" onclick="setDependentDisabledState(this, undefined, 'input[id=bipolar-affective-disorder-diagnosis-date]', true, !this.checked);"/>
-                        </td>
-                        <td>
-                            <label for="bipolar-affective-disorder">mentalhealth.form.initial.patient.obs.bipolar</label>
-                        </td>
-                        <td>
-                            
-                        </td>
-                        <td>
-                            <label for="bipolar-affective-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-                        </td>
-                        <td>
-                            <input data-concept-id="" type="date" name="bipolar-affective-disorder-diagnosis-date" id="bipolar-affective-disorder-diagnosis-date" disabled="true"/>
-                        </td>
-
-                    </tr>
-                    <tr>
-
-	                    <td>
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="transient-acute-psychotic-disorder" id="transient-acute-psychotic-disorder" value="f5ede243-9083-11e6-a98e-000c29db4475" onclick="setDependentDisabledState(this, undefined, 'input[id=transient-acute-psychotic-disorder-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="transient-acute-psychotic-disorder">mentalhealth.form.initial.patient.obs.transient.acute.psychotic</label>
-	                    </td>
-	                    <td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="0" id="depressive-disorder-row-fieldset">
+	                        <td>
+	                            <input data-concept-id="1be1978a-9084-11e6-a98e-000c29db4475" type="checkbox" name="depressive-disorder" id="depressive-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=depressive-disorder-diagnosis-date]');" class=""/>
+	                        </td>
+	                        <td>
+	                            <label for="depressive-disorder" class="">mentalhealth.form.initial.patient.obs.depresive.disorder</label>
+	                        </td>
+	                        <td>
 	
-	                    </td>
-	                    <td>
-	                        <label for="transient-acute-psychotic-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="transient-acute-psychotic-disorder-diagnosis-date" id="transient-acute-psychotic-disorder-diagnosis-date" disabled="true"/>
-	                    </td>
+	                        </td>
+	                        <td>
+	                            <label for="depressive-disorder-diagnosis-date" class="">mentalhealth.form.initial.patient.obs.date</label>
+	                        </td>
+	                        <td>
+	                            <input type="date" name="depressive-disorder-diagnosis-date" id="depressive-disorder-diagnosis-date" disabled="true"/>
+	                        </td>
+	                    </fieldset>
+                    </tr>
+                    <tr>
+                    
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="1" id="anxiety-disorder-row-fieldset">
+	                        <td>
+	                            <input data-concept-id="fc5805e5-c11c-4ae0-9441-d3562fc82b40" type="checkbox" name="anxiety-disorder" id="anxiety-disorder" value="on" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=anxiety-disorder-radio-fieldset]', 'input[id=anxiety-disorder-diagnosis-date]' ], true, !this.checked);"/>
+	                        </td>
+	                        <td>
+	                            <label for="anxiety-disorder">mentalhealth.form.initial.patient.obs.anxiety.disorder</label>
+	                        </td>
+	                        <td>
+	                            <fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="2" disabled="true" id="anxiety-disorder-radio-fieldset">
+	                                <table class="mental-health-radio-fieldset-table">
+	                                    <tr>
+	                                        <td>
+	                                            <input data-concept-id="2a0ecc35-b60c-466a-aa9e-a4ff38919169" type="radio" name="anxiety-disorder-type" id="anxiety-disorder-ptsd" value="ptsd"/>
+	                                        </td>
+	                                        <td>
+	                                            <label for="anxiety-disorder-ptsd">mentalhealth.form.initial.patient.obs.anxiety.ptsd</label>
+	                                        </td>
+	
+	                                        <td>
+	                                            <input data-concept-id="c9be08ea-fbed-4179-8f85-b2f035272ad7" type="radio" name="anxiety-disorder-type" id="anxiety-disorder-panic" value="panic"/>
+	                                        </td>
+	                                        <td>
+	                                            <label for="anxiety-disorder-panic">mentalhealth.form.initial.patient.obs.anxiety.panic</label>
+	                                        </td>
+	                                            
+	                                        <td>
+	                                            <input data-concept-id="fea17a55-9083-11e6-a98e-000c29db4475" type="radio" name="anxiety-disorder-type" id="anxiety-disorder-gad"  value="gad"/>
+	                                        </td>
+	                                        <td>
+	                                            <label for="anxiety-disorder-gad">mentalhealth.form.initial.patient.obs.anxiety.tag</label>
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </fieldset>
+	                        </td>
+	                        <td>
+	                            <label for="anxiety-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                        </td>
+	                        <td>
+	                            <input type="date" name="anxiety-disorder-diagnosis-date" id="anxiety-disorder-diagnosis-date"  disabled="true"/>
+	                        </td>
+	                	</fieldset>
+                    
+                    </tr>
+                    <tr>
+
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="3" id="adjustment-disorder-row-fieldset">
+	                        <td>
+	                            <input data-concept-id="e96b83bf-6988-4b8d-b17e-c1d0ad6641d4" type="checkbox" name="mental-health-disorders-adjustment-disorder" id="mental-health-disorders-adjustment-disorder-comorbidity" value="on" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-adjustment-disorder-radio-fieldset]','input[id=mental-health-disorders-adjustment-disorder-diagnosis-date]'], true, !this.checked);"/>
+	                        </td>
+	                        <td>
+	                            <label for="mental-health-disorders-adjustment-disorder-comorbidity">mentalhealth.form.initial.patient.obs.adjustment.disorder</label>
+	                        </td>
+	                        <td>
+	                            <fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="4" disabled="true" id="mental-health-disorders-adjustment-disorder-radio-fieldset">
+	                                <table class="mental-health-radio-fieldset-table">
+	                                    <tr>
+	                                        <td>
+	                                            <!-- conceptId="23745" -->
+	                                            <input data-concept-id="2c238052-9f8a-4341-8e59-eeb886c9590d" type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-anxiety" value="anxiety"/>
+	                                        </td>
+	                                        <td>
+	                                            <label for="mental-health-disorders-adjustment-disorder-comorbid-anxiety">mentalhealth.form.initial.patient.obs.adjustment.disorder.anxiety</label>
+	                                        </td>
+	                                        <td>
+	                                            <input data-concept-id="e1d004a4-1d5f-11e0-b929-000c29ad1d07" type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-depression" value="depression"/>
+	                                        </td>
+	                                        <td>
+	                                                <label for="mental-health-disorders-adjustment-disorder-comorbid-depression">mentalhealth.form.initial.patient.obs.adjustment.disorder.depression</label>
+	                                        </td>
+	                                        <td>
+	                                            <input data-concept-id="558e1817-9087-11e6-a98e-000c29db4475" type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-agitation" value="agitation"/>
+	                                        </td>
+	                                        <td>
+	                                            <label for="mental-health-disorders-adjustment-disorder-comorbid-agitation">mentalhealth.form.initial.patient.obs.adjustment.disorder.agitation</label>
+	                                        </td>
+	                                    </tr>
+	                                </table>
+	                            </fieldset>
+	                        </td>
+	                        <td>
+	                            <label for="mental-health-disorders-adjustment-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                        </td>
+	                        <td>
+	                            <input type="date" name="mental-health-disorders-adjustment-disorder-diagnosis-date" id="mental-health-disorders-adjustment-disorder-diagnosis-date" disabled="true"/>
+	                        </td>
+	                    </fieldset>
+	                    
+                    </tr>
+                    <tr>
+
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="5" id="bipolar-affective-disorder-row-fieldset">
+	                        <td>
+	                            <!-- conceptId="23747" -->
+	                            <input data-concept-id="4873ee8e-3e3d-46ff-8fb3-a3ad5443053e" type="checkbox" name="bipolar-affective-disorder" id="bipolar-affective-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=bipolar-affective-disorder-diagnosis-date]', true, !this.checked);"/>
+	                        </td>
+	                        <td>
+	                            <label for="bipolar-affective-disorder">mentalhealth.form.initial.patient.obs.bipolar</label>
+	                        </td>
+	                        <td>
+	                            
+	                        </td>
+	                        <td>
+	                            <label for="bipolar-affective-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                        </td>
+	                        <td>
+	                            <input type="date" name="bipolar-affective-disorder-diagnosis-date" id="bipolar-affective-disorder-diagnosis-date" disabled="true"/>
+	                        </td>
+	                    </fieldset>
 
                     </tr>
                     <tr>
 
-                        <td>
-                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="schizophreniform-disorder" id="schizophreniform-disorder" value="14dc8522-c790-4a69-9dae-00c649435d15" onclick="setDependentDisabledState(this, undefined, 'input[id=schizophreniform-disorder-diagnosis-date]', true, !this.checked);"/>
-                        </td>
-                        <td>
-                            <label for="schizophreniform-disorder">mentalhealth.form.initial.patient.obs.schizophreniform</label>
-                        </td>
-                        <td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="6" id="transient-acute-psychotic-disorder-row-fieldset">
+		                    <td>
+		                        <input data-concept-id="f5ede243-9083-11e6-a98e-000c29db4475" type="checkbox" name="transient-acute-psychotic-disorder" id="transient-acute-psychotic-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=transient-acute-psychotic-disorder-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="transient-acute-psychotic-disorder">mentalhealth.form.initial.patient.obs.transient.acute.psychotic</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="transient-acute-psychotic-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="transient-acute-psychotic-disorder-diagnosis-date" id="transient-acute-psychotic-disorder-diagnosis-date" disabled="true"/>
+		                    </td>
+		                </fieldset>
 
-                        </td>
-                        <td>
-                            <label for="schizophreniform-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-                        </td>
-                        <td>
-                                <input data-concept-id="" type="date" name="schizophreniform-disorder-diagnosis-date" id="schizophreniform-disorder-diagnosis-date" disabled="true"/>
-                        </td>
+                    </tr>
+                    <tr>
 
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="7" id="schizophreniform-disorder-row-fieldset">
+	                        <td>
+	                            <input data-concept-id="14dc8522-c790-4a69-9dae-00c649435d15" type="checkbox" name="schizophreniform-disorder" id="schizophreniform-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=schizophreniform-disorder-diagnosis-date]', true, !this.checked);"/>
+	                        </td>
+	                        <td>
+	                            <label for="schizophreniform-disorder">mentalhealth.form.initial.patient.obs.schizophreniform</label>
+	                        </td>
+	                        <td>
+	
+	                        </td>
+	                        <td>
+	                            <label for="schizophreniform-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                        </td>
+	                        <td>
+	                                <input type="date" name="schizophreniform-disorder-diagnosis-date" id="schizophreniform-disorder-diagnosis-date" disabled="true"/>
+	                        </td>
+						</fieldset>
+						
                     </tr>
                		<tr>
 
-                        <td>
-                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="persistent-delusional-disorder" id="persistent-delusional-disorder" value="f50ab21b-9083-11e6-a98e-000c29db4475" onclick="setDependentDisabledState(this, undefined, 'input[id=persistent-delusional-disorder-diagnosis-date]', true, !this.checked);"/>
-                        </td>
-                        <td>
-                            <label for="persistent-delusional-disorder">mentalhealth.form.initial.patient.obs.persistent.delusional</label>
-                        </td>
-                        <td>
-
-                        </td>
-                        <td>
-                            <label for="persistent-delusional-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-                        </td>
-                        <td>
-                            <input data-concept-id="" type="date" name="persistent-delusional-disorder-diagnosis-date" id="persistent-delusional-disorder-diagnosis-date" disabled="true"/>
-                        </td>
-
-                	</tr>
-                	<tr>
-
-                    	<td>
-                        	<!-- conceptId="23749" -->
-                        	<input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="personality-disorder" id="personality-disorder" value="00d48c07-c3db-4926-ab70-9b883f46b079" onclick="setDependentDisabledState(this, undefined, 'input[id=personality-disorder-diagnosis-date]', true, !this.checked);"/>
-                    	</td>
-                    	<td>
-                        	<label for="personality-disorder">mentalhealth.form.initial.patient.obs.personality</label>
-                    	</td>
-                    	<td>
-
-                    	</td>
-                    	<td>
-                        	<label for="personality-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-                    	</td>
-                    	<td>
-                        	<input data-concept-id="" type="date" name="personality-disorder-diagnosis-date" id="personality-disorder-diagnosis-date" disabled="true"/>
-                    	</td>
-
-                	</tr>
-                	<tr>
-
-                    	<td>
-                        	<input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="schizophrenia" id="schizophrenia" value="e1d25e8e-1d5f-11e0-b929-000c29ad1d07" onclick="setDependentDisabledState(this, undefined, 'input[id=schizophrenia-diagnosis-date]', true, !this.checked);"/>
-                    	</td>
-                    	<td>
-                        	<label for="schizophrenia">mentalhealth.form.initial.patient.obs.schizophrenia</label>
-                    	</td>
-                    	<td>
-                        
-                    	</td>
-                    	<td>
-                        	<label for="schizophrenia-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-                    	</td>
-                    	<td>
-                        	<input data-concept-id="" type="date" name="schizophrenia-diagnosis-date" id="schizophrenia-diagnosis-date" disabled="true"/>
-                    	</td>
-
-                	</tr>
-                	<tr>
-
-	                    <td>
-	                        <!-- conceptId="23750" -->
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="puerperal-psychosis" id="puerperal-psychosis" value="e805e45e-2027-44b5-9412-0e29a79cf801" onclick="setDependentDisabledState(this, undefined, 'input[id=puerperal-psychosis-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="puerperal-psychosis">mentalhealth.form.initial.patient.obs.puerperal</label>
-	                    </td>
-	                    <td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="8" id="persistent-delusional-disorder-row-fieldset">
+	                        <td>
+	                            <input data-concept-id="f50ab21b-9083-11e6-a98e-000c29db4475" type="checkbox" name="persistent-delusional-disorder" id="persistent-delusional-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=persistent-delusional-disorder-diagnosis-date]', true, !this.checked);"/>
+	                        </td>
+	                        <td>
+	                            <label for="persistent-delusional-disorder">mentalhealth.form.initial.patient.obs.persistent.delusional</label>
+	                        </td>
+	                        <td>
 	
-	                    </td>
-	                    <td>
-	                        <label for="puerperal-psychosis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="puerperal-psychosis-diagnosis-date" id="puerperal-psychosis-diagnosis-date" disabled="true"/>
-	                    </td>
+	                        </td>
+	                        <td>
+	                            <label for="persistent-delusional-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                        </td>
+	                        <td>
+	                            <input type="date" name="persistent-delusional-disorder-diagnosis-date" id="persistent-delusional-disorder-diagnosis-date" disabled="true"/>
+	                        </td>
+						</fieldset>
+						
+                	</tr>
+                	<tr>
+
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="9" id="personality-disorder-row-fieldset">
+	                    	<td>
+	                        	<!-- conceptId="23749" -->
+	                        	<input data-concept-id="00d48c07-c3db-4926-ab70-9b883f46b079" type="checkbox" name="personality-disorder" id="personality-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=personality-disorder-diagnosis-date]', true, !this.checked);"/>
+	                    	</td>
+	                    	<td>
+	                        	<label for="personality-disorder">mentalhealth.form.initial.patient.obs.personality</label>
+	                    	</td>
+	                    	<td>
 	
+	                    	</td>
+	                    	<td>
+	                        	<label for="personality-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                    	</td>
+	                    	<td>
+	                        	<input type="date" name="personality-disorder-diagnosis-date" id="personality-disorder-diagnosis-date" disabled="true"/>
+	                    	</td>
+						</fieldset>
+						
+                	</tr>
+                	<tr>
+
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="10" id="schizophrenia-row-fieldset">
+	                    	<td>
+	                        	<input data-concept-id="e1d25e8e-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="schizophrenia" id="schizophrenia" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=schizophrenia-diagnosis-date]', true, !this.checked);"/>
+	                    	</td>
+	                    	<td>
+	                        	<label for="schizophrenia">mentalhealth.form.initial.patient.obs.schizophrenia</label>
+	                    	</td>
+	                    	<td>
+	                        
+	                    	</td>
+	                    	<td>
+	                        	<label for="schizophrenia-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+	                    	</td>
+	                    	<td>
+	                        	<input type="date" name="schizophrenia-diagnosis-date" id="schizophrenia-diagnosis-date" disabled="true"/>
+	                    	</td>
+						</fieldset>
+						
+                	</tr>
+                	<tr>
+
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="11" id="puerperal-psychosis-row-fieldset">
+		                    <td>
+		                        <!-- conceptId="23750" -->
+		                        <input data-concept-id="e805e45e-2027-44b5-9412-0e29a79cf801" type="checkbox" name="puerperal-psychosis" id="puerperal-psychosis" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=puerperal-psychosis-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="puerperal-psychosis">mentalhealth.form.initial.patient.obs.puerperal</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="puerperal-psychosis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="puerperal-psychosis-diagnosis-date" id="puerperal-psychosis-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
+							
 	                </tr>
 	                <tr>
 	
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="12" id="nonorganic-psychosis-row-fieldset">
 	                        <td>
 	                            <!-- conceptId="23751" -->
-	                            <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="nonorganic-psychosis" id="nonorganic-psychosis" value="1ffc05b2-5630-41c6-891f-b43b930639db" onclick="setDependentDisabledState(this, undefined, 'input[id=nonorganic-psychosis-diagnosis-date]', true, !this.checked);"/>
+	                            <input data-concept-id="1ffc05b2-5630-41c6-891f-b43b930639db" type="checkbox" name="nonorganic-psychosis" id="nonorganic-psychosis" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=nonorganic-psychosis-diagnosis-date]', true, !this.checked);"/>
 	                        </td>
 	                        <td>
 	                            <label for="nonorganic-psychosis">mentalhealth.form.initial.patient.obs.non-organic.psychosis</label>
@@ -863,319 +880,342 @@
 	                            <label for="nonorganic-psychosis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
 	                        </td>
 	                        <td>
-	                            <input data-concept-id="" type="date" name="nonorganic-psychosis-diagnosis-date" id="nonorganic-psychosis-diagnosis-date" disabled="true"/>
+	                            <input type="date" name="nonorganic-psychosis-diagnosis-date" id="nonorganic-psychosis-diagnosis-date" disabled="true"/>
 	                        </td>
-	
+						</fieldset>
+							
 	                </tr>
 	                <tr>
 	
-	                    <td>
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="epilepsy" id="epilepsy" value="e1cfcdea-1d5f-11e0-b929-000c29ad1d07" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-epilepsy-radio-fieldset]', 'input[id=epilepsy-diagnosis-date]'], true, !this.checked );"/></td>
-	                    <td>
-	                        <label for="epilepsy">mentalhealth.form.initial.patient.obs.epilepsy</label>
-	                    </td>
-	                    <td>
-	                        <fieldset data-concept-id="" disabled="true" id="mental-health-disorders-epilepsy-radio-fieldset">
-	                            <table class="mental-health-radio-fieldset-table">
-	                                    <tr>
-	                                        <td>
-	                                            <!-- conceptId="23752" -->
-	                                            <input data-concept-id="ebeb7145-2cb9-455b-8992-66ec53943ec7" type="radio" name="epilepsy-type" id="epilepsy-type-focal" value="focal"/>
-	                                        </td>
-	                                        <td>
-	                                            <label for="epilepsy-type-focal">mentalhealth.form.initial.patient.obs.epilepsy.type.focal</label>
-	                                        </td>
-	                                        <td>
-	                                            <input data-concept-id="fea17a55-9083-11e6-a98e-000c29db4475" type="radio" name="epilepsy-type" id="epilepsy-type-generalized" value="generalized"/>
-	                                        </td>
-	                                        <td>
-	                                            <label for="epilepsy-type-generalized">mentalhealth.form.initial.patient.obs.epilepsy.type.generalized</label>
-	                                        </td>
-	                                        <td>
-	                                            <!--Epilepsy with myoclonic absences-->
-	                                            <!-- conceptId="23762" -->
-	                                            <input data-concept-id="f578a931-6810-461e-ab7d-3616203b966c" type="radio" name="epilepsy-type" id="epilepsy-type-absence" value="absence"/>
-	                                        </td>
-	                                        <td>
-	                                            <label for="epilepsy-type-absence">mentalhealth.form.initial.patient.obs.epilepsy.type.absence</label>
-	                                        </td>
-	                                        <td>
-	                                            <!-- conceptId="23753" -->
-	                                            <input data-concept-id="35790285-d425-4ff0-8028-0ce0c3afc1ba" type="radio" name="epilepsy-type" id="epilepsy-type-myoclonic" value="myoclonic"/>
-	                                        </td>
-	                                        <td>
-	                                            <label for="epilepsy-type-myoclonic">mentalhealth.form.initial.patient.obs.epilepsy.type.myoclonic</label>
-	                                        </td>
-	                                    </tr>
-	                                </table>
-	                        </fieldset>
-	                    </td>
-	                    <td>
-	                        <label for="epilepsy-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="epilepsy-diagnosis-date" id="epilepsy-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="13" id="epilepsy-row-fieldset">
+		                    <td>
+		                        <input data-concept-id="e1cfcdea-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="epilepsy" id="epilepsy" value="on" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-epilepsy-radio-fieldset]', 'input[id=epilepsy-diagnosis-date]'], true, !this.checked );"/></td>
+		                    <td>
+		                        <label for="epilepsy">mentalhealth.form.initial.patient.obs.epilepsy</label>
+		                    </td>
+		                    <td>
+		                        <fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="14" disabled="true" id="mental-health-disorders-epilepsy-radio-fieldset">
+		                            <table class="mental-health-radio-fieldset-table">
+		                                    <tr>
+		                                        <td>
+		                                            <!-- conceptId="23752" -->
+		                                            <input data-concept-id="ebeb7145-2cb9-455b-8992-66ec53943ec7" type="radio" name="epilepsy-type" id="epilepsy-type-focal" value="focal"/>
+		                                        </td>
+		                                        <td>
+		                                            <label for="epilepsy-type-focal">mentalhealth.form.initial.patient.obs.epilepsy.type.focal</label>
+		                                        </td>
+		                                        <td>
+		                                            <input data-concept-id="fea17a55-9083-11e6-a98e-000c29db4475" type="radio" name="epilepsy-type" id="epilepsy-type-generalized" value="generalized"/>
+		                                        </td>
+		                                        <td>
+		                                            <label for="epilepsy-type-generalized">mentalhealth.form.initial.patient.obs.epilepsy.type.generalized</label>
+		                                        </td>
+		                                        <td>
+		                                            <!--Epilepsy with myoclonic absences-->
+		                                            <!-- conceptId="23762" -->
+		                                            <input data-concept-id="f578a931-6810-461e-ab7d-3616203b966c" type="radio" name="epilepsy-type" id="epilepsy-type-absence" value="absence"/>
+		                                        </td>
+		                                        <td>
+		                                            <label for="epilepsy-type-absence">mentalhealth.form.initial.patient.obs.epilepsy.type.absence</label>
+		                                        </td>
+		                                        <td>
+		                                            <!-- conceptId="23753" -->
+		                                            <input data-concept-id="35790285-d425-4ff0-8028-0ce0c3afc1ba" type="radio" name="epilepsy-type" id="epilepsy-type-myoclonic" value="myoclonic"/>
+		                                        </td>
+		                                        <td>
+		                                            <label for="epilepsy-type-myoclonic">mentalhealth.form.initial.patient.obs.epilepsy.type.myoclonic</label>
+		                                        </td>
+		                                    </tr>
+		                                </table>
+		                        </fieldset>
+		                    </td>
+		                    <td>
+		                        <label for="epilepsy-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="epilepsy-diagnosis-date" id="epilepsy-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
+						
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <!-- conceptId="23754" -->
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="acute-organic-psychosis" id="acute-organic-psychosis" value="cac91e33-8f36-4d2b-b4e4-fdad8a0583d6" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=mental-health-disorders-acute-organic-psychosis-radio-fieldset]', 'input[id=acute-organic-psychosis-diagnosis-date]' ], true, !this.checked );"/>
-	                    </td>
-	                    <td>
-	                        <label for="acute-organic-psychosis">mentalhealth.form.initial.patient.obs.acute.organic.psychosis</label>
-	                    </td>
-	                    <td>
-	                        <fieldset data-concept-id="" disabled="true" id="mental-health-disorders-acute-organic-psychosis-radio-fieldset">
-	                            
-	                            <table class="mental-health-radio-fieldset-table">
-	                                <tr>
-	                                    <td>
-	                                        <input data-concept-id="e1cf5270-1d5f-11e0-b929-000c29ad1d07" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-malaria" value="malaria"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="acute-organic-psychosis-type-malaria">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.malaria</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="e1d64666-1d5f-11e0-b929-000c29ad1d07" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hiv-aids" value="hiv-aids"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="acute-organic-psychosis-type-hiv-aids">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.hiv</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="e1d69314-1d5f-11e0-b929-000c29ad1d07" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hta" value="hta"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="acute-organic-psychosis-type-hta">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.hta</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="fefc42c7-7e30-4aea-8f03-121f72f35b95" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-tce" value="tce"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="acute-organic-psychosis-type-tce">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.tce</label>
-	                                    </td>
-	                                </tr>
-	                            </table>
-	                        </fieldset>
-	                    </td>
-	                    <td>
-	                        <label for="acute-organic-psychosis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="acute-organic-psychosis-diagnosis-date" id="acute-organic-psychosis-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="15" id="acute-organic-psychosis-row-fieldset">
+		                    <td>
+		                        <!-- conceptId="23754" -->
+		                        <input data-concept-id="cac91e33-8f36-4d2b-b4e4-fdad8a0583d6" type="checkbox" name="acute-organic-psychosis" id="acute-organic-psychosis" value="on" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=mental-health-disorders-acute-organic-psychosis-radio-fieldset]', 'input[id=acute-organic-psychosis-diagnosis-date]' ], true, !this.checked );"/>
+		                    </td>
+		                    <td>
+		                        <label for="acute-organic-psychosis">mentalhealth.form.initial.patient.obs.acute.organic.psychosis</label>
+		                    </td>
+		                    <td>
+		                        <fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="16" disabled="true" id="mental-health-disorders-acute-organic-psychosis-radio-fieldset">
+		                            
+		                            <table class="mental-health-radio-fieldset-table">
+		                                <tr>
+		                                    <td>
+		                                        <input data-concept-id="e1cf5270-1d5f-11e0-b929-000c29ad1d07" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-malaria" value="malaria"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="acute-organic-psychosis-type-malaria">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.malaria</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="e1d64666-1d5f-11e0-b929-000c29ad1d07" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hiv-aids" value="hiv-aids"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="acute-organic-psychosis-type-hiv-aids">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.hiv</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="e1d69314-1d5f-11e0-b929-000c29ad1d07" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hta" value="hta"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="acute-organic-psychosis-type-hta">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.hta</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="fefc42c7-7e30-4aea-8f03-121f72f35b95" type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-tce" value="tce"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="acute-organic-psychosis-type-tce">mentalhealth.form.initial.patient.obs.acute.organic.psychosis.cause.tce</label>
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </fieldset>
+		                    </td>
+		                    <td>
+		                        <label for="acute-organic-psychosis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="acute-organic-psychosis-diagnosis-date" id="acute-organic-psychosis-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
+						
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <!-- conceptId="23755" -->
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="drug-use" id="drug-use" value="9d171a5c-973b-4a0a-91ed-f5dbcf6eef67" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=drug-use-type-radio-fieldset]', 'input[id=drug-use-diagnosis-date]' ], true, !this.checked );"/>
-	                    </td>
-	                    <td>
-	                        <label for="drug-use">mentalhealth.form.initial.patient.obs.drug.use</label>
-	                    </td>
-	                    <td>
-	                        <fieldset data-concept-id="" id="drug-use-type-radio-fieldset" onchange="setDependentDisabledState(this, 'fieldset[id=drug-use-type-radio-fieldset] input[id=drug-use-other-drug]', 'input[id=drug-use-other-drug-specific]');" disabled="true">
-	                            <table class="mental-health-radio-fieldset-table">
-	                                <tr>
-	                                    <td>
-	                                        <input data-concept-id="3f3adf16-a612-4317-9278-7742c9ccfbe3" type="radio" name="drug-use-type" id="drug-use-alcohol" value="alcohol"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-alcohol">mentalhealth.form.initial.patient.obs.drug.use.type.alcohol</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="3e3dbed2-fc79-4650-8140-b98bb079f34b" type="radio" name="drug-use-type" id="drug-use-intoxication" value="intoxication"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-intoxication">mentalhealth.form.initial.patient.obs.drug.use.type.intoxication</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="101fd0b5-376f-4bcf-a020-5f568b6df7f9" type="radio" name="drug-use-type" id="drug-use-abuse" value="abuse"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-abuse">mentalhealth.form.initial.patient.obs.drug.use.type.abuse</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="e1e04eae-1d5f-11e0-b929-000c29ad1d07" type="radio" name="drug-use-type" id="drug-use-abstinence" value="abstinence"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-abstinence">mentalhealth.form.initial.patient.obs.drug.use.type.abstinence</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="aa2cd23d-6dd2-421e-95ac-76442814105d" type="radio" name="drug-use-type" id="drug-use-dependence" value="dependence"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-dependence">mentalhealth.form.initial.patient.obs.drug.use.type.dependence</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="radio" name="drug-use-type" id="drug-use-other-drug" value="other-drug"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-other-drug">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug</label>
-	                                    </td>
-	                                    <td>
-	                                        <label for="drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug.specify</label>
-	                                        <input data-concept-id="" type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
-	                                    </td>
-	                                </tr>
-	                            </table>
-	                        </fieldset>
-	                    </td>
-	                    <td>
-	                        <label for="drug-use-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="drug-use-diagnosis-date" id="drug-use-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="17" id="drug-use-row-fieldset">
+		                    <td>
+		                        <!-- conceptId="23755" -->
+		                        <input data-concept-id="9d171a5c-973b-4a0a-91ed-f5dbcf6eef67" type="checkbox" name="drug-use" id="drug-use" value="on" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=drug-use-type-radio-fieldset]', 'input[id=drug-use-diagnosis-date]' ], true, !this.checked );"/>
+		                    </td>
+		                    <td>
+		                        <label for="drug-use">mentalhealth.form.initial.patient.obs.drug.use</label>
+		                    </td>
+		                    <td>
+		                        <fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="18" id="drug-use-type-radio-fieldset" onchange="setDependentDisabledState(this, 'fieldset[id=drug-use-type-radio-fieldset] input[id=drug-use-other-drug]', 'input[id=drug-use-other-drug-specific]');" disabled="true">
+		                            <table class="mental-health-radio-fieldset-table">
+		                                <tr>
+		                                    <td>
+		                                        <input data-concept-id="3f3adf16-a612-4317-9278-7742c9ccfbe3" type="radio" name="drug-use-type" id="drug-use-alcohol" value="alcohol"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-alcohol">mentalhealth.form.initial.patient.obs.drug.use.type.alcohol</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="3e3dbed2-fc79-4650-8140-b98bb079f34b" type="radio" name="drug-use-type" id="drug-use-intoxication" value="intoxication"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-intoxication">mentalhealth.form.initial.patient.obs.drug.use.type.intoxication</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="101fd0b5-376f-4bcf-a020-5f568b6df7f9" type="radio" name="drug-use-type" id="drug-use-abuse" value="abuse"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-abuse">mentalhealth.form.initial.patient.obs.drug.use.type.abuse</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="e1e04eae-1d5f-11e0-b929-000c29ad1d07" type="radio" name="drug-use-type" id="drug-use-abstinence" value="abstinence"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-abstinence">mentalhealth.form.initial.patient.obs.drug.use.type.abstinence</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="aa2cd23d-6dd2-421e-95ac-76442814105d" type="radio" name="drug-use-type" id="drug-use-dependence" value="dependence"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-dependence">mentalhealth.form.initial.patient.obs.drug.use.type.dependence</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="e1e783ea-1d5f-11e0-b929-000c29ad1d07" type="radio" name="drug-use-type" id="drug-use-other-drug" value="other-drug"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-other-drug">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug</label>
+		                                    </td>
+		                                    <td>
+		                                        <label for="drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug.specify</label>
+		                                        <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </fieldset>
+		                    </td>
+		                    <td>
+		                        <label for="drug-use-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="drug-use-diagnosis-date" id="drug-use-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
+						
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <!-- conceptId="23761" -->
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="multiple-drug-use" id="multiple-drug-use" value="a5fa8b2b-e279-46d5-b7cb-dc59fb2dae3b" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=multiple-drug-use-type-radio-fieldset]', 'input[id=multiple-drug-use-diagnosis-date]' ], true, !this.checked );"/>
-	                    </td>
-	                    <td>
-	                        <label for="multiple-drug-use">mentalhealth.form.initial.patient.obs.multiple.drug.use</label>
-	                    </td>
-	                    <td>
-	                        <fieldset data-concept-id="" id="multiple-drug-use-type-radio-fieldset" onchange="setDependentDisabledState(this, 'fieldset[id=multiple-drug-use-type-radio-fieldset] input[id=multiple-drug-use-other-drug]', 'input[id=multiple-drug-use-other-drug-specific]');" disabled="true">
-	                            <table class="mental-health-radio-fieldset-table">
-	                                <tr>
-	                                    <td>
-	                                        <input data-concept-id="3f3adf16-a612-4317-9278-7742c9ccfbe3" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-alcohol" value="alcohol"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-alcohol">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.alcohol</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="3e3dbed2-fc79-4650-8140-b98bb079f34b" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-intoxication" value="intoxication"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-intoxication">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.intoxication</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="101fd0b5-376f-4bcf-a020-5f568b6df7f9" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abuse" value="abuse"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-abuse">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.abuse</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="e1e04eae-1d5f-11e0-b929-000c29ad1d07" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abstinence" value="abstinence"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-abstinence">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.abstinence</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="aa2cd23d-6dd2-421e-95ac-76442814105d" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-dependence" value="dependence"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-dependence">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.dependence</label>
-	                                    </td>
-	                                    <td>
-	                                        <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-other-drug" value="other-drug"/>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-other-drug">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug</label>
-	                                    </td>
-	                                    <td>
-	                                        <label for="multiple-drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug.specify</label>
-	                                        <input data-concept-id="" type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
-	                                    </td>
-	                                </tr>
-	                            </table>
-	                        </fieldset>
-	                    </td>
-	                    <td>
-	                        <label for="multiple-drug-use-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="multiple-drug-use-diagnosis-date" id="multiple-drug-use-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="19" id="multiple-drug-use-row-fieldset">
+		                    <td>
+		                        <!-- conceptId="23761" -->
+		                        <input data-concept-id="a5fa8b2b-e279-46d5-b7cb-dc59fb2dae3b" type="checkbox" name="multiple-drug-use" id="multiple-drug-use" value="on" onclick="setDependentDisabledState(this, undefined, [ 'fieldset[id=multiple-drug-use-type-radio-fieldset]', 'input[id=multiple-drug-use-diagnosis-date]' ], true, !this.checked );"/>
+		                    </td>
+		                    <td>
+		                        <label for="multiple-drug-use">mentalhealth.form.initial.patient.obs.multiple.drug.use</label>
+		                    </td>
+		                    <td>
+		                        <fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" data-obs-number="20" id="multiple-drug-use-type-radio-fieldset" onchange="setDependentDisabledState(this, 'fieldset[id=multiple-drug-use-type-radio-fieldset] input[id=multiple-drug-use-other-drug]', 'input[id=multiple-drug-use-other-drug-specific]');" disabled="true">
+		                            <table class="mental-health-radio-fieldset-table">
+		                                <tr>
+		                                    <td>
+		                                        <input data-concept-id="3f3adf16-a612-4317-9278-7742c9ccfbe3" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-alcohol" value="alcohol"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-alcohol">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.alcohol</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="3e3dbed2-fc79-4650-8140-b98bb079f34b" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-intoxication" value="intoxication"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-intoxication">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.intoxication</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="101fd0b5-376f-4bcf-a020-5f568b6df7f9" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abuse" value="abuse"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-abuse">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.abuse</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="e1e04eae-1d5f-11e0-b929-000c29ad1d07" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abstinence" value="abstinence"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-abstinence">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.abstinence</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="aa2cd23d-6dd2-421e-95ac-76442814105d" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-dependence" value="dependence"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-dependence">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.dependence</label>
+		                                    </td>
+		                                    <td>
+		                                        <input data-concept-id="e1e783ea-1d5f-11e0-b929-000c29ad1d07" type="radio" name="multiple-drug-use-type" id="multiple-drug-use-other-drug" value="other-drug"/>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-other-drug">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug</label>
+		                                    </td>
+		                                    <td>
+		                                        <label for="multiple-drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug.specify</label>
+		                                        <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </fieldset>
+		                    </td>
+		                    <td>
+		                        <label for="multiple-drug-use-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="multiple-drug-use-diagnosis-date" id="multiple-drug-use-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
+						
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="dementia" id="dementia" value="e1e3237c-1d5f-11e0-b929-000c29ad1d07" onclick="setDependentDisabledState(this, undefined, 'input[id=dementia-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="dementia">mentalhealth.form.initial.patient.obs.dementia</label>
-	                    </td>
-	                    <td>
-	
-	                    </td>
-	                    <td>
-	                        <label for="dementia-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="dementia-diagnosis-date" id="dementia-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="21" id="dementia-row-fieldset">
+		                    <td>
+		                        <input data-concept-id="e1e3237c-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="dementia" id="dementia" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=dementia-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="dementia">mentalhealth.form.initial.patient.obs.dementia</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="dementia-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="dementia-diagnosis-date" id="dementia-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="mental-retardation" id="mental-retardation" value="8fee16d8-128b-4ef6-b0ef-9e6a4335f6ce" onclick="setDependentDisabledState(this, undefined, 'input[id=mental-retardation-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="mental-retardation">mentalhealth.form.initial.patient.obs.mental.retardation</label>
-	                    </td>
-	                    <td>
-	
-	                    </td>
-	                    <td>
-	                        <label for="mental-retardation-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="mental-retardation-diagnosis-date" id="mental-retardation-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="22" id="mental-retardation-row-fieldset">
+		                    <td>
+		                        <input data-concept-id="8fee16d8-128b-4ef6-b0ef-9e6a4335f6ce" type="checkbox" name="mental-retardation" id="mental-retardation" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=mental-retardation-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="mental-retardation">mentalhealth.form.initial.patient.obs.mental.retardation</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="mental-retardation-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="mental-retardation-diagnosis-date" id="mental-retardation-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="conduct-disorder" id="conduct-disorder" value="742dbe8f-11bf-4904-b835-b93052f02128" onclick="setDependentDisabledState(this, undefined, 'input[id=conduct-disorder-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="conduct-disorder">mentalhealth.form.initial.patient.obs.behavioral</label>
-	                    </td>
-	                    <td>
-	
-	                    </td>
-	                    <td>
-	                        <label for="conduct-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="conduct-disorder-diagnosis-date" id="conduct-disorder-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="23" id="conduct-disorder-row-fieldset">
+		                    <td>
+		                        <input data-concept-id="742dbe8f-11bf-4904-b835-b93052f02128" type="checkbox" name="conduct-disorder" id="conduct-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=conduct-disorder-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="conduct-disorder">mentalhealth.form.initial.patient.obs.behavioral</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="conduct-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="conduct-disorder-diagnosis-date" id="conduct-disorder-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <!-- conceptId="23765" -->
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  type="checkbox" name="attention-deficity-hyperactivity-disorder" id="attention-deficity-hyperactivity-disorder" value="23d54d47-0d3e-4fa3-a2c8-0a21db724110" onclick="setDependentDisabledState(this, undefined, 'input[id=attention-deficity-hyperactivity-disorder-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="attention-deficity-hyperactivity-disorder">mentalhealth.form.initial.patient.obs.attention.deficit</label>
-	                    </td>
-	                    <td>
-	
-	                    </td>
-	                    <td>
-	                        <label for="attention-deficity-hyperactivity-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="attention-deficity-hyperactivity-disorder-diagnosis-date" id="attention-deficity-hyperactivity-disorder-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="24" id="attention-deficity-hyperactivity-disorder-row-fieldset">
+		                    <td>
+		                        <!-- conceptId="23765" -->
+		                        <input data-concept-id="23d54d47-0d3e-4fa3-a2c8-0a21db724110"  type="checkbox" name="attention-deficity-hyperactivity-disorder" id="attention-deficity-hyperactivity-disorder" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=attention-deficity-hyperactivity-disorder-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="attention-deficity-hyperactivity-disorder">mentalhealth.form.initial.patient.obs.attention.deficit</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="attention-deficity-hyperactivity-disorder-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="attention-deficity-hyperactivity-disorder-diagnosis-date" id="attention-deficity-hyperactivity-disorder-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
 	                </tr>
 	                <tr>
-	                    <td>
-	                        <input data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07" type="checkbox" name="nocturnal-enuresis" id="nocturnal-enuresis" value="1f53044e-9084-11e6-a98e-000c29db4475" onclick="setDependentDisabledState(this, undefined, 'input[id=nocturnal-enuresis-diagnosis-date]', true, !this.checked);"/>
-	                    </td>
-	                    <td>
-	                        <label for="nocturnal-enuresis">mentalhealth.form.initial.patient.obs.nocturnal.enuresis</label>
-	                    </td>
-	                    <td>
-	
-	                    </td>
-	                    <td>
-	                        <label for="nocturnal-enuresis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
-	                    </td>
-	                    <td>
-	                        <input data-concept-id="" type="date" name="nocturnal-enuresis-diagnosis-date" id="nocturnal-enuresis-diagnosis-date" disabled="true"/>
-	                    </td>
+                    	<fieldset data-concept-id="e1eb7806-1d5f-11e0-b929-000c29ad1d07"  data-obs-number="25" id="nocturnal-enuresis-row-fieldset">
+		                    <td>
+		                        <input data-concept-id="1f53044e-9084-11e6-a98e-000c29db4475" type="checkbox" name="nocturnal-enuresis" id="nocturnal-enuresis" value="on" onclick="setDependentDisabledState(this, undefined, 'input[id=nocturnal-enuresis-diagnosis-date]', true, !this.checked);"/>
+		                    </td>
+		                    <td>
+		                        <label for="nocturnal-enuresis">mentalhealth.form.initial.patient.obs.nocturnal.enuresis</label>
+		                    </td>
+		                    <td>
+		
+		                    </td>
+		                    <td>
+		                        <label for="nocturnal-enuresis-diagnosis-date">mentalhealth.form.initial.patient.obs.date</label>
+		                    </td>
+		                    <td>
+		                        <input type="date" name="nocturnal-enuresis-diagnosis-date" id="nocturnal-enuresis-diagnosis-date" disabled="true"/>
+		                    </td>
+						</fieldset>
                 	</tr>
                 </table>
         
