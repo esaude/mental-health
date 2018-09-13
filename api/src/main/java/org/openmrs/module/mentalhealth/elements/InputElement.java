@@ -22,8 +22,9 @@ import org.w3c.dom.Node;
 
 public class InputElement extends PassthroughElement implements IHandleHTMLEdit, IHandleHTMLView, FormSubmissionControllerAction, IPassthrough {
 	
-	public InputElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
-		super(context, parameters, originalNode);
+	
+	public InputElement(FormEntrySession session, Map<String, String> parameters, Node originalNode) {
+		super(session, parameters, originalNode);
 		
 	}
 	
@@ -40,13 +41,6 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 
 
 	@Override
-	public boolean handlesSubmission() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-
-	@Override
 	public boolean requiresClosingTag() {
 		//basically the only self closing tag, but including multiple types
 		return false;
@@ -58,9 +52,13 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		
 	}*/
 	
+	protected boolean noHtmlAction() {
+		return m_openMRSConcept == null;
+	}
+	
 	public void takeActionForEditMode(FormEntryContext context)
 	{
-		if(m_openMRSConcept == null) {
+		if( noHtmlAction() ) {
 			return;
 		}
 		//Encounter viewEncounter = context.getExistingEncounter();
@@ -71,27 +69,45 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 			return;
 		}
 		
-		List<Obs> observations = existingObs.get(m_openMRSConcept);
+		Obs answer = null;
 		
-		if(observations==null || m_obsNumber >= observations.size()) {
-			return;
+		if( m_openMRSConcept != null ) {
+			
+			List<Obs> observations = existingObs.get(m_openMRSConcept);
+			
+			if(observations==null || m_obsNumber >= observations.size()) {
+				return;
+			}
+			
+			
+			answer = observations.get(m_obsNumber);
+			
+			if(answer == null) {
+				return;
+			}
 		}
 		
-		Obs answer = observations.get(m_obsNumber);
+		String inputValue = derivedClassSpecializeHTMLEditProcessing(answer);
 		
-		if(answer == null) {
-			return;
+		if(inputValue != null) {
+			((Element)m_originalNode).setAttribute("value", inputValue);
 		}
-		
-		((Element)m_originalNode).setAttribute("value", answer.getValueText());
-		//result = NodeUtil.stringify();
 	
+	}
+	
+	//does nothing in this class, but derived classes can override
+	//this method to implement any additional procesisng that may need to
+	//be done
+	public String derivedClassSpecializeHTMLEditProcessing(Obs answer)
+	{
+		return answer.getValueText();
 	}
 	
 	@Override
 	public void handleSubmission(FormEntrySession session, HttpServletRequest submission) {
 		
-		if( m_openMRSConcept == null ) {
+		//if it doesn't have a concept or encounter function, just return
+		if( m_openMRSConcept == null && m_encounterFn == null) {
 			return;
 		}
 		
@@ -103,14 +119,26 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 			return;
 		}
 		
+		Object valueToStore = null;
+		
 		String safeValue = "";
 		
-		safeValue = StringEscapeUtils.escapeHtml(value);
+		String htmlsafeValue = StringEscapeUtils.escapeHtml(value);
+		safeValue = StringEscapeUtils.escapeSql(htmlsafeValue);
+
+		valueToStore = safeValue;
 		
-		//shouldnt happen, play it safe anyway
+		//shouldn't happen, play it safe anyway
 		if(safeValue == null || safeValue.isEmpty()) {
 			return;
 		}
+		
+		valueToStore = derivedClassSpecializeHandleSubmission(session, safeValue);
+		
+		//a null value returned from derived element indicates it has handled
+		//the submission itself, and this class should simply return
+		if(valueToStore == null)
+			return;
 		
 		switch(context.getMode()) {
 			case EDIT:
@@ -118,10 +146,14 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 			case VIEW:
 				break;
 			case ENTER:
-				session.getSubmissionActions().createObs(m_openMRSConcept, safeValue, null, null, null);
+				session.getSubmissionActions().createObs(m_openMRSConcept, valueToStore, null, null, null);
 				break;
 		
 		}
+	}
+	
+	public Object derivedClassSpecializeHandleSubmission(FormEntrySession session, String safeValue) {
+		return safeValue;
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.FormEntryContext;
+import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEnter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -18,8 +19,8 @@ public class TranslatingElement extends PassthroughElement implements IHandleHTM
 
 	protected ArrayList<AbstractMap.SimpleEntry<String, Node>> m_toTranslate = new ArrayList<AbstractMap.SimpleEntry<String, Node>>();
 	
-	public TranslatingElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
-		super(context, parameters, originalNode);
+	public TranslatingElement(FormEntrySession session, Map<String, String> parameters, Node originalNode) {
+		super(session, parameters, originalNode);
 
 		String translateAttr = m_parameters.get("data-translate");
 		

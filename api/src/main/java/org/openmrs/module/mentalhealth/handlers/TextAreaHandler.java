@@ -2,6 +2,7 @@ package org.openmrs.module.mentalhealth.handlers;
 
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.htmlformentry.BadFormDesignException;
@@ -24,12 +25,13 @@ public class TextAreaHandler extends AbstractTagHandler {
 	public boolean doStartTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
 		
+		try {
 		log.info("In TextAreaHandler doStartTag");
 		
 		FormEntryContext context = session.getContext();
 		
 		//instantiate a new instance of our observation controller adapter
-		TextAreaElement elem = new TextAreaElement(context, getAttributes(node), node);
+		TextAreaElement elem = new TextAreaElement(session, getAttributes(node), node);
 		
 		//element implements FormSubmissionController interface
 		session.getSubmissionController().addAction(elem);
@@ -40,6 +42,10 @@ public class TextAreaHandler extends AbstractTagHandler {
 		//keep track of nested tags
 		context.pushToStack(elem);
 		
+		}catch(Exception e) {
+			throw new IllegalStateException("Exception in TextAreaHandler.doStartTag(): " + ExceptionUtils.getStackTrace(e));
+		}
+
 		//if in view mode a child text node is added to the actual dom
 		//so the generator will parse that node as normal
 		//Returns whether or not to handle the body also. (True = Yes)
@@ -50,6 +56,7 @@ public class TextAreaHandler extends AbstractTagHandler {
 	public void doEndTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
 		
+		try {
 		log.info("In TextAreaHandler doEndTag");
 
 		FormEntryContext context = session.getContext();
@@ -68,6 +75,10 @@ public class TextAreaHandler extends AbstractTagHandler {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Error when writing closing <textarea> tag. element was "+ elem + " Parameters: " + getAttributes(node));
 		}
+		}catch(Exception e) {
+			throw new IllegalStateException("Exception in TextAreaHandler.doEndTag(): " + ExceptionUtils.getStackTrace(e));
+		}
+
 	}
 
 }

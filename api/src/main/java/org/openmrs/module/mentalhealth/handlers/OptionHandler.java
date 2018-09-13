@@ -2,6 +2,7 @@ package org.openmrs.module.mentalhealth.handlers;
 
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openmrs.module.htmlformentry.BadFormDesignException;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
@@ -20,7 +21,7 @@ public class OptionHandler extends AbstractTagHandler {
 	@Override
 	public boolean doStartTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
-		
+		try {
 		//make sure the last element pushed onto the stack was select, we'll need
 		//it to continue
 		
@@ -35,7 +36,7 @@ public class OptionHandler extends AbstractTagHandler {
 		if(parentElement instanceof SelectElement) {
 			SelectElement parentSelectElement = (SelectElement) parentElement;
 			
-			OptionElement elem = new OptionElement(context, getAttributes(node), node, parentSelectElement);
+			OptionElement elem = new OptionElement(session, getAttributes(node), node, parentSelectElement);
 			
 			context.pushToStack(elem);
 			
@@ -44,7 +45,10 @@ public class OptionHandler extends AbstractTagHandler {
 		}else {
 			throw new IllegalArgumentException("Options immediate ancestor should be a select tag! Option with attrs: " + getAttributes(node));
 		}
-		
+		}catch(Exception e) {
+			throw new IllegalStateException("Exception in OptionHandler.doStartTag(): " + ExceptionUtils.getStackTrace(e));
+		}
+
 		//handles text node children
 		return true;
 	}
@@ -52,7 +56,7 @@ public class OptionHandler extends AbstractTagHandler {
 	@Override
 	public void doEndTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
-		
+		try {
 		FormEntryContext context = session.getContext();
 		
 		Object baseObj = context.popFromStack();
@@ -68,6 +72,10 @@ public class OptionHandler extends AbstractTagHandler {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Error when writing closing <option> tag. element was "+ elem + " Option with attrs: " + getAttributes(node));
 		}
+		}catch(Exception e) {
+			throw new IllegalStateException("Exception in OptionHandler.doEndTag(): " + ExceptionUtils.getStackTrace(e));
+		}
+
 	}
 
 }

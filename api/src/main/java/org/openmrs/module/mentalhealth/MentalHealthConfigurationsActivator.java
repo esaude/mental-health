@@ -33,7 +33,7 @@ import org.openmrs.module.mentalhealth.activator.MentalHealthAppConfigurationIni
 import org.openmrs.module.mentalhealth.activator.MentalHealthHtmlFormsInitializer;
 import org.openmrs.module.mentalhealth.activator.MentalHealthInitializer;
 import org.openmrs.module.mentalhealth.deploy.MentalHealthCommonMetadataBundle;
-import org.openmrs.module.mentalhealth.handlers.FieldsetWithRadiosHandler;
+import org.openmrs.module.mentalhealth.handlers.FieldsetHandler;
 import org.openmrs.module.mentalhealth.handlers.InputHandler;
 import org.openmrs.module.mentalhealth.handlers.LabelHandler;
 import org.openmrs.module.mentalhealth.handlers.SelectHandler;
@@ -71,7 +71,7 @@ public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 		hfeService.addHandler("label", new LabelHandler());
 		
 		//also handles rendering all children (including radios, if responsible radio parent)
-		hfeService.addHandler("fieldset", new FieldsetWithRadiosHandler());
+		hfeService.addHandler("fieldset", new FieldsetHandler());
 		
 		hfeService.addHandler("textarea", new TextAreaHandler());
 		

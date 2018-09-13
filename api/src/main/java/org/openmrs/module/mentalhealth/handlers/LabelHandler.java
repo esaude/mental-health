@@ -2,6 +2,7 @@ package org.openmrs.module.mentalhealth.handlers;
 
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openmrs.module.htmlformentry.BadFormDesignException;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
@@ -19,10 +20,12 @@ public class LabelHandler extends AbstractTagHandler {
 	@Override
 	public boolean doStartTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
+		
+	try {
 		FormEntryContext context = session.getContext();
 		
 		//instantiate a new instance of the HTML generator for this element
-		LabelElement elem = new LabelElement(context, getAttributes(node), node);
+		LabelElement elem = new LabelElement(session, getAttributes(node), node);
 		
 		//Also adds any necessary FormSubmissionControllerActions to the FormSubmissionController associated with the session.
 		
@@ -37,6 +40,10 @@ public class LabelHandler extends AbstractTagHandler {
 		//element implements HTMLGeneratorElement interface
 		context.pushToStack(elem);
 		
+	}catch(Exception e) {
+		throw new IllegalStateException("Exception in LabelHandler.doStartTag(): " + ExceptionUtils.getStackTrace(e));
+	}
+
 		//Returns whether or not to handle the body also. (True = Yes)
 		//the child elements should also be processed individually by their respective handlers
 		return true;
@@ -45,7 +52,7 @@ public class LabelHandler extends AbstractTagHandler {
 	@Override
 	public void doEndTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
-		
+		try {
 		FormEntryContext context = session.getContext();
 		
 		Object baseObj = context.popFromStack();
@@ -61,6 +68,10 @@ public class LabelHandler extends AbstractTagHandler {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Error when writing closing <label> tag. element was "+ elem + " Parameters: " + getAttributes(node));
 		}
+		}catch(Exception e) {
+			throw new IllegalStateException("Exception in LabelHandler.doEndTag(): " + ExceptionUtils.getStackTrace(e));
+		}
+
 	}
 
 }

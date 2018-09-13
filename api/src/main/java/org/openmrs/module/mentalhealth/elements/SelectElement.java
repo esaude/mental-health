@@ -13,7 +13,6 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
-import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
@@ -25,15 +24,9 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 	private Map<String, Concept> m_options = new HashMap<String, Concept>();
 	
 	private Concept m_selectedChildConcept = null;
-	
-	public void addHTMLValueConceptMapping(IChildElement opt) {
-		String childValue = opt.getAttrs().get("value");
-		
-		m_options.put(childValue, opt.getConcept());
-	}
-	
-	public SelectElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
-		super(context, parameters, originalNode);
+			
+	public SelectElement(FormEntrySession session, Map<String, String> parameters, Node originalNode) {
+		super(session, parameters, originalNode);
 	}
 
 	
@@ -113,7 +106,9 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 			return;
 		}
 		
-		Concept answerConcept = observations.get(m_obsNumber).getValueCoded();
+		Obs specificObs = observations.get(m_obsNumber);
+		
+		Concept answerConcept = specificObs.getValueCoded();
 		
 		if(answerConcept == null) {
 			return;
@@ -124,9 +119,14 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 		
 	}
 
+	public void addHTMLValueConceptMapping(IChildElement opt) {
+		String childValue = opt.getAttrs().get("value");
+		
+		m_options.put(childValue, opt.getConcept());
+	}
 	
 	@Override
-	public boolean getValueStoredInOpenMRS(IChildElement child) {
+	public Object getValueStoredInOpenMRS(IChildElement child) {
 		
 		Concept childConcept = child.getConcept();
 		
@@ -142,6 +142,12 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 	public String getTagName() {
 		// TODO Auto-generated method stub
 		return "select";
+	}
+
+
+	@Override
+	public boolean hasConceptAssociated() {
+		return true;
 	}
 
 }

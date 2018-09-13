@@ -2,14 +2,14 @@ package org.openmrs.module.mentalhealth.elements;
 
 import java.util.Map;
 
-import org.openmrs.module.htmlformentry.FormEntryContext;
+import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.mentalhealth.elements.interfaces.IPassthrough;
 import org.w3c.dom.Node;
 
 public class LabelElement extends TranslatingElement implements IPassthrough {
 
-	public LabelElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
-		super(context, parameters, originalNode);
+	public LabelElement(FormEntrySession session, Map<String, String> parameters, Node originalNode) {
+		super(session, parameters, originalNode);
 		
 	}
 

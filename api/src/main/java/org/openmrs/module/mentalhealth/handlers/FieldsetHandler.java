@@ -2,6 +2,7 @@ package org.openmrs.module.mentalhealth.handlers;
 
 import java.io.PrintWriter;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.openmrs.module.htmlformentry.BadFormDesignException;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
@@ -10,19 +11,22 @@ import org.openmrs.module.mentalhealth.elements.FieldsetElement;
 import org.openmrs.module.mentalhealth.elements.PassthroughElement;
 import org.w3c.dom.Node;
 
-public class FieldsetWithRadiosHandler extends AbstractTagHandler {
+public class FieldsetHandler extends AbstractTagHandler {
 	
-	public FieldsetWithRadiosHandler() {
+	public FieldsetHandler() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean doStartTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
+		
+		try {
+		
 		FormEntryContext context = session.getContext();
 		
 		//instantiate a new instance of our observation controller adapter
-		FieldsetElement elem = new FieldsetElement(context, getAttributes(node), node);
+		FieldsetElement elem = new FieldsetElement(session, getAttributes(node), node);
 		
 		//element implements FormSubmissionController interface
 		session.getSubmissionController().addAction(elem);
@@ -35,7 +39,9 @@ public class FieldsetWithRadiosHandler extends AbstractTagHandler {
 		//should be self closing
 		//element implements HTMLGeneratorElement interface
 		context.pushToStack(elem);
-		
+		}catch(Exception e) {
+			throw new IllegalStateException("Exception in FieldsetHandler.doStartTag(): " + ExceptionUtils.getStackTrace(e));
+		}
 		//Returns whether or not to handle the body also. (True = Yes)
 		//we want the htmlformentrygenerator to call applyTagsHelper for child nodes
 		return true;
@@ -44,6 +50,7 @@ public class FieldsetWithRadiosHandler extends AbstractTagHandler {
 	@Override
 	public void doEndTag(FormEntrySession session, PrintWriter out, Node parent, Node node)
 			throws BadFormDesignException {
+		try {
 		FormEntryContext context = session.getContext();
 		
 		Object baseObj = context.popFromStack();
@@ -59,6 +66,11 @@ public class FieldsetWithRadiosHandler extends AbstractTagHandler {
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Error when writing closing <fieldset> tag. element was "+ elem + " Parameters: " + getAttributes(node));
 		}
+		
+	}catch(Exception e) {
+		throw new IllegalStateException("Exception in FieldsetHandler.doEndTag(): " + ExceptionUtils.getStackTrace(e));
+	}
+
 
 	}
 

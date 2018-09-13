@@ -4,8 +4,7 @@ import java.util.Map;
 
 import org.openmrs.Concept;
 import org.openmrs.module.htmlformentry.FormEntryContext;
-
-import org.openmrs.module.htmlformentry.element.HtmlGeneratorElement;
+import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
@@ -23,8 +22,8 @@ public class OptionElement extends TranslatingElement implements IHandleHTMLEdit
 	
 	private IParentElement m_parentSelect;
 	
-	public OptionElement(FormEntryContext context, Map<String, String> parameters, Node originalNode, IParentElement parentElement) {
-		super(context, parameters, originalNode);
+	public OptionElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, IParentElement parentElement) {
+		super(session, parameters, originalNode);
 		
 		/*
 		 * form
@@ -44,7 +43,7 @@ This attribute lets you specify the form element to which the select element is 
 			return;
 		}
 		
-		if(m_parentSelect.getValueStoredInOpenMRS(this)) {
+		if((Boolean)m_parentSelect.getValueStoredInOpenMRS(this)) {
 			
 			((Element)m_originalNode).setAttribute("selected", "true");
 			
@@ -76,9 +75,9 @@ This attribute lets you specify the form element to which the select element is 
 	}
 
 	@Override
-	public boolean getDefaultStateFromNode() {
-		// TODO Auto-generated method stub
-		return false;
+	public Object getDefaultStateFromNode() {
+		Boolean selected = m_parameters.get("selected")!=null;
+		return selected;
 	}
 
 	@Override

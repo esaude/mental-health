@@ -1,20 +1,21 @@
 package org.openmrs.module.mentalhealth.elements;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.openmrs.Concept;
 import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
-import org.openmrs.module.htmlformentry.HtmlFormEntryUtil;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
@@ -25,26 +26,23 @@ import org.w3c.dom.Node;
 
 public class FieldsetElement extends PassthroughElement implements IHandleHTMLEdit, FormSubmissionControllerAction, IParentElement, IPassthrough {
 	
-	protected Log log = LogFactory.getLog(getClass());
+	//private Map<String, Concept> m_radios = new HashMap<String, Concept>();
 	
-	
-	private Map<String, Concept> m_radios = new HashMap<String, Concept>();
-	
-	//private Map<String, Boolean> m_radioStates = new HashMap<String, Boolean>();
-	
+	private Map<String, IChildElement> m_children = new HashMap<String, IChildElement>();
+
 	private Concept m_selectedChildConcept = null;
 	
-	private boolean m_responsibleFieldset = false;
+	private String m_formValueName;
+
+	private Date m_previouslyRecordedObsDateTime = null;
 	
-	private String m_radioGroupName;
-	
-	public FieldsetElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
-		super(context, parameters, originalNode);
+	public FieldsetElement(FormEntrySession session, Map<String, String> parameters, Node originalNode) {
+		super(session, parameters, originalNode);
 		
 		log.info("fieldsetelement ctor, after super ctor");
 		//parse child nodes to identify if this fieldset is the immediate parent of radios
 		//if it has a fieldset child, the nodes between this one and that one will be passed through as normal
-		m_responsibleFieldset = isClosestParentOfRadios();
+		//m_responsibleFieldset = isClosestParentOfRadios();
 	}
 	
 	//fieldsets do not require names
@@ -53,75 +51,17 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		return false;
 	}
 
-	private boolean isClosestParentOfRadios() {
-		/*boolean result = false;
-		
-		boolean madeDecision = false;
-		
-		Node child = m_originalNode.getFirstChild();
-		Node sibling = null;
-		Stack<Node> parents = new Stack<Node>();
-		
-		while(child != null) {
-			
-			/*switch(((Element)child).getTagName().toLowerCase()) {
-				case "fieldset":
-						result = false;
-						madeDecision = true;
-					break;
-				case "radio":
-						result = true;
-						madeDecision = true;
-					break;
-			}*/
-		/*	
-		String tag = ((Element)child).getTagName().toLowerCase();
-			if(tag.equals("fieldset")) {
-				result = false;
-				madeDecision = true;
-			}
-			else if(tag.equals("radio")) {
-				result = true;
-				madeDecision = true;
-			}
-			
-			if(madeDecision)
-				break;
-			
-			if(child.hasChildNodes()) {
-				parents.push(child);
-				child = child.getFirstChild();
-			} 
-			
-			sibling = child.getNextSibling();
-			
-			if(sibling!=null) {
-				child = child.getNextSibling();
-			} else {
-				
-				try {
-					child = parents.pop();
-				} catch (Exception e) {
-					child = null;
-				}
-				
-			}
-			
-		}
-*/
-		boolean parentOfAnotherFieldset = ((Element)m_originalNode).getElementsByTagName("fieldset").getLength()<1;
-		
-		//((Element)m_originalNode).getElementsByTagName("input").getLength()>0;
-		//filter based on attribute type
-		//boolean parentOfRadios =  
-		
-		return parentOfAnotherFieldset;
+	private boolean hasChildrenAfterHTMLParse() {
+		return m_children.size()>0;
 	}
 	
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 		
-		if(m_openMRSConcept == null || !m_responsibleFieldset) {
+		//has associated concept is used here because it is evaluated before
+		//child nodes have been parsed, i.e. is this fieldset intended to repr.
+		//an obs
+		if( m_openMRSConcept == null || !hasConceptAssociated()) {
 			return;
 		}
 		
@@ -134,12 +74,21 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		
 		List<Obs> observations = existingObs.get(m_openMRSConcept);
 		
-		if(observations == null || m_obsNumber >= observations.size())
+		if(observations == null || m_obsNumber >= observations.size() || m_obsNumber < 0)
 		{
 			return;
 		}
+
+		//reverse indices for lifo (LinkedList),
+		//should instanceof be used on observations?
+		//if(observations instanceof LinkedList ) //<LIFOLIST>
+		int numObs = observations.size()-1;
+
+		Obs specificObs = observations.get(numObs-m_obsNumber);
 		
-		Concept answerConcept = observations.get(m_obsNumber).getValueCoded();
+		//else if(observations instanceof x) {} //<FIFOLIST>
+		//else if unordered?
+		Concept answerConcept = specificObs.getValueCoded();
 		
 		if(answerConcept == null) {
 			return;
@@ -147,7 +96,9 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 
 		m_selectedChildConcept = answerConcept;
 		((Element)m_originalNode).setAttribute("data-answered-concept-id", String.valueOf(m_selectedChildConcept.getUuid()));
-		
+
+		m_previouslyRecordedObsDateTime = specificObs.getObsDatetime();
+
 	}
 	
 	@Override
@@ -160,21 +111,66 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	public void handleSubmission(FormEntrySession session, HttpServletRequest submission) {
 		
 		//if no conceptid was provided, or this is not the fieldset responsible
-		//for a set of child radios, just return
-		if(m_openMRSConcept == null || !m_responsibleFieldset) {
+		//for a set of child elements 
+		//(at this time child nodes were already processed during html generation), just return
+		if(m_openMRSConcept == null || !hasChildrenAfterHTMLParse()) {
 			return;
 		}
 		
 		FormEntryContext context = session.getContext();
 		
-		String value = submission.getParameter(m_radioGroupName);
+		String responseName = null;
+		
+		Map<String, Concept> radios = new HashMap<String, Concept>();
+		
+		Date obsDateTime = null;
+		
+		Concept responseConcept = null;
+		
+		for(Entry<String, IChildElement> childEntry: m_children.entrySet()) {
+			IChildElement child = childEntry.getValue();
+			
+			if( child instanceof RadioElement) {
+				radios.put(childEntry.getKey(), child.getConcept());
+				
+				responseName = m_formValueName;
+				
+				//comparator functor?
+			} else if( child instanceof DateElement ) {
+				SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					String dateFormName = child.getAttrs().get("name");
+					String dateString = null;
+					
+					if(dateFormName!=null) {
+						dateString = submission.getParameter(dateFormName);
+					}
+					
+					if(dateString != null) {
+						obsDateTime = dateFormatter.parse(dateString);
+					}
+				} catch (ParseException e) {
+					
+					e.printStackTrace();
+					
+				}
+			} else if( child instanceof CheckboxElement ) {
+				responseName = child.getAttrs().get("name");
+				responseConcept = child.getConcept();
+			}
+			
+		}
+		
+		String value = submission.getParameter(responseName);
 		
 		if(value == null || value.isEmpty()) {
 			//throw new IllegalArgumentException("Value for select " + tagName + " cannot be blank/empty");
 			return;
 		}
 		
-		Concept responseConcept = m_radios.get(value);
+		if(radios.size() > 0) {
+			responseConcept = radios.get(value);
+		}
 		
 		if(responseConcept == null) {
 			String fieldsetId = "#"+m_parameters.get("id");
@@ -183,7 +179,7 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 				fieldsetId = "with no id";
 			}
 			
-			throw new IllegalArgumentException("Concept for fieldset " + fieldsetId + " radio name " + m_radioGroupName + " and value " + value + " not found!");
+			throw new IllegalArgumentException("Concept for fieldset " + fieldsetId + " radio name " + m_formValueName + " and value " + value + " not found!");
 		
 		}
 		
@@ -193,7 +189,7 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 			case VIEW:
 				break;
 			case ENTER:
-				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, null, null, null);
+				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, null);
 				break;
 		
 		}
@@ -215,6 +211,9 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	@Override
 	public void addHTMLValueConceptMapping(IChildElement child) {
 
+		if(!hasConceptAssociated()) {
+			return;
+		}
 		
 		//instantiation of radioelement already requires both a name and value
 		
@@ -223,38 +222,61 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		if(childAttrs == null)
 			return;
 		
-		String childName = childAttrs.get("name");
 		String childValue = childAttrs.get("value");
 		
-		log.info("attaching child with name "+ childName + " and value "+ childValue + " to fieldset " + m_parameters.get("id"));
+		if(child instanceof RadioElement) {
+			String childName = childAttrs.get("name");
+			
+			log.info("attaching child with name "+ childName + " and value "+ childValue + " to fieldset " + m_parameters.get("id"));
+			
+			if(m_formValueName == null){
+				m_formValueName = childName;
+			}
+			
+			if(!m_formValueName.equals(childName)) {
+				throw new IllegalArgumentException("All radios in a fieldset should have the same name assigned, expected " + m_formValueName + " but saw " + childName);
+			}
+			
+		}/* else if(child instanceof CheckboxElement){
+			m_formValueName = child.getAttrs().get("name");
+		}*/
 		
-		if(m_radioGroupName == null){
-			m_radioGroupName = childName;
-		}
-		
-		if(!m_radioGroupName.equals(childName))
-			throw new IllegalArgumentException("All radios in a fieldset should have the same name assigned, expected " + m_radioGroupName + " but saw " + childName);
-		
-		m_radios.put(childValue, child.getConcept());
+		m_children.put(childValue, child);
 	}
 
 	@Override
-	public boolean getValueStoredInOpenMRS(IChildElement child) {
-
-		Concept childConcept = child.getConcept();
+	public Object getValueStoredInOpenMRS(IChildElement child) {
 		
-		if(		childConcept == null ||
-				m_selectedChildConcept == null ) {
+		if(!hasConceptAssociated()) {
 			return false;
 		}
 		
-		return childConcept.equals(m_selectedChildConcept);
+		if(!(child instanceof DateElement) ) {
+		
+			Concept childConcept = child.getConcept();
+			
+			if(		childConcept == null ||
+					m_selectedChildConcept == null ) {
+				return false;
+			}
+			
+			return childConcept.equals(m_selectedChildConcept);
+		}
+		
+		return m_previouslyRecordedObsDateTime;
+		
 	}
 	
 	@Override
 	public String getTagName() {
 		// TODO Auto-generated method stub
 		return "fieldset";
+	}
+
+	@Override
+	public boolean hasConceptAssociated() {
+		// TODO Auto-generated method stub
+		return m_parameters.get("data-concept-id")!=null;
 	}
 	
 

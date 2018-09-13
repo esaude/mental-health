@@ -11,29 +11,30 @@ import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class RadioElement extends InputElement implements IHandleHTMLEdit, IChildElement {
+public class CheckboxElement extends InputElement implements IChildElement, IHandleHTMLEdit {
 
 	IParentElement m_parentElement;
 	
-	public RadioElement(FormEntrySession session, Map<String, String> attrs, Node node, IParentElement parentElement) {
-		super(session, attrs, node);
+	public CheckboxElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, IParentElement parent) {
+		super(session, parameters, originalNode);
+		// TODO Auto-generated constructor stub
+		m_parentElement = parent;
 		
-		m_parentElement = parentElement;
+		if(parent != null) {
+			parent.addHTMLValueConceptMapping(this);
+		}
+	}
+
+	@Override
+	public boolean handlesSubmission() {
 		
-		if(m_parentElement != null) {
-			parentElement.addHTMLValueConceptMapping(this);
+		if(m_parentElement == null) {
+			return true;
 		}
 		
+		return !m_parentElement.hasConceptAssociated();
 	}
 	
-
-	//radios require both values and names
-	@Override
-	protected boolean requiresValue() {
-		return true;
-	}
-	
-
 	@Override
 	public Concept getConcept() {
 		// TODO Auto-generated method stub
@@ -42,15 +43,16 @@ public class RadioElement extends InputElement implements IHandleHTMLEdit, IChil
 
 	@Override
 	public Map<String, String> getAttrs() {
+		// TODO Auto-generated method stub
 		return m_parameters;
 	}
 
 	@Override
 	public Object getDefaultStateFromNode() {
-		Boolean checked = m_parameters.get("checked")!=null;
-		return checked;
+		// TODO Auto-generated method stub
+		return (m_parameters.get("checked")!=null);
 	}
-
+	
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 
@@ -68,11 +70,6 @@ public class RadioElement extends InputElement implements IHandleHTMLEdit, IChil
 			
 		}
 	}
-	
-	@Override
-	public String getTagName() {
-		// TODO Auto-generated method stub
-		return "input[type='radio']";
-	}
+
 
 }

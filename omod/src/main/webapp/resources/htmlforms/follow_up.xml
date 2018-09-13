@@ -60,6 +60,19 @@
 		fieldset fieldset fieldset{
 		    border-style: none;
 		}
+		
+		.typeahead-list{
+			position: absolute;
+			z-index: 100000;
+			background-color: white;
+		}
+		
+		.typeahead-list div{
+			background-color: white;
+		}
+		.typeahead-list div:hover{
+			background-color: #AAA;
+		}
 	</style>
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -275,7 +288,7 @@
                     <fieldset disabled="true" id="medication-1-name-quantity-set">
                     	<span class="d-flex flex-fill mt-4">
 	                        <label for="medication-1-name" aria-label="name">mentalhealth.form.followup.medication.name</label>
-	                        <input data-concept-id="" type="text" id="medication-1-name" name="medication-1-name" class="form-control"/>
+	                        <input data-concept-id="" type="text" id="medication-1-name" name="medication-1-name" class="form-control drug-list"/>
 	                        <label for="medication-1-quantity" aria-label="quantity">mentalhealth.form.followup.medication.quantity</label>
 	                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-1-quantity" name="medication-1-quantity" class="form-control"/>
 	                        <label for="medication-1-dosage" aria-label="dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -291,7 +304,7 @@
                     <fieldset disabled="true" id="medication-2-name-quantity-set">
                     	<span class="d-flex flex-fill mt-4">
 	                        <label for="medication-2-name" aria-label="name">mentalhealth.form.followup.medication.name</label>
-	                        <input data-concept-id="" type="text" id="medication-2-name" name="medication-2-name" class="form-control"/>
+	                        <input data-concept-id="" type="text" id="medication-2-name" name="medication-2-name" class="form-control drug-list"/>
 	                        <label for="medication-2-quantity" aria-label="quantity">mentalhealth.form.followup.medication.quantity</label>
 	                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-2-quantity" name="medication-2-quantity" class="form-control"/>
 	                        <label for="medication-2-dosage" aria-label="dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -307,7 +320,7 @@
                     <fieldset disabled="true" id="medication-3-name-quantity-set">
                     	<span class="d-flex flex-fill mt-4">
 	                        <label for="medication-3-name" aria-label="name">mentalhealth.form.followup.medication.name</label>
-	                        <input data-concept-id="" type="text" id="medication-3-name" name="medication-3-name" class="form-control"/>
+	                        <input data-concept-id="" type="text" id="medication-3-name" name="medication-3-name" class="form-control drug-list"/>
 	                        <label for="medication-3-quantity" aria-label="quantity">mentalhealth.form.followup.medication.quantity</label>
 	                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-3-quantity" name="medication-3-quantity" class="form-control"/>
 	                        <label for="medication-3-dosage" aria-label="dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -323,7 +336,7 @@
                     <fieldset disabled="true" id="medication-4-name-quantity-set">
                     	<span class="d-flex flex-fill mt-4">
 	                        <label for="medication-4-name" aria-label="name">mentalhealth.form.followup.medication.name</label>
-	                        <input data-concept-id="" type="text" id="medication-4-name" name="medication-4-name" class="form-control"/>
+	                        <input data-concept-id="" type="text" id="medication-4-name" name="medication-4-name" class="form-control drug-list"/>
 	                        <label for="medication-4-quantity" aria-label="quantity">mentalhealth.form.followup.medication.quantity</label>
 	                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-4-quantity" name="medication-4-quantity" class="form-control"/>
 	                        <label for="medication-4-dosage" aria-label="dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -339,7 +352,7 @@
                     <fieldset disabled="true" id="medication-5-name-quantity-set">
                     	<span class="d-flex flex-fill mt-4">
 	                        <label for="medication-5-name" aria-label="name">mentalhealth.form.followup.medication.name</label>
-	                        <input data-concept-id="" type="text" id="medication-5-name" name="medication-5-name" class="form-control"/>
+	                        <input data-concept-id="" type="text" id="medication-5-name" name="medication-5-name" class="form-control drug-list"/>
 	                        <label for="medication-5-quantity" aria-label="quantity">mentalhealth.form.followup.medication.quantity</label>
 	                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-5-quantity" name="medication-5-quantity" class="form-control"/>
 	                        <label for="medication-5-dosage" aria-label="dosage">mentalhealth.form.followup.medication.dosage</label>

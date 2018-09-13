@@ -9,5 +9,5 @@ public interface IChildElement {
 	public Map<String,String> getAttrs();
 
 	//selected or checked
-	public boolean 	getDefaultStateFromNode();
+	public Object getDefaultStateFromNode();
 }

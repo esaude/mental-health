@@ -21,8 +21,8 @@ import org.w3c.dom.Node;
 
 public class TextAreaElement extends PassthroughElement implements IHandleHTMLEdit, FormSubmissionControllerAction {
 
-	public TextAreaElement(FormEntryContext context, Map<String, String> parameters, Node originalNode) {
-		super(context, parameters, originalNode);
+	public TextAreaElement(FormEntrySession session, Map<String, String> parameters, Node originalNode) {
+		super(session, parameters, originalNode);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -44,7 +44,8 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 		
 		String safeValue = "";
 		
-		safeValue = StringEscapeUtils.escapeHtml(value);
+		String htmlsafeValue = StringEscapeUtils.escapeHtml(value);
+		safeValue = StringEscapeUtils.escapeSql(htmlsafeValue);
 		
 		//shouldnt happen, play it safe anyway
 		if(safeValue == null || safeValue.isEmpty()) {
