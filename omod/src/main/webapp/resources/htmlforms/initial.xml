@@ -281,7 +281,7 @@
                     <label for="companion-name" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.name</label>
                     <input data-concept-id="e1de46a4-1d5f-11e0-b929-000c29ad1d07" type="text" name="companion-name" id="companion-name" autocomplete="off" class=""/>
                     
-                    <label for="companion-telephone-number" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.telephone</label> <label>mentalhealth.form.initial.patient.obs.treatment.supporter.telephone.format</label>
+                    <span class="d-flex flex-fill mt-2"><label for="companion-telephone-number" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.telephone</label> <span style="font-size: small"><label>mentalhealth.form.initial.patient.obs.treatment.supporter.telephone.format</label></span></span>
                     <input data-concept-id="eb23c94a-2c2e-40fa-ab82-22308b1c5f27" type="tel" name="companion-telephone-number" id="companion-telephone-number" pattern="[0-9]{2,3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="off" class=""/>
 
                     <label for="companion-relationship" class="d-block">mentalhealth.form.initial.patient.obs.treatment.supporter.relationship</label>
@@ -558,7 +558,7 @@
                 </table>
             </fieldset>
             <fieldset id="patient-overview" class="form-group tab-pane fade" role="tabpanel">
-                <legend class="ml-5">mentalhealth.form.initial.patient.patient.overview</legend>
+                <label class="ml-5">mentalhealth.form.initial.patient.patient.overview</label>
                 
                     <table id="patient-overview-table" class="ml-5 mr-5">
                         <tr>
