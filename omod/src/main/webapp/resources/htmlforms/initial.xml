@@ -312,7 +312,7 @@
                 <fieldset data-concept-id="e4248283-f93f-40b4-bc9d-d6cb1059e092" id="family-history-epilepsy">
                     <label>mentalhealth.form.initial.patient.obs.family.history.epilepsy</label>
                     <label for="family-history-epilepsy-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-np" value="np" checked="true"/>
+                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-np" value="" checked="true"/>
                     
                     <label for="family-history-epilepsy-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <!-- conceptId="23711" -->
@@ -328,7 +328,7 @@
                 <fieldset data-concept-id="928d5265-44ec-4b78-8626-d10cb29ee8bf" id="family-history-mental-disease" onchange="setDependentDisabledState(this, 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-yes]', 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-specific]');">
                     <label>mentalhealth.form.initial.patient.obs.mental.illness</label>
                     <label for="family-history-mental-disease-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-np" value="np" checked="true"/>
+                    <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-np" value="" checked="true"/>
                     
                     <label for="family-history-mental-disease-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-mental-disease" id="family-history-mental-disease-yes" value="y"/>
@@ -348,7 +348,7 @@
                     <label>mentalhealth.form.initial.patient.obs.suicidal</label>
 
                     <label for="family-history-suicide-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-suicide" id="family-history-suicide-np" value="np" checked="true"/>
+                    <input type="radio" name="family-history-suicide" id="family-history-suicide-np" value="" checked="true"/>
                     
                     <label for="family-history-suicide-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-suicide" id="family-history-suicide-yes" value="y"/>
@@ -364,7 +364,7 @@
                     <label>mentalhealth.form.initial.patient.obs.alcoholism</label>
 
                     <label for="family-history-alcoholism-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-np" value="np" checked="true"/>
+                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-np" value="" checked="true"/>
                     
                     <label for="family-history-alcoholism-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-alcoholism" id="family-history-alcoholism-yes" value="y"/>
@@ -380,7 +380,7 @@
                     <label>mentalhealth.form.initial.patient.obs.other.substances</label>
                     
                     <label for="family-history-other-substances-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="family-history-other-substances" id="family-history-other-substances-np" value="np" checked="true"/>
+                    <input type="radio" name="family-history-other-substances" id="family-history-other-substances-np" value="" checked="true"/>
 
                     <label for="family-history-other-substances-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-history-other-substances" id="family-history-other-substances-yes" value="y"/>
@@ -402,7 +402,7 @@
                     <label>mentalhealth.form.initial.patient.obs.other.chronic.diseases</label>
 
                     <label for="patient-history-other-chronic-diseases-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-np" value="np" checked="true"/>
+                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-np" value="" checked="true"/>
 
                     <label for="patient-history-other-chronic-diseases-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-yes" value="y"/>
@@ -422,7 +422,7 @@
                     <label>mentalhealth.form.initial.patient.obs.tb.test</label>
 
                     <label for="patient-history-tuberculosis-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-np" value="np" checked="true"/>
+                    <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-np" value="" checked="true"/>
 
                     <label for="patient-history-tuberculosis-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="5ab65682-608d-49e1-b581-2cde8def6df9" type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-yes" value="y"/>
@@ -443,7 +443,7 @@
                     <label>mentalhealth.form.initial.patient.obs.hiv.test</label>
                     
                     <label for="patient-history-hiv-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-hiv" id="patient-history-hiv-np" value="np" checked="true"/>
+                    <input type="radio" name="patient-history-hiv" id="patient-history-hiv-np" value="" checked="true"/>
 
                     <label for="patient-history-hiv-yes">mentalhealth.form.initial.patient.obs.yes</label>
                     <input data-concept-id="e1d8dab6-1d5f-11e0-b929-000c29ad1d07" type="radio" name="patient-history-hiv" id="patient-history-hiv-yes" value="y"/>
@@ -467,7 +467,7 @@
                     <label>mentalhealth.form.initial.patient.obs.alcohol.use</label>
 
                     <label for="patient-history-alcohol-use-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-np" value="np" checked="true"/>
+                    <input type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-np" value="" checked="true"/>
 
                     <label for="patient-history-alcohol-use-current">mentalhealth.form.initial.patient.obs.use.current</label>
                     <input data-concept-id="5bb90676-908a-11e6-a98e-000c29db4475" type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-current" value="c"/>
@@ -486,7 +486,7 @@
                     <label>mentalhealth.form.initial.patient.obs.use.other.drugs</label>
 
                     <label for="patient-history-other-drug-use-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-np" value="np" checked="true"/>
+                    <input type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-np" value="" checked="true"/>
 
                     <label for="patient-history-other-drug-use-current">mentalhealth.form.initial.patient.obs.use.current</label>
                     <input data-concept-id="858b2bb3-d93a-41a8-afeb-c84ef24cbe7a" type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-current" value="c"/>
@@ -505,7 +505,7 @@
                     <label>mentalhealth.form.initial.patient.obs.use.traditional.medicine</label>
                     
                     <label for="patient-history-traditional-medicine-use-np">mentalhealth.form.initial.patient.obs.not.provided</label>
-                    <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-np" value="np" checked="true"/>
+                    <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-np" value="" checked="true"/>
 
                     <label for="patient-history-traditional-medicine-use-current">mentalhealth.form.initial.patient.obs.use.current</label>
                     <input data-concept-id="858b2bb3-d93a-41a8-afeb-c84ef24cbe7a" type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-current" value="c"/>
