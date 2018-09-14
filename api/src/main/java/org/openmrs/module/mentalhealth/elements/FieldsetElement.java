@@ -3,6 +3,8 @@ package org.openmrs.module.mentalhealth.elements;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,15 +81,32 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 			return;
 		}
 
-		//reverse indices for lifo (LinkedList),
-		//should instanceof be used on observations?
-		//if(observations instanceof LinkedList ) //<LIFOLIST>
-		int numObs = observations.size()-1;
+		Collections.sort(observations, new Comparator<Obs>() {
 
-		Obs specificObs = observations.get(numObs-m_obsNumber);
+			@Override
+			public int compare(Obs o1, Obs o2) {
+				//default to no change (equal)
+				Integer result = 0;
+				
+				try {
+					//if the comment exists and is a parsable integer, 
+					//order by comment
+					result = Integer.parseInt(o1.getComment()) - Integer.parseInt(o2.getComment());
+				}catch(Exception e) {
+					//worst case scenario, result should have been set, but we
+					//set it to the default of no change (equal) anyway
+					result = 0;
+				}
+				
+				return result;
+			}
+				
+			
+			
+		});
 		
-		//else if(observations instanceof x) {} //<FIFOLIST>
-		//else if unordered?
+		Obs specificObs = observations.get(m_obsNumber);
+		
 		Concept answerConcept = specificObs.getValueCoded();
 		
 		if(answerConcept == null) {
@@ -183,13 +202,16 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		
 		}
 		
+		
+		
 		switch(context.getMode()) {
 			case EDIT:
 				break;
 			case VIEW:
 				break;
 			case ENTER:
-				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, null);
+				//m_obsNumber should always be at least 0, parsed to "0"
+				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, String.valueOf(m_obsNumber));
 				break;
 		
 		}
