@@ -15,6 +15,7 @@ import org.openmrs.module.mentalhealth.elements.CheckboxElement;
 import org.openmrs.module.mentalhealth.elements.DateElement;
 import org.openmrs.module.mentalhealth.elements.FieldsetElement;
 import org.openmrs.module.mentalhealth.elements.InputElement;
+import org.openmrs.module.mentalhealth.elements.NumberInputElement;
 import org.openmrs.module.mentalhealth.elements.PassthroughElement;
 import org.openmrs.module.mentalhealth.elements.RadioElement;
 
@@ -102,6 +103,11 @@ public class InputHandler extends AbstractTagHandler {
 			if( elem.handlesSubmission()) {
 				session.getSubmissionController().addAction(elem);
 			}
+		}else if(inputType.equals("number")) {
+			
+			elem = new NumberInputElement(session, attrs, node);
+			session.getSubmissionController().addAction(elem);
+			
 		}
 		//instantiate a new instance of our observation controller adapter
 		else {
