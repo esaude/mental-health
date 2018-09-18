@@ -10,6 +10,7 @@ import org.openmrs.Concept;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
+import org.openmrs.module.htmlformentry.HtmlFormEntryUtil;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
@@ -58,6 +59,14 @@ public class SelectElement extends ParentElement implements IHandleHTMLEdit, For
 		
 		Concept responseConcept = m_options.get(value);
 		
+		//if the value wasnt in the list of options in the template xml
+		//see if the value itself is a concept uuid, id, et c. possibly
+		//added by JS
+		if(responseConcept == null) {
+			responseConcept = HtmlFormEntryUtil.getConcept(value);
+		}
+		
+		//if there's still no concept, report an error
 		if(responseConcept == null) {
 			String selectId = "#"+m_parameters.get("id");
 			
@@ -71,11 +80,17 @@ public class SelectElement extends ParentElement implements IHandleHTMLEdit, For
 		
 		switch(context.getMode()) {
 			case EDIT:
+				if(m_prevObs!=null) {
+					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, null, null, m_obsNumber);
+				} else {
+					session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, null, null, m_obsNumber);
+				}
+				
 				break;
 			case VIEW:
 				break;
 			case ENTER:
-				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, null, null, null);
+				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, null, null, m_obsNumber);
 				break;
 		
 		}

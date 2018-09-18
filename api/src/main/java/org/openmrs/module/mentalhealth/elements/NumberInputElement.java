@@ -16,10 +16,14 @@ public class NumberInputElement extends InputElement {
 	}
 
 	@Override
-	public String derivedClassSpecializeHTMLEditProcessing(Obs answer)
+	public String derivedClassSpecializeHTMLEditProcessing()
 	{
-		//only support integer values for now
-		return String.valueOf(answer.getValueNumeric().intValue());
+		if(m_prevObs!=null) {
+			//only support integer values for now
+			return String.valueOf(m_prevObs.getValueNumeric().intValue());
+		}
+		
+		return null;
 	}
 	
 	

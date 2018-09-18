@@ -55,7 +55,12 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 		
 		switch(context.getMode()) {
 			case EDIT:
-				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, safeValue, null, null, null);
+				if(m_prevObs!=null) {
+					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, safeValue, null, null, null);
+				} else {
+					session.getSubmissionActions().createObs(m_openMRSConcept, safeValue, null, null, null);
+				}
+				
 				break;
 			case VIEW:
 				break;

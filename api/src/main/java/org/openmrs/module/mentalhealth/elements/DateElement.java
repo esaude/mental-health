@@ -142,12 +142,12 @@ public class DateElement extends InputElement implements IChildElement, FormSubm
 	}
 	
 	@Override
-	public String derivedClassSpecializeHTMLEditProcessing(Obs answer) {
+	public String derivedClassSpecializeHTMLEditProcessing() {
 		
 		Date answerDate = null;
 		
-		if(answer != null) {
-			answerDate = answer.getValueDate();
+		if(m_prevObs != null) {
+			answerDate = m_prevObs.getValueDate();
 		} else if(m_parent != null && m_parent.hasConceptAssociated()) {
 			Object valFromParent = m_parent.getValueStoredInOpenMRS(this);
 			

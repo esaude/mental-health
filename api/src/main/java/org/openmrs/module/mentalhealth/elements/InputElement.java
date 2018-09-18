@@ -68,9 +68,7 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		if(existingObs == null) {
 			return;
 		}
-		
-		Obs answer = null;
-		
+
 		if( m_openMRSConcept != null ) {
 			
 			List<Obs> observations = existingObs.get(m_openMRSConcept);
@@ -88,14 +86,14 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 			}
 			
 			
-			answer = observations.get(iObsNumber);
+			m_prevObs = observations.get(iObsNumber);
 			
-			if(answer == null) {
+			if(m_prevObs == null) {
 				return;
 			}
 		}
 		
-		String inputValue = derivedClassSpecializeHTMLEditProcessing(answer);
+		String inputValue = derivedClassSpecializeHTMLEditProcessing();
 		
 		if(inputValue != null) {
 			((Element)m_originalNode).setAttribute("value", inputValue);
@@ -106,9 +104,9 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 	//does nothing in this class, but derived classes can override
 	//this method to implement any additional procesisng that may need to
 	//be done
-	public String derivedClassSpecializeHTMLEditProcessing(Obs answer)
+	public String derivedClassSpecializeHTMLEditProcessing()
 	{
-		return answer.getValueText();
+		return m_prevObs.getValueText();
 	}
 	
 	@Override
@@ -150,11 +148,16 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		
 		switch(context.getMode()) {
 			case EDIT:
+				if(m_prevObs!=null) {
+					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, valueToStore, null, null, m_obsNumber);
+				} else {
+					session.getSubmissionActions().createObs(m_openMRSConcept, valueToStore, null, null, m_obsNumber);
+				}
 				break;
 			case VIEW:
 				break;
 			case ENTER:
-				session.getSubmissionActions().createObs(m_openMRSConcept, valueToStore, null, null, null);
+				session.getSubmissionActions().createObs(m_openMRSConcept, valueToStore, null, null, m_obsNumber);
 				break;
 		
 		}

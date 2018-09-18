@@ -163,7 +163,11 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 		
 		switch(context.getMode()) {
 			case EDIT:
-				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
+				if(m_prevObs==null) {
+					session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
+				}else {
+					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
+				}
 				break;
 			case VIEW:
 				break;
