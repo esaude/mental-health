@@ -115,7 +115,7 @@
 					<div class="form-group row">
 						<div class="col">
 							<label for="transfer-or-consult-date">mentalhealth.form.initial.consultation.date</label>
-                            <input name="encounter-date" data-encounter-function="date" tabindex="4" type="date" id="transfer-or-consult-date" class="form-control-sm" onchange="warnMaxDateToday(this, 'span[id=transfer-or-consult-date-alert]');"/>
+                            <input name="encounter-date" data-encounter-function="date" tabindex="4" type="date" id="transfer-or-consult-date" class="form-control-sm" onchange="warnMaxDateToday(this, 'span[id=transfer-or-consult-date-alert]');" required="required"/>
                       		<span class="" role="alert" id="transfer-or-consult-date-alert"></span>
 						</div>
 					</div>
@@ -203,6 +203,7 @@
                 	<label for="symptom-assessment-gravity" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.symptom.assessment.gravity</label>
                   	<div class="col-md-3">
                    		<select data-concept-id="a3707116-50ff-4c89-bb6b-cd717bf47e03" name="symptom-assessment-gravity" id="symptom-assessment-gravity" class="form-control-sm">
+	                   		<option />
                        		<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        		<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
                        		<option data-concept-id="dccdf8ba-401a-4538-91d8-a4c8ae8f20cb" value="serious">mentalhealth.form.followup.symptom.assessment.gravity.serious</option>
@@ -241,7 +242,7 @@
                   	</fieldset>
         	    </div>
         	    <div>
-	                <fieldset data-concept-id="e1dcabf0-1d5f-11e0-b929-000c29ad1d07" id="other-obs-drugs" onChange="setDependentDisabledState(this, 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-yes]', 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-specific]');">
+	                <fieldset data-concept-id="e1dcabf0-1d5f-11e0-b929-000c29ad1d07" id="other-obs-drugs">
                     	<div class="form-group row">
                      		<label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.alcohol.drugs.concerns</label>
                       		<div class="col-md-7">
@@ -284,21 +285,19 @@
             <fieldset id="treatment-details" class="tab-pane fade" role="tabpanel">
                 <fieldset id="medication-1-fieldset">
                     <label>mentalhealth.form.followup.medication.one</label>
-	                <fieldset data-concept-id="7c05f296-0d44-4a7c-bcdc-badf3ac96d5c" data-obs-number="0" id="medication-1-input-fieldset">
-                    	<span class="d-flex flex-fill mt-4">
-		                    <label for="medication-1-use-fnm">mentalhealth.form.followup.medication.fnm</label>
-                        	<select id="medication-1-fnm" name="medication-1-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-1-name', 'medication-1-form')">
-                            </select>
-                            <input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" type="text" id="medication-1-name" name="medication-1-name" hidden="true"/>
-                            <input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" type="text" id="medication-1-form" name="medication-1-form" hidden="true"/>
-	                        <label for="medication-1-quantity">mentalhealth.form.followup.medication.quantity</label>
-	                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-1-quantity" name="medication-1-quantity" class="form-control"/>
-	                        <label for="medication-1-dosage">mentalhealth.form.followup.medication.dosage</label>
-	                        <input data-concept-id="efe37777-1687-42ef-b515-35d9ee85b7c5" type="text" id="medication-1-dosage" name="medication-1-dosage" class="form-control"/>
-	                        <label for="medication-1-frequency">mentalhealth.form.followup.medication.frequency</label>
-	                        <input data-concept-id="0170ae0d-ebe2-451c-825d-921573946f66" type="text" id="medication-1-frequency" name="medication-1-frequency" class="form-control"/>
-                        </span>
-                    </fieldset>
+                   	<span class="d-flex flex-fill mt-4">
+	                    <label for="medication-1-use-fnm">mentalhealth.form.followup.medication.fnm</label>
+                       	<select id="medication-1-fnm" name="medication-1-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-1-name', 'medication-1-form')">
+                        </select>
+                        <input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" type="text" id="medication-1-name" name="medication-1-name" hidden="true"/>
+                        <input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" type="text" id="medication-1-form" name="medication-1-form" hidden="true"/>
+                        <label for="medication-1-quantity">mentalhealth.form.followup.medication.quantity</label>
+                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" type="text" id="medication-1-quantity" name="medication-1-quantity" class="form-control"/>
+                        <label for="medication-1-dosage">mentalhealth.form.followup.medication.dosage</label>
+                        <input data-concept-id="efe37777-1687-42ef-b515-35d9ee85b7c5" type="text" id="medication-1-dosage" name="medication-1-dosage" class="form-control"/>
+                        <label for="medication-1-frequency">mentalhealth.form.followup.medication.frequency</label>
+                        <input data-concept-id="0170ae0d-ebe2-451c-825d-921573946f66" type="text" id="medication-1-frequency" name="medication-1-frequency" class="form-control"/>
+                	</span>
                 </fieldset>
                 <fieldset id="medication-2-fieldset">
                     <label>mentalhealth.form.followup.medication.two</label>
@@ -388,6 +387,7 @@
 
                     <label for="same-drug-not-delivered" class="form-check-label col-form-label-sm">mentalhealth.form.followup.medication.if.not.same.reason</label>
                    	<select data-concept-id="b811467d-17e0-4b0b-bbe7-c2413c59a916" name="same-drug-not-delivered" id="same-drug-not-delivered" disabled="true">
+                   		<option />
                    	   	<option data-concept-id="2e52c1c4-990b-4dbb-a095-8b5fff967e1d" value="not-in-pharmacy">mentalhealth.form.followup.medication.if.not.same.reason.out.of.stock</option>
                        	<option data-concept-id="0f3bec12-550c-477d-96f4-b0e81f9b20de" value="not-in-system">mentalhealth.form.followup.medication.if.not.same.reason.not.in.system</option>
                     </select>
@@ -402,8 +402,9 @@
                 	</div>
               	</div>
                 <div class="form-group row">
-                    <label for="vital-signs-bp-systolic" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.bp.systolic</label>
+                    <label for="vital-signs-bp-systolic" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.bp</label>
                     <div class="col">
+                    	<label for="vital-signs-bp-systolic" class="col-form-label-sm">mentalhealth.form.followup.vitals.bp.systolic</label>
                     	<input data-concept-id="e1e2e3d0-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-bp-systolic" id="vital-signs-bp-systolic" min="0" max="1000" class="form-control-sm"/>
                     	<label for="vital-signs-bp-diastolic" class="col-form-label-sm">mentalhealth.form.followup.vitals.bp.diastolic</label>
                     	<input data-concept-id="e1e2e4e8-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-bp-diastolic" id="vital-signs-bp-diastolic" min="0" max="500" class="form-control-sm"/>
@@ -412,19 +413,19 @@
                 <div class="form-group row">
                     <label for="vital-signs-weight" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.weight</label>
                     <div class="col">
-                    	<input data-concept-id="e1e2e826-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-weight" id="vital-signs-weight" min="0" max="1000" class="form-control-sm"/>
+                    	<input data-concept-id="e1e2e826-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-weight" id="vital-signs-weight" min="0" max="1000" class="form-control-sm" onChange="computeBmi();"/>
                 	</div>
                 </div >
                 <div class="form-group row">
                     <label for="vital-signs-height" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.height</label>
                     <div class="col">
-                    	<input data-concept-id="e1e2e934-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-height" id="vital-signs-height" min="0" max="500" class="form-control-sm"/>
+                    	<input data-concept-id="e1e2e934-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-height" id="vital-signs-height" min="0" max="500" class="form-control-sm" onChange="computeBmi();"/>
                 	</div>
                 </div>
                 <div class="form-group row">
                     <label for="vital-signs-bmi" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.bmi</label>
                     <div class="col">
-                    	<input type="number" name="vital-signs-bmi" id="vital-signs-bmi" min="0" max="100" class="form-control-sm"/>
+                    	<input type="number" name="vital-signs-bmi" id="vital-signs-bmi" min="0" max="100" class="form-control-sm" disabled="true"/>
                 	</div>
                 </div>
             </fieldset>
@@ -434,6 +435,7 @@
                 <div class="form-group row">
                     <label for="side-effects-sep" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.sep</label>
                    	<select data-concept-id="2596f5e1-e9c3-48b0-be19-bc415c3ade9b" name="side-effects-sep" id="side-effects-sep" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
@@ -444,6 +446,7 @@
                 <div class="form-group row">
                     <label for="side-effects-orthostatic-hypotension" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.orthostatic.hypertension</label>
                    	<select data-concept-id="e90fa65c-9084-11e6-a98e-000c29db4475" name="side-effects-orthostatic-hypotension" id="side-effects-orthostatic-hypotension" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
@@ -454,6 +457,7 @@
                 <div class="form-group row">
                     <label for="side-effects-metabolic-syndrome" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.metabolic.syndrome</label>
                    	<select data-concept-id="3694c0fb-de71-4ab9-9a7a-31d43e3f9453" name="side-effects-metabolic-syndrome" id="side-effects-metabolic-syndrome" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
@@ -464,6 +468,7 @@
                 <div class="form-group row">
                     <label for="side-effects-gingival-hypertrophy" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.gingival.hypertrophy</label>
                    	<select data-concept-id="18258483-1a35-4422-bc0b-a8ce928ae984" name="side-effects-gingival-hypertrophy" id="side-effects-gingival-hypertrophy" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
@@ -474,6 +479,7 @@
                 <div class="form-group row">
                     <label for="side-effects-rash" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.rash</label>
                    	<select data-concept-id="6302c75c-48b7-4146-95b8-966119aaf88c" name="side-effects-rash" id="side-effects-rash" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
@@ -484,6 +490,7 @@
                 <div class="form-group row">
                     <label for="side-effects-steven-johnson-syndrome" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.steven.johnson</label>
                    	<select data-concept-id="751000e2-5592-4a44-bf10-5da8e5f1c992" name="side-effects-steven-johnson-syndrome" id="side-effects-steven-johnson-syndrome" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
@@ -494,6 +501,7 @@
                 <div class="form-group row">
                     <label for="side-effects-diabetes" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.side.effects.diabetes</label>
                    	<select data-concept-id="2fe96a54-524e-4144-853b-ef3fd99fd6bf" name="side-effects-diabetes" id="side-effects-diabetes" class="form-control-sm">
+                   		<option />
                    	   	<option data-concept-id="e1d85294-1d5f-11e0-b929-000c29ad1d07" value="none">mentalhealth.form.followup.symptom.assessment.gravity.none</option>
                        	<option data-concept-id="9de4cbbd-27d2-4bf9-88e5-756eccc90b39" value="light">mentalhealth.form.followup.symptom.assessment.gravity.light</option>
                        	<option data-concept-id="e1dac86c-1d5f-11e0-b929-000c29ad1d07" value="moderate">mentalhealth.form.followup.symptom.assessment.gravity.moderate</option>
