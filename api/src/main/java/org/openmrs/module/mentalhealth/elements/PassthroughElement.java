@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Concept;
+import org.openmrs.Obs;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
@@ -28,7 +29,9 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 	
 	protected Concept m_openMRSConcept;
 
-	protected Integer m_obsNumber;
+	protected String m_obsNumber;
+	
+	protected Obs m_prevObs;
 	
 	protected String m_encounterFn;
 	
@@ -59,10 +62,14 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 	
 			try {
 				
-				m_obsNumber = Integer.parseInt(m_parameters.get("data-obs-number"));
+				m_obsNumber = m_parameters.get("data-obs-number");
+				
+				if(m_obsNumber == null) {
+					m_obsNumber = "0";
+				}
 			
 			} catch (Exception e) {
-				m_obsNumber = 0;
+				m_obsNumber = "0";
 			}
 			
 		}
@@ -128,6 +135,7 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 		
 		return "";
 	}
+	
 	
 	public String closeTag() {
 		

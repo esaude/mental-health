@@ -21,12 +21,11 @@ import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
-import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IPassthrough;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class FieldsetElement extends PassthroughElement implements IHandleHTMLEdit, FormSubmissionControllerAction, IParentElement, IPassthrough {
+public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, FormSubmissionControllerAction, IPassthrough {
 	
 	//private Map<String, Concept> m_radios = new HashMap<String, Concept>();
 	
@@ -60,54 +59,12 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 		
-		//has associated concept is used here because it is evaluated before
-		//child nodes have been parsed, i.e. is this fieldset intended to repr.
-		//an obs
-		if( m_openMRSConcept == null || !hasConceptAssociated()) {
+		getPreviousObsForConcept(context);
+		
+		if(m_prevObs == null)
 			return;
-		}
 		
-		//Encounter viewEncounter = context.getExistingEncounter();
-		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
-		//viewEncounter.
-		if(existingObs == null) {
-			return;
-		}
-		
-		List<Obs> observations = existingObs.get(m_openMRSConcept);
-		
-		if(observations == null || m_obsNumber >= observations.size() || m_obsNumber < 0)
-		{
-			return;
-		}
-
-		Collections.sort(observations, new Comparator<Obs>() {
-
-			@Override
-			public int compare(Obs o1, Obs o2) {
-				//default to no change (equal)
-				Integer result = 0;
-				
-				try {
-					//if the comment exists and is a parsable integer, 
-					//order by comment
-					result = Integer.parseInt(o1.getComment()) - Integer.parseInt(o2.getComment());
-				}catch(Exception e) {
-					//worst case scenario, result should have been set, but we
-					//set it to the default of no change (equal) anyway
-					result = 0;
-				}
-				
-				return result;
-			}
-				
-			
-			
-		});
-		
-		Obs specificObs = observations.get(m_obsNumber);
-		
-		Concept answerConcept = specificObs.getValueCoded();
+		Concept answerConcept = m_prevObs.getValueCoded();
 		
 		if(answerConcept == null) {
 			return;
@@ -116,7 +73,7 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		m_selectedChildConcept = answerConcept;
 		((Element)m_originalNode).setAttribute("data-answered-concept-id", String.valueOf(m_selectedChildConcept.getUuid()));
 
-		m_previouslyRecordedObsDateTime = specificObs.getObsDatetime();
+		m_previouslyRecordedObsDateTime = m_prevObs.getObsDatetime();
 
 	}
 	
@@ -206,12 +163,13 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 		
 		switch(context.getMode()) {
 			case EDIT:
+				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
 				break;
 			case VIEW:
 				break;
 			case ENTER:
 				//m_obsNumber should always be at least 0, parsed to "0"
-				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, String.valueOf(m_obsNumber));
+				session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
 				break;
 		
 		}
@@ -297,7 +255,6 @@ public class FieldsetElement extends PassthroughElement implements IHandleHTMLEd
 
 	@Override
 	public boolean hasConceptAssociated() {
-		// TODO Auto-generated method stub
 		return m_parameters.get("data-concept-id")!=null;
 	}
 	

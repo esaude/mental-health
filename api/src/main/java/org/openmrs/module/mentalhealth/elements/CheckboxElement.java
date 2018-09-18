@@ -7,15 +7,14 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
-import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class CheckboxElement extends InputElement implements IChildElement, IHandleHTMLEdit {
 
-	IParentElement m_parentElement;
+	ParentElement m_parentElement;
 	
-	public CheckboxElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, IParentElement parent) {
+	public CheckboxElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, ParentElement parent) {
 		super(session, parameters, originalNode);
 		// TODO Auto-generated constructor stub
 		m_parentElement = parent;

@@ -7,15 +7,14 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
-import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class RadioElement extends InputElement implements IHandleHTMLEdit, IChildElement {
 
-	IParentElement m_parentElement;
+	ParentElement m_parentElement;
 	
-	public RadioElement(FormEntrySession session, Map<String, String> attrs, Node node, IParentElement parentElement) {
+	public RadioElement(FormEntrySession session, Map<String, String> attrs, Node node, ParentElement parentElement) {
 		super(session, attrs, node);
 		
 		m_parentElement = parentElement;

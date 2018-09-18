@@ -75,12 +75,20 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 			
 			List<Obs> observations = existingObs.get(m_openMRSConcept);
 			
-			if(observations==null || m_obsNumber >= observations.size()) {
+			Integer iObsNumber = 0;
+			
+			try {
+				iObsNumber = Integer.parseInt(m_obsNumber);
+			} catch (Exception e) {
+				iObsNumber = 0;
+			}
+			
+			if(observations==null || iObsNumber >= observations.size()) {
 				return;
 			}
 			
 			
-			answer = observations.get(m_obsNumber);
+			answer = observations.get(iObsNumber);
 			
 			if(answer == null) {
 				return;

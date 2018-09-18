@@ -55,6 +55,7 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 		
 		switch(context.getMode()) {
 			case EDIT:
+				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, safeValue, null, null, null);
 				break;
 			case VIEW:
 				break;
@@ -78,19 +79,27 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 			return;
 		}
 		
+		Integer iObsNumber = 0;
+		
+		try {
+			iObsNumber = Integer.parseInt(m_obsNumber);
+		} catch (Exception e) {
+			iObsNumber = 0;
+		}
+
 		List<Obs> observations = existingObs.get(m_openMRSConcept);
 		
-		if(observations==null || m_obsNumber >= observations.size()) {
+		if(observations==null || iObsNumber >= observations.size()) {
 			return;
 		}
 		
-		Obs answer = observations.get(m_obsNumber);
+		m_prevObs = observations.get(iObsNumber);
 		
-		if(answer == null) {
+		if(m_prevObs == null) {
 			return;
 		}
 		
-		Node textChildNode = m_originalNode.getOwnerDocument().createTextNode(answer.getValueText());
+		Node textChildNode = m_originalNode.getOwnerDocument().createTextNode(m_prevObs.getValueText());
 		
 		((Element)m_originalNode).appendChild(textChildNode);
 	

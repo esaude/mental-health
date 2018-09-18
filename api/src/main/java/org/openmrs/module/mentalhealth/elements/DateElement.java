@@ -12,16 +12,15 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
-import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class DateElement extends InputElement implements IChildElement, FormSubmissionControllerAction {
 
-	IParentElement m_parent;
+	ParentElement m_parent;
 	
 	
-	public DateElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, IParentElement parent) {
+	public DateElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, ParentElement parent) {
 		super(session, parameters, originalNode);
 		
 		FormEntryContext context = session.getContext();

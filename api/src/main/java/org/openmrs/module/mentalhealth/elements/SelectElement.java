@@ -2,24 +2,21 @@ package org.openmrs.module.mentalhealth.elements;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.Concept;
-import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
-import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class SelectElement extends PassthroughElement implements IHandleHTMLEdit, FormSubmissionControllerAction, IParentElement {
+public class SelectElement extends ParentElement implements IHandleHTMLEdit, FormSubmissionControllerAction {
 
 	private Map<String, Concept> m_options = new HashMap<String, Concept>();
 	
@@ -88,27 +85,13 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 		
-		if(m_openMRSConcept == null) {
+		getPreviousObsForConcept(context);
+		
+		if(m_prevObs == null) {
 			return;
 		}
 		
-		//Encounter viewEncounter = context.getExistingEncounter();
-		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
-		//viewEncounter.
-		if(existingObs == null) {
-			return;
-		}
-		
-		List<Obs> observations = existingObs.get(m_openMRSConcept);
-		
-		if(observations == null || m_obsNumber >= observations.size())
-		{
-			return;
-		}
-		
-		Obs specificObs = observations.get(m_obsNumber);
-		
-		Concept answerConcept = specificObs.getValueCoded();
+		Concept answerConcept = m_prevObs.getValueCoded();
 		
 		if(answerConcept == null) {
 			return;
@@ -144,10 +127,9 @@ public class SelectElement extends PassthroughElement implements IHandleHTMLEdit
 		return "select";
 	}
 
-
 	@Override
 	public boolean hasConceptAssociated() {
-		return true;
+		return m_parameters.get("data-concept-id") != null || m_encounterFn.equalsIgnoreCase("provider") || m_encounterFn.equalsIgnoreCase("location");
 	}
 
 }

@@ -7,7 +7,6 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
-import org.openmrs.module.mentalhealth.elements.interfaces.IParentElement;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -20,9 +19,9 @@ public class OptionElement extends TranslatingElement implements IHandleHTMLEdit
 	 * It is not at all necessary to include them in your classes.
 	*/
 	
-	private IParentElement m_parentSelect;
+	private ParentElement m_parentSelect;
 	
-	public OptionElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, IParentElement parentElement) {
+	public OptionElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, ParentElement parentElement) {
 		super(session, parameters, originalNode);
 		
 		/*
