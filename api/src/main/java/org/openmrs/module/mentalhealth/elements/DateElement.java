@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.openmrs.Concept;
 import org.openmrs.Encounter;
-import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;

@@ -695,7 +695,7 @@
         </div>
         <div class="row">
         	<div class="col text-center">
-            	<button type="submit" id="submit-form-btn" class="btn btn-primary mr-2"><uimessage code="mentalhealth.form.initial.save"/></button>
+            	<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
 	        	<button type="reset" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);"><uimessage code="mentalhealth.form.initial.reset"/></button>
         	</div>
         </div>

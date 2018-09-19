@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.openmrs.Concept;
 import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
+import org.openmrs.module.htmlformentry.FormEntryContext.Mode;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
@@ -38,7 +39,14 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 		
 		String value = submission.getParameter(m_parameters.get("name"));
 		
-		if( value == null || value.isEmpty() ) {
+		Mode formMode = context.getMode();
+		
+		//in edit mode, if the obs doesnt exist, act like enter mode
+		if(m_prevObs==null && formMode==Mode.EDIT) {
+			formMode = Mode.ENTER;
+		}
+		
+		if( formMode==Mode.ENTER && (value == null || value.isEmpty()) ) {
 			return;
 		}
 		
@@ -47,25 +55,20 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 		String htmlsafeValue = StringEscapeUtils.escapeHtml(value);
 		safeValue = StringEscapeUtils.escapeSql(htmlsafeValue);
 		
-		//shouldnt happen, play it safe anyway
-		if(safeValue == null || safeValue.isEmpty()) {
+		//shouldnt happen, play it safe anyway, only ignore in enter mode, in
+		//edit mode, this voids an obs
+		if( formMode==Mode.ENTER && (safeValue == null || safeValue.isEmpty())) {
 			return;
 		}
 		
-		
-		switch(context.getMode()) {
+		switch(formMode) {
 			case EDIT:
-				if(m_prevObs!=null) {
-					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, safeValue, null, null, null);
-				} else {
-					session.getSubmissionActions().createObs(m_openMRSConcept, safeValue, null, null, null);
-				}
-				
+				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, safeValue, null, null, m_obsNumber);
 				break;
 			case VIEW:
 				break;
 			case ENTER:
-				session.getSubmissionActions().createObs(m_openMRSConcept, safeValue, null, null, null);
+				session.getSubmissionActions().createObs(m_openMRSConcept, safeValue, null, null, m_obsNumber);
 				break;
 		
 		}
@@ -73,32 +76,7 @@ public class TextAreaElement extends PassthroughElement implements IHandleHTMLEd
 	
 	public void takeActionForEditMode(FormEntryContext context)
 	{
-		if(m_openMRSConcept == null) {
-			return;
-		}
-		//Encounter viewEncounter = context.getExistingEncounter();
-		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
-		//viewEncounter.
-		
-		if(existingObs == null) {
-			return;
-		}
-		
-		Integer iObsNumber = 0;
-		
-		try {
-			iObsNumber = Integer.parseInt(m_obsNumber);
-		} catch (Exception e) {
-			iObsNumber = 0;
-		}
-
-		List<Obs> observations = existingObs.get(m_openMRSConcept);
-		
-		if(observations==null || iObsNumber >= observations.size()) {
-			return;
-		}
-		
-		m_prevObs = observations.get(iObsNumber);
+		getPreviousObsForConcept(context);
 		
 		if(m_prevObs == null) {
 			return;

@@ -1,5 +1,6 @@
 package org.openmrs.module.mentalhealth.elements;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -104,6 +105,61 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 		
 	}
 	
+	public boolean hasConceptAssociated() {
+		String conceptId = m_parameters.get("data-concept-id");
+		
+		return conceptId != null && !conceptId.isEmpty();
+	};
+	
+	protected boolean noHtmlAction() {
+		return m_openMRSConcept == null;
+	}
+	
+	final
+	protected void getPreviousObsForConcept(FormEntryContext context) {
+		//has associated concept is used here because it is evaluated before
+		//child nodes have been parsed, i.e. is this fieldset intended to repr.
+		//an obs
+		if( noHtmlAction() ) {
+			return;
+		}
+		
+		//Encounter viewEncounter = context.getExistingEncounter();
+		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
+		//viewEncounter.
+		if(existingObs == null) {
+			return;
+		}
+		
+		List<Obs> observations = existingObs.get(m_openMRSConcept);
+		
+		Integer iObsNumber = 0;
+		
+		try {
+			iObsNumber = Integer.parseInt(m_obsNumber);
+		} catch (Exception e) {
+			iObsNumber = 0;
+		}
+		
+		//since parsing in a single pass, how many of the same obs will be seen while processing the xml/html
+		//is unknown. An array could be built with null entries using existing obs (basically a LUT),
+		//but will take more time if done everytime here than just checking all existing obs for a given 
+		//concept... if it can be built in a common handler (and some other checks like if obs exist at all),
+		//some performance benefits may be seen (if necessary)
+		if(observations == null || iObsNumber < 0)
+		{
+			return;
+		}
+		
+		for(Obs ob : observations) {
+			if(m_obsNumber.equals(ob.getComment())) {
+				m_prevObs = ob;
+				break;
+			}
+		}
+	}
+
+	
 	protected boolean requiresName() {
 		return true;
 	}
@@ -120,13 +176,13 @@ public class PassthroughElement implements HtmlGeneratorElement, IHandleHTMLView
 		{
 			switch(context.getMode()) {
 				case VIEW:	
-					this.takeActionForViewMode(context);
+					takeActionForViewMode(context);
 					
 				case EDIT:
-					this.takeActionForEditMode(context);
+					takeActionForEditMode(context);
 					
 				case ENTER:
-					this.takeActionForEnterMode(context);
+					takeActionForEnterMode(context);
 					break;
 			}
 			

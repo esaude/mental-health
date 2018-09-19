@@ -2,7 +2,6 @@ package org.openmrs.module.mentalhealth.elements;
 
 import java.util.Map;
 
-import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.w3c.dom.Node;
 
@@ -18,12 +17,14 @@ public class NumberInputElement extends InputElement {
 	@Override
 	public String derivedClassSpecializeHTMLEditProcessing()
 	{
+		String result = null;
+		
 		if(m_prevObs!=null) {
 			//only support integer values for now
-			return String.valueOf(m_prevObs.getValueNumeric().intValue());
+			result = String.valueOf(m_prevObs.getValueNumeric().intValue());
 		}
 		
-		return null;
+		return result;
 	}
 	
 	

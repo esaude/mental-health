@@ -11,6 +11,7 @@ import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.HtmlFormEntryUtil;
+import org.openmrs.module.htmlformentry.FormEntryContext.Mode;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IChildElement;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
@@ -52,7 +53,14 @@ public class SelectElement extends ParentElement implements IHandleHTMLEdit, For
 		
 		String value = submission.getParameter(tagName);
 		
-		if(value == null || value.isEmpty()) {
+		Mode formMode = context.getMode();
+		
+		//in edit mode, if the obs doesnt exist, act like enter mode
+		if(m_prevObs==null && formMode==Mode.EDIT) {
+			formMode = Mode.ENTER;
+		}
+		
+		if( formMode == Mode.ENTER && (value == null || value.isEmpty()) ) {
 			//throw new IllegalArgumentException("Value for select " + tagName + " cannot be blank/empty");
 			return;
 		}
@@ -67,7 +75,7 @@ public class SelectElement extends ParentElement implements IHandleHTMLEdit, For
 		}
 		
 		//if there's still no concept, report an error
-		if(responseConcept == null) {
+		if(formMode==Mode.ENTER && responseConcept == null) {
 			String selectId = "#"+m_parameters.get("id");
 			
 			if(selectId.equals("#")) {
@@ -78,14 +86,9 @@ public class SelectElement extends ParentElement implements IHandleHTMLEdit, For
 		
 		}
 		
-		switch(context.getMode()) {
+		switch(formMode) {
 			case EDIT:
-				if(m_prevObs!=null) {
-					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, null, null, m_obsNumber);
-				} else {
-					session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, null, null, m_obsNumber);
-				}
-				
+				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, null, null, m_obsNumber);
 				break;
 			case VIEW:
 				break;

@@ -962,7 +962,7 @@
 	                                <label for="drug-use-other-drug" class="form-check-label">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug</label>
 	                            </div>
 	                            <label for="drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug.specify</label>
-	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm"/>
+	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm" data-obs-number="0"/>
 	                                 
 	                        </fieldset>
 	                    </div>
@@ -1010,7 +1010,7 @@
 	                                <label for="multiple-drug-use-other-drug" class="form-check-label">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug</label>
 	                            </div>    
 	                            <label for="multiple-drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug.specify</label>
-	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm"/>
+	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm" data-obs-number="1"/>
 	                                        
 	                        </fieldset>
 	                    </div>
@@ -1085,7 +1085,7 @@
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save"/>
+				<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
 				<input type="reset" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);" data-translate-value="true" value="mentalhealth.form.initial.reset"/>
 			</div>
 		</div>

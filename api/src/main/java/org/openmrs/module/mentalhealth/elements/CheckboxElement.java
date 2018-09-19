@@ -53,20 +53,31 @@ public class CheckboxElement extends InputElement implements IChildElement, IHan
 	}
 	
 	@Override
+	protected boolean noHtmlAction() {
+		
+		return m_openMRSConcept == null && m_parentElement == null;
+	}
+
+	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 
-		if(m_openMRSConcept == null || m_parentElement == null) {
-			return;
-		}
+		getPreviousObsForConcept(context);
 		
-		if((Boolean)m_parentElement.getValueStoredInOpenMRS(this)) {
+		if( m_prevObs != null ) {
 			
 			((Element)m_originalNode).setAttribute("checked", "true");
 			
-		} else {
+		} else if( m_parentElement!=null ) {
 
-			((Element)m_originalNode).removeAttribute("checked");
-			
+			if((Boolean)m_parentElement.getValueStoredInOpenMRS(this)) {
+				
+				((Element)m_originalNode).setAttribute("checked", "true");
+				
+			} else {
+	
+				((Element)m_originalNode).removeAttribute("checked");
+				
+			}
 		}
 	}
 
