@@ -71,7 +71,7 @@
 		}
 		.overlay {
 		    background: #e9e9e9;
-		    position: absolute;
+		    position: fixed;
 		    top: 0;
 		    right: 0;
 		    bottom: 0;
@@ -89,7 +89,7 @@
 		.mesh-loader .circle {
 		    width: 25px;
 		    height: 25px;
-		    position: fixed;
+		    position: absolute;
 		    background: #03A9F4;
 		    border-radius: 50%;
 		    margin: -12.5px;
@@ -170,7 +170,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script-->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	
 	<!--<uiInclude provider="mentalhealth" javascript="bootstrap.min.js"/>-->
@@ -962,7 +962,7 @@
 	                                <label for="drug-use-other-drug" class="form-check-label">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug</label>
 	                            </div>
 	                            <label for="drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.drug.use.type.other.drug.specify</label>
-	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm"/>
+	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" data-obs-number="0" type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm"/>
 	                                 
 	                        </fieldset>
 	                    </div>
@@ -1010,7 +1010,7 @@
 	                                <label for="multiple-drug-use-other-drug" class="form-check-label">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug</label>
 	                            </div>    
 	                            <label for="multiple-drug-use-other-drug-specific">mentalhealth.form.initial.patient.obs.multiple.drug.use.type.other.drug.specify</label>
-	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm"/>
+	                            <input data-concept-id="76e0946e-8dc3-4597-b470-866bffbee1f1" data-obs-number="1" type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off" class="form-control-sm"/>
 	                                        
 	                        </fieldset>
 	                    </div>
