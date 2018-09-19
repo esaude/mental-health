@@ -3,19 +3,16 @@ package org.openmrs.module.mentalhealth.elements;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.openmrs.Concept;
-import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
+import org.openmrs.module.htmlformentry.FormEntryContext.Mode;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
@@ -139,7 +136,14 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 		
 		String value = submission.getParameter(responseName);
 		
-		if(value == null || value.isEmpty()) {
+		Mode formMode = context.getMode();
+		
+		//in edit mode, if the obs doesnt exist, act like enter mode
+		if(m_prevObs==null && formMode==Mode.EDIT) {
+			formMode = Mode.ENTER;
+		}
+		
+		if( formMode == Mode.ENTER && (value == null || value.isEmpty() )) {
 			//throw new IllegalArgumentException("Value for select " + tagName + " cannot be blank/empty");
 			return;
 		}
@@ -148,7 +152,7 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 			responseConcept = radios.get(value);
 		}
 		
-		if(responseConcept == null) {
+		if(formMode==Mode.ENTER && responseConcept == null) {
 			String fieldsetId = "#"+m_parameters.get("id");
 			
 			if(fieldsetId.equals("#")) {
@@ -159,15 +163,9 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 		
 		}
 		
-		
-		
-		switch(context.getMode()) {
+		switch(formMode) {
 			case EDIT:
-				if(m_prevObs==null) {
-					session.getSubmissionActions().createObs(m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
-				}else {
-					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
-				}
+				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, responseConcept, obsDateTime, null, m_obsNumber);
 				break;
 			case VIEW:
 				break;
@@ -239,7 +237,16 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 		
 			Concept childConcept = child.getConcept();
 			
-			if(		childConcept == null ||
+			//allow default checked radio to remain checked
+			
+			//if this child has no concept, and there's no selected concept,
+			//and this child is checked by default, return checked
+			if( childConcept == null &&
+				m_selectedChildConcept == null &&
+				child.getAttrs().containsKey("checked")) {
+				return true;
+			//if a value is stored in edit mode, clear default checked states
+			}else if( childConcept == null ||
 					m_selectedChildConcept == null ) {
 				return false;
 			}

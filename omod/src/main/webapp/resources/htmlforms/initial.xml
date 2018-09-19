@@ -1085,7 +1085,7 @@
 		</div>
 		<div class="row">
 			<div class="col text-center">
-				<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save"/>
+				<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
 				<input type="reset" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);" data-translate-value="true" value="mentalhealth.form.initial.reset"/>
 			</div>
 		</div>

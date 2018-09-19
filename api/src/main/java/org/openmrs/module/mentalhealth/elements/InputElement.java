@@ -1,17 +1,15 @@
 package org.openmrs.module.mentalhealth.elements;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringEscapeUtils;
-import org.openmrs.Concept;
-import org.openmrs.Obs;
 import org.openmrs.module.htmlformentry.FormEntryContext;
 import org.openmrs.module.htmlformentry.FormEntrySession;
 import org.openmrs.module.htmlformentry.FormSubmissionError;
+import org.openmrs.module.htmlformentry.FormEntryContext.Mode;
 import org.openmrs.module.htmlformentry.action.FormSubmissionControllerAction;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLEdit;
 import org.openmrs.module.mentalhealth.elements.interfaces.IHandleHTMLView;
@@ -39,60 +37,18 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		return "";
 	}
 
-
 	@Override
 	public boolean requiresClosingTag() {
 		//basically the only self closing tag, but including multiple types
 		return false;
 	}
-
-	/*public void modifyHTMLNodeForEnterMode( context)
-	{
-		//result= NodeUtil.stringify(m_originalNode);
-		
-	}*/
-	
-	protected boolean noHtmlAction() {
-		return m_openMRSConcept == null;
-	}
 	
 	public void takeActionForEditMode(FormEntryContext context)
 	{
-		if( noHtmlAction() ) {
-			return;
-		}
-		//Encounter viewEncounter = context.getExistingEncounter();
-		Map<Concept, List<Obs>> existingObs = context.getExistingObs();
-		//viewEncounter.
-		
-		if(existingObs == null) {
-			return;
-		}
+		//gets corresponding m_prevObs if one exists
+		getPreviousObsForConcept(context);
 
-		if( m_openMRSConcept != null ) {
-			
-			List<Obs> observations = existingObs.get(m_openMRSConcept);
-			
-			Integer iObsNumber = 0;
-			
-			try {
-				iObsNumber = Integer.parseInt(m_obsNumber);
-			} catch (Exception e) {
-				iObsNumber = 0;
-			}
-			
-			if(observations==null || iObsNumber >= observations.size()) {
-				return;
-			}
-			
-			
-			m_prevObs = observations.get(iObsNumber);
-			
-			if(m_prevObs == null) {
-				return;
-			}
-		}
-		
+		//returns string based on m_prevObs
 		String inputValue = derivedClassSpecializeHTMLEditProcessing();
 		
 		if(inputValue != null) {
@@ -106,7 +62,13 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 	//be done
 	public String derivedClassSpecializeHTMLEditProcessing()
 	{
-		return m_prevObs.getValueText();
+		String result = null;
+		
+		if(m_prevObs!=null) {
+			result = m_prevObs.getValueText();
+		}
+
+		return result;
 	}
 	
 	@Override
@@ -121,7 +83,14 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		
 		String value = submission.getParameter(m_parameters.get("name"));
 		
-		if( value == null || value.isEmpty() ) {
+		Mode formMode = context.getMode();
+		
+		//in edit mode, if the obs doesnt exist, act like enter mode
+		if(m_prevObs==null && formMode==Mode.EDIT) {
+			formMode = Mode.ENTER;
+		}
+			
+		if( formMode == Mode.ENTER && (value == null || value.isEmpty()) ) {
 			return;
 		}
 		
@@ -134,8 +103,9 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 
 		valueToStore = safeValue;
 		
-		//shouldn't happen, play it safe anyway
-		if(safeValue == null || safeValue.isEmpty()) {
+		//shouldnt happen, play it safe anyway, only ignore in enter mode, in
+		//edit mode, this voids an obs
+		if(formMode==Mode.ENTER && (safeValue == null || safeValue.isEmpty())) {
 			return;
 		}
 		
@@ -143,16 +113,12 @@ public class InputElement extends PassthroughElement implements IHandleHTMLEdit,
 		
 		//a null value returned from derived element indicates it has handled
 		//the submission itself, and this class should simply return
-		if(valueToStore == null)
+		if(formMode==Mode.ENTER && valueToStore == null)
 			return;
 		
-		switch(context.getMode()) {
+		switch(formMode) {
 			case EDIT:
-				if(m_prevObs!=null) {
-					session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, valueToStore, null, null, m_obsNumber);
-				} else {
-					session.getSubmissionActions().createObs(m_openMRSConcept, valueToStore, null, null, m_obsNumber);
-				}
+				session.getSubmissionActions().modifyObs(m_prevObs, m_openMRSConcept, valueToStore, null, null, m_obsNumber);
 				break;
 			case VIEW:
 				break;

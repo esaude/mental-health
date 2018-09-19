@@ -53,7 +53,9 @@ public class RadioElement extends InputElement implements IHandleHTMLEdit, IChil
 	@Override
 	public void takeActionForEditMode(FormEntryContext context) {
 
-		if(m_openMRSConcept == null || m_parentElement == null) {
+		//allow blank radios (e.g. "not provided" with value="" and no concept
+		//to be modified to *not* have checked attr
+		if( m_parentElement == null ) {
 			return;
 		}
 		
