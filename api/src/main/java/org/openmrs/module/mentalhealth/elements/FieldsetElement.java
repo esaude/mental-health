@@ -143,6 +143,14 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 			formMode = Mode.ENTER;
 		}
 		
+		//if in edit mode, and the posted form data does not include
+		//the value, clear the responseConcept (e.g. checkbox provides
+		//value and responseConcept), during edit, it was unchecked and
+		//no value is sent
+		if( formMode == Mode.EDIT && value == null) {
+			responseConcept = null;
+		}
+		
 		if( formMode == Mode.ENTER && (value == null || value.isEmpty() )) {
 			//throw new IllegalArgumentException("Value for select " + tagName + " cannot be blank/empty");
 			return;
