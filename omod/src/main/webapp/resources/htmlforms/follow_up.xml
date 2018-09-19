@@ -183,7 +183,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script-->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
     <!--<uiInclude provider="mentalhealth" javascript="bootstrap.min.js"/>-->
@@ -272,16 +272,16 @@
         <div class="tab-content" id="tab-content-sections">
             <fieldset id="clinical-diagnosis" class="form-group tab-pane show active fade" role="tabpanel">
 				<div class="form-group row">
-                	<label for="primary-dx-list" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.clinical.diagnosis</label>
+                	<label for="primary-dx-list" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.clinical.diagnosis.primary</label>
                 	<div class="col-md-2">
-                    	<select class="form-control-sm" data-concept-id="43d660da-4527-4e79-a735-f0a53a39c28d" id="primary-dx-list" name="primary-dx-list">
+                    	<select class="form-control-sm dx-list" data-concept-id="43d660da-4527-4e79-a735-f0a53a39c28d" id="primary-dx-list" name="primary-dx-list">
                     	</select>
                 	</div>
                 </div>
                 <div class="form-group row">
                     <label for="secondary-dx" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.clinical.diagnosis.secondary</label>
                     <div class="col-md-2">
-                    	<select class="form-control-sm" data-concept-id="4649f6d2-2fca-4ae5-8762-3fcec7caec44" id="secondary-dx-list" name="secondary-dx-list">
+                    	<select class="form-control-sm dx-list" data-concept-id="4649f6d2-2fca-4ae5-8762-3fcec7caec44" id="secondary-dx-list" name="secondary-dx-list">
                     	</select>
                 	</div>
                 </div>
@@ -403,14 +403,18 @@
 	                    	<div class="row">
 	                    		<div class="col-md-2">
 		                			<label for="medication-1-use-fnm" >mentalhealth.form.followup.medication.fnm</label>      
-	                    			<select id="medication-1-fnm" name="medication-1-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-1-name', 'medication-1-form')">
+	                    			<select id="medication-1-fnm" name="medication-1-fnm" class="form-control fnm-list" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-1-name', 'medication-1-form')">
 	                    			</select>
 	                    		</div>
 	                    		<div class="col-md-2">
-	                    			<input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="0" type="text" id="medication-1-name" name="medication-1-name" hidden="true"/>
-	                    			<input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="0" type="text" id="medication-1-form" name="medication-1-form" hidden="true"/>
+	                    			<select data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="0" id="medication-1-name-select" name="medication-1-name-select" hidden="true">
+	                    				<option id="medication-1-name" value="" selected="true"/>
+	                    			</select>
+	                    			<select data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="0" id="medication-1-form-select" name="medication-1-form-select" hidden="true">
+	                    				<option id="medication-1-form" value="" selected="true"/>
+	                    			</select>	                    				
 	                    			<label for="medication-1-quantity">mentalhealth.form.followup.medication.quantity</label>
-	                    			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="0" type="text" id="medication-1-quantity" name="medication-1-quantity" class="form-control"/>
+	                    			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="0" type="number" id="medication-1-quantity" name="medication-1-quantity" class="form-control"/>
 								</div>
 								<div class="col-md-2">                        				
 									<label for="medication-1-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -431,14 +435,18 @@
 	                    	<div class="row">
 	                    		<div class="col-md-2">
 				                    <label for="medication-2-use-fnm">mentalhealth.form.followup.medication.fnm</label>
-            			           	<select id="medication-2-fnm" name="medication-2-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-2-name', 'medication-2-form')">
+            			           	<select id="medication-2-fnm" name="medication-2-fnm" class="form-control fnm-list" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-2-name', 'medication-2-form')">
                         			</select>
                         		</div>
 	                    		<div class="col-md-2">
-                        			<input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="1" type="text" id="medication-2-name" name="medication-2-name" hidden="true"/>
-			                        <input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="1" type="text" id="medication-2-form" name="medication-2-form" hidden="true"/>
+	                    			<select data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="1" id="medication-2-name-select" name="medication-2-name-select" hidden="true">
+	                    				<option id="medication-2-name" value="" selected="true"/>
+	                    			</select>
+	                    			<select data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="1" id="medication-2-form-select" name="medication-2-form-select" hidden="true">
+	                    				<option id="medication-2-form" value="" selected="true"/>
+	                    			</select>	                    				
             			            <label for="medication-2-quantity">mentalhealth.form.followup.medication.quantity</label>
-                        			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="1" type="text" id="medication-2-quantity" name="medication-2-quantity" class="form-control"/>
+                        			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="1" type="number" id="medication-2-quantity" name="medication-2-quantity" class="form-control"/>
 								</div>
 								<div class="col-md-2">                        				
                         			<label for="medication-2-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -459,14 +467,18 @@
 	                    	<div class="row">
 	                    		<div class="col-md-2">
 				                    <label for="medication-3-use-fnm">mentalhealth.form.followup.medication.fnm</label>
-			                       	<select id="medication-3-fnm" name="medication-3-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-3-name', 'medication-3-form')">
+			                       	<select id="medication-3-fnm" name="medication-3-fnm" class="form-control fnm-list" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-3-name', 'medication-3-form')">
 			                        </select>
                         		</div>
 	                    		<div class="col-md-2">
-			                        <input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="2" type="text" id="medication-3-name" name="medication-3-name" hidden="true"/>
-			                        <input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="2" type="text" id="medication-3-form" name="medication-3-form" hidden="true"/>
+	                    			<select data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="2" id="medication-3-name-select" name="medication-3-name-select" hidden="true">
+	                    				<option id="medication-3-name" value="" selected="true"/>
+	                    			</select>
+	                    			<select data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="2" id="medication-3-form-select" name="medication-3-form-select" hidden="true">
+	                    				<option id="medication-3-form" value="" selected="true"/>
+	                    			</select>	                    				
 			                        <label for="medication-3-quantity">mentalhealth.form.followup.medication.quantity</label>
-			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="2" type="text" id="medication-3-quantity" name="medication-3-quantity" class="form-control"/>
+			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="2" type="number" id="medication-3-quantity" name="medication-3-quantity" class="form-control"/>
                         		</div>
 	                    		<div class="col-md-2">
 			                        <label for="medication-3-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -487,14 +499,18 @@
 	                    	<div class="row">
 	                    		<div class="col-md-2">
 				                    <label for="medication-4-use-fnm">mentalhealth.form.followup.medication.fnm</label>
-			                       	<select id="medication-4-fnm" name="medication-4-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-4-name', 'medication-4-form')">
+			                       	<select id="medication-4-fnm" name="medication-4-fnm" class="form-control fnm-list" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-4-name', 'medication-4-form')">
 			                        </select>
                         		</div>
 	                    		<div class="col-md-2">
-			                        <input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="3" type="text" id="medication-4-name" name="medication-4-name" hidden="true"/>
-			                        <input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="3" type="text" id="medication-4-form" name="medication-4-form" hidden="true"/>
+	                    			<select data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="3" id="medication-4-name-select" name="medication-4-name-select" hidden="true">
+	                    				<option id="medication-4-name" value="" selected="true"/>
+	                    			</select>
+	                    			<select data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="3" id="medication-4-form-select" name="medication-4-form-select" hidden="true">
+	                    				<option id="medication-4-form" value="" selected="true"/>
+	                    			</select>	                    				
 			                        <label for="medication-4-quantity">mentalhealth.form.followup.medication.quantity</label>
-			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="3" type="text" id="medication-4-quantity" name="medication-4-quantity" class="form-control"/>
+			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="3" type="number" id="medication-4-quantity" name="medication-4-quantity" class="form-control"/>
                         		</div>
 	                    		<div class="col-md-2">
 			                        <label for="medication-4-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -515,14 +531,18 @@
 	                    	<div class="row">
 	                    		<div class="col-md-2">
 				                    <label for="medication-5-use-fnm">mentalhealth.form.followup.medication.fnm</label>
-			                       	<select id="medication-5-fnm" name="medication-5-fnm" class="form-control" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-5-name', 'medication-5-form')">
+			                       	<select id="medication-5-fnm" name="medication-5-fnm" class="form-control fnm-list" onChange="setHiddenMedicationValues(this.options[this.selectedIndex].text, 'medication-5-name', 'medication-5-form')">
 			                        </select>
                         		</div>
 	                    		<div class="col-md-2">
-			                        <input data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="4" type="text" id="medication-5-name" name="medication-5-name" hidden="true"/>
-			                        <input data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="4" type="text" id="medication-5-form" name="medication-5-form" hidden="true"/>
+	                    			<select data-concept-id="e1da0ab2-1d5f-11e0-b929-000c29ad1d07" data-obs-number="4" id="medication-5-name-select" name="medication-5-name-select" hidden="true">
+	                    				<option id="medication-5-name" value="" selected="true"/>
+	                    			</select>
+	                    			<select data-concept-id="999d4e72-f5b2-4bc6-a498-15e641cfb8fb" data-obs-number="4" id="medication-5-form-select" name="medication-5-form-select" hidden="true">
+	                    				<option id="medication-5-form" value="" selected="true"/>
+	                    			</select>	                    				
 			                        <label for="medication-5-quantity">mentalhealth.form.followup.medication.quantity</label>
-			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="4" type="text" id="medication-5-quantity" name="medication-5-quantity" class="form-control"/>
+			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="4" type="number" id="medication-5-quantity" name="medication-5-quantity" class="form-control"/>
                         		</div>
 	                    		<div class="col-md-2">
 			                        <label for="medication-5-dosage">mentalhealth.form.followup.medication.dosage</label>
