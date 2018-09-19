@@ -237,7 +237,16 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 		
 			Concept childConcept = child.getConcept();
 			
-			if(		childConcept == null ||
+			//allow default checked radio to remain checked
+			
+			//if this child has no concept, and there's no selected concept,
+			//and this child is checked by default, return checked
+			if( childConcept == null &&
+				m_selectedChildConcept == null &&
+				child.getAttrs().containsKey("checked")) {
+				return true;
+			//if a value is stored in edit mode, clear default checked states
+			}else if( childConcept == null ||
 					m_selectedChildConcept == null ) {
 				return false;
 			}
