@@ -414,7 +414,7 @@
 	                    				<option id="medication-1-form" value="" selected="true"/>
 	                    			</select>	                    				
 	                    			<label for="medication-1-quantity">mentalhealth.form.followup.medication.quantity</label>
-	                    			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="0" type="number" id="medication-1-quantity" name="medication-1-quantity" class="form-control"/>
+	                    			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="0" type="number" id="medication-1-quantity" name="medication-1-quantity" class="form-control" min="0"/>
 								</div>
 								<div class="col-md-2">                        				
 									<label for="medication-1-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -446,7 +446,7 @@
 	                    				<option id="medication-2-form" value="" selected="true"/>
 	                    			</select>	                    				
             			            <label for="medication-2-quantity">mentalhealth.form.followup.medication.quantity</label>
-                        			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="1" type="number" id="medication-2-quantity" name="medication-2-quantity" class="form-control"/>
+                        			<input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="1" type="number" id="medication-2-quantity" name="medication-2-quantity" class="form-control" min="0"/>
 								</div>
 								<div class="col-md-2">                        				
                         			<label for="medication-2-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -478,7 +478,7 @@
 	                    				<option id="medication-3-form" value="" selected="true"/>
 	                    			</select>	                    				
 			                        <label for="medication-3-quantity">mentalhealth.form.followup.medication.quantity</label>
-			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="2" type="number" id="medication-3-quantity" name="medication-3-quantity" class="form-control"/>
+			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="2" type="number" id="medication-3-quantity" name="medication-3-quantity" class="form-control" min="0"/>
                         		</div>
 	                    		<div class="col-md-2">
 			                        <label for="medication-3-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -510,7 +510,7 @@
 	                    				<option id="medication-4-form" value="" selected="true"/>
 	                    			</select>	                    				
 			                        <label for="medication-4-quantity">mentalhealth.form.followup.medication.quantity</label>
-			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="3" type="number" id="medication-4-quantity" name="medication-4-quantity" class="form-control"/>
+			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="3" type="number" id="medication-4-quantity" name="medication-4-quantity" class="form-control" min="0"/>
                         		</div>
 	                    		<div class="col-md-2">
 			                        <label for="medication-4-dosage">mentalhealth.form.followup.medication.dosage</label>
@@ -542,7 +542,7 @@
 	                    				<option id="medication-5-form" value="" selected="true"/>
 	                    			</select>	                    				
 			                        <label for="medication-5-quantity">mentalhealth.form.followup.medication.quantity</label>
-			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="4" type="number" id="medication-5-quantity" name="medication-5-quantity" class="form-control"/>
+			                        <input data-concept-id="5a7d2720-9326-4484-9518-319e30cc6721" data-obs-number="4" type="number" id="medication-5-quantity" name="medication-5-quantity" class="form-control" min="0"/>
                         		</div>
 	                    		<div class="col-md-2">
 			                        <label for="medication-5-dosage">mentalhealth.form.followup.medication.dosage</label>
