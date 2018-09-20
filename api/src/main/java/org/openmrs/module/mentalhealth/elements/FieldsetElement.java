@@ -1,6 +1,5 @@
 package org.openmrs.module.mentalhealth.elements;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -119,10 +118,10 @@ public class FieldsetElement extends ParentElement implements IHandleHTMLEdit, F
 						dateString = submission.getParameter(dateFormName);
 					}
 					
-					if(dateString != null) {
+					if(dateString != null && !dateString.isEmpty()) {
 						obsDateTime = dateFormatter.parse(dateString);
 					}
-				} catch (ParseException e) {
+				} catch (Exception e) {
 					
 					e.printStackTrace();
 					

@@ -1,6 +1,5 @@
 package org.openmrs.module.mentalhealth.elements;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.w3c.dom.Node;
 public class DateElement extends InputElement implements IChildElement, FormSubmissionControllerAction {
 
 	ParentElement m_parent;
-	
 	
 	public DateElement(FormEntrySession session, Map<String, String> parameters, Node originalNode, ParentElement parent) {
 		super(session, parameters, originalNode);
@@ -105,13 +103,14 @@ public class DateElement extends InputElement implements IChildElement, FormSubm
 		//but always stores and sends yyyy-mm-dd
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			valueToStore = dateFormatter.parse(safeValue);
-		} catch (ParseException e) {
-			//should log error? issues that would show up here should be 
-			//caught in handleValidation
-
-			//don't throw during submission (avoid 500s)
-			//return null;
+			
+			if(safeValue != null && !safeValue.isEmpty()) {
+				valueToStore = dateFormatter.parse(safeValue);
+			}
+		
+		} catch (Exception e) {
+			//should log error?
+			e.printStackTrace();
 		}
 
 		
