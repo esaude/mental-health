@@ -265,7 +265,7 @@
                   <label for="homeless-status" class="col-md-2 col-form-label-sm">mentalhealth.form.initial.patient.obs.homeless</label>
                     <fieldset data-concept-id="ad8f819c-c83e-49cb-bc63-6dc6372a3823" id="homeless-status">
 	                	<input type="radio" name="homeless" id="homeless-np" value="" checked="true"/>
-	                	<label for="family-history-epilepsy-np">mentalhealth.form.initial.patient.obs.not.provided</label>
+	                	<label for="homeless-np">mentalhealth.form.initial.patient.obs.not.provided</label>
                         <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07"  type="radio" name="homeless" value="homeless-yes" id="homeless-yes"/>
                         <label for="homeless-yes" class="form-check-label-sm">mentalhealth.form.initial.patient.obs.yes</label>
                         <input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07"  type="radio" name="homeless" value="homeless-no" id="homeless-no"/>
@@ -276,7 +276,7 @@
                 	<label for="martial-status" class="col-md-2 col-form-label-sm">mentalhealth.form.initial.patient.obs.civil.state</label>
                     <fieldset data-concept-id="e1d80fbe-1d5f-11e0-b929-000c29ad1d07" id="marital-status">
 	                	<input type="radio" name="marital-status" id="marital-status-np" value="" checked="true"/>
-	                	<label for="family-history-epilepsy-np">mentalhealth.form.initial.patient.obs.not.provided</label>
+	                	<label for="marital-status-np">mentalhealth.form.initial.patient.obs.not.provided</label>
 
                         <input data-concept-id="e1d812e8-1d5f-11e0-b929-000c29ad1d07" type="radio" name="marital-status" value="single" id="marital-status-single"/>
                         <label for="marital-status-single">mentalhealth.form.initial.patient.obs.single</label>
@@ -307,7 +307,7 @@
                 	<label for="community-agreement" class="col-md-2 col-form-label-sm">mentalhealth.form.initial.patient.obs.agree.with.community</label>
 	                <fieldset data-concept-id="bd51ee44-b8cc-4931-9c7a-f5518d15b388" id="community-agreement">
 	                	<input type="radio" name="community-agreement" id="community-agreement-np" value="" checked="true"/>
-	                	<label for="family-history-epilepsy-np">mentalhealth.form.initial.patient.obs.not.provided</label>
+	                	<label for="community-agreement-np">mentalhealth.form.initial.patient.obs.not.provided</label>
 
 	                    <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="community-agreement" id="community-agreement-yes" value="y"/>
 	                    <label for="community-agreement-yes">mentalhealth.form.initial.patient.obs.yes</label>
