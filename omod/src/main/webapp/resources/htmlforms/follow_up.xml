@@ -348,8 +348,8 @@
                      	 		<label for="other-obs-other-concerns-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>
                       			<input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="other-concerns" id="other-obs-other-concerns-no" value="n"/>
                       			<label for="other-obs-other-concerns-no" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.no</label>
-                        		<input data-concept-id="635dc91f-ff26-428e-9922-e98636df871e" type="text" name="other-obs-other-concerns-specific" id="other-obs-other-concerns-specific" disabled="true" class="form-control-sm"/>
                         		<label for="other-obs-other-concerns-specific" class="col-form-label-sm" >mentalhealth.form.initial.patient.obs.other.substances.specify</label>
+                        		<input data-concept-id="635dc91f-ff26-428e-9922-e98636df871e" type="text" name="other-obs-other-concerns-specific" id="other-obs-other-concerns-specific" disabled="true" class="form-control-sm"/>
                       		</div>
                  		</div>
                   	</fieldset>
@@ -381,7 +381,7 @@
                   	</fieldset>
         	    </div>
         	    <div>
-	                <fieldset data-concept-id="e1e482ee-1d5f-11e0-b929-000c29ad1d07" id="other-obs-family-planning">
+	                <fieldset data-concept-id="e1e481ea-1d5f-11e0-b929-000c29ad1d07" id="other-obs-family-planning">
                     	<div class="form-group row">
                       		<label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.family.planning</label>
                       		<div class="col-md-7">
@@ -583,7 +583,7 @@
                 <div class="form-group row">
                     <label for="vital-signs-temperature" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.temp</label>
                     <div class="col">
-                    	<input data-concetp-id="e1e2e70e-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-temperature" id="vital-signs-temperature" min="0" max="100" class="form-control-sm"/>
+                    	<input data-concept-id="e1e2e70e-1d5f-11e0-b929-000c29ad1d07" type="number" name="vital-signs-temperature" id="vital-signs-temperature" min="0" max="100" class="form-control-sm"/>
                 	</div>
               	</div>
                 <div class="form-group row">
