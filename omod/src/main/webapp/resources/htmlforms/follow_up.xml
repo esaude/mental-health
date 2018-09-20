@@ -331,6 +331,8 @@
                     <div class="form-group row">
 	  	                <label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.suicidal.ideation</label>
                     	<div class="col-md-3">  
+	                		<input type="radio" name="suicide" id="suicide-np" value="" checked="true"/>
+	                		<label for="suicide-np">mentalhealth.form.initial.patient.obs.not.provided</label>
             	    		<input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="suicide" id="other-obs-suicide-yes" value="y"/>
                     		<label for="other-obs-suicide-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>
 	                		<input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="suicide" id="other-obs-suicide-no" value="n"/>
@@ -344,6 +346,8 @@
                     	<div class="form-group row">
                     		<label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.other.concerns</label>              
 	                    	<div class="col-md-7">
+		                		<input type="radio" name="other-concerns" id="other-concerns-np" value="" checked="true"/>
+		                		<label for="other-concerns-np">mentalhealth.form.initial.patient.obs.not.provided</label>
 	                    		<input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="other-concerns" id="other-obs-other-concerns-yes" value="y"/>
                      	 		<label for="other-obs-other-concerns-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>
                       			<input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="other-concerns" id="other-obs-other-concerns-no" value="n"/>
@@ -359,6 +363,8 @@
                     	<div class="form-group row">
                      		<label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.alcohol.drugs.concerns</label>
                       		<div class="col-md-7">
+		                		<input type="radio" name="drugs" id="drugs-np" value="" checked="true"/>
+		                		<label for="drugs-np">mentalhealth.form.initial.patient.obs.not.provided</label>
                       			<input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="drugs" id="other-obs-drugs-yes" value="y"/>
                       			<label for="other-obs-drugs-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>             
                       			<input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="drugs" id="other-obs-drugs-no" value="n"/>
@@ -372,7 +378,9 @@
                     	<div class="form-group row">
                       		<label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.pregnant</label>
                       		<div class="col-md-7">
-	                    		<input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="pregnant" id="other-obs-pregnant-yes" value="y"/>
+		                		<input type="radio" name="pregnant" id="pregnant-np" value="" checked="true"/>
+		                		<label for="pregnant-np">mentalhealth.form.initial.patient.obs.not.provided</label>
+ 	                    		<input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="pregnant" id="other-obs-pregnant-yes" value="y"/>
                       			<label for="other-obs-pregnant-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>   
                       			<input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="pregnant" id="other-obs-pregnant-no" value="n"/>
                      	 		<label for="other-obs-pregnant-no" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.no</label>     
@@ -385,6 +393,8 @@
                     	<div class="form-group row">
                       		<label class="col-md-2 col-form-label-sm">mentalhealth.form.followup.family.planning</label>
                       		<div class="col-md-7">
+ 		                		<input type="radio" name="family-planning" id="family-planning-np" value="" checked="true"/>
+		                		<label for="family-planning-np">mentalhealth.form.initial.patient.obs.not.provided</label>
                       			<input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-planning" id="other-obs-family-planning-yes" value="y"/>
                       			<label for="other-obs-family-planning-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>
                       			<input data-concept-id="e1d81c70-1d5f-11e0-b929-000c29ad1d07" type="radio" name="family-planning" id="other-obs-family-planning-no" value="n"/>
@@ -564,6 +574,9 @@
             	</div>
               	<fieldset data-concept-id="bedf475c-459c-40fe-ad72-56f42733739c" id="same-drug-delivered" onChange="setDependentDisabledState(this, 'fieldset[id=same-drug-delivered] input[id=same-drug-delivered-no]', 'fieldset[id=same-drug-delivered] select[id=same-drug-not-delivered]');">
                     <label class="form-check-label col-form-label-sm">mentalhealth.form.followup.medication.same.drug</label>
+               		<input type="radio" name="same-drug-delivered" id="same-drug-delivered-np" value="" checked="true"/>
+               		<label for="same-drug-delivered-np">mentalhealth.form.initial.patient.obs.not.provided</label>
+               		
                     <input data-concept-id="e1d81b62-1d5f-11e0-b929-000c29ad1d07" type="radio" name="same-drug-delivered" id="same-drug-delivered-yes" value="y"/>
                     <label for="same-drug-delivered-yes" class="form-check-label col-form-label-sm">mentalhealth.form.initial.patient.obs.yes</label>
                     
