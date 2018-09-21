@@ -843,7 +843,7 @@ function computeBmi () {
 
     if (!isNaN($('#vital-signs-weight').val()) &amp;&amp;
         !isNaN($('#vital-signs-height').val())) {
-        var bmi = Math.round($('#vital-signs-weight').val() / Math.pow($('#vital-signs-height').val(), 2) * 10000);
+        var bmi = parseFloat($('#vital-signs-weight').val() / Math.pow($('#vital-signs-height').val(), 2) * 10000).toFixed(1);
         $('#vital-signs-bmi').val(bmi);
     }
 }
@@ -1920,7 +1920,7 @@ $(document).ready(
                 <div class="form-group row">
                     <label for="vital-signs-bmi" class="col-md-2 col-form-label-sm">mentalhealth.form.followup.vitals.bmi</label>
                     <div class="col">
-                    	<input type="text" name="vital-signs-bmi" id="vital-signs-bmi" min="0" max="100" class="form-control-sm" disabled="true"/>
+                    	<input type="number" name="vital-signs-bmi" id="vital-signs-bmi" min="0" max="100" step=".1" class="form-control-sm" disabled="true"/>
                 	</div>
                 </div>
             </fieldset>
