@@ -70,7 +70,6 @@ public class MentalHealthConfigurationsActivator extends BaseModuleActivator {
 		hfeService.addHandler("input", new InputHandler());
 		hfeService.addHandler("label", new LabelHandler());
 		
-		//also handles rendering all children (including radios, if responsible radio parent)
 		hfeService.addHandler("fieldset", new FieldsetHandler());
 		
 		hfeService.addHandler("textarea", new TextAreaHandler());

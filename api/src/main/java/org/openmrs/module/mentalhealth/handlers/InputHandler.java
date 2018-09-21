@@ -80,6 +80,12 @@ public class InputHandler extends AbstractTagHandler {
 			
 		String inputType = attrs.get("type");
 		
+		
+		//HTML specs (inputs default to type text if blank or unknown)
+		if(inputType == null || inputType.isEmpty()) {
+			inputType = "text";
+			attrs.put("type", "text");
+		}
 		//throw new IllegalArgumentException("input type " + inputType + " type.equals(radio)" + (inputType.equals("radio")?"true":"false") );
 		
 		FieldsetElement parentFieldset = context.getHighestOnStack(FieldsetElement.class);

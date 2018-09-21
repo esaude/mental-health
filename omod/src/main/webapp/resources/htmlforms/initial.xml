@@ -1247,10 +1247,15 @@ function applyTabSelectionPersistence(){
             event.preventDefault();
 
             if(!form.reportValidity()){
-                return;
+            	event.stopPropagation();
+                return false;
             }
 
             $(this).tab('show');
+            
+            //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
+            $(event.relatedTarget).removeClass("active");
+                
 
             if(sessionStorage[dataStoreNS+"visibleTab"]!=this.id) {
                 sessionStorage[dataStoreNS+"visibleTab"]=this.id;
@@ -1316,13 +1321,6 @@ $(document).ready(
 
                 //remove hidden attribute from tabs
                 tabs.removeAttr("hidden");
-
-                //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
-                $('a[data-toggle="tab"]').on('shown.bs.tab',
-                    function (e) {
-                        //e.target // newly activated tab
-                        $(e.relatedTarget).removeClass("active");
-                    });
             }
 
             var deletePopup = $("[id=confirmDeleteFormPopup]");
