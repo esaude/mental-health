@@ -4,7 +4,7 @@
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>mentalhealth</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0-BETA-2</version>
 	<packaging>pom</packaging>
 	<name>Mental Health Configurations Module</name>
 	<description>The module help configure several metadata for Mental health project</description>
