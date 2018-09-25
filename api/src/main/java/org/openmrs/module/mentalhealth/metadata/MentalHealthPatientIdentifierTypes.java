@@ -13,7 +13,7 @@ public class MentalHealthPatientIdentifierTypes {
 
         @Override
         public String name() {
-            return "Mental Health NID";
+            return "MENTAL HEALTH NID";
         }
 
         @Override

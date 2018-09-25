@@ -12,7 +12,7 @@ public class MentalHealthProgramtypes {
 
         @Override
         public String name() {
-            return "Mental Health Program";
+            return "MENTAL HEALTH PROGRAM";
         }
 
         @Override
