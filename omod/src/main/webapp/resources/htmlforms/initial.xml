@@ -57,7 +57,7 @@
 		}
 
 	    .bg-info {
-			background-color: #1aac9b!important;
+			background-color: #1aac9b !important;
 	    }
 		    label {
 		    font-size: 0.875rem;
@@ -164,6 +164,14 @@
 		    -webkit-transform: rotate(360deg);
 		            transform: rotate(360deg);
 		  }
+		}
+		.btn-primary {
+		    color: #fff;
+		    background-color: #6a1b9a;
+		    border-color: #6a1b9a;
+		}
+		.form-control-sm {
+		    border: 1px solid #1aac9b;
 		}
 	</style>
 	
@@ -830,7 +838,7 @@ function computeBmi () {
 
     if (!isNaN($('#vital-signs-weight').val()) &amp;&amp;
         !isNaN($('#vital-signs-height').val())) {
-        var bmi = Math.round($('#vital-signs-weight').val() / Math.pow($('#vital-signs-height').val(), 2) * 10000);
+        var bmi = parseFloat($('#vital-signs-weight').val() / Math.pow($('#vital-signs-height').val(), 2) * 10000).toFixed(1);
         $('#vital-signs-bmi').val(bmi);
     }
 }
@@ -1482,16 +1490,22 @@ $(document).ready(
 		            <div class="circle"></div>
 		         </div>
 		        <div class="set-two">
-		                <div class="circle"></div>
-		                <div class="circle"></div>
+		            <div class="circle"></div>
+		            <div class="circle"></div>
 		        </div>
 			</div>
 		</div>
 		<div class="sticky-top">
 	        <div class="card  bg-white d-flex flex-column">
 				<div class="card-body bg-info text-white">
+                    <div class="row">
+						<div class="col text-left">
+							<input type="submit" id="submit-form-btn" class="btn-sm btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
+							<input type="reset" id="reset-form-btn" class="btn-sm btn-warning" onclick="confirmReset(event);" data-translate-value="true" value="mentalhealth.form.initial.reset"/>
+						</div>
+					</div>
 	
-					<div class=" row">
+					<div class="row">
 						<div class="col-md-6">
 							<span id="patient-details-patient-name" ><lookup expression="patient.personName"/></span>
 							<label >mentalhealth.form.initial.title</label>
@@ -1500,7 +1514,7 @@ $(document).ready(
 							<label>mentalhealth.form.initial.patient.nid</label>:  <span id="patient-details-NID"><lookup expression="patient.getPatientIdentifier(14)"/></span>
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="row">
 						<div class="col-md-7">
 							<span id="patient-details-patient-gender"><lookup expression="patient.gender" codePrefix="gender_"/></span>
 							<span id="patient-details-patient-age"><lookup expression="patient.age"/> yrs</span>
@@ -1508,23 +1522,21 @@ $(document).ready(
 						</div>
 					</div>
 	
-					<div class="form-group row">
-						<div class="col">
+					<div class="row form-control-sm">
+						<div class="col-md-3">
 							<label for="transfer-or-consult-date">mentalhealth.form.initial.consultation.date</label>
                             <input name="encounter-date" data-encounter-function="date" tabindex="4" type="date" id="transfer-or-consult-date" class="form-control-sm" onchange="warnMaxDateToday(this, 'span[id=transfer-or-consult-date-alert]');" required="required"/>
 		                    <span class="" role="alert" id="transfer-or-consult-date-alert"></span>
 						</div>
-					</div>
-					<div class="row">
-	  					<div class="col-md-6">
+						<div class="col-md-5">
 	    					<label for="health-facility-select" >mentalhealth.form.initial.facility</label>
 							<encounterLocation name="health-facility-select" id="health-facility-select" class="form-control-sm" tabindex="3"/>                        
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3 form-control-sm">
 							<label>mentalhealth.form.provider</label>
-	                  		<encounterProvider class="form-control-sm"/>
-	                    </div>
-					</div>                 
+	                		<encounterProvider class="form-control-sm"/>
+	                	</div>
+					</div>			                
 				</div>
 			</div>
 	
@@ -2378,13 +2390,7 @@ $(document).ready(
             </fieldset>
 
 		</div>
-		<div class="row">
-			<div class="col text-center">
-				<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
-				<input type="reset" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);" data-translate-value="true" value="mentalhealth.form.initial.reset"/>
-			</div>
-		</div>
-        
+		
         <enrollInProgram programId="10"/>
         
     </form>

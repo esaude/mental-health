@@ -77,9 +77,9 @@
 		.typeahead-list div:hover{
 			background-color: #AAA;
 		}
-		.form-control-sm {
-		       background-color: white
-		}
+		.bg-info {
+			background-color: #1aac9b !important;
+	    }
 		.overlay {
 		    background: #e9e9e9;
 		    
@@ -176,6 +176,14 @@
 		    -webkit-transform: rotate(360deg);
 		            transform: rotate(360deg);
 		  }
+		}
+		.btn-primary {
+		    color: #fff;
+		    background-color: #6a1b9a;
+		    border-color: #6a1b9a;
+		}
+		.form-control-sm {
+		    border: 1px solid #1aac9b;
 		}
 
 	</style>
@@ -1494,48 +1502,52 @@ $(document).ready(
 		            <div class="circle"></div>
 		         </div>
 		        <div class="set-two">
-		                <div class="circle"></div>
-		                <div class="circle"></div>
+		            <div class="circle"></div>
+		            <div class="circle"></div>
 		        </div>
 			</div>
 		</div>
       	<div class="sticky-top">
     		<div class="card  bg-white d-flex flex-column">
   				<div class="card-body bg-info text-white">
-
-					<div class=" row">
-					    <div class="col-md-6">
-					    	<span id="patient-details-patient-name" ><lookup expression="patient.personName"/></span>
+                    <div class="row">
+						<div class="col text-center">
+							<input type="submit" id="submit-form-btn" class="btn-sm btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
+							<input type="reset" id="reset-form-btn" class="btn-sm btn-warning" onclick="confirmReset(event);" data-translate-value="true" value="mentalhealth.form.initial.reset"/>
+						</div>
+					</div>
+	
+					<div class="row">
+						<div class="col-md-6">
+							<span id="patient-details-patient-name" ><lookup expression="patient.personName"/></span>
 							<label >mentalhealth.form.initial.title</label>
 						</div>
 						<div class="col-md-5 text-right">
-							<label>mentalhealth.form.initial.patient.nid</label>:  <span id="patient-details-NID"  ><lookup expression="patient.getPatientIdentifier(14)"/></span>
+							<label>mentalhealth.form.initial.patient.nid</label>:  <span id="patient-details-NID"><lookup expression="patient.getPatientIdentifier(14)"/></span>
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="row">
 						<div class="col-md-7">
-							<span id="patient-details-patient-gender"  ><lookup expression="patient.gender" codePrefix="gender_"/></span>
-							<span id="patient-details-patient-age" ><lookup expression="patient.age"/> yrs</span>
-							(<span id="patient-details-patient-dob" ><lookup expression="patient.birthdate"/></span>)
+							<span id="patient-details-patient-gender"><lookup expression="patient.gender" codePrefix="gender_"/></span>
+							<span id="patient-details-patient-age"><lookup expression="patient.age"/> yrs</span>
+							(<span id="patient-details-patient-dob"><lookup expression="patient.birthdate"/></span>)
 						</div>
 					</div>
-
-					<div class="form-group row">
-						<div class="col">
+	
+					<div class="row form-control-sm">
+						<div class="col-md-3">
 							<label for="transfer-or-consult-date">mentalhealth.form.initial.consultation.date</label>
                             <input name="encounter-date" data-encounter-function="date" tabindex="4" type="date" id="transfer-or-consult-date" class="form-control-sm" onchange="warnMaxDateToday(this, 'span[id=transfer-or-consult-date-alert]');" required="required"/>
                       		<span class="" role="alert" id="transfer-or-consult-date-alert"></span>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<label for="health-facility-select" >mentalhealth.form.initial.facility</label>
-							<encounterLocation name="health-facility-select" id="health-facility-select" class="form-control-sm" tabindex="3"/>
+						<div class="col-md-5">
+	    					<label for="health-facility-select" >mentalhealth.form.initial.facility</label>
+							<encounterLocation name="health-facility-select" id="health-facility-select" class="form-control-sm" tabindex="3"/>                        
 						</div>
-    					<div class="col-md-4">
-						    <label>mentalhealth.form.provider</label>
-                    		<encounterProvider class="form-control-sm"/>
-                      	</div>
+						<div class="col-md-3 ">
+							<label>mentalhealth.form.provider</label>
+	                  		<encounterProvider class="form-control-sm"/>
+	                    </div>
 					</div>
 				</div>
 			</div>
@@ -2021,12 +2033,7 @@ $(document).ready(
             	</div>
             </fieldset>
         </div>
-        <div class="row">
-        	<div class="col text-center">
-            	<input type="submit" id="submit-form-btn" class="btn btn-primary mr-2" data-translate-value="true" value="mentalhealth.form.initial.save" onsubmit="submitHtmlForm()"/>
-	        	<button type="reset" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);"><uimessage code="mentalhealth.form.initial.reset"/></button>
-        	</div>
-        </div>
+        
     </form>
 
 </htmlform>
